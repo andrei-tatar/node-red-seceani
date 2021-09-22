@@ -42,7 +42,8 @@
         "twofactor": "off",
         "twofactorpin": "",
         "localexecution": true,
-        "structure": "Seceani"
+        "structure": "Seceani",
+        "storeStateInContext": true
     },
     {
         "id": "f569d34c.8c7ed",
@@ -798,7 +799,7 @@
         "type": "function",
         "z": "13aa577370e4c4d7",
         "name": "Last Message",
-        "func": "const name = `msg/${msg.topic}`\nconst now = new Date();\nconst last = flow.get(name) || {};\nconst span = last ? (now.getTime() - last.lastTick) / 1000 : null;\nconst maxSpan = last && span ? Math.max(last.maxSpan, span) : null;\n\nflow.set(name, {\n    lastTick: now.getTime(),\n    last: now.toLocaleString(),\n    maxSpan,\n});\n\nreturn msg;",
+        "func": "// const name = `msg/${msg.topic}`\n// const now = new Date();\n// const last = context.get(name) || {};\n// const span = last ? (now.getTime() - last.lastTick) / 1000 : null;\n// const maxSpan = last && span ? Math.max(last.maxSpan, span) : null;\n\n// context.set(name, {\n//     lastTick: now.getTime(),\n//     last: now.toLocaleString(),\n//     maxSpan,\n// });\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1027,7 +1028,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 410,
+        "x": 250,
         "y": 440,
         "wires": [
             [
@@ -1058,17 +1059,17 @@
         "type": "function",
         "z": "13aa577370e4c4d7",
         "name": "UPS battery",
-        "func": "if (msg.payload.battery.soc < 25) {\n    if (!context.set('warning-25')) {\n        context.set('warning-25', true);\n        return {\n            payload: {\n                tag: 'ups-battery',\n                title: 'Warning',\n                body: `UPS battery under 25% (${msg.payload.battery.soc}%)`,\n            },\n        };\n    }\n} else {\n    context.set('warning-25', false);\n}",
+        "func": "if (msg.payload.battery.soc < 25) {\n    return {\n        payload: {\n            tag: 'ups-battery',\n            title: 'Warning',\n            body: `UPS battery low (${msg.payload.battery.soc}%)`,\n        },\n    };\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 410,
+        "x": 250,
         "y": 400,
         "wires": [
             [
-                "684884b00c3e9fad"
+                "2222fb495b79673f"
             ]
         ]
     },
@@ -1701,6 +1702,7 @@
         "id": "c889b2d7802d3067",
         "type": "change",
         "z": "ba47b065d237cc55",
+        "d": true,
         "name": "",
         "rules": [
             {
@@ -1821,6 +1823,31 @@
         "libs": [],
         "x": 440,
         "y": 360,
+        "wires": [
+            [
+                "684884b00c3e9fad"
+            ]
+        ]
+    },
+    {
+        "id": "2222fb495b79673f",
+        "type": "trigger",
+        "z": "13aa577370e4c4d7",
+        "name": "",
+        "op1": "",
+        "op2": "",
+        "op1type": "pay",
+        "op2type": "nul",
+        "duration": "15",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "min",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 430,
+        "y": 400,
         "wires": [
             [
                 "684884b00c3e9fad"
