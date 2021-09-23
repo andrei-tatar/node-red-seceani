@@ -28,13 +28,6 @@
         "info": ""
     },
     {
-        "id": "ba47b065d237cc55",
-        "type": "tab",
-        "label": "Zigbee",
-        "disabled": false,
-        "info": ""
-    },
-    {
         "id": "f1e538c1.0315f8",
         "type": "noraf-config",
         "name": "NORA",
@@ -799,7 +792,7 @@
         "type": "function",
         "z": "13aa577370e4c4d7",
         "name": "Last Message",
-        "func": "// const name = `msg/${msg.topic}`\n// const now = new Date();\n// const last = context.get(name) || {};\n// const span = last ? (now.getTime() - last.lastTick) / 1000 : null;\n// const maxSpan = last && span ? Math.max(last.maxSpan, span) : null;\n\n// context.set(name, {\n//     lastTick: now.getTime(),\n//     last: now.toLocaleString(),\n//     maxSpan,\n// });\n\nreturn msg;",
+        "func": "const now = new Date();\nconst last = context.get(msg.topic) || {};\nconst span = last ? (now.getTime() - last.lastTick) / 1000 : null;\nconst maxSpan = last && span ? Math.max(last.maxSpan, span) : null;\n\ncontext.set(msg.topic, {\n    lastTick: now.getTime(),\n    last: now.toLocaleString(),\n    maxSpan,\n});\n\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1356,7 +1349,7 @@
         "type": "function",
         "z": "bd3b7721fd58430a",
         "name": "When motion detected",
-        "func": "if (!flow.get('away_mode')) {\n    return;\n}\n\nif (msg.payload.occupancy) {\n    const now = new Date().toLocaleString();\n    const location = msg.topic.substr(msg.topic.lastIndexOf('/'));\n\n    return {\n        payload: {\n            title: 'Motion Detected',\n            body: `In ${location}, at: ${now}`,\n        },\n    };\n}\n",
+        "func": "const location = msg.topic.substr(msg.topic.lastIndexOf('/') + 1);\ncontext.set(location, msg.payload.occupancy);\n\nif (!flow.get('away_mode')) {\n    return;\n}\n\nif (msg.payload.occupancy) {\n    const now = new Date().toLocaleString();\n    return {\n        payload: {\n            title: 'Motion Detected',\n            body: `In ${location}, at: ${now}`,\n        },\n    };\n}\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1451,280 +1444,6 @@
         ]
     },
     {
-        "id": "257bfdbfa0178eb5",
-        "type": "inject",
-        "z": "ba47b065d237cc55",
-        "name": "Get network graph",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "{\"type\": \"graphviz\", \"routes\": true}",
-        "payloadType": "json",
-        "x": 170,
-        "y": 40,
-        "wires": [
-            [
-                "11b90ca26d60ad2d"
-            ]
-        ]
-    },
-    {
-        "id": "a11086d92d599a99",
-        "type": "mqtt in",
-        "z": "ba47b065d237cc55",
-        "name": "",
-        "topic": "zigbee2mqtt/bridge/response/networkmap",
-        "qos": "2",
-        "datatype": "json",
-        "broker": "f569d34c.8c7ed",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "x": 220,
-        "y": 100,
-        "wires": [
-            [
-                "f01827c2844503a6"
-            ]
-        ]
-    },
-    {
-        "id": "11b90ca26d60ad2d",
-        "type": "mqtt out",
-        "z": "ba47b065d237cc55",
-        "name": "",
-        "topic": "zigbee2mqtt/bridge/request/networkmap",
-        "qos": "",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "f569d34c.8c7ed",
-        "x": 480,
-        "y": 40,
-        "wires": []
-    },
-    {
-        "id": "f01827c2844503a6",
-        "type": "debug",
-        "z": "ba47b065d237cc55",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 550,
-        "y": 100,
-        "wires": []
-    },
-    {
-        "id": "002379ed90d73bbd",
-        "type": "inject",
-        "z": "ba47b065d237cc55",
-        "name": "Rename",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "{\"from\":\"0x00124b0022fea9d3\",\"to\":\"pir/hallway_1\"}",
-        "payloadType": "json",
-        "x": 150,
-        "y": 300,
-        "wires": [
-            [
-                "43b19095653dab56"
-            ]
-        ]
-    },
-    {
-        "id": "43b19095653dab56",
-        "type": "mqtt out",
-        "z": "ba47b065d237cc55",
-        "name": "",
-        "topic": "zigbee2mqtt/bridge/request/device/rename",
-        "qos": "",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "f569d34c.8c7ed",
-        "x": 450,
-        "y": 300,
-        "wires": []
-    },
-    {
-        "id": "4e16c7cdbed58c87",
-        "type": "mqtt in",
-        "z": "ba47b065d237cc55",
-        "name": "",
-        "topic": "zigbee2mqtt/bridge/response/device/rename",
-        "qos": "2",
-        "datatype": "json",
-        "broker": "f569d34c.8c7ed",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "x": 250,
-        "y": 340,
-        "wires": [
-            [
-                "4a3f36d9d13a875d"
-            ]
-        ]
-    },
-    {
-        "id": "4a3f36d9d13a875d",
-        "type": "debug",
-        "z": "ba47b065d237cc55",
-        "name": "",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 530,
-        "y": 340,
-        "wires": []
-    },
-    {
-        "id": "bfb240ea513b88a2",
-        "type": "inject",
-        "z": "ba47b065d237cc55",
-        "name": "Allow Join",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "{\"options\":{\"permit_join\":true}}",
-        "payloadType": "json",
-        "x": 140,
-        "y": 440,
-        "wires": [
-            [
-                "c4420eb4edbd1bfc"
-            ]
-        ]
-    },
-    {
-        "id": "c4420eb4edbd1bfc",
-        "type": "mqtt out",
-        "z": "ba47b065d237cc55",
-        "name": "",
-        "topic": "zigbee2mqtt/bridge/request/options",
-        "qos": "",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "f569d34c.8c7ed",
-        "x": 420,
-        "y": 440,
-        "wires": []
-    },
-    {
-        "id": "0d9f3599d7f2cddc",
-        "type": "inject",
-        "z": "ba47b065d237cc55",
-        "name": "Stop Join",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "{\"options\":{\"permit_join\":false}}",
-        "payloadType": "json",
-        "x": 140,
-        "y": 480,
-        "wires": [
-            [
-                "c4420eb4edbd1bfc"
-            ]
-        ]
-    },
-    {
-        "id": "625d908193dfc5b9",
-        "type": "mqtt in",
-        "z": "ba47b065d237cc55",
-        "name": "",
-        "topic": "zigbee2mqtt/bridge/devices",
-        "qos": "2",
-        "datatype": "json",
-        "broker": "f569d34c.8c7ed",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "x": 170,
-        "y": 160,
-        "wires": [
-            [
-                "c889b2d7802d3067"
-            ]
-        ]
-    },
-    {
-        "id": "c889b2d7802d3067",
-        "type": "change",
-        "z": "ba47b065d237cc55",
-        "d": true,
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "devices",
-                "pt": "flow",
-                "to": "payload",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 400,
-        "y": 160,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "a2c9d6a36b64dbb9",
         "type": "function",
         "z": "13aa577370e4c4d7",
@@ -1739,7 +1458,7 @@
         "y": 240,
         "wires": [
             [
-                "400cda1647d09dcd"
+                "6ac061a53b0101c8"
             ]
         ]
     },
@@ -1759,30 +1478,6 @@
         "y": 180,
         "wires": [
             []
-        ]
-    },
-    {
-        "id": "400cda1647d09dcd",
-        "type": "delay",
-        "z": "13aa577370e4c4d7",
-        "name": "",
-        "pauseType": "queue",
-        "timeout": "5",
-        "timeoutUnits": "seconds",
-        "rate": "1",
-        "nbRateUnits": "1",
-        "rateUnits": "day",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": true,
-        "allowrate": false,
-        "x": 630,
-        "y": 240,
-        "wires": [
-            [
-                "d4e786f7a3e14298"
-            ]
         ]
     },
     {
@@ -1851,6 +1546,31 @@
         "wires": [
             [
                 "684884b00c3e9fad"
+            ]
+        ]
+    },
+    {
+        "id": "6ac061a53b0101c8",
+        "type": "trigger",
+        "z": "13aa577370e4c4d7",
+        "name": "",
+        "op1": "",
+        "op2": "",
+        "op1type": "pay",
+        "op2type": "nul",
+        "duration": "24",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "hr",
+        "reset": "",
+        "bytopic": "topic",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 590,
+        "y": 240,
+        "wires": [
+            [
+                "d4e786f7a3e14298"
             ]
         ]
     }
