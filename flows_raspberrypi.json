@@ -145,7 +145,7 @@
         "type": "function",
         "z": "7ceb1d8.f3afee4",
         "name": "Map",
-        "func": "let name = msg.topic.substr(msg.topic.indexOf('/') + 1);\n\nconst PREFIX = '/RESULT';\nif (name.endsWith(PREFIX)) {\n    name = name.substr(0, name.length - PREFIX.length);\n}\n\nconst previousPayload = flow.get(name) ?? {};\nconst payload = {\n    ...previousPayload,\n    ...v('temperature'),\n    ...v('humidity'),\n    ...v('state', 'on', p => p === 'ON'),\n    ...v('POWER', 'on', p => p === 'ON'),\n    ...v('Dimmer', 'brightness'),\n    online: msg.payload?.online ?? true,\n};\nflow.set(name, payload);\n\nreturn {\n    payload,\n    topic: msg.topic,\n};\n\nfunction v(input, output = input, transform = x => x) {\n    if (input in msg.payload) {\n        return {\n            [output]: transform(msg.payload[input])\n        };\n    }\n    return {};\n}\n",
+        "func": "let name = msg.topic.substr(msg.topic.indexOf('/') + 1);\n\nconst PREFIX = '/RESULT';\nif (name.endsWith(PREFIX)) {\n    name = name.substr(0, name.length - PREFIX.length);\n}\n\nconst previousPayload = global.get(name) ?? {};\nconst payload = {\n    ...previousPayload,\n    ...v('temperature'),\n    ...v('humidity'),\n    ...v('state', 'on', p => p === 'ON'),\n    ...v('POWER', 'on', p => p === 'ON'),\n    ...v('Dimmer', 'brightness'),\n    online: msg.payload?.online ?? true,\n};\nglobal.set(name, payload);\n\nreturn {\n    payload,\n    topic: msg.topic,\n};\n\nfunction v(input, output = input, transform = x => x) {\n    if (input in msg.payload) {\n        return {\n            [output]: transform(msg.payload[input])\n        };\n    }\n    return {};\n}\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -162,7 +162,8 @@
                 "44ea36e4.b6da78",
                 "6b4aafa9.7bb67",
                 "bb50f16e.915bf",
-                "3154423735afdc9d"
+                "3154423735afdc9d",
+                "e6a8f442d9e2ee73"
             ]
         ]
     },
@@ -213,7 +214,7 @@
         "finalize": "",
         "libs": [],
         "x": 180,
-        "y": 680,
+        "y": 600,
         "wires": [
             [
                 "8379de16.82ace"
@@ -280,7 +281,7 @@
         "type": "function",
         "z": "7ceb1d8.f3afee4",
         "name": "At night, turn outside light",
-        "func": "if (!msg.payload) {\n    const skip = flow.get('skip_night_light');\n    context.set('light_on', !skip);\n    if (!skip) {\n        const state = flow.get('light/outside');\n        if (!state?.on) {\n            return [{\n                topic: 'zigbee2mqtt/light/outside/set',\n                payload: { state: 'ON' },\n            }, {\n                //send notification\n            }];\n        }\n    }\n} else if (context.get('light_on')) {\n    context.set('light_on', false);\n    return [{\n        topic: 'zigbee2mqtt/light/outside/set',\n        payload: { state: 'OFF' },\n    }, null, {\n        //set skip to false\n        payload: false,\n    }];\n}\n",
+        "func": "if (!msg.payload) {\n    global.set('dark', true);\n    const skip = flow.get('skip_night_light');\n    context.set('light_on', !skip);\n    if (!skip) {\n        const state = global.get('light/outside');\n        if (!state?.on) {\n            return [{\n                topic: 'zigbee2mqtt/light/outside/set',\n                payload: { state: 'ON' },\n            }, {\n                //send notification\n            }];\n        }\n    }\n} else if (context.get('light_on')) {\n    global.set('dark', false);\n    context.set('light_on', false);\n    return [{\n        topic: 'zigbee2mqtt/light/outside/set',\n        payload: { state: 'OFF' },\n    }, null, {\n        //set skip to false\n        payload: false,\n    }];\n}\n",
         "outputs": 3,
         "noerr": 0,
         "initialize": "",
@@ -386,14 +387,14 @@
         "type": "function",
         "z": "7ceb1d8.f3afee4",
         "name": "To Tasmota",
-        "func": "const start = msg.topic.indexOf('/') + 1;\nconst deviceName = msg.topic.substr(start, msg.topic.lastIndexOf('/') - start);\nconst state = flow.get(deviceName);\n\nconst messages = [{\n    payload: msg.payload.on ? 'ON' : 'OFF',\n    topic: `cmnd/${deviceName}/Power`,\n}];\n\nif (msg.payload.brightness !== state?.brightness) {\n    messages.push({\n        payload: msg.payload.brightness,\n        topic: `cmnd/${deviceName}/Dimmer`,\n    });\n}\n\nreturn [messages];",
+        "func": "const start = msg.topic.indexOf('/') + 1;\nconst deviceName = msg.topic.substr(start, msg.topic.lastIndexOf('/') - start);\nconst state = global.get(deviceName);\n\nconst messages = [{\n    payload: msg.payload.on ? 'ON' : 'OFF',\n    topic: `cmnd/${deviceName}/Power`,\n}];\n\nif ('brightness' in msg.payload &&\n    msg.payload.brightness !== state?.brightness) {\n    messages.push({\n        payload: msg.payload.brightness,\n        topic: `cmnd/${deviceName}/Dimmer`,\n    });\n}\n\nreturn [messages];",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
         "x": 170,
-        "y": 720,
+        "y": 640,
         "wires": [
             [
                 "8379de16.82ace"
@@ -439,7 +440,7 @@
         "topic": "cmnd/dimmer/deck/Power",
         "payloadType": "str",
         "x": 130,
-        "y": 600,
+        "y": 680,
         "wires": [
             [
                 "8379de16.82ace"
@@ -463,8 +464,8 @@
         "bytopic": "topic",
         "topic": "topic",
         "outputs": 1,
-        "x": 330,
-        "y": 420,
+        "x": 350,
+        "y": 440,
         "wires": [
             [
                 "d3e3eb54.f8d448"
@@ -511,7 +512,7 @@
         "topic": "cmnd/dimmer/deck/Dimmer",
         "payloadType": "str",
         "x": 140,
-        "y": 640,
+        "y": 720,
         "wires": [
             [
                 "8379de16.82ace"
@@ -771,7 +772,7 @@
         "op2": "{\"online\": false}",
         "op1type": "nul",
         "op2type": "json",
-        "duration": "2",
+        "duration": "2.2",
         "extend": true,
         "overrideDelay": false,
         "units": "hr",
@@ -1198,7 +1199,7 @@
             "b9f407f589ac04c2"
         ],
         "x": 55,
-        "y": 680,
+        "y": 600,
         "wires": [
             [
                 "c6e8bbb7.f47708"
@@ -1214,7 +1215,7 @@
             "75e8ab20bdccb8ad"
         ],
         "x": 55,
-        "y": 720,
+        "y": 640,
         "wires": [
             [
                 "a538e3ab.977be"
@@ -1573,5 +1574,366 @@
                 "d4e786f7a3e14298"
             ]
         ]
+    },
+    {
+        "id": "e0e089bcc9576b96",
+        "type": "mqtt in",
+        "z": "bd3b7721fd58430a",
+        "name": "",
+        "topic": "zigbee2mqtt/pir/hallway_1",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "f569d34c.8c7ed",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "x": 150,
+        "y": 340,
+        "wires": [
+            [
+                "cb5201d245ef0f2c"
+            ]
+        ]
+    },
+    {
+        "id": "cb5201d245ef0f2c",
+        "type": "function",
+        "z": "bd3b7721fd58430a",
+        "name": "When motion and dark",
+        "func": "if (msg.payload.occupancy &&\n    global.get('dark') &&\n    !global.get('light/hallway')?.on) {\n    return {\n        payload: { state: 'ON' },\n        topic: 'zigbee2mqtt/light/hallway/set',\n    };\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "var  timer;\n",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 340,
+        "wires": [
+            [
+                "27d661e8c21a058a"
+            ]
+        ],
+        "outputLabels": [
+            "battery low"
+        ]
+    },
+    {
+        "id": "6f3c322d6b5d8fb3",
+        "type": "mqtt out",
+        "z": "bd3b7721fd58430a",
+        "name": "",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "f569d34c.8c7ed",
+        "x": 910,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "19163ebae520d30d",
+        "type": "mqtt in",
+        "z": "bd3b7721fd58430a",
+        "name": "",
+        "topic": "zigbee2mqtt/pir/hallway_2",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "f569d34c.8c7ed",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "x": 150,
+        "y": 380,
+        "wires": [
+            [
+                "cb5201d245ef0f2c"
+            ]
+        ]
+    },
+    {
+        "id": "29324ba1a9182de4",
+        "type": "mqtt in",
+        "z": "bd3b7721fd58430a",
+        "name": "",
+        "topic": "zigbee2mqtt/light/hallway",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "f569d34c.8c7ed",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "x": 150,
+        "y": 440,
+        "wires": [
+            [
+                "4d110fd70084348f"
+            ]
+        ]
+    },
+    {
+        "id": "27d661e8c21a058a",
+        "type": "trigger",
+        "z": "bd3b7721fd58430a",
+        "name": "debounce",
+        "op1": "",
+        "op2": "",
+        "op1type": "pay",
+        "op2type": "nul",
+        "duration": "1",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 620,
+        "y": 340,
+        "wires": [
+            [
+                "e7f1f52c32467204"
+            ]
+        ]
+    },
+    {
+        "id": "8e891f757e90a8a0",
+        "type": "mqtt in",
+        "z": "7ceb1d8.f3afee4",
+        "name": "",
+        "topic": "stat/outlet/+/RESULT",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "f569d34c.8c7ed",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "x": 140,
+        "y": 480,
+        "wires": [
+            [
+                "ba90f4f6.8ddd08",
+                "d3e3eb54.f8d448"
+            ]
+        ]
+    },
+    {
+        "id": "e6a8f442d9e2ee73",
+        "type": "noraf-outlet",
+        "z": "7ceb1d8.f3afee4",
+        "devicename": "Lamp",
+        "roomhint": "Bedroom",
+        "name": "",
+        "passthru": false,
+        "errorifstateunchaged": false,
+        "nora": "f1e538c1.0315f8",
+        "topic": "stat/outlet/t2/RESULT",
+        "onvalue": "{\"on\":true}",
+        "onvalueType": "json",
+        "offvalue": "{\"on\":false}",
+        "offvalueType": "json",
+        "twofactor": "off",
+        "twofactorpin": "",
+        "filter": true,
+        "asyncCmd": false,
+        "outputs": 1,
+        "x": 670,
+        "y": 740,
+        "wires": [
+            [
+                "75e8ab20bdccb8ad"
+            ]
+        ]
+    },
+    {
+        "id": "fe1d0a76b2274a32",
+        "type": "inject",
+        "z": "7ceb1d8.f3afee4",
+        "name": "Query T2 power",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "10",
+        "topic": "cmnd/outlet/t2/Power",
+        "payloadType": "str",
+        "x": 130,
+        "y": 760,
+        "wires": [
+            [
+                "8379de16.82ace"
+            ]
+        ]
+    },
+    {
+        "id": "4d110fd70084348f",
+        "type": "function",
+        "z": "bd3b7721fd58430a",
+        "name": "clear",
+        "func": "if (msg.payload.state === 'OFF') {\n    return { payload: 'clear' };\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 440,
+        "wires": [
+            [
+                "27d661e8c21a058a"
+            ]
+        ]
+    },
+    {
+        "id": "e7f1f52c32467204",
+        "type": "trigger",
+        "z": "bd3b7721fd58430a",
+        "name": "",
+        "op1": "",
+        "op2": "{\"state\":\"OFF\"}",
+        "op1type": "pay",
+        "op2type": "json",
+        "duration": "5",
+        "extend": true,
+        "overrideDelay": false,
+        "units": "min",
+        "reset": "clear",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 770,
+        "y": 340,
+        "wires": [
+            [
+                "6f3c322d6b5d8fb3"
+            ]
+        ]
+    },
+    {
+        "id": "946b585de665e3c8",
+        "type": "inject",
+        "z": "bd3b7721fd58430a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "2",
+        "topic": "",
+        "payload": "{\"occupancy\":true}",
+        "payloadType": "json",
+        "x": 150,
+        "y": 300,
+        "wires": [
+            [
+                "cb5201d245ef0f2c"
+            ]
+        ]
+    },
+    {
+        "id": "6680f6fa94e9dd35",
+        "type": "inject",
+        "z": "bd3b7721fd58430a",
+        "name": "at specific time",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "18 21 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 520,
+        "wires": [
+            [
+                "0d2b2d300fef754d"
+            ]
+        ]
+    },
+    {
+        "id": "0d2b2d300fef754d",
+        "type": "function",
+        "z": "bd3b7721fd58430a",
+        "name": "when away, turn light on",
+        "func": "if (flow.get('away_mode')) {\n    return {\n        payload: 'ON',\n        topic: 'cmnd/outlet/t2/Power',\n    };\n}\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 520,
+        "wires": [
+            [
+                "e0ca5c97879cec6a",
+                "a55ef9b7ec1d9d29"
+            ]
+        ],
+        "outputLabels": [
+            "battery low"
+        ]
+    },
+    {
+        "id": "a55ef9b7ec1d9d29",
+        "type": "trigger",
+        "z": "bd3b7721fd58430a",
+        "name": "",
+        "op1": "",
+        "op2": "OFF",
+        "op1type": "nul",
+        "op2type": "str",
+        "duration": "1.17",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "hr",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 570,
+        "y": 560,
+        "wires": [
+            [
+                "e0ca5c97879cec6a"
+            ]
+        ]
+    },
+    {
+        "id": "e0ca5c97879cec6a",
+        "type": "mqtt out",
+        "z": "bd3b7721fd58430a",
+        "name": "",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "f569d34c.8c7ed",
+        "x": 730,
+        "y": 520,
+        "wires": []
     }
 ]
