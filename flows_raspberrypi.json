@@ -14,6 +14,13 @@
         "info": ""
     },
     {
+        "id": "4289ddd18011b400",
+        "type": "tab",
+        "label": "Dogo",
+        "disabled": false,
+        "info": ""
+    },
+    {
         "id": "13aa577370e4c4d7",
         "type": "tab",
         "label": "Logs/Notifications",
@@ -24,6 +31,13 @@
         "id": "b9a14f5917f73660",
         "type": "tab",
         "label": "Manual",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "984a481102416abd",
+        "type": "tab",
+        "label": "Office heater",
         "disabled": false,
         "info": ""
     },
@@ -64,6 +78,17 @@
         "sessionExpiry": ""
     },
     {
+        "id": "3302889fa9b7cb44",
+        "type": "noraf-config",
+        "name": "NORA - test",
+        "group": "test",
+        "twofactor": "off",
+        "twofactorpin": "",
+        "localexecution": true,
+        "structure": "",
+        "storeStateInContext": true
+    },
+    {
         "id": "7346c0bb.6010f",
         "type": "mqtt in",
         "z": "7ceb1d8.f3afee4",
@@ -97,6 +122,13 @@
         "nora": "f1e538c1.0315f8",
         "topic": "zigbee2mqtt/temp/office",
         "filter": true,
+        "sensorSupport": false,
+        "sensorStates": [],
+        "sensorStatesThatNotify": [],
+        "sensorNumeric": false,
+        "openCloseSupport": false,
+        "openCloseDiscrete": false,
+        "onOffSupport": false,
         "x": 670,
         "y": 380,
         "wires": []
@@ -115,6 +147,13 @@
         "nora": "f1e538c1.0315f8",
         "topic": "zigbee2mqtt/temp/bedroom",
         "filter": true,
+        "sensorSupport": false,
+        "sensorStates": [],
+        "sensorStatesThatNotify": [],
+        "sensorNumeric": false,
+        "openCloseSupport": false,
+        "openCloseDiscrete": false,
+        "onOffSupport": false,
         "x": 680,
         "y": 320,
         "wires": []
@@ -163,7 +202,9 @@
                 "6b4aafa9.7bb67",
                 "bb50f16e.915bf",
                 "3154423735afdc9d",
-                "e6a8f442d9e2ee73"
+                "e6a8f442d9e2ee73",
+                "4ba1a30d5d4d1e66",
+                "0fcc500c33a6316f"
             ]
         ]
     },
@@ -544,7 +585,8 @@
         "z": "7ceb1d8.f3afee4",
         "name": "mqtt",
         "links": [
-            "7e9a545c.9189bc"
+            "7e9a545c.9189bc",
+            "7ecc883174140724"
         ],
         "x": 875,
         "y": 40,
@@ -939,6 +981,7 @@
         "nora": "f1e538c1.0315f8",
         "topic": "",
         "actions": [],
+        "closeNotification": false,
         "x": 390,
         "y": 40,
         "wires": [
@@ -1172,7 +1215,8 @@
         "z": "7ceb1d8.f3afee4",
         "name": "tasmota",
         "links": [
-            "bd037393fb3732c7"
+            "bd037393fb3732c7",
+            "ca9dd8ce871a00db"
         ],
         "x": 815,
         "y": 680,
@@ -1184,7 +1228,8 @@
         "z": "7ceb1d8.f3afee4",
         "name": "zigbee2mqtt",
         "links": [
-            "3eaaee8d48469e17"
+            "3eaaee8d48469e17",
+            "05e168b4c197db65"
         ],
         "x": 835,
         "y": 480,
@@ -1600,7 +1645,7 @@
         "type": "function",
         "z": "bd3b7721fd58430a",
         "name": "When motion and dark",
-        "func": "if (msg.payload.occupancy &&\n    global.get('dark') &&\n    !global.get('light/hallway')?.on) {\n    return {\n        payload: { state: 'ON' },\n        topic: 'zigbee2mqtt/light/hallway/set',\n    };\n}\n",
+        "func": "const now = new Date();\n\nif (msg.payload.occupancy &&\n    global.get('dark') &&\n    flow.get('auto_light') &&\n    !global.get('light/hallway')?.on) {\n    return {\n        payload: { state: 'ON' },\n        topic: 'zigbee2mqtt/light/hallway/set',\n    };\n}\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "var  timer;\n",
@@ -1726,7 +1771,7 @@
         "type": "noraf-outlet",
         "z": "7ceb1d8.f3afee4",
         "devicename": "Lamp",
-        "roomhint": "Bedroom",
+        "roomhint": "Office",
         "name": "",
         "passthru": false,
         "errorifstateunchaged": false,
@@ -1770,7 +1815,7 @@
         "topic": "cmnd/outlet/t2/Power",
         "payloadType": "str",
         "x": 130,
-        "y": 760,
+        "y": 800,
         "wires": [
             [
                 "8379de16.82ace"
@@ -1805,7 +1850,7 @@
         "op2": "{\"state\":\"OFF\"}",
         "op1type": "pay",
         "op2type": "json",
-        "duration": "5",
+        "duration": "6",
         "extend": true,
         "overrideDelay": false,
         "units": "min",
@@ -1857,7 +1902,7 @@
             }
         ],
         "repeat": "",
-        "crontab": "18 21 * * *",
+        "crontab": "30 18 * * *",
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
@@ -1866,7 +1911,7 @@
         "y": 520,
         "wires": [
             [
-                "0d2b2d300fef754d"
+                "bef5086dbfa753ed"
             ]
         ]
     },
@@ -1881,7 +1926,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 350,
+        "x": 510,
         "y": 520,
         "wires": [
             [
@@ -1902,7 +1947,7 @@
         "op2": "OFF",
         "op1type": "nul",
         "op2type": "str",
-        "duration": "1.17",
+        "duration": "3.2",
         "extend": false,
         "overrideDelay": false,
         "units": "hr",
@@ -1910,7 +1955,7 @@
         "bytopic": "all",
         "topic": "topic",
         "outputs": 1,
-        "x": 570,
+        "x": 730,
         "y": 560,
         "wires": [
             [
@@ -1932,8 +1977,718 @@
         "correl": "",
         "expiry": "",
         "broker": "f569d34c.8c7ed",
-        "x": 730,
+        "x": 890,
         "y": 520,
         "wires": []
+    },
+    {
+        "id": "0cd4f1385c4acbae",
+        "type": "inject",
+        "z": "4289ddd18011b400",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "cmnd/outlet/t3/pulsetime",
+        "payload": "116",
+        "payloadType": "str",
+        "x": 180,
+        "y": 100,
+        "wires": [
+            [
+                "b7e4826693fc3fbc"
+            ]
+        ]
+    },
+    {
+        "id": "b7e4826693fc3fbc",
+        "type": "mqtt out",
+        "z": "4289ddd18011b400",
+        "name": "",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "f569d34c.8c7ed",
+        "x": 410,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "ffdb7ab8e24caa3a",
+        "type": "inject",
+        "z": "4289ddd18011b400",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "cmnd/outlet/t3/pulsetime",
+        "payload": "off",
+        "payloadType": "str",
+        "x": 180,
+        "y": 140,
+        "wires": [
+            [
+                "b7e4826693fc3fbc"
+            ]
+        ]
+    },
+    {
+        "id": "4ba1a30d5d4d1e66",
+        "type": "noraf-outlet",
+        "z": "7ceb1d8.f3afee4",
+        "devicename": "Feed Dog",
+        "roomhint": "Outside",
+        "name": "",
+        "passthru": false,
+        "errorifstateunchaged": false,
+        "nora": "f1e538c1.0315f8",
+        "topic": "stat/outlet/t3/RESULT",
+        "onvalue": "{\"on\":true}",
+        "onvalueType": "json",
+        "offvalue": "{\"on\":false}",
+        "offvalueType": "json",
+        "twofactor": "off",
+        "twofactorpin": "",
+        "filter": true,
+        "asyncCmd": false,
+        "outputs": 1,
+        "x": 680,
+        "y": 800,
+        "wires": [
+            [
+                "75e8ab20bdccb8ad"
+            ]
+        ]
+    },
+    {
+        "id": "f683fa9f427b3f09",
+        "type": "inject",
+        "z": "7ceb1d8.f3afee4",
+        "name": "Query T3 power",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "10",
+        "topic": "cmnd/outlet/t3/Power",
+        "payloadType": "str",
+        "x": 130,
+        "y": 840,
+        "wires": [
+            [
+                "8379de16.82ace"
+            ]
+        ]
+    },
+    {
+        "id": "c53989ecfa9c42d2",
+        "type": "mqtt in",
+        "z": "4289ddd18011b400",
+        "name": "",
+        "topic": "stat/outlet/t3/RESULT",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "f569d34c.8c7ed",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "x": 140,
+        "y": 200,
+        "wires": [
+            [
+                "a32c1a618f7c8359"
+            ]
+        ]
+    },
+    {
+        "id": "a32c1a618f7c8359",
+        "type": "function",
+        "z": "4289ddd18011b400",
+        "name": "when turned on, turn off after a few seconds",
+        "func": "const prev = context.get('prev');\nconst powerOn = msg.payload.POWER === 'ON';\ncontext.set('prev', powerOn);\n\nif (powerOn && powerOn !== prev) {\n    let topic = msg.topic.split('/');\n    topic = topic.slice(1, topic.length - 1);\n    setTimeout(() => {\n        node.send({\n            payload: 'off',\n            topic: ['cmnd', ...topic, 'power'].join('/'),\n        });\n    }, 17000);\n}\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 200,
+        "wires": [
+            [
+                "3910ecc79e784aa4"
+            ]
+        ]
+    },
+    {
+        "id": "3910ecc79e784aa4",
+        "type": "mqtt out",
+        "z": "4289ddd18011b400",
+        "name": "",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "f569d34c.8c7ed",
+        "x": 710,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "5cc7e798047cd148",
+        "type": "inject",
+        "z": "4289ddd18011b400",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "31 08 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "cmnd/outlet/t3/power",
+        "payload": "on",
+        "payloadType": "str",
+        "x": 170,
+        "y": 60,
+        "wires": [
+            [
+                "b7e4826693fc3fbc"
+            ]
+        ]
+    },
+    {
+        "id": "036909ac4c8992bc",
+        "type": "inject",
+        "z": "7ceb1d8.f3afee4",
+        "name": "Query T1 power",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "10",
+        "topic": "cmnd/outlet/t1/Power",
+        "payloadType": "str",
+        "x": 130,
+        "y": 760,
+        "wires": [
+            [
+                "8379de16.82ace"
+            ]
+        ]
+    },
+    {
+        "id": "53a291c48acfbb03",
+        "type": "mqtt in",
+        "z": "13aa577370e4c4d7",
+        "name": "",
+        "topic": "zigbee2mqtt/temp/bedroom",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "f569d34c.8c7ed",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "x": 170,
+        "y": 540,
+        "wires": [
+            [
+                "bbee0273798f13c8"
+            ]
+        ]
+    },
+    {
+        "id": "bbee0273798f13c8",
+        "type": "function",
+        "z": "13aa577370e4c4d7",
+        "name": "temp > 23",
+        "func": "const last = context.get('last')\nconst send = msg.payload.temperature > 23;\ncontext.set('last', send);\n\nif (send && send !== last) {\n    return {\n        payload: {}\n    };\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 540,
+        "wires": [
+            [
+                "909d0eb7201e0449"
+            ]
+        ]
+    },
+    {
+        "id": "909d0eb7201e0449",
+        "type": "noraf-notify",
+        "z": "13aa577370e4c4d7",
+        "tag": "stop-heat",
+        "title": "Opreste focul",
+        "body": "Temperatura in dormitor e mai mare de 23",
+        "icon": "",
+        "name": "Opreste focul!",
+        "nora": "f1e538c1.0315f8",
+        "topic": "",
+        "actions": [],
+        "closeNotification": false,
+        "x": 520,
+        "y": 540,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ec7e0700ecf87d1d",
+        "type": "inject",
+        "z": "7ceb1d8.f3afee4",
+        "name": "Query T4 power",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "10",
+        "topic": "cmnd/outlet/t4/Power",
+        "payloadType": "str",
+        "x": 130,
+        "y": 880,
+        "wires": [
+            [
+                "8379de16.82ace"
+            ]
+        ]
+    },
+    {
+        "id": "c6055ff7d025f776",
+        "type": "noraf-thermostat",
+        "z": "984a481102416abd",
+        "devicename": "Heater",
+        "roomhint": "Office",
+        "name": "",
+        "modes": "off,heat,on",
+        "unit": "C",
+        "rangeMin": "",
+        "rangeMax": "",
+        "topic": "",
+        "passthru": false,
+        "commandOnly": false,
+        "queryOnly": false,
+        "bufferRangeCelsius": 2,
+        "nora": "f1e538c1.0315f8",
+        "twofactor": "off",
+        "twofactorpin": "",
+        "filter": false,
+        "x": 150,
+        "y": 100,
+        "wires": [
+            [
+                "c83fd020873ab0f9"
+            ]
+        ]
+    },
+    {
+        "id": "c4153c6b6fea2aca",
+        "type": "function",
+        "z": "984a481102416abd",
+        "name": "command",
+        "func": "const heater = flow.get('heater') ?? {};\nconst sensor = flow.get('sensor') ?? {};\nconst state = global.get('outlet/t4')?.on ?? false;\n\nconst threshold = heater.setpoint + (state ? 0 : -1) * 0.2;\nconst command = heater.mode === 'heat' && sensor.temperature < threshold;\n\nif (command !== state) {\n    return {\n        payload: command ? 'ON' : 'OFF',\n    };\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 120,
+        "wires": [
+            [
+                "e6af76021d7d10a5"
+            ]
+        ]
+    },
+    {
+        "id": "c83fd020873ab0f9",
+        "type": "change",
+        "z": "984a481102416abd",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "heater",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 340,
+        "y": 100,
+        "wires": [
+            [
+                "c4153c6b6fea2aca"
+            ]
+        ]
+    },
+    {
+        "id": "e15ab29ef4314d52",
+        "type": "mqtt in",
+        "z": "984a481102416abd",
+        "name": "",
+        "topic": "zigbee2mqtt/temp/office",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "f569d34c.8c7ed",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "x": 140,
+        "y": 160,
+        "wires": [
+            [
+                "52950434627bb625"
+            ]
+        ]
+    },
+    {
+        "id": "52950434627bb625",
+        "type": "function",
+        "z": "984a481102416abd",
+        "name": "get temp/humidity",
+        "func": "if ('temperature' in msg.payload &&\n    'humidity' in msg.payload) {\n    const sensor = {\n        temperature: msg.payload.temperature,\n        humidity: msg.payload.humidity,\n    };\n    flow.set('sensor', sensor);\n    return {\n        payload: sensor,\n    };\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 160,
+        "wires": [
+            [
+                "c6055ff7d025f776",
+                "c4153c6b6fea2aca"
+            ]
+        ]
+    },
+    {
+        "id": "e6af76021d7d10a5",
+        "type": "mqtt out",
+        "z": "984a481102416abd",
+        "name": "",
+        "topic": "cmnd/outlet/t4/Power",
+        "qos": "2",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "f569d34c.8c7ed",
+        "x": 800,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "f2f15464c2b3c419",
+        "type": "function",
+        "z": "984a481102416abd",
+        "name": "active mode",
+        "func": "return {\n    payload: {\n        activeMode: msg.payload.POWER === 'ON'\n            ? 'heat'\n            : 'off',\n    },\n};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 220,
+        "wires": [
+            [
+                "c6055ff7d025f776"
+            ]
+        ]
+    },
+    {
+        "id": "8c6b8c708e4088bd",
+        "type": "mqtt in",
+        "z": "984a481102416abd",
+        "name": "",
+        "topic": "stat/outlet/t4/RESULT",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "f569d34c.8c7ed",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "x": 140,
+        "y": 220,
+        "wires": [
+            [
+                "f2f15464c2b3c419",
+                "c4153c6b6fea2aca"
+            ]
+        ]
+    },
+    {
+        "id": "9c2173599da5c5df",
+        "type": "noraf-switch",
+        "z": "bd3b7721fd58430a",
+        "devicename": "Auto light mode",
+        "roomhint": "Hallway",
+        "name": "",
+        "passthru": true,
+        "errorifstateunchaged": false,
+        "nora": "f1e538c1.0315f8",
+        "topic": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "twofactor": "off",
+        "twofactorpin": "",
+        "filter": false,
+        "asyncCmd": false,
+        "outputs": 1,
+        "x": 380,
+        "y": 660,
+        "wires": [
+            [
+                "71ac0abb743dbd23"
+            ]
+        ]
+    },
+    {
+        "id": "71ac0abb743dbd23",
+        "type": "change",
+        "z": "bd3b7721fd58430a",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "auto_light",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 610,
+        "y": 660,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bfaabcc12a514c9d",
+        "type": "inject",
+        "z": "bd3b7721fd58430a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "00 17 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 170,
+        "y": 640,
+        "wires": [
+            [
+                "9c2173599da5c5df"
+            ]
+        ]
+    },
+    {
+        "id": "1c5ce62cb3d01e67",
+        "type": "inject",
+        "z": "bd3b7721fd58430a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "00 23 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "x": 170,
+        "y": 680,
+        "wires": [
+            [
+                "9c2173599da5c5df"
+            ]
+        ]
+    },
+    {
+        "id": "32a38547e15789a1",
+        "type": "inject",
+        "z": "bd3b7721fd58430a",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "2",
+        "topic": "",
+        "payload": "auto_light",
+        "payloadType": "flow",
+        "x": 140,
+        "y": 600,
+        "wires": [
+            [
+                "9c2173599da5c5df"
+            ]
+        ]
+    },
+    {
+        "id": "b3a1d159212b38fb",
+        "type": "noraf-camera",
+        "z": "984a481102416abd",
+        "devicename": "Yard",
+        "roomhint": "Outside",
+        "name": "",
+        "passthru": false,
+        "nora": "3302889fa9b7cb44",
+        "topic": "",
+        "twofactor": "off",
+        "twofactorpin": "",
+        "filter": false,
+        "asyncCmd": false,
+        "outputs": 0,
+        "cameraStreamNeedAuthToken": false,
+        "protocols": [
+            {
+                "cameraStreamProtocol": "hls",
+                "cameraStreamAccessUrl": "http://192.168.100.2:8083/stream/curte/channel/0/hls/live/index.m3u8"
+            }
+        ],
+        "x": 580,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "0fcc500c33a6316f",
+        "type": "noraf-outlet",
+        "z": "7ceb1d8.f3afee4",
+        "devicename": "Heater",
+        "roomhint": "Bathroom",
+        "name": "",
+        "passthru": false,
+        "errorifstateunchaged": false,
+        "nora": "f1e538c1.0315f8",
+        "topic": "stat/outlet/t1/RESULT",
+        "onvalue": "{\"on\":true}",
+        "onvalueType": "json",
+        "offvalue": "{\"on\":false}",
+        "offvalueType": "json",
+        "twofactor": "off",
+        "twofactorpin": "",
+        "filter": true,
+        "asyncCmd": false,
+        "outputs": 1,
+        "x": 670,
+        "y": 860,
+        "wires": [
+            [
+                "75e8ab20bdccb8ad"
+            ]
+        ]
+    },
+    {
+        "id": "bef5086dbfa753ed",
+        "type": "delay",
+        "z": "bd3b7721fd58430a",
+        "name": "",
+        "pauseType": "random",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "40",
+        "randomUnits": "minutes",
+        "drop": false,
+        "allowrate": false,
+        "x": 320,
+        "y": 520,
+        "wires": [
+            [
+                "0d2b2d300fef754d"
+            ]
+        ]
     }
 ]
