@@ -1796,7 +1796,7 @@
         "correl": "",
         "expiry": "",
         "broker": "f569d34c.8c7ed",
-        "x": 410,
+        "x": 690,
         "y": 100,
         "wires": []
     },
@@ -1908,12 +1908,84 @@
         "topic": "cmnd/outlet/t3/power",
         "payload": "on",
         "payloadType": "str",
-        "x": 170,
+        "x": 180,
+        "y": 60,
+        "wires": [
+            [
+                "8750afb90a9573ae"
+            ]
+        ]
+    },
+    {
+        "id": "8750afb90a9573ae",
+        "type": "function",
+        "z": "4289ddd18011b400",
+        "name": "if auto feed dog is turned on",
+        "func": "if (flow.get('auto-feed-dog')) {\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
         "y": 60,
         "wires": [
             [
                 "b7e4826693fc3fbc"
             ]
+        ]
+    },
+    {
+        "id": "7826b59e484d0344",
+        "type": "noraf-outlet",
+        "z": "4289ddd18011b400",
+        "devicename": "Auto Feed Dog",
+        "roomhint": "Outside",
+        "name": "",
+        "passthru": false,
+        "errorifstateunchaged": true,
+        "nora": "f1e538c1.0315f8",
+        "topic": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "twofactor": "off",
+        "twofactorpin": "",
+        "filter": false,
+        "asyncCmd": false,
+        "outputs": 1,
+        "x": 420,
+        "y": 280,
+        "wires": [
+            [
+                "8b09f3d5fe4676da"
+            ]
+        ]
+    },
+    {
+        "id": "8b09f3d5fe4676da",
+        "type": "change",
+        "z": "4289ddd18011b400",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "auto-feed-dog",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 630,
+        "y": 280,
+        "wires": [
+            []
         ]
     },
     {
@@ -2074,7 +2146,7 @@
         "topic": "",
         "actions": [],
         "closeNotification": false,
-        "x": 390,
+        "x": 610,
         "y": 40,
         "wires": [
             []
@@ -2085,7 +2157,7 @@
         "type": "function",
         "z": "13aa577370e4c4d7",
         "name": "When device offline",
-        "func": "const now = new Date().toLocaleString();\nif (msg.payload.online === false && \n    flow.get('grid_offline') === false) {\n    return {\n        payload: {\n            tag: msg.topic,\n            title: 'Device offline',\n            body: `${msg.topic} at ${now}`,\n        },\n    };\n}\n",
+        "func": "const now = new Date().toLocaleString();\nif (msg.payload.online === false) {\n    if (flow.get('grid_offline') === false && !context.get(msg.topic)) {\n        context.set(msg.topic, true);\n        return {\n            payload: {\n                tag: msg.topic,\n                title: 'Device offline',\n                body: `${msg.topic} at ${now}`,\n            },\n        };\n    }\n} \n\nif (msg.payload.online) {\n    context.set(msg.topic, false);\n}\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -2370,15 +2442,44 @@
         "title": "Opreste focul",
         "body": "Temperatura in dormitor e mai mare de 23",
         "icon": "",
-        "name": "Opreste focul!",
+        "name": "Opreste focul",
         "nora": "f1e538c1.0315f8",
         "topic": "",
         "actions": [],
         "closeNotification": false,
-        "x": 520,
+        "x": 550,
         "y": 540,
         "wires": [
             []
+        ]
+    },
+    {
+        "id": "f1e1a78807df0e49",
+        "type": "inject",
+        "z": "13aa577370e4c4d7",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 370,
+        "y": 620,
+        "wires": [
+            [
+                "909d0eb7201e0449"
+            ]
         ]
     },
     {
