@@ -187,7 +187,7 @@
         "type": "function",
         "z": "7ceb1d8.f3afee4",
         "name": "Map",
-        "func": "let name = msg.topic.substr(msg.topic.indexOf('/') + 1);\n\nconst PREFIX = '/RESULT';\nif (name.endsWith(PREFIX)) {\n    name = name.substr(0, name.length - PREFIX.length);\n}\n\nconst previousPayload = global.get(name) ?? {};\nconst payload = {\n    ...previousPayload,\n    ...v('temperature'),\n    ...v('humidity'),\n    ...v('state', 'on', p => p === 'ON'),\n    ...v('POWER', 'on', p => p === 'ON'),\n    ...v('Dimmer', 'brightness'),\n    online: msg.payload?.online ?? true,\n};\nglobal.set(name, payload);\n\nreturn {\n    payload,\n    topic: msg.topic,\n};\n\nfunction v(input, output = input, transform = x => x) {\n    if (input in msg.payload) {\n        return {\n            [output]: transform(msg.payload[input])\n        };\n    }\n    return {};\n}\n",
+        "func": "let name = msg.topic.substring(msg.topic.indexOf('/') + 1);\n\nconst PREFIX = '/RESULT';\nif (name.endsWith(PREFIX)) {\n    name = name.substring(0, name.length - PREFIX.length);\n}\n\nconst previousPayload = global.get(name) ?? {};\nconst payload = {\n    ...previousPayload,\n    ...v('temperature'),\n    ...v('humidity'),\n    ...v('state', 'on', p => p === 'ON'),\n    ...v('POWER', 'on', p => p === 'ON'),\n    ...v('Dimmer', 'brightness'),\n    online: msg.payload?.online ?? true,\n};\nglobal.set(name, payload);\n\nreturn {\n    payload,\n    topic: msg.topic,\n};\n\nfunction v(input, output = input, transform = x => x) {\n    if (input in msg.payload) {\n        return {\n            [output]: transform(msg.payload[input])\n        };\n    }\n    return {};\n}\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1522,16 +1522,17 @@
             }
         ],
         "repeat": "",
-        "crontab": "30 18 * * *",
+        "crontab": "40 20 * * *",
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
+        "payload": "",
         "payloadType": "date",
         "x": 140,
         "y": 520,
         "wires": [
             [
-                "bef5086dbfa753ed"
+                "0d2b2d300fef754d"
             ]
         ]
     },
@@ -1540,22 +1541,27 @@
         "type": "function",
         "z": "bd3b7721fd58430a",
         "name": "when away, turn light on",
-        "func": "if (flow.get('away_mode')) {\n    return {\n        payload: 'ON',\n        topic: 'cmnd/outlet/t2/Power',\n    };\n}\n\n",
-        "outputs": 1,
+        "func": "if (flow.get('away_mode')) {\n    return [{\n        //office lamp\n        payload: 'ON',\n        topic: 'cmnd/outlet/t2/Power',\n    }, {\n        //wake light\n        payload: {\n            state: 'ON',\n        },\n        topic: 'zigbee2mqtt/relay/bedroom_wake/set',\n    }];\n}\n",
+        "outputs": 2,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 510,
+        "x": 370,
         "y": 520,
         "wires": [
             [
-                "e0ca5c97879cec6a",
+                "c97981c88c781654",
                 "a55ef9b7ec1d9d29"
+            ],
+            [
+                "c97981c88c781654",
+                "8a3c5bcc9a778638"
             ]
         ],
         "outputLabels": [
-            "battery low"
+            "battery low",
+            ""
         ]
     },
     {
@@ -1567,7 +1573,7 @@
         "op2": "OFF",
         "op1type": "nul",
         "op2type": "str",
-        "duration": "3.2",
+        "duration": "2.3",
         "extend": false,
         "overrideDelay": false,
         "units": "hr",
@@ -1575,11 +1581,11 @@
         "bytopic": "all",
         "topic": "topic",
         "outputs": 1,
-        "x": 730,
-        "y": 560,
+        "x": 610,
+        "y": 540,
         "wires": [
             [
-                "e0ca5c97879cec6a"
+                "c97981c88c781654"
             ]
         ]
     },
@@ -1597,8 +1603,8 @@
         "correl": "",
         "expiry": "",
         "broker": "f569d34c.8c7ed",
-        "x": 890,
-        "y": 520,
+        "x": 970,
+        "y": 500,
         "wires": []
     },
     {
@@ -1730,7 +1736,7 @@
         ]
     },
     {
-        "id": "bef5086dbfa753ed",
+        "id": "c97981c88c781654",
         "type": "delay",
         "z": "bd3b7721fd58430a",
         "name": "",
@@ -1746,13 +1752,55 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 320,
-        "y": 520,
+        "x": 780,
+        "y": 500,
         "wires": [
             [
-                "0d2b2d300fef754d"
+                "e0ca5c97879cec6a",
+                "c0718d22327809e7"
             ]
         ]
+    },
+    {
+        "id": "8a3c5bcc9a778638",
+        "type": "trigger",
+        "z": "bd3b7721fd58430a",
+        "name": "",
+        "op1": "",
+        "op2": "{\"state\":\"OFF\"}",
+        "op1type": "nul",
+        "op2type": "json",
+        "duration": "3",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "hr",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 610,
+        "y": 580,
+        "wires": [
+            [
+                "c97981c88c781654"
+            ]
+        ]
+    },
+    {
+        "id": "c0718d22327809e7",
+        "type": "debug",
+        "z": "bd3b7721fd58430a",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1000,
+        "y": 600,
+        "wires": []
     },
     {
         "id": "0cd4f1385c4acbae",
@@ -1903,7 +1951,7 @@
             }
         ],
         "repeat": "",
-        "crontab": "31 08 * * *",
+        "crontab": "31 07 * * *",
         "once": false,
         "onceDelay": 0.1,
         "topic": "cmnd/outlet/t3/power",
@@ -2310,7 +2358,7 @@
         "op2": "true",
         "op1type": "nul",
         "op2type": "bool",
-        "duration": "15",
+        "duration": "30",
         "extend": true,
         "overrideDelay": false,
         "units": "s",
