@@ -42,6 +42,14 @@
         "info": ""
     },
     {
+        "id": "7d41aab9fd0b6a3e",
+        "type": "tab",
+        "label": "ESP32",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "f1e538c1.0315f8",
         "type": "noraf-config",
         "name": "NORA",
@@ -50,7 +58,9 @@
         "twofactorpin": "",
         "localexecution": true,
         "structure": "Seceani",
-        "storeStateInContext": true
+        "storeStateInContext": true,
+        "disableValidationErrors": false,
+        "sendDeviceNameAndLocation": false
     },
     {
         "id": "f569d34c.8c7ed",
@@ -2782,30 +2792,139 @@
         ]
     },
     {
-        "id": "b3a1d159212b38fb",
-        "type": "noraf-camera",
-        "z": "984a481102416abd",
-        "d": true,
-        "devicename": "Yard",
-        "roomhint": "Outside",
+        "id": "5bb98af947157223",
+        "type": "node-espota",
+        "z": "7d41aab9fd0b6a3e",
+        "firmwareLink": "https://github.com/andrei-tatar/ha-wifi-switch/releases/latest/download/ha_switch_esp32.bin",
+        "includeTopics": "^(.+)/version$",
+        "excludeTopics": "",
         "name": "",
+        "x": 350,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "f2dddb9e4756a85a",
+        "type": "mqtt in",
+        "z": "7d41aab9fd0b6a3e",
+        "name": "",
+        "topic": "+/version",
+        "qos": "2",
+        "datatype": "utf8",
+        "broker": "f569d34c.8c7ed",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 140,
+        "wires": [
+            [
+                "5bb98af947157223"
+            ]
+        ]
+    },
+    {
+        "id": "b5f045d301d04cf3",
+        "type": "inject",
+        "z": "7d41aab9fd0b6a3e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "00 04 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "update",
+        "payload": "",
+        "payloadType": "date",
+        "x": 190,
+        "y": 100,
+        "wires": [
+            [
+                "5bb98af947157223"
+            ]
+        ]
+    },
+    {
+        "id": "3c431f9fc06dcf0a",
+        "type": "noraf-light",
+        "z": "7d41aab9fd0b6a3e",
+        "devicename": "Light",
+        "lightcolor": false,
+        "brightnesscontrol": true,
+        "commandonlycolor": false,
+        "turnonwhenbrightnesschanges": true,
         "passthru": false,
+        "errorifstateunchaged": false,
+        "statepayload": true,
+        "brightnessoverride": "",
+        "roomhint": "",
+        "name": "",
+        "colortype": "hsv",
         "nora": "3302889fa9b7cb44",
-        "topic": "",
+        "topic": "switch-dimmer-6/state/set",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "temperaturemin": "2700",
+        "temperaturemax": "5500",
         "twofactor": "off",
         "twofactorpin": "",
         "filter": false,
-        "asyncCmd": false,
-        "outputs": 0,
-        "cameraStreamNeedAuthToken": false,
-        "protocols": [
-            {
-                "cameraStreamProtocol": "hls",
-                "cameraStreamAccessUrl": "http://192.168.100.2:8083/stream/curte/channel/0/hls/live/index.m3u8"
-            }
-        ],
-        "x": 580,
-        "y": 320,
+        "x": 330,
+        "y": 220,
+        "wires": [
+            [
+                "9d1a4bc7e231f606"
+            ]
+        ]
+    },
+    {
+        "id": "d482edb1f0c94e5b",
+        "type": "mqtt in",
+        "z": "7d41aab9fd0b6a3e",
+        "name": "",
+        "topic": "switch-dimmer-6/state",
+        "qos": "1",
+        "datatype": "json",
+        "broker": "f569d34c.8c7ed",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 220,
+        "wires": [
+            [
+                "3c431f9fc06dcf0a"
+            ]
+        ]
+    },
+    {
+        "id": "9d1a4bc7e231f606",
+        "type": "mqtt out",
+        "z": "7d41aab9fd0b6a3e",
+        "name": "",
+        "topic": "",
+        "qos": "1",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "f569d34c.8c7ed",
+        "x": 470,
+        "y": 220,
         "wires": []
     }
 ]
