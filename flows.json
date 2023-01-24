@@ -1,0 +1,673 @@
+[
+    {
+        "id": "61cc80910aede988",
+        "type": "tab",
+        "label": "Audio System",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "3c1f7041b0963594",
+        "type": "cec-config",
+        "OSDname": "node-red",
+        "comport": "RPI",
+        "hdmiport": "0",
+        "player": false,
+        "recorder": false,
+        "tuner": false,
+        "audio": true
+    },
+    {
+        "id": "2dd98965cb8d503c",
+        "type": "serial-port",
+        "serialport": "/dev/serial/by-id/usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_Controller_0001-if00-port0",
+        "serialbaud": "57600",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "10",
+        "bin": "bin",
+        "out": "time",
+        "addchar": "",
+        "responsetimeout": "10000"
+    },
+    {
+        "id": "7b2707f28190958d",
+        "type": "serial-port",
+        "serialport": "/dev/serial/by-id/usb-Prolific_Technology_Inc._USB-Serial_Controller-if00-port0",
+        "serialbaud": "115200",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "5",
+        "bin": "bin",
+        "out": "interbyte",
+        "addchar": "",
+        "responsetimeout": "10000"
+    },
+    {
+        "id": "81e4c2a1.94c2e",
+        "type": "cec-in",
+        "z": "61cc80910aede988",
+        "cec_adapter": "3c1f7041b0963594",
+        "name": "",
+        "flow_in": true,
+        "flow_out": true,
+        "select_all": "false",
+        "active_source": true,
+        "image_view_on": true,
+        "text_view_on": true,
+        "inactive_source": true,
+        "request_active_source": true,
+        "routing_change": true,
+        "routing_information": true,
+        "set_stream_path": true,
+        "standby": true,
+        "record_off": true,
+        "record_on": true,
+        "record_status": true,
+        "record_tv_screen": true,
+        "clear_analogue_timer": true,
+        "clear_digital_timer": true,
+        "clear_external_timer": true,
+        "set_analogue_timer": true,
+        "set_digital_timer": true,
+        "set_external_timer": true,
+        "set_timer_program_title": true,
+        "timer_cleared_status": true,
+        "timer_status": true,
+        "cec_version": true,
+        "get_cec_version": true,
+        "give_physical_address": true,
+        "get_menu_language": true,
+        "report_physical_address": true,
+        "set_menu_language": true,
+        "deck_control": true,
+        "deck_status": true,
+        "give_deck_status": true,
+        "play": true,
+        "give_tuner_device_status": true,
+        "select_analogue_service": true,
+        "select_digital_service": true,
+        "tuner_device_status": true,
+        "tuner_step_decrement": true,
+        "tuner_step_increment": true,
+        "device_vendor_id": true,
+        "give_device_vendor_id": true,
+        "vendor_command": true,
+        "vendor_command_with_id": true,
+        "vendor_remote_button_down": true,
+        "vendor_remote_button_up": true,
+        "set_osd_string": true,
+        "give_osd_name": true,
+        "set_osd_name": true,
+        "menu_request": true,
+        "menu_status": true,
+        "user_control_pressed": true,
+        "user_control_release": true,
+        "give_device_power_status": true,
+        "report_power_status": true,
+        "feature_abort": true,
+        "abort": true,
+        "give_audio_status": true,
+        "give_system_audio_mode_status": true,
+        "report_audio_status": true,
+        "set_system_audio_mode": true,
+        "system_audio_mode_request": true,
+        "system_audio_mode_status": true,
+        "set_audio_rate": true,
+        "start_arc": true,
+        "report_arc_started": true,
+        "report_arc_ended": true,
+        "request_arc_start": true,
+        "request_arc_end": true,
+        "end_arc": true,
+        "cdc": true,
+        "none": true,
+        "x": 130,
+        "y": 360,
+        "wires": [
+            [
+                "8ab27e65.532f6"
+            ]
+        ]
+    },
+    {
+        "id": "b6410302.efaed",
+        "type": "inject",
+        "z": "61cc80910aede988",
+        "name": "repeat",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "2",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 240,
+        "wires": [
+            [
+                "405fa020.fd7e"
+            ]
+        ]
+    },
+    {
+        "id": "4ee37088.4b80f",
+        "type": "cec-out",
+        "z": "61cc80910aede988",
+        "cec_adapter": "3c1f7041b0963594",
+        "name": "",
+        "x": 540,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "41bcfed6.234",
+        "type": "function",
+        "z": "61cc80910aede988",
+        "name": "Get TV power status",
+        "func": "return {\n    payload: {\n        source: 'AUDIOSYSTEM',\n        target: 'TV',\n        opcode: \"GIVE_DEVICE_POWER_STATUS\",\n        args: []\n    }\n};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 300,
+        "wires": [
+            [
+                "4ee37088.4b80f"
+            ]
+        ]
+    },
+    {
+        "id": "8ab27e65.532f6",
+        "type": "function",
+        "z": "61cc80910aede988",
+        "name": "Is TV on?",
+        "func": "if (msg.payload.type === 'TRAFFIC' &&\n    msg.payload.source === 0 &&\n    msg.payload.target === 5 &&\n    msg.payload.event === 'REPORT_POWER_STATUS') {\n    const tvStatus = msg.payload.data.str === 'ON';\n\n    node.status({\n        fill: tvStatus ? 'blue' : 'yellow',\n        shape: \"dot\",\n        text: tvStatus ? 'on' : 'off'\n    });\n\n    const flowStatus = flow.get('tv_on');\n    if (flowStatus !== tvStatus) {\n        flow.set('tv_on', tvStatus);\n        return msg;\n    }\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 280,
+        "y": 360,
+        "wires": [
+            [
+                "b6bf4e6d.2b16c"
+            ]
+        ]
+    },
+    {
+        "id": "b6bf4e6d.2b16c",
+        "type": "link out",
+        "z": "61cc80910aede988",
+        "name": "update amp power",
+        "links": [
+            "50e2118a.c5d65",
+            "bc4bddd9e7b73ff6",
+            "fca32fff6a920574"
+        ],
+        "x": 405,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "a9f14b34.b4b698",
+        "type": "function",
+        "z": "61cc80910aede988",
+        "name": "Playing?",
+        "func": "const isPlaying = msg.payload.indexOf('\"playing\"') >= 0;\nnode.status({\n    fill: isPlaying ? \"blue\" : \"yellow\",\n    shape: \"dot\",\n    text: isPlaying ? 'playing' : 'not playing'\n});\n\nconst flowMusicOn = flow.get('music_on');\nif (isPlaying !== flowMusicOn) {\n    flow.set('music_on', isPlaying);\n    return msg;\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 240,
+        "wires": [
+            [
+                "8fc31dc0.fe6ff"
+            ]
+        ]
+    },
+    {
+        "id": "8fc31dc0.fe6ff",
+        "type": "link out",
+        "z": "61cc80910aede988",
+        "name": "update amp power",
+        "mode": "link",
+        "links": [
+            "bc4bddd9e7b73ff6",
+            "fca32fff6a920574"
+        ],
+        "x": 795,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "5c740848.5ee358",
+        "type": "exec",
+        "z": "61cc80910aede988",
+        "command": "dbus-send --system --print-reply --dest=org.bluez /org/bluez/hci0/dev_F8_0F_F9_A0_32_AF/player0 org.freedesktop.DBus.Properties.Get string:org.bluez.MediaPlayer1 string:Status || exit 0",
+        "addpay": false,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "check",
+        "x": 570,
+        "y": 240,
+        "wires": [
+            [
+                "a9f14b34.b4b698"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "405fa020.fd7e",
+        "type": "exec",
+        "z": "61cc80910aede988",
+        "command": "dbus-send --system --print-reply --dest=org.bluez /org/bluez/hci0/dev_F8_0F_F9_A0_32_AF org.freedesktop.DBus.Properties.Get string:org.bluez.MediaControl1 string:Connected || exit 0",
+        "addpay": false,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "check",
+        "x": 290,
+        "y": 240,
+        "wires": [
+            [
+                "645350d4.805c"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "645350d4.805c",
+        "type": "function",
+        "z": "61cc80910aede988",
+        "name": "connected?",
+        "func": "if (msg.payload.indexOf('boolean true') >= 0) {\n    node.status({ fill: \"blue\", shape: \"dot\", text: \"connected\" });\n    return [msg, null];\n} else {\n    node.status({ fill: \"yellow\", shape: \"dot\", text: \"disconnected\" });\n    return [null, { payload: false }];\n}",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 240,
+        "wires": [
+            [
+                "5c740848.5ee358"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "22eaa8ece847ad55",
+        "type": "serial in",
+        "z": "61cc80910aede988",
+        "name": "amp in",
+        "serial": "2dd98965cb8d503c",
+        "x": 130,
+        "y": 120,
+        "wires": [
+            [
+                "6f4e96896c3676f2"
+            ]
+        ]
+    },
+    {
+        "id": "2d91cfa01f91ba30",
+        "type": "function",
+        "z": "61cc80910aede988",
+        "name": "get amp status",
+        "func": "/** @type {Buffer} */\nconst input = msg.payload;\n\nif (input.length === 4 &&\n    input[0] === 1 //msg type = status\n) {\n    const amp = {\n        on: input[1] !== 0,\n        channel: input[2],\n        volume: input[3],\n    };\n\n    node.status({\n        fill: \"blue\",\n        shape: \"dot\",\n        text: `${amp.on ? 'on' : 'off'} c-${amp.channel} v-${amp.volume}`\n    });\n    return {\n        payload: amp,\n    };\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 120,
+        "wires": [
+            [
+                "4ec33041d75c6b43"
+            ]
+        ]
+    },
+    {
+        "id": "a6b1d4e441d9274d",
+        "type": "function",
+        "z": "61cc80910aede988",
+        "name": "update amp state",
+        "func": "const desiredPower = flow.get('tv_on') || flow.get('music_on');\nconst desiredChannel = flow.get('music_on') ? 6 : 4;\nconst state = flow.get('amp');\n\nif (desiredPower !== state?.on ||\n    desiredPower && desiredChannel !== state?.channel) {\n\n    if (!desiredPower) {\n        return {\n            payload: {\n                on: false,\n            }\n        };\n    } else {\n        return [\n            { reset: true },\n            {\n                payload: {\n                    on: true,\n                    channel: desiredChannel,\n                }\n            }\n        ]\n    }\n} else {\n    return { reset: true };\n}\n",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 60,
+        "wires": [
+            [
+                "63a3e87f72239626"
+            ],
+            [
+                "7309dc78973011ff"
+            ]
+        ]
+    },
+    {
+        "id": "4ec33041d75c6b43",
+        "type": "change",
+        "z": "61cc80910aede988",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "amp",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 650,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9502278b14c1c63d",
+        "type": "serial in",
+        "z": "61cc80910aede988",
+        "name": "ir in",
+        "serial": "7b2707f28190958d",
+        "x": 130,
+        "y": 180,
+        "wires": [
+            [
+                "2641f45143772992"
+            ]
+        ]
+    },
+    {
+        "id": "2641f45143772992",
+        "type": "function",
+        "z": "61cc80910aede988",
+        "name": "decode",
+        "func": "/** @type {Buffer} */\nconst input = msg.payload;\n\nif (input.length > 6 &&\n    input[0] === 0xDE && //header1\n    input[1] === 0x5B && //header2\n    input[2] >= 1\n) {\n    const size = input[2];\n    if (size === input.length - 5) {\n        const data = input.slice(3, input.length - 2);\n        const checksum = getChecksum(data);\n        if (checksum === input.readUint16BE(3 + data.length)) {\n            return {\n                payload: data,\n            };\n        }\n    }\n}\n\n/**\n* @param {Buffer} data\n*/\nfunction getChecksum(data) {\n    let checksum = 0x1021;\n\n    const size = data.length;\n    for (let i = 0; i <= size; i++) {\n        const byte = i === 0 ? size : data[i - 1];\n        const roll = (checksum & 0x8000) !== 0 ? true : false;\n        checksum <<= 1;\n        checksum &= 0xFFFF;\n        if (roll) { checksum |= 1; }\n        checksum ^= byte;\n    }\n\n    return checksum;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 280,
+        "y": 180,
+        "wires": [
+            [
+                "ab7a779b6528bfa8"
+            ]
+        ]
+    },
+    {
+        "id": "6f4e96896c3676f2",
+        "type": "function",
+        "z": "61cc80910aede988",
+        "name": "decode",
+        "func": "/** @type {Buffer} */\nconst input = msg.payload;\n\nif (input.length > 6 &&\n    input[0] === 0xDE && //header1\n    input[1] === 0x5B && //header2\n    input[2] >= 1\n) {\n    const size = input[2];\n    if (size === input.length - 5) {\n        const data = input.slice(3, input.length - 2);\n        const checksum = getChecksum(data);\n        if (checksum === input.readUint16BE(3 + data.length)) {\n            return {\n                payload: data,\n            };\n        }\n    }\n}\n\n/**\n* @param {Buffer} data\n*/\nfunction getChecksum(data) {\n    let checksum = 0x1021;\n\n    const size = data.length;\n    for (let i = 0; i <= size; i++) {\n        const byte = i === 0 ? size : data[i - 1];\n        const roll = (checksum & 0x8000) !== 0 ? true : false;\n        checksum <<= 1;\n        checksum &= 0xFFFF;\n        if (roll) { checksum |= 1; }\n        checksum ^= byte;\n    }\n\n    return checksum;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 280,
+        "y": 120,
+        "wires": [
+            [
+                "2d91cfa01f91ba30"
+            ]
+        ]
+    },
+    {
+        "id": "ab7a779b6528bfa8",
+        "type": "function",
+        "z": "61cc80910aede988",
+        "name": "ir decode",
+        "func": "/** @type {Buffer} */\nconst input = msg.payload;\n\nconst max_error = 21; // %\nconst header_mark = 9000;\nconst header_space = 4500;\nconst repeat_space = 2250;\nconst bit_mark = 562;\nconst zero_space = 562;\nconst one_space = 1687;\n\nif (input[0] === 1) {\n    /** @type {number[]} */\n    const pulses = [];\n    for (let i = 1; i < input.length; i++) {\n        pulses.push(input[i] * 50);\n    }\n\n    const decoded = decode(pulses);\n    if (decoded) {\n        node.status({ fill: \"green\", shape: \"dot\", text: decoded });\n        setTimeout(() => node.status({}), 3000);\n        return { payload: decoded };\n    }\n}\n\nfunction matches(value, target) {\n    return Math.abs(value - target) / target * 100 < max_error;\n}\n\nfunction decode(pulses) {\n    if (pulses.length < 3) {\n        return null;\n    }\n\n    if (!matches(pulses[0], header_mark)) {\n        return null;\n    }\n\n    if (matches(pulses[1], repeat_space)) {\n        if (matches(pulses[2], bit_mark) && pulses.length === 3) {\n            return 'NEC_REPEAT';\n        }\n\n        return null;\n    }\n\n    if (!matches(pulses[1], header_space) || pulses.length !== 67) {\n        return null;\n    }\n\n    let message = 0;\n    for (let i = 0; i < 32; i++) {\n        message *= 2;\n\n        if (!matches(pulses[2 + i * 2], bit_mark)) {\n            return null;\n        }\n\n        if (matches(pulses[3 + i * 2], zero_space)) {\n            continue;\n        }\n\n        if (matches(pulses[3 + i * 2], one_space)) {\n            message += 1;\n            continue;\n        }\n\n        return null;\n    }\n\n    if (!matches(pulses[66], bit_mark)) {\n        return null;\n    }\n\n    return 'NEC_' + message.toString(16);\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 180,
+        "wires": [
+            [
+                "e4eb2b9ff631534a"
+            ]
+        ]
+    },
+    {
+        "id": "e4eb2b9ff631534a",
+        "type": "function",
+        "z": "61cc80910aede988",
+        "name": "change volume",
+        "func": "if (!flow.get('amp')) {\n    return;\n}\n\nconst currentVolume = flow.get('amp').volume;\nconst delta = currentVolume < 23 ? 3 : 6;\n\nlet desiredVolume;\n\nif (msg.payload === 'NEC_20dfc03f') {\n    desiredVolume = currentVolume - delta;\n}\nif (msg.payload === 'NEC_20df40bf') {\n    desiredVolume = currentVolume + delta;\n}\n\ndesiredVolume = Math.min(120, Math.max(0, desiredVolume));\n\nif (desiredVolume !== currentVolume) {\n    return {\n        payload: {\n            volume: desiredVolume,\n        },\n    };\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 180,
+        "wires": [
+            [
+                "8cee9e70d8f260a0"
+            ]
+        ]
+    },
+    {
+        "id": "a32f630096bcf6d4",
+        "type": "inject",
+        "z": "61cc80910aede988",
+        "name": "repeat",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 300,
+        "wires": [
+            [
+                "41bcfed6.234"
+            ]
+        ]
+    },
+    {
+        "id": "63a3e87f72239626",
+        "type": "trigger",
+        "z": "61cc80910aede988",
+        "name": "",
+        "op1": "",
+        "op2": "",
+        "op1type": "nul",
+        "op2type": "payl",
+        "duration": "30",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 530,
+        "y": 40,
+        "wires": [
+            [
+                "7309dc78973011ff"
+            ]
+        ]
+    },
+    {
+        "id": "6c4064c82858dc07",
+        "type": "delay",
+        "z": "61cc80910aede988",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 860,
+        "y": 60,
+        "wires": [
+            [
+                "1765c50cef4e89ae"
+            ]
+        ]
+    },
+    {
+        "id": "7309dc78973011ff",
+        "type": "function",
+        "z": "61cc80910aede988",
+        "name": "encode",
+        "func": "const todo = [];\n\nconst p = msg.payload;\nif ('on' in p) {\n    todo.push(Buffer.from([0xE0, p.on ? 1 : 0]));\n}\n\nif ('channel' in p && typeof p.channel === 'number' &&\n    p.channel >= 1 && p.channel <= 8) {\n    todo.push(Buffer.from([0xCA, p.channel]));\n}\n\nif ('volume' in p && typeof p.volume === 'number' &&\n    p.volume > 0 && p.volume <= 255) {\n    todo.push(Buffer.from([0x10, p.volume]));\n}\n\nfor (const data of todo) {\n    const packet = Buffer.alloc(data.length + 5);\n    let offset = packet.writeUInt8(0xDE, 0);\n    offset = packet.writeUInt8(0x5B, offset);\n    offset = packet.writeUInt8(data.length, offset);\n    offset += data.copy(packet, offset, 0, data.length);\n    const checksum = getChecksum(data);\n    packet.writeUInt16BE(checksum, offset);\n    node.send({ payload: packet });\n}\n\n/**\n* @param {Buffer} data\n*/\nfunction getChecksum(data) {\n    let checksum = 0x1021;\n\n    const size = data.length;\n    for (let i = 0; i <= size; i++) {\n        const byte = i === 0 ? size : data[i - 1];\n        const roll = (checksum & 0x8000) !== 0 ? true : false;\n        checksum <<= 1;\n        checksum &= 0xFFFF;\n        if (roll) { checksum |= 1; }\n        checksum ^= byte;\n    }\n\n    return checksum;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 700,
+        "y": 60,
+        "wires": [
+            [
+                "6c4064c82858dc07"
+            ]
+        ]
+    },
+    {
+        "id": "8cee9e70d8f260a0",
+        "type": "function",
+        "z": "61cc80910aede988",
+        "name": "encode",
+        "func": "const todo = [];\n\nconst p = msg.payload;\nif ('on' in p) {\n    todo.push(Buffer.from([0xE0, p.on ? 1 : 0]));\n}\n\nif ('channel' in p && typeof p.channel === 'number' &&\n    p.channel >= 1 && p.channel <= 8) {\n    todo.push(Buffer.from([0xCA, p.channel]));\n}\n\nif ('volume' in p && typeof p.volume === 'number' &&\n    p.volume > 0 && p.volume <= 255) {\n    todo.push(Buffer.from([0x10, p.volume]));\n}\n\nfor (const data of todo) {\n    const packet = Buffer.alloc(data.length + 5);\n    let offset = packet.writeUInt8(0xDE, 0);\n    offset = packet.writeUInt8(0x5B, offset);\n    offset = packet.writeUInt8(data.length, offset);\n    offset += data.copy(packet, offset, 0, data.length);\n    const checksum = getChecksum(data);\n    packet.writeUInt16BE(checksum, offset);\n    node.send({ payload: packet });\n}\n\n/**\n* @param {Buffer} data\n*/\nfunction getChecksum(data) {\n    let checksum = 0x1021;\n\n    const size = data.length;\n    for (let i = 0; i <= size; i++) {\n        const byte = i === 0 ? size : data[i - 1];\n        const roll = (checksum & 0x8000) !== 0 ? true : false;\n        checksum <<= 1;\n        checksum &= 0xFFFF;\n        if (roll) { checksum |= 1; }\n        checksum ^= byte;\n    }\n\n    return checksum;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 780,
+        "y": 180,
+        "wires": [
+            [
+                "1765c50cef4e89ae"
+            ]
+        ]
+    },
+    {
+        "id": "1765c50cef4e89ae",
+        "type": "serial out",
+        "z": "61cc80910aede988",
+        "name": "amp out",
+        "serial": "2dd98965cb8d503c",
+        "x": 980,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "fca32fff6a920574",
+        "type": "link in",
+        "z": "61cc80910aede988",
+        "name": "link in 1",
+        "links": [
+            "8fc31dc0.fe6ff",
+            "b6bf4e6d.2b16c"
+        ],
+        "x": 95,
+        "y": 80,
+        "wires": [
+            [
+                "a6b1d4e441d9274d"
+            ]
+        ]
+    },
+    {
+        "id": "169444f0f10f41cd",
+        "type": "inject",
+        "z": "61cc80910aede988",
+        "name": "repeat",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 40,
+        "wires": [
+            [
+                "a6b1d4e441d9274d"
+            ]
+        ]
+    }
+]
