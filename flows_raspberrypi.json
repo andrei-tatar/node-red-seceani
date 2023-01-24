@@ -1,5 +1,13 @@
 [
     {
+        "id": "2de9a494ac1d6c71",
+        "type": "tab",
+        "label": "HVAC",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "7d41aab9fd0b6a3e",
         "type": "tab",
         "label": "ESP32",
@@ -17,7 +25,15 @@
     {
         "id": "536b0e9eda614fd2",
         "type": "tab",
-        "label": "Zigbee 2 MQTT",
+        "label": "Zigbee",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "05e865126427c1f9",
+        "type": "tab",
+        "label": "Motion",
         "disabled": false,
         "info": "",
         "env": []
@@ -63,12 +79,12 @@
                 "8521a26270a7f5ed",
                 "d2f287de8e2b7bdb",
                 "b7b0b4d5c552d29a",
-                "917568c1def8a578",
                 "0450c2ce91a72b78",
                 "dfc52bfc266069f0",
                 "6762d86fa674744b",
                 "b2a67d17df0195f8",
-                "31ccd8e9f0a2e09e"
+                "31ccd8e9f0a2e09e",
+                "917568c1def8a578"
             ]
         ]
     },
@@ -97,7 +113,8 @@
                 "7426cbb773e5162c",
                 "efac8720a10238d0",
                 "6b14f65c73a0bf69",
-                "ba592d172f57dd43"
+                "ba592d172f57dd43",
+                "a3dbdc255ebe8243"
             ]
         ]
     },
@@ -114,7 +131,7 @@
                 "8714fba0422dd9f9",
                 "c78d7adf71b71c07",
                 "6ebdf6901c3c44a1",
-                "901f5285db387f79"
+                "177b7b13cf11baf0"
             ]
         ]
     },
@@ -181,6 +198,193 @@
         "localexecution": true,
         "structure": "",
         "storeStateInContext": true
+    },
+    {
+        "id": "89e46ce21c7f5128",
+        "type": "nibe-config",
+        "name": "nibe config",
+        "address": "tcp://NIBE-06545022180002.local:502",
+        "registerFile": ""
+    },
+    {
+        "id": "651eb38aa48c6e2a",
+        "type": "nibe-register",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "register": "Humidity (AZ30-BM20)",
+        "nibe": "89e46ce21c7f5128",
+        "interval": "30",
+        "timeout": "3",
+        "force": false,
+        "x": 580,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ed13633a52b01660",
+        "type": "nibe-register",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "register": "Increased ventilation 1",
+        "nibe": "89e46ce21c7f5128",
+        "interval": "5",
+        "timeout": "3",
+        "force": true,
+        "x": 580,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "56c58fa176df299a",
+        "type": "inject",
+        "z": "2de9a494ac1d6c71",
+        "name": "on",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 350,
+        "y": 260,
+        "wires": [
+            [
+                "ed13633a52b01660"
+            ]
+        ]
+    },
+    {
+        "id": "78338f9999b19eaa",
+        "type": "inject",
+        "z": "2de9a494ac1d6c71",
+        "name": "off",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 350,
+        "y": 300,
+        "wires": [
+            [
+                "ed13633a52b01660"
+            ]
+        ]
+    },
+    {
+        "id": "27d499b6a6e0d7e5",
+        "type": "nibe-register",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "register": "Bypass during heating (ERS 1)",
+        "nibe": "89e46ce21c7f5128",
+        "interval": "5",
+        "timeout": "3",
+        "force": false,
+        "x": 610,
+        "y": 340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "719187bb860811ae",
+        "type": "nibe-register",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "register": "Fan speed (AZ30-GQ3)",
+        "nibe": "89e46ce21c7f5128",
+        "interval": "5",
+        "timeout": "3",
+        "force": false,
+        "x": 590,
+        "y": 500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "975b4952ce9a0378",
+        "type": "nibe-register",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "register": "Fan speed (AZ30-GQ2)",
+        "nibe": "89e46ce21c7f5128",
+        "interval": "5",
+        "timeout": "3",
+        "force": false,
+        "x": 590,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d1aebeb16f2c8075",
+        "type": "inject",
+        "z": "2de9a494ac1d6c71",
+        "name": "on",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "1",
+        "payloadType": "num",
+        "x": 350,
+        "y": 360,
+        "wires": [
+            [
+                "27d499b6a6e0d7e5"
+            ]
+        ]
+    },
+    {
+        "id": "2cb3a7311f8d0f8c",
+        "type": "inject",
+        "z": "2de9a494ac1d6c71",
+        "name": "off",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "0",
+        "payloadType": "num",
+        "x": 350,
+        "y": 400,
+        "wires": [
+            [
+                "27d499b6a6e0d7e5"
+            ]
+        ]
     },
     {
         "id": "5bb98af947157223",
@@ -531,7 +735,7 @@
         "temperaturemax": "5500",
         "twofactor": "off",
         "twofactorpin": "",
-        "filter": true,
+        "filter": false,
         "x": 440,
         "y": 620,
         "wires": [
@@ -615,7 +819,7 @@
         "type": "noraf-openclose",
         "z": "7d41aab9fd0b6a3e",
         "devicename": "Door Shutters",
-        "roomhint": "Living",
+        "roomhint": "Living Room",
         "name": "4. living - door",
         "directions": "",
         "openclosetype": "SHUTTER",
@@ -647,7 +851,7 @@
         "type": "noraf-openclose",
         "z": "7d41aab9fd0b6a3e",
         "devicename": "Window Shutters",
-        "roomhint": "Living",
+        "roomhint": "Living Room",
         "name": "6. living - window",
         "directions": "",
         "openclosetype": "SHUTTER",
@@ -680,7 +884,7 @@
         "z": "7d41aab9fd0b6a3e",
         "devicename": "Shutters",
         "roomhint": "Kitchen",
-        "name": "2. kitchen 1",
+        "name": "2. kitchen window",
         "directions": "",
         "openclosetype": "SHUTTER",
         "passthru": false,
@@ -698,7 +902,7 @@
         "twofactor": "off",
         "twofactorpin": "",
         "filter": true,
-        "x": 1130,
+        "x": 1150,
         "y": 860,
         "wires": [
             [
@@ -782,7 +986,8 @@
         "links": [
             "3fdd728b0585df23",
             "b8a5316364ec5fe8",
-            "1b4bb0df8c93cc89"
+            "1b4bb0df8c93cc89",
+            "b3a359bc7a838527"
         ],
         "x": 1025,
         "y": 100,
@@ -889,7 +1094,8 @@
         "links": [
             "6af1216eb7c5c03f",
             "49583d9de218bf42",
-            "43ff6ea09782443a"
+            "43ff6ea09782443a",
+            "bd1a7b07efa6d260"
         ],
         "x": 1145,
         "y": 100,
@@ -1268,10 +1474,58 @@
         ]
     },
     {
-        "id": "901f5285db387f79",
+        "id": "52cbf133f2f61326",
+        "type": "function",
+        "z": "7d41aab9fd0b6a3e",
+        "name": "Clone On/Off",
+        "func": "/**\n * @type Map<string, {topic:string, type:'onoff'|'offonly'}>\n */\nconst CTRL = new Map([\n    ['ha-switch/switch-dimmer-5/state', { topic: 'ha-switch/switch-onoff-4/state', type: 'onoff' }],\n    ['ha-switch/switch-dimmer-9/state', { topic: 'ha-switch/switch-onoff-6/state', type: 'onoff' }],\n    ['ha-switch/switch-onoff-5/state', { topic: 'ha-switch/switch-onoff-8/state', type: 'offonly' }],\n]);\n\nconst topic = msg.topic;\nconst to = CTRL.get(topic);\nif (!to) {\n    return;\n}\n\nlet on = msg.payload.on;\nif (Array.isArray(on) && on.length) {\n    on = on[0];\n}\nif (typeof on != 'boolean') {\n    return;\n}\n\nconst lastOn = context.get(topic);\nif (lastOn !== on) {\n    context.set(topic, on);\n\n    if (to.type === 'offonly' && on) {\n        return;\n    }\n\n    return {\n        topic: to.topic,\n        payload: {\n            on: [on],\n        },\n    };\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 230,
+        "y": 840,
+        "wires": [
+            [
+                "bd1a7b07efa6d260"
+            ]
+        ]
+    },
+    {
+        "id": "b3a359bc7a838527",
+        "type": "link in",
+        "z": "7d41aab9fd0b6a3e",
+        "name": "link in 5",
+        "links": [
+            "340c4ef4bedec8a6"
+        ],
+        "x": 115,
+        "y": 840,
+        "wires": [
+            [
+                "52cbf133f2f61326"
+            ]
+        ]
+    },
+    {
+        "id": "bd1a7b07efa6d260",
+        "type": "link out",
+        "z": "7d41aab9fd0b6a3e",
+        "name": "link out 5",
+        "mode": "link",
+        "links": [
+            "d1bf6e5c3d819560"
+        ],
+        "x": 345,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "177b7b13cf11baf0",
         "type": "noraf-light",
         "z": "7d41aab9fd0b6a3e",
-        "devicename": "Mirror Light",
+        "devicename": "Light",
         "lightcolor": false,
         "brightnesscontrol": false,
         "commandonlycolor": false,
@@ -1280,11 +1534,11 @@
         "errorifstateunchaged": false,
         "statepayload": true,
         "brightnessoverride": "",
-        "roomhint": "Bathroom",
-        "name": "4. big bedroom bathroom - mirror",
+        "roomhint": "Guest Room",
+        "name": "2. bedroom - guest",
         "colortype": "hsv",
         "nora": "f1e538c1.0315f8",
-        "topic": "ha-switch/switch-onoff-4/state",
+        "topic": "ha-switch/switch-onoff-2/state",
         "onvalue": "true",
         "onvalueType": "bool",
         "offvalue": "false",
@@ -1294,11 +1548,111 @@
         "twofactor": "off",
         "twofactorpin": "",
         "filter": true,
-        "x": 1200,
+        "x": 1150,
         "y": 500,
         "wires": [
             [
                 "03e9def7ed68132d"
+            ]
+        ]
+    },
+    {
+        "id": "cfd8480b606b454e",
+        "type": "noraf-light",
+        "z": "7d41aab9fd0b6a3e",
+        "d": true,
+        "devicename": "Light",
+        "lightcolor": false,
+        "brightnesscontrol": false,
+        "commandonlycolor": false,
+        "turnonwhenbrightnesschanges": false,
+        "passthru": false,
+        "errorifstateunchaged": false,
+        "statepayload": true,
+        "brightnessoverride": "",
+        "roomhint": "Dressing",
+        "name": "5. dressing",
+        "colortype": "hsv",
+        "nora": "f1e538c1.0315f8",
+        "topic": "ha-switch/switch-onoff-5/state",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "temperaturemin": "2700",
+        "temperaturemax": "5500",
+        "twofactor": "off",
+        "twofactorpin": "",
+        "filter": true,
+        "x": 550,
+        "y": 900,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "72228fcd02ae304f",
+        "type": "noraf-light",
+        "z": "7d41aab9fd0b6a3e",
+        "d": true,
+        "devicename": "Light",
+        "lightcolor": false,
+        "brightnesscontrol": false,
+        "commandonlycolor": false,
+        "turnonwhenbrightnesschanges": false,
+        "passthru": false,
+        "errorifstateunchaged": false,
+        "statepayload": true,
+        "brightnessoverride": "",
+        "roomhint": "Dressing Mirror",
+        "name": "8. dressing mirror",
+        "colortype": "hsv",
+        "nora": "f1e538c1.0315f8",
+        "topic": "ha-switch/switch-onoff-8/state",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "temperaturemin": "2700",
+        "temperaturemax": "5500",
+        "twofactor": "off",
+        "twofactorpin": "",
+        "filter": true,
+        "x": 570,
+        "y": 940,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a3dbdc255ebe8243",
+        "type": "noraf-openclose",
+        "z": "7d41aab9fd0b6a3e",
+        "devicename": "Shutters",
+        "roomhint": "Guest Room",
+        "name": "1. guest room",
+        "directions": "",
+        "openclosetype": "SHUTTER",
+        "passthru": false,
+        "errorifstateunchaged": false,
+        "discrete": false,
+        "lockunlock": false,
+        "commandonly": false,
+        "queryonly": false,
+        "nora": "f1e538c1.0315f8",
+        "topic": "ha-switch/switch-blinds-1/state",
+        "openvalue": "true",
+        "openvalueType": "bool",
+        "closevalue": "false",
+        "closevalueType": "bool",
+        "twofactor": "off",
+        "twofactorpin": "",
+        "filter": true,
+        "x": 1140,
+        "y": 560,
+        "wires": [
+            [
+                "8ad4a13f3069f1ac"
             ]
         ]
     },
@@ -1489,7 +1843,7 @@
         "type": "function",
         "z": "13aa577370e4c4d7",
         "name": "GRID status",
-        "func": "const now = new Date();\nconst status = msg.payload === 'POWER' ? 'ONLINE' : 'OFFLINE';\n\n\nflow.set('grid_offline', status === 'OFFLINE');\nflow.set('last_grid_status_change', new Date().getTime());\n\nconst key = `${now.getMonth() + 1}-${now.getDate()}`;\nconst powerLosses = flow.get('power') || {};\nlet perDay = powerLosses[key];\nif (!perDay) {\n    powerLosses[key] = perDay = [];\n}\nif (perDay[perDay.length - 1]?.status === status) {\n    //handle restarts of nodered...\n    return;\n}\nperDay.push({ at: now.toLocaleTimeString(), status });\nflow.set('power', powerLosses);\n\nlet recovered = '';\nif (status === 'OFFLINE') {\n    context.set('offline', now.getTime());\n} else {\n    const offlineAt = context.get('offline');\n    context.set('offline', null);\n    if (typeof offlineAt === 'number') {\n        let span = (now.getTime() - offlineAt) / 1000;\n        let unit = 'sec';\n        if (span >= 60) {\n            span /= 60;\n            unit = 'min';\n\n            if (span >= 60) {\n                span /= 60;\n                unit = 'h';\n\n                if (span >= 24) {\n                    span /= 24;\n                    unit = 'day';\n                }\n            }\n        }\n\n        recovered = ` Recovered after ${span} ${unit}.`;\n    }\n}\n\n\nreturn {\n    payload: {\n        tag: `power`,\n        title: 'Grid Status',\n        body: `${status} at ${now.toLocaleString()}.${recovered}`,\n    },\n};",
+        "func": "const now = new Date();\nconst status = msg.payload === 'POWER' ? 'ONLINE' : 'OFFLINE';\nnode.status({\n    fill: status === 'ONLINE' ? 'green' : 'red',\n    shape: 'dot',\n    text: status,\n});\n\nflow.set('grid_offline', status === 'OFFLINE');\nflow.set('last_grid_status_change', new Date().getTime());\n\nconst key = `${now.getMonth() + 1}-${now.getDate()}`;\nconst powerLosses = flow.get('power') || {};\nlet perDay = powerLosses[key];\nif (!perDay) {\n    powerLosses[key] = perDay = [];\n}\nif (perDay[perDay.length - 1]?.status === status) {\n    //handle restarts of nodered...\n    return;\n}\nperDay.push({ at: now.toLocaleTimeString(), status });\nflow.set('power', powerLosses);\n\nlet recovered = '';\nif (status === 'OFFLINE') {\n    context.set('offline', now.getTime());\n} else {\n    const offlineAt = context.get('offline');\n    context.set('offline', null);\n    if (typeof offlineAt === 'number') {\n        let span = (now.getTime() - offlineAt) / 1000;\n        let unit = 'sec';\n        if (span >= 60) {\n            span /= 60;\n            unit = 'min';\n\n            if (span >= 60) {\n                span /= 60;\n                unit = 'h';\n\n                if (span >= 24) {\n                    span /= 24;\n                    unit = 'day';\n                }\n            }\n        }\n\n        recovered = ` Recovered after ${span} ${unit}.`;\n    }\n}\n\n\nreturn {\n    payload: {\n        tag: `power`,\n        title: 'Grid Status',\n        body: `${status} at ${now.toLocaleString()}.${recovered}`,\n    },\n};",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1716,7 +2070,7 @@
         "type": "function",
         "z": "13aa577370e4c4d7",
         "name": "notify when offline",
-        "func": "if (typeof msg.payload !== 'boolean' || msg.payload) {\n    return;\n}\n\nconst lastGridStatusChange = flow.get('last_grid_status_change');\nif (typeof lastGridStatusChange === 'number') {\n    const now = new Date().getTime();\n    if (now - lastGridStatusChange < 300000) {\n        // grid status changed in the last 5 mins, ignore offline messages\n        return;\n    }\n}\n\nconst lastOfflines = context.get('last5min') || {};\nconst now = new Date().getTime();\nfor (const key of Object.keys(lastOfflines)) {\n    const delta = (now - lastOfflines[key]) / 1000;\n    if (delta > 60) {\n        delete lastOfflines[key];\n    }\n}\n\nconst name = msg.topic.split('/')[1];\nlastOfflines[name] = now;\ncontext.set('last5min', lastOfflines);\n\nif (flow.get('grid_offline') === false) {\n    const names = Object.keys(lastOfflines).join(',');\n    const nowString = new Date().toLocaleString();\n    node.send({\n        payload: {\n            tag: `devices-offline`,\n            title: 'Device(s) offline',\n            body: `${names} at ${nowString}`,\n        },\n    });\n}\n",
+        "func": "if (typeof msg.payload !== 'boolean' || msg.payload) {\n    return;\n}\n\nconst now = new Date().getTime();\n\nconst lastGridStatusChange = flow.get('last_grid_status_change');\nif (typeof lastGridStatusChange === 'number') {\n    if (now - lastGridStatusChange < 300000) {\n        // grid status changed in the last 5 mins, ignore offline messages\n        return;\n    }\n}\n\nconst lastOfflines = context.get('last5min') || {};\nfor (const key of Object.keys(lastOfflines)) {\n    const delta = (now - lastOfflines[key]) / 1000;\n    if (delta > 60) {\n        delete lastOfflines[key];\n    }\n}\n\nconst name = msg.topic.split('/')[1];\nlastOfflines[name] = now;\ncontext.set('last5min', lastOfflines);\n\nif (flow.get('grid_offline') === false) {\n    const names = Object.keys(lastOfflines).join(',');\n    const nowString = new Date().toLocaleString();\n    node.send({\n        payload: {\n            tag: `devices-offline`,\n            title: 'Device(s) offline',\n            body: `${names} at ${nowString}`,\n        },\n    });\n}\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1800,14 +2154,14 @@
         "type": "function",
         "z": "536b0e9eda614fd2",
         "name": "Map",
-        "func": "let name = msg.topic.substring(msg.topic.indexOf('/') + 1);\n\nconst PREFIX = '/RESULT';\nif (name.endsWith(PREFIX)) {\n    name = name.substring(0, name.length - PREFIX.length);\n}\n\nconst previousPayload = global.get(name) ?? {};\nconst payload = {\n    ...previousPayload,\n    ...v('temperature'),\n    ...v('humidity'),\n    ...v('state', 'on', p => p === 'ON'),\n    ...v('POWER', 'on', p => p === 'ON'),\n    ...v('Dimmer', 'brightness'),\n    online: msg.payload?.online ?? true,\n};\nglobal.set(name, payload);\n\nreturn {\n    payload,\n    topic: msg.topic,\n};\n\n/**\n* @param {string} input\n* @param {string} output\n* @param {vCallback} transform\n* @returns {Record<string, *>}\n*/\nfunction v(input, output = input, transform = x => x) {\n    if (input in msg.payload) {\n        return {\n            [output]: transform(msg.payload[input])\n        };\n    }\n    return {};\n}\n\n/**\n * This callback is displayed as a global member.\n * @callback vCallback\n * @param {*} value\n * @returns {*} transformedValue\n */",
+        "func": "let name = msg.topic.substring(msg.topic.indexOf('/') + 1);\n\nconst PREFIX = '/RESULT';\nif (name.endsWith(PREFIX)) {\n    name = name.substring(0, name.length - PREFIX.length);\n}\n\nconst previousPayload = global.get(name) ?? {};\nconst payload = {\n    ...previousPayload,\n    ...v('temperature'),\n    ...v('humidity'),\n    ...v('state', 'on', p => p === 'ON'),\n    ...v('POWER', 'on', p => p === 'ON'),\n    ...v('Dimmer', 'brightness'),\n    ...v('occupancy'),\n    online: msg.payload?.online ?? true,\n};\nglobal.set(name, payload);\n\nreturn {\n    payload,\n    topic: msg.topic,\n};\n\n/**\n* @param {string} input\n* @param {string} output\n* @param {(a:any)=>any} transform\n* @returns {Record<string, *>}\n*/\nfunction v(input, output = input, transform = x => x) {\n    if (input in msg.payload) {\n        return {\n            [output]: transform(msg.payload[input])\n        };\n    }\n    return {};\n}\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 310,
-        "y": 60,
+        "x": 190,
+        "y": 240,
         "wires": [
             [
                 "38687e0ac546600f"
@@ -1834,8 +2188,8 @@
         "filter": true,
         "asyncCmd": false,
         "outputs": 1,
-        "x": 490,
-        "y": 60,
+        "x": 370,
+        "y": 240,
         "wires": [
             [
                 "7d559a43a7ec6440"
@@ -1853,8 +2207,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 690,
-        "y": 60,
+        "x": 570,
+        "y": 240,
         "wires": [
             [
                 "b02b6ceb7687e947"
@@ -1875,51 +2229,9 @@
         "correl": "",
         "expiry": "",
         "broker": "f569d34c.8c7ed",
-        "x": 850,
-        "y": 60,
+        "x": 790,
+        "y": 240,
         "wires": []
-    },
-    {
-        "id": "c6355da571534fb0",
-        "type": "mqtt in",
-        "z": "536b0e9eda614fd2",
-        "name": "",
-        "topic": "zigbee2mqtt/+/+",
-        "qos": "2",
-        "datatype": "json",
-        "broker": "f569d34c.8c7ed",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 140,
-        "y": 60,
-        "wires": [
-            [
-                "f08cfee748e21645"
-            ]
-        ]
-    },
-    {
-        "id": "767e876f92010664",
-        "type": "mqtt in",
-        "z": "536b0e9eda614fd2",
-        "name": "",
-        "topic": "zigbee2mqtt/+/+",
-        "qos": "2",
-        "datatype": "json",
-        "broker": "f569d34c.8c7ed",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 140,
-        "y": 220,
-        "wires": [
-            [
-                "857f019fa5ad8be5"
-            ]
-        ]
     },
     {
         "id": "857f019fa5ad8be5",
@@ -1940,19 +2252,28 @@
                 "v": ".+\\/temp\\/.+",
                 "vt": "str",
                 "case": false
+            },
+            {
+                "t": "regex",
+                "v": ".+\\/pir\\/.+",
+                "vt": "str",
+                "case": false
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 2,
-        "x": 310,
-        "y": 220,
+        "outputs": 3,
+        "x": 570,
+        "y": 120,
         "wires": [
             [
                 "9cf17a33d6369750"
             ],
             [
                 "591e4bb345a80b08"
+            ],
+            [
+                "2e643a135c0bc68a"
             ]
         ]
     },
@@ -1973,11 +2294,11 @@
         "bytopic": "topic",
         "topic": "topic",
         "outputs": 1,
-        "x": 470,
-        "y": 180,
+        "x": 730,
+        "y": 60,
         "wires": [
             [
-                "14727e6f1398ee5d"
+                "18ee405180e7ef0d"
             ]
         ]
     },
@@ -1998,40 +2319,11 @@
         "bytopic": "topic",
         "topic": "topic",
         "outputs": 1,
-        "x": 470,
-        "y": 240,
+        "x": 730,
+        "y": 120,
         "wires": [
             [
-                "14727e6f1398ee5d"
-            ]
-        ]
-    },
-    {
-        "id": "14727e6f1398ee5d",
-        "type": "link out",
-        "z": "536b0e9eda614fd2",
-        "name": "link out 4",
-        "mode": "link",
-        "links": [
-            "cba8948193fd7838"
-        ],
-        "x": 595,
-        "y": 220,
-        "wires": []
-    },
-    {
-        "id": "cba8948193fd7838",
-        "type": "link in",
-        "z": "536b0e9eda614fd2",
-        "name": "link in 4",
-        "links": [
-            "14727e6f1398ee5d"
-        ],
-        "x": 205,
-        "y": 100,
-        "wires": [
-            [
-                "f08cfee748e21645"
+                "18ee405180e7ef0d"
             ]
         ]
     },
@@ -2052,7 +2344,7 @@
                 "payloadType": "str",
                 "payload": "ON",
                 "expressionType": "cron",
-                "expression": "0 0 7,19 ? * * *",
+                "expression": "0 0 7 ? * * *",
                 "location": "",
                 "offset": "0",
                 "solarType": "all",
@@ -2064,7 +2356,7 @@
                 "payloadType": "str",
                 "payload": "OFF",
                 "expressionType": "cron",
-                "expression": "0 0 11,22 ? * * *",
+                "expression": "0 0 22 ? * * *",
                 "location": "",
                 "offset": "0",
                 "solarType": "all",
@@ -2072,7 +2364,7 @@
             }
         ],
         "x": 130,
-        "y": 340,
+        "y": 500,
         "wires": [
             [
                 "b6cc3dcb19c105e1"
@@ -2094,8 +2386,317 @@
         "expiry": "",
         "broker": "f569d34c.8c7ed",
         "x": 350,
-        "y": 340,
+        "y": 500,
         "wires": []
+    },
+    {
+        "id": "5174cbdc84c9deb9",
+        "type": "mqtt in",
+        "z": "536b0e9eda614fd2",
+        "name": "",
+        "topic": "zigbee2mqtt/pir/+",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "f569d34c.8c7ed",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 80,
+        "wires": [
+            [
+                "59a6f1a86fee64bb"
+            ]
+        ]
+    },
+    {
+        "id": "c77921bad91a3fd4",
+        "type": "mqtt in",
+        "z": "536b0e9eda614fd2",
+        "name": "",
+        "topic": "zigbee2mqtt/temp/+",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "f569d34c.8c7ed",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 40,
+        "wires": [
+            [
+                "59a6f1a86fee64bb"
+            ]
+        ]
+    },
+    {
+        "id": "9e54c33578b35bbc",
+        "type": "mqtt in",
+        "z": "536b0e9eda614fd2",
+        "name": "",
+        "topic": "zigbee2mqtt/relay/+",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "f569d34c.8c7ed",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 120,
+        "wires": [
+            [
+                "59a6f1a86fee64bb"
+            ]
+        ]
+    },
+    {
+        "id": "32d650ad5f529b41",
+        "type": "mqtt in",
+        "z": "536b0e9eda614fd2",
+        "name": "",
+        "topic": "zigbee2mqtt/light/+",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "f569d34c.8c7ed",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 160,
+        "wires": [
+            [
+                "59a6f1a86fee64bb"
+            ]
+        ]
+    },
+    {
+        "id": "8d660f4ac3640160",
+        "type": "link in",
+        "z": "536b0e9eda614fd2",
+        "name": "link in 6",
+        "links": [
+            "59a6f1a86fee64bb"
+        ],
+        "x": 455,
+        "y": 120,
+        "wires": [
+            [
+                "857f019fa5ad8be5"
+            ]
+        ]
+    },
+    {
+        "id": "59a6f1a86fee64bb",
+        "type": "link out",
+        "z": "536b0e9eda614fd2",
+        "name": "z2mqtt",
+        "mode": "link",
+        "links": [
+            "8d660f4ac3640160",
+            "556407976cf82dd1"
+        ],
+        "x": 315,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "556407976cf82dd1",
+        "type": "link in",
+        "z": "536b0e9eda614fd2",
+        "name": "link in 7",
+        "links": [
+            "59a6f1a86fee64bb",
+            "18ee405180e7ef0d"
+        ],
+        "x": 75,
+        "y": 240,
+        "wires": [
+            [
+                "f08cfee748e21645"
+            ]
+        ]
+    },
+    {
+        "id": "18ee405180e7ef0d",
+        "type": "link out",
+        "z": "536b0e9eda614fd2",
+        "name": "z2mqtt",
+        "mode": "link",
+        "links": [
+            "556407976cf82dd1"
+        ],
+        "x": 855,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "2e643a135c0bc68a",
+        "type": "trigger",
+        "z": "536b0e9eda614fd2",
+        "name": "",
+        "op1": "",
+        "op2": "{\"online\": false}",
+        "op1type": "nul",
+        "op2type": "json",
+        "duration": "1.5",
+        "extend": true,
+        "overrideDelay": false,
+        "units": "hr",
+        "reset": "",
+        "bytopic": "topic",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 730,
+        "y": 180,
+        "wires": [
+            [
+                "18ee405180e7ef0d"
+            ]
+        ]
+    },
+    {
+        "id": "dfca40dd7aa881e6",
+        "type": "mqtt in",
+        "z": "05e865126427c1f9",
+        "name": "",
+        "topic": "zigbee2mqtt/pir/+",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "f569d34c.8c7ed",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 80,
+        "wires": [
+            [
+                "a0bf8cda615f1687",
+                "309ce3ec93316bc9"
+            ]
+        ]
+    },
+    {
+        "id": "a0bf8cda615f1687",
+        "type": "function",
+        "z": "05e865126427c1f9",
+        "d": true,
+        "name": "When motion",
+        "func": "/**\n * @type Array<{src:Array<string>, target:string}>\n */\nconst targetByPir = [\n    {\n        src: ['hallway-1', 'hallway-2'],\n        target: 'switch-dimmer-3',\n    }, {\n        src: ['hallway-3'],\n        target: 'switch-dimmer-10',\n    }\n]\n\nconst parts = msg.topic.split('/');\nconst name = parts[parts.length - 1];\nconst found = targetByPir.find(t => t.src.includes(name));\n\nif (msg.payload.occupancy && found) {\n    return {\n        payload: {\n            'brightness': 15,\n            'for': 300\n        },\n        topic: `ha-switch/${found.target}/state/set`,\n    };\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "var  timer;\n",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 80,
+        "wires": [
+            [
+                "05ebecdb8b80ec34"
+            ]
+        ],
+        "outputLabels": [
+            "battery low"
+        ]
+    },
+    {
+        "id": "05ebecdb8b80ec34",
+        "type": "mqtt out",
+        "z": "05e865126427c1f9",
+        "name": "",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "f569d34c.8c7ed",
+        "x": 830,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "a42db8829c31d140",
+        "type": "inject",
+        "z": "05e865126427c1f9",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "ha-switch/switch-dimmer-8/state/set",
+        "payload": "{\"brightness\":20, \"for\": 3}",
+        "payloadType": "json",
+        "x": 650,
+        "y": 200,
+        "wires": [
+            [
+                "05ebecdb8b80ec34"
+            ]
+        ]
+    },
+    {
+        "id": "309ce3ec93316bc9",
+        "type": "function",
+        "z": "05e865126427c1f9",
+        "d": true,
+        "name": "When motion",
+        "func": "/**\n * @type Array<{src:Array<string>, target:string}>\n */\nconst targetByPir = [\n    {\n        src: ['hallway-1', 'hallway-2'],\n        target: 'switch-dimmer-3',\n    }, {\n        src: ['hallway-3'],\n        target: 'switch-dimmer-10',\n    }\n]\n\nconst parts = msg.topic.split('/');\nconst name = parts[parts.length - 1];\nconst found = targetByPir.find(t => t.src.includes(name));\n\nif (msg.payload.occupancy && found) {\n    return {\n        payload: { on: true },\n        topic: `ha-switch/${found.target}/state/set`,\n    };\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "var  timer;\n",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 120,
+        "wires": [
+            [
+                "94000ee52d0a0138"
+            ]
+        ],
+        "outputLabels": [
+            "battery low"
+        ]
+    },
+    {
+        "id": "94000ee52d0a0138",
+        "type": "trigger",
+        "z": "05e865126427c1f9",
+        "name": "",
+        "op1": "",
+        "op2": "{\"on\":false}",
+        "op1type": "pay",
+        "op2type": "json",
+        "duration": "5",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "min",
+        "reset": "",
+        "bytopic": "topic",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 550,
+        "y": 120,
+        "wires": [
+            [
+                "05ebecdb8b80ec34"
+            ]
+        ]
     },
     {
         "id": "244c26807bc68f0e",
@@ -2122,7 +2723,7 @@
         "type": "function",
         "z": "67e1c6f6bd2fab57",
         "name": "At night, turn outside light",
-        "func": "if (!msg.payload) {\n    context.set('light_on', true);\n    turn(true);\n} else if (context.get('light_on')) {\n    context.set('light_on', false);\n    turn(false);\n}\n\nfunction turn(on) {\n    node.send([[{\n        payload: { on },\n        topic: 'ha-switch/switch-dimmer-11/state/set',\n    }, {\n        payload: { on: [on] },\n        topic: 'ha-switch/switch-onoff-7/state/set',\n    }]]);\n}\n\n",
+        "func": "if (!msg.payload) {\n    context.set('light_on', true);\n    turn(true);\n} else if (context.get('light_on')) {\n    context.set('light_on', false);\n    turn(false);\n}\n\nfunction turn(on) {\n    node.send([[{\n        payload: { on },\n        topic: 'ha-switch/switch-dimmer-11/state/set',\n    }, {\n        payload: { on: [on] },\n        topic: 'ha-switch/switch-onoff-7/state/set',\n    }, {\n        topic: 'zigbee2mqtt/light/outside/set',\n        payload: { state: on ? 'ON' : 'OFF' },\n    }]]);\n}\n\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
