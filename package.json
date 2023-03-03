@@ -3,8 +3,10 @@
     "description": "A Node-RED Project",
     "version": "0.0.1",
     "dependencies": {
-        "node-red-contrib-serialups": "1.0.0",
-        "node-red-contrib-smartnora": "1.5.0",
+        "node-red-contrib-smartnora": "1.18.1",
+	"@andrei-tatar/node-red-contrib-githubespota": "1.0.0",
+	"@andrei-tatar/node-red-contrib-serialups": "1.0.0",
+	"@andrei-tatar/node-red-contrib-nibetcp": "1.1.1",
         "node-red-node-suncalc": "1.0.1"
     },
     "node-red": {

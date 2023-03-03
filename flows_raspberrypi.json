@@ -139,8 +139,8 @@
         "id": "3d478a662ee44292",
         "type": "junction",
         "z": "13aa577370e4c4d7",
-        "x": 200,
-        "y": 360,
+        "x": 180,
+        "y": 380,
         "wires": [
             [
                 "b7e650722bc17863",
@@ -197,13 +197,15 @@
         "twofactorpin": "",
         "localexecution": true,
         "structure": "",
-        "storeStateInContext": true
+        "storeStateInContext": true,
+        "disableValidationErrors": false,
+        "sendDeviceNameAndLocation": false
     },
     {
         "id": "89e46ce21c7f5128",
         "type": "nibe-config",
         "name": "nibe config",
-        "address": "tcp://NIBE-06545022180002.local:502",
+        "address": "tcp://192.168.68.24:502",
         "registerFile": ""
     },
     {
@@ -213,13 +215,17 @@
         "name": "",
         "register": "Humidity (AZ30-BM20)",
         "nibe": "89e46ce21c7f5128",
-        "interval": "30",
+        "interval": "5",
         "timeout": "3",
         "force": false,
-        "x": 580,
-        "y": 220,
+        "topic": "",
+        "filter": false,
+        "x": 160,
+        "y": 60,
         "wires": [
-            []
+            [
+                "1895125bc221a5c6"
+            ]
         ]
     },
     {
@@ -232,59 +238,13 @@
         "interval": "5",
         "timeout": "3",
         "force": true,
-        "x": 580,
-        "y": 280,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "56c58fa176df299a",
-        "type": "inject",
-        "z": "2de9a494ac1d6c71",
-        "name": "on",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "1",
-        "payloadType": "num",
-        "x": 350,
-        "y": 260,
+        "topic": "ventilation-boost",
+        "filter": true,
+        "x": 240,
+        "y": 220,
         "wires": [
             [
-                "ed13633a52b01660"
-            ]
-        ]
-    },
-    {
-        "id": "78338f9999b19eaa",
-        "type": "inject",
-        "z": "2de9a494ac1d6c71",
-        "name": "off",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "0",
-        "payloadType": "num",
-        "x": 350,
-        "y": 300,
-        "wires": [
-            [
-                "ed13633a52b01660"
+                "1cd1125ce32c5aca"
             ]
         ]
     },
@@ -298,22 +258,28 @@
         "interval": "5",
         "timeout": "3",
         "force": false,
-        "x": 610,
-        "y": 340,
+        "topic": "",
+        "filter": false,
+        "x": 570,
+        "y": 60,
         "wires": [
-            []
+            [
+                "639e21cb7adb71ba"
+            ]
         ]
     },
     {
         "id": "719187bb860811ae",
         "type": "nibe-register",
         "z": "2de9a494ac1d6c71",
-        "name": "",
-        "register": "Fan speed (AZ30-GQ3)",
+        "name": "Fan speed (AZ30-GQ3)",
+        "register": "40136",
         "nibe": "89e46ce21c7f5128",
         "interval": "5",
         "timeout": "3",
         "force": false,
+        "topic": "",
+        "filter": false,
         "x": 590,
         "y": 500,
         "wires": [
@@ -324,12 +290,14 @@
         "id": "975b4952ce9a0378",
         "type": "nibe-register",
         "z": "2de9a494ac1d6c71",
-        "name": "",
-        "register": "Fan speed (AZ30-GQ2)",
+        "name": "Fan speed (AZ30-GQ2)",
+        "register": "40135",
         "nibe": "89e46ce21c7f5128",
         "interval": "5",
         "timeout": "3",
         "force": false,
+        "topic": "",
+        "filter": false,
         "x": 590,
         "y": 440,
         "wires": [
@@ -337,7 +305,198 @@
         ]
     },
     {
-        "id": "d1aebeb16f2c8075",
+        "id": "4b7ea65a94ecfaf3",
+        "type": "nibe-register",
+        "z": "2de9a494ac1d6c71",
+        "name": "Living setpoint",
+        "register": "id:12802",
+        "nibe": "89e46ce21c7f5128",
+        "interval": "5",
+        "timeout": "3",
+        "force": false,
+        "topic": "",
+        "filter": false,
+        "x": 960,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8a2d91b19d4ef994",
+        "type": "nibe-register",
+        "z": "2de9a494ac1d6c71",
+        "name": "Bedroom setpoint",
+        "register": "id:12803",
+        "nibe": "89e46ce21c7f5128",
+        "interval": "5",
+        "timeout": "3",
+        "force": false,
+        "topic": "",
+        "filter": false,
+        "x": 970,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "aa438942649ecf58",
+        "type": "nibe-register",
+        "z": "2de9a494ac1d6c71",
+        "name": "Living temp.",
+        "register": "Roomsensor 2-1",
+        "nibe": "89e46ce21c7f5128",
+        "interval": "5",
+        "timeout": "3",
+        "force": false,
+        "topic": "",
+        "filter": false,
+        "x": 1170,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e12aab3001f9c07c",
+        "type": "nibe-register",
+        "z": "2de9a494ac1d6c71",
+        "name": "Bedroom temp.",
+        "register": "Roomsensor 3-1",
+        "nibe": "89e46ce21c7f5128",
+        "interval": "5",
+        "timeout": "3",
+        "force": false,
+        "topic": "",
+        "filter": false,
+        "x": 1180,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "59d2b8582a86cef6",
+        "type": "nibe-register",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "register": "Priority",
+        "nibe": "89e46ce21c7f5128",
+        "interval": "5",
+        "timeout": "3",
+        "force": false,
+        "topic": "",
+        "filter": false,
+        "x": 940,
+        "y": 420,
+        "wires": [
+            [
+                "649a67b05469e039"
+            ]
+        ]
+    },
+    {
+        "id": "649a67b05469e039",
+        "type": "function",
+        "z": "2de9a494ac1d6c71",
+        "name": "Priority",
+        "func": "const map = {\n    '10': 'off',\n    '20': 'hotwater',\n    '30': 'heat',\n    '40': 'pool',\n    '60': 'cooling',\n};\n\nnode.status({ fill: \"blue\", shape: \"dot\", text: map[msg.payload.value] });\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1100,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ab2ab1c68494a0de",
+        "type": "nibe-register",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "register": "Current hot water mode",
+        "nibe": "89e46ce21c7f5128",
+        "interval": "5",
+        "timeout": "3",
+        "force": false,
+        "topic": "",
+        "filter": false,
+        "x": 990,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "99b78cb07dd4c043",
+        "type": "nibe-register",
+        "z": "2de9a494ac1d6c71",
+        "name": "More hot water",
+        "register": "30697",
+        "nibe": "89e46ce21c7f5128",
+        "interval": "5",
+        "timeout": "3",
+        "force": true,
+        "topic": "more-hot-water",
+        "filter": true,
+        "x": 220,
+        "y": 280,
+        "wires": [
+            [
+                "1cd1125ce32c5aca"
+            ]
+        ]
+    },
+    {
+        "id": "1895125bc221a5c6",
+        "type": "function",
+        "z": "2de9a494ac1d6c71",
+        "name": "decide",
+        "func": "const stopRecovery = flow.get('bypass_recovery') === 1;\nconst humidity = msg.payload.value;\nconst trigger = 55;\nconst histerezis = 3;\nconst compareTo = trigger + (stopRecovery ? -1 : 1) * histerezis;\nconst shouldStopRecovery = humidity >= compareTo;\n\nnode.status({\n    fill: shouldStopRecovery ? 'red' : \"blue\",\n    shape: \"dot\",\n    text: `recovery ${shouldStopRecovery ? 'off' : 'on'}`,\n});\n\nreturn {\n    payload: shouldStopRecovery ? 1 : 0,\n};\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 60,
+        "wires": [
+            [
+                "27d499b6a6e0d7e5"
+            ]
+        ]
+    },
+    {
+        "id": "639e21cb7adb71ba",
+        "type": "change",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "bypass_recovery",
+                "pt": "flow",
+                "to": "payload.value",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 870,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b4f19b227252fe50",
         "type": "inject",
         "z": "2de9a494ac1d6c71",
         "name": "on",
@@ -353,8 +512,8 @@
         "topic": "",
         "payload": "1",
         "payloadType": "num",
-        "x": 350,
-        "y": 360,
+        "x": 326.1999816894531,
+        "y": 128.1999969482422,
         "wires": [
             [
                 "27d499b6a6e0d7e5"
@@ -362,7 +521,7 @@
         ]
     },
     {
-        "id": "2cb3a7311f8d0f8c",
+        "id": "696ea15c4918cf37",
         "type": "inject",
         "z": "2de9a494ac1d6c71",
         "name": "off",
@@ -378,13 +537,146 @@
         "topic": "",
         "payload": "0",
         "payloadType": "num",
-        "x": 350,
-        "y": 400,
+        "x": 326.1999816894531,
+        "y": 168.1999969482422,
         "wires": [
             [
                 "27d499b6a6e0d7e5"
             ]
         ]
+    },
+    {
+        "id": "46b0b3fc4d086f1e",
+        "type": "noraf-switch",
+        "z": "2de9a494ac1d6c71",
+        "devicename": "Ventilation Boost",
+        "roomhint": "Service Room",
+        "name": "",
+        "passthru": false,
+        "errorifstateunchaged": false,
+        "nora": "f1e538c1.0315f8",
+        "topic": "ventilation-boost",
+        "onvalue": "1",
+        "onvalueType": "num",
+        "offvalue": "0",
+        "offvalueType": "num",
+        "twofactor": "ack",
+        "twofactorpin": "",
+        "filter": true,
+        "asyncCmd": false,
+        "outputs": 1,
+        "x": 610,
+        "y": 220,
+        "wires": [
+            [
+                "660188df0186d9af"
+            ]
+        ]
+    },
+    {
+        "id": "1cd1125ce32c5aca",
+        "type": "function",
+        "z": "2de9a494ac1d6c71",
+        "name": "map",
+        "func": "return {\n    payload: msg.payload.value,\n    topic: msg.topic,\n};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 260,
+        "wires": [
+            [
+                "46b0b3fc4d086f1e",
+                "f07580f20f9c8e5f"
+            ]
+        ]
+    },
+    {
+        "id": "8b223dbf7927d67d",
+        "type": "noraf-thermostat",
+        "z": "2de9a494ac1d6c71",
+        "d": true,
+        "devicename": "Living Room",
+        "roomhint": "Living Room",
+        "name": "",
+        "modes": "off,heat,on",
+        "unit": "C",
+        "rangeMin": "",
+        "rangeMax": "",
+        "topic": "",
+        "passthru": false,
+        "commandOnly": false,
+        "queryOnly": false,
+        "bufferRangeCelsius": 2,
+        "nora": "f1e538c1.0315f8",
+        "twofactor": "off",
+        "twofactorpin": "",
+        "filter": false,
+        "x": 950,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f07580f20f9c8e5f",
+        "type": "noraf-switch",
+        "z": "2de9a494ac1d6c71",
+        "devicename": "More hot water",
+        "roomhint": "Service Room",
+        "name": "",
+        "passthru": false,
+        "errorifstateunchaged": false,
+        "nora": "f1e538c1.0315f8",
+        "topic": "more-hot-water",
+        "onvalue": "1",
+        "onvalueType": "num",
+        "offvalue": "0",
+        "offvalueType": "num",
+        "twofactor": "ack",
+        "twofactorpin": "",
+        "filter": true,
+        "asyncCmd": false,
+        "outputs": 1,
+        "x": 600,
+        "y": 280,
+        "wires": [
+            [
+                "660188df0186d9af"
+            ]
+        ]
+    },
+    {
+        "id": "9f8ecdb12e5082f5",
+        "type": "link in",
+        "z": "2de9a494ac1d6c71",
+        "name": "link in 8",
+        "links": [
+            "660188df0186d9af"
+        ],
+        "x": 75,
+        "y": 260,
+        "wires": [
+            [
+                "ed13633a52b01660",
+                "99b78cb07dd4c043"
+            ]
+        ]
+    },
+    {
+        "id": "660188df0186d9af",
+        "type": "link out",
+        "z": "2de9a494ac1d6c71",
+        "name": "link out 6",
+        "mode": "link",
+        "links": [
+            "9f8ecdb12e5082f5"
+        ],
+        "x": 765,
+        "y": 260,
+        "wires": []
     },
     {
         "id": "5bb98af947157223",
@@ -735,7 +1027,7 @@
         "temperaturemax": "5500",
         "twofactor": "off",
         "twofactorpin": "",
-        "filter": false,
+        "filter": true,
         "x": 440,
         "y": 620,
         "wires": [
@@ -989,8 +1281,8 @@
             "1b4bb0df8c93cc89",
             "b3a359bc7a838527"
         ],
-        "x": 1025,
-        "y": 100,
+        "x": 1035,
+        "y": 60,
         "wires": []
     },
     {
@@ -1006,11 +1298,11 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 720,
+        "x": 610,
         "y": 60,
         "wires": [
             [
-                "340c4ef4bedec8a6"
+                "cb6ee814173dbfcd"
             ]
         ]
     },
@@ -1027,7 +1319,7 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 730,
+        "x": 600,
         "y": 120,
         "wires": [
             [
@@ -1046,11 +1338,11 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 900,
+        "x": 790,
         "y": 120,
         "wires": [
             [
-                "340c4ef4bedec8a6"
+                "cb6ee814173dbfcd"
             ]
         ]
     },
@@ -1657,6 +1949,25 @@
         ]
     },
     {
+        "id": "cb6ee814173dbfcd",
+        "type": "function",
+        "z": "7d41aab9fd0b6a3e",
+        "name": "store state",
+        "func": "const value = global.get(msg.topic) || { online: true };\n\nif (Array.isArray(msg.payload.on) && msg.payload.on.length === 1) {\n    msg.payload.on = msg.payload.on[0];\n}\n\nglobal.set(msg.topic, {\n    ...value,\n    ...msg.payload,\n});\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 910,
+        "y": 60,
+        "wires": [
+            [
+                "340c4ef4bedec8a6"
+            ]
+        ]
+    },
+    {
         "id": "e6892c53b951d955",
         "type": "function",
         "z": "13aa577370e4c4d7",
@@ -1802,25 +2113,6 @@
         ]
     },
     {
-        "id": "df67e91a2f6be50b",
-        "type": "noraf-notify",
-        "z": "13aa577370e4c4d7",
-        "tag": "",
-        "title": "??",
-        "body": "??",
-        "icon": "",
-        "name": "Notify",
-        "nora": "f1e538c1.0315f8",
-        "topic": "",
-        "actions": [],
-        "closeNotification": false,
-        "x": 690,
-        "y": 580,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "42e556342bd34fe3",
         "type": "node-ups",
         "z": "13aa577370e4c4d7",
@@ -1849,8 +2141,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 350,
-        "y": 460,
+        "x": 310,
+        "y": 480,
         "wires": [
             [
                 "684884b00c3e9fad"
@@ -1870,8 +2162,8 @@
         "topic": "",
         "actions": [],
         "closeNotification": false,
-        "x": 750,
-        "y": 360,
+        "x": 730,
+        "y": 380,
         "wires": [
             []
         ]
@@ -1887,8 +2179,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 350,
-        "y": 360,
+        "x": 310,
+        "y": 380,
         "wires": [
             [
                 "2222fb495b79673f"
@@ -1900,37 +2192,18 @@
         "type": "function",
         "z": "13aa577370e4c4d7",
         "name": "Battery low",
-        "func": "if (msg.payload?.battery_low === true ||\n    msg.payload?.battery < 20) {\n    const now = new Date().toLocaleString();\n    const location = msg.topic.substring(msg.topic.indexOf('/') + 1);\n    return {\n        topic: location,\n        payload: {\n            tag: location,\n            body: `${location} at ${now}. Battery: ${msg.payload.battery ?? -1}. Low: ${msg.payload.battery_low}`,\n        },\n    };\n}\n",
+        "func": "if (msg.payload?.battery_low === true ||\n    msg.payload?.battery < 20) {\n    const now = new Date().toLocaleString();\n    const location = msg.topic.substring(msg.topic.indexOf('/') + 1);\n    return {\n        topic: location,\n        payload: {\n            tag: location,\n            title: 'Battery low',\n            body: `${location} at ${now}. Battery: ${msg.payload.battery ?? -1}. Low: ${msg.payload.battery_low}`,\n        },\n    };\n}\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 430,
+        "x": 410,
         "y": 240,
         "wires": [
             [
                 "6ac061a53b0101c8"
             ]
-        ]
-    },
-    {
-        "id": "d4e786f7a3e14298",
-        "type": "noraf-notify",
-        "z": "13aa577370e4c4d7",
-        "tag": "",
-        "title": "Battery low",
-        "body": "??",
-        "icon": "",
-        "name": "Notify",
-        "nora": "f1e538c1.0315f8",
-        "topic": "",
-        "actions": [],
-        "closeNotification": false,
-        "x": 750,
-        "y": 240,
-        "wires": [
-            []
         ]
     },
     {
@@ -1950,8 +2223,8 @@
         "bytopic": "all",
         "topic": "topic",
         "outputs": 1,
-        "x": 350,
-        "y": 320,
+        "x": 310,
+        "y": 340,
         "wires": [
             [
                 "d10c6183a957ae08"
@@ -1969,8 +2242,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 540,
-        "y": 320,
+        "x": 500,
+        "y": 340,
         "wires": [
             [
                 "684884b00c3e9fad"
@@ -1994,8 +2267,8 @@
         "bytopic": "all",
         "topic": "topic",
         "outputs": 1,
-        "x": 530,
-        "y": 360,
+        "x": 490,
+        "y": 380,
         "wires": [
             [
                 "684884b00c3e9fad"
@@ -2019,11 +2292,11 @@
         "bytopic": "topic",
         "topic": "topic",
         "outputs": 1,
-        "x": 590,
+        "x": 570,
         "y": 240,
         "wires": [
             [
-                "d4e786f7a3e14298"
+                "684884b00c3e9fad"
             ]
         ]
     },
@@ -2038,8 +2311,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 330,
-        "y": 400,
+        "x": 290,
+        "y": 420,
         "wires": [
             []
         ]
@@ -2069,6 +2342,7 @@
         "id": "184032aab20a73e0",
         "type": "function",
         "z": "13aa577370e4c4d7",
+        "d": true,
         "name": "notify when offline",
         "func": "if (typeof msg.payload !== 'boolean' || msg.payload) {\n    return;\n}\n\nconst now = new Date().getTime();\n\nconst lastGridStatusChange = flow.get('last_grid_status_change');\nif (typeof lastGridStatusChange === 'number') {\n    if (now - lastGridStatusChange < 300000) {\n        // grid status changed in the last 5 mins, ignore offline messages\n        return;\n    }\n}\n\nconst lastOfflines = context.get('last5min') || {};\nfor (const key of Object.keys(lastOfflines)) {\n    const delta = (now - lastOfflines[key]) / 1000;\n    if (delta > 60) {\n        delete lastOfflines[key];\n    }\n}\n\nconst name = msg.topic.split('/')[1];\nlastOfflines[name] = now;\ncontext.set('last5min', lastOfflines);\n\nif (flow.get('grid_offline') === false) {\n    const names = Object.keys(lastOfflines).join(',');\n    const nowString = new Date().toLocaleString();\n    node.send({\n        payload: {\n            tag: `devices-offline`,\n            title: 'Device(s) offline',\n            body: `${names} at ${nowString}`,\n        },\n    });\n}\n",
         "outputs": 1,
@@ -2110,7 +2384,7 @@
         "type": "function",
         "z": "13aa577370e4c4d7",
         "name": "notify reason",
-        "func": "const RESET_CAUSE = {\n    '0': 'NO_MEAN',\n    '1': 'POWERON',\n    '3': 'SW',\n    '4': 'OWDT',\n    '5': 'DEEPSLEEP',\n    '6': 'SDIO',\n    '7': 'TG0WDT_SYS',\n    '8': 'TG1WDT_SYS',\n    '9': 'RTCWDT_SYS',\n    '10': 'INTRUSION',\n    '11': 'TGWDT_CPU',\n    '12': 'SW_CPU',\n    '13': 'RTCWDT_CPU',\n    '14': 'EXT_CPU',\n    '15': 'RTCWDT_BROWN_OUT',\n    '16': 'RTCWDT_RTC',\n};\n\nconst reason = msg.payload;\nconst name = msg.topic.split('/')[1];\nconst last = context.get('last5min') || {};\nconst now = new Date().getTime();\n\nfor (const key of Object.keys(last)) {\n    const delta = (now - last[key].at) / 1000;\n    if (delta > 60) {\n        delete last[key];\n    }\n}\n\nlast[name] = { at: now, reason: RESET_CAUSE[reason] ?? 'unknown' };\ncontext.set('last5min', last);\n\nconst names = Object.keys(last).map(k => `${k}-${last[k].reason}`).join(', ');\nconst nowString = new Date().toLocaleString();\nnode.send({\n    payload: {\n        tag: `devices-reset`,\n        title: 'Device(s) reset',\n        body: `${names}`,\n    },\n});\n",
+        "func": "const RESET_CAUSE = {\n    '0': 'NO_MEAN',\n    '1': 'POWERON',\n    '3': 'SW',\n    '4': 'OWDT',\n    '5': 'DEEPSLEEP',\n    '6': 'SDIO',\n    '7': 'TG0WDT_SYS',\n    '8': 'TG1WDT_SYS',\n    '9': 'RTCWDT_SYS',\n    '10': 'INTRUSION',\n    '11': 'TGWDT_CPU',\n    '12': 'SW_CPU',\n    '13': 'RTCWDT_CPU',\n    '14': 'EXT_CPU',\n    '15': 'RTCWDT_BROWN_OUT',\n    '16': 'RTCWDT_RTC',\n};\n\nconst reason = msg.payload;\nconst name = msg.topic.split('/')[1];\nconst last = context.get('last5min') || {};\nconst now = new Date().getTime();\n\nfor (const key of Object.keys(last)) {\n    const delta = (now - last[key].at) / 1000;\n    if (delta > 60) {\n        delete last[key];\n    }\n}\n\nlast[name] = { at: now, reason: RESET_CAUSE[reason] ?? 'unknown' };\ncontext.set('last5min', last);\n\nconst lastGridChange = flow.get('last_grid_status_change');\nif (lastGridChange && Math.abs(now - lastGridChange) < 30000) {\n    return;\n}\n\nconst names = Object.keys(last).map(k => `${k}-${last[k].reason}`).join(', ');\nconst nowString = new Date().toLocaleString();\nnode.send({\n    payload: {\n        tag: `devices-reset`,\n        title: 'Device(s) reset',\n        body: `${names}`,\n    },\n});\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -2145,7 +2419,7 @@
         "y": 580,
         "wires": [
             [
-                "df67e91a2f6be50b"
+                "684884b00c3e9fad"
             ]
         ]
     },
@@ -2699,6 +2973,120 @@
         ]
     },
     {
+        "id": "bbbdecb1cda7db5e",
+        "type": "noraf-doorbell",
+        "z": "05e865126427c1f9",
+        "devicename": "Doorbell",
+        "roomhint": "",
+        "name": "",
+        "nora": "3302889fa9b7cb44",
+        "topic": "",
+        "filter": false,
+        "x": 600,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "7dc0804a1cdeba54",
+        "type": "inject",
+        "z": "05e865126427c1f9",
+        "name": "\"Alice\" is at the doorbell",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"named\":[\"Alice\"]}",
+        "payloadType": "json",
+        "x": 280,
+        "y": 360,
+        "wires": [
+            [
+                "bbbdecb1cda7db5e"
+            ]
+        ]
+    },
+    {
+        "id": "1b08bca9fd2551e9",
+        "type": "inject",
+        "z": "05e865126427c1f9",
+        "name": "someone's at the doorbell (unclassified)",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"unclassified\":1}",
+        "payloadType": "json",
+        "x": 330,
+        "y": 440,
+        "wires": [
+            [
+                "bbbdecb1cda7db5e"
+            ]
+        ]
+    },
+    {
+        "id": "71629549d9fd9dc9",
+        "type": "inject",
+        "z": "05e865126427c1f9",
+        "name": "someone you know is at the doorbell",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"familiar\":1}",
+        "payloadType": "json",
+        "x": 320,
+        "y": 400,
+        "wires": [
+            [
+                "bbbdecb1cda7db5e"
+            ]
+        ]
+    },
+    {
+        "id": "aeeedb84a9e88d39",
+        "type": "inject",
+        "z": "05e865126427c1f9",
+        "name": "someone's at the doorbell (unfamiliar)",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"unfamiliar\":1}",
+        "payloadType": "json",
+        "x": 330,
+        "y": 480,
+        "wires": [
+            [
+                "bbbdecb1cda7db5e"
+            ]
+        ]
+    },
+    {
         "id": "244c26807bc68f0e",
         "type": "sunrise",
         "z": "67e1c6f6bd2fab57",
@@ -2722,14 +3110,14 @@
         "id": "4c7198dcb8cd0684",
         "type": "function",
         "z": "67e1c6f6bd2fab57",
-        "name": "At night, turn outside light",
+        "name": "outside light on/off",
         "func": "if (!msg.payload) {\n    context.set('light_on', true);\n    turn(true);\n} else if (context.get('light_on')) {\n    context.set('light_on', false);\n    turn(false);\n}\n\nfunction turn(on) {\n    node.send([[{\n        payload: { on },\n        topic: 'ha-switch/switch-dimmer-11/state/set',\n    }, {\n        payload: { on: [on] },\n        topic: 'ha-switch/switch-onoff-7/state/set',\n    }, {\n        topic: 'zigbee2mqtt/light/outside/set',\n        payload: { state: on ? 'ON' : 'OFF' },\n    }]]);\n}\n\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 470,
+        "x": 450,
         "y": 120,
         "wires": [
             [
@@ -2754,6 +3142,63 @@
         "x": 670,
         "y": 120,
         "wires": []
+    },
+    {
+        "id": "0d243166fa4cb451",
+        "type": "function",
+        "z": "67e1c6f6bd2fab57",
+        "name": "open/close blinds",
+        "func": "/** @type Array<{id: number, open?:number, close?: number, openLater?: number}> */\nconst BLINDS = [\n    { id: 1, open: 15, openLater: 100, close: 0 }, // guest\n    { id: 2, open: 100, close: 0 }, // kitchen-window\n    { id: 8, open: 15, close: 0 }, // kitchen-fixed\n    { id: 3, open: 15, openLater: 100, close: 0 }, // big bedroom\n    { id: 4, open: 100 }, // living-door\n    { id: 6, open: 15, openLater: 100, close: 0 }, // living-window\n    { id: 5, open: 100, close: 0 }, // office\n];\n\nconst KEY = 'blindsLastCommand';\n\n/** @type {'open'|'close'|'openLater'} */\n\nif (!msg.payload) {\n    blinds('close');\n} else {\n    const now = new Date();\n    const minTimeToOpenBlinds = new Date();\n    minTimeToOpenBlinds.setHours(7, 30, 0);\n\n    const openLaterTime = new Date();\n    openLaterTime.setHours(8, 0, 0);\n\n    if (now >= minTimeToOpenBlinds && now < openLaterTime) {\n        blinds('open');\n    } else if (now >= openLaterTime) {\n        blinds('openLater');\n    }\n}\n\n/** @param {'open'|'close'|'openLater'} type */\nfunction blinds(type) {\n    const last = context.get(KEY);\n    if (type === last) {\n        return;\n    }\n    context.set(KEY, type);\n    const msgs = BLINDS\n        .map(b => {\n            const stateTopic = `ha-switch/switch-blinds-${b.id}/state`;\n            const currentState = global.get(stateTopic);\n\n            const openPercent = b[type];\n            if (typeof openPercent !== 'number') {\n                return;\n            }\n\n            if (currentState) {\n                switch (type) {\n                    case 'open':\n                    case 'openLater':\n                        if (openPercent <= currentState.openPercent) {\n                            return;\n                        }\n                        break;\n                    case 'close':\n                        if (openPercent >= currentState.openPercent) {\n                            //blinds are already more closed\n                            return;\n                        }\n                        break;\n                }\n            }\n\n            return {\n                payload: { openPercent },\n                topic: `${stateTopic}/set`,\n                retain: true,\n            };\n        })\n        .filter(m => !!m);\n    node.send([msgs]);\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 180,
+        "wires": [
+            [
+                "11e1c771398804b4"
+            ]
+        ]
+    },
+    {
+        "id": "11e1c771398804b4",
+        "type": "mqtt out",
+        "z": "67e1c6f6bd2fab57",
+        "name": "",
+        "topic": "",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "f569d34c.8c7ed",
+        "x": 670,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "4929a74e2d6431e1",
+        "type": "sunrise",
+        "z": "67e1c6f6bd2fab57",
+        "name": "",
+        "lat": "45.977066",
+        "lon": "21.316671",
+        "start": "sunrise",
+        "end": "dusk",
+        "soff": "-15",
+        "eoff": "-15",
+        "x": 250,
+        "y": 180,
+        "wires": [
+            [
+                "0d243166fa4cb451"
+            ],
+            []
+        ]
     },
     {
         "id": "7346c0bb.6010f",
