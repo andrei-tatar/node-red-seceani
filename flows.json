@@ -8,17 +8,6 @@
         "env": []
     },
     {
-        "id": "3c1f7041b0963594",
-        "type": "cec-config",
-        "OSDname": "node-red",
-        "comport": "RPI",
-        "hdmiport": "0",
-        "player": false,
-        "recorder": false,
-        "tuner": false,
-        "audio": true
-    },
-    {
         "id": "2dd98965cb8d503c",
         "type": "serial-port",
         "serialport": "/dev/serial/by-id/usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_Controller_0001-if00-port0",
@@ -57,170 +46,6 @@
         "responsetimeout": "10000"
     },
     {
-        "id": "81e4c2a1.94c2e",
-        "type": "cec-in",
-        "z": "61cc80910aede988",
-        "cec_adapter": "3c1f7041b0963594",
-        "name": "",
-        "flow_in": true,
-        "flow_out": true,
-        "select_all": "false",
-        "active_source": true,
-        "image_view_on": true,
-        "text_view_on": true,
-        "inactive_source": true,
-        "request_active_source": true,
-        "routing_change": true,
-        "routing_information": true,
-        "set_stream_path": true,
-        "standby": true,
-        "record_off": true,
-        "record_on": true,
-        "record_status": true,
-        "record_tv_screen": true,
-        "clear_analogue_timer": true,
-        "clear_digital_timer": true,
-        "clear_external_timer": true,
-        "set_analogue_timer": true,
-        "set_digital_timer": true,
-        "set_external_timer": true,
-        "set_timer_program_title": true,
-        "timer_cleared_status": true,
-        "timer_status": true,
-        "cec_version": true,
-        "get_cec_version": true,
-        "give_physical_address": true,
-        "get_menu_language": true,
-        "report_physical_address": true,
-        "set_menu_language": true,
-        "deck_control": true,
-        "deck_status": true,
-        "give_deck_status": true,
-        "play": true,
-        "give_tuner_device_status": true,
-        "select_analogue_service": true,
-        "select_digital_service": true,
-        "tuner_device_status": true,
-        "tuner_step_decrement": true,
-        "tuner_step_increment": true,
-        "device_vendor_id": true,
-        "give_device_vendor_id": true,
-        "vendor_command": true,
-        "vendor_command_with_id": true,
-        "vendor_remote_button_down": true,
-        "vendor_remote_button_up": true,
-        "set_osd_string": true,
-        "give_osd_name": true,
-        "set_osd_name": true,
-        "menu_request": true,
-        "menu_status": true,
-        "user_control_pressed": true,
-        "user_control_release": true,
-        "give_device_power_status": true,
-        "report_power_status": true,
-        "feature_abort": true,
-        "abort": true,
-        "give_audio_status": true,
-        "give_system_audio_mode_status": true,
-        "report_audio_status": true,
-        "set_system_audio_mode": true,
-        "system_audio_mode_request": true,
-        "system_audio_mode_status": true,
-        "set_audio_rate": true,
-        "start_arc": true,
-        "report_arc_started": true,
-        "report_arc_ended": true,
-        "request_arc_start": true,
-        "request_arc_end": true,
-        "end_arc": true,
-        "cdc": true,
-        "none": true,
-        "x": 130,
-        "y": 360,
-        "wires": [
-            [
-                "8ab27e65.532f6"
-            ]
-        ]
-    },
-    {
-        "id": "b6410302.efaed",
-        "type": "inject",
-        "z": "61cc80910aede988",
-        "name": "repeat",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "2",
-        "crontab": "",
-        "once": true,
-        "onceDelay": "1",
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 140,
-        "y": 240,
-        "wires": [
-            [
-                "405fa020.fd7e"
-            ]
-        ]
-    },
-    {
-        "id": "4ee37088.4b80f",
-        "type": "cec-out",
-        "z": "61cc80910aede988",
-        "cec_adapter": "3c1f7041b0963594",
-        "name": "",
-        "x": 540,
-        "y": 300,
-        "wires": []
-    },
-    {
-        "id": "41bcfed6.234",
-        "type": "function",
-        "z": "61cc80910aede988",
-        "name": "Get TV power status",
-        "func": "return {\n    payload: {\n        source: 'AUDIOSYSTEM',\n        target: 'TV',\n        opcode: \"GIVE_DEVICE_POWER_STATUS\",\n        args: []\n    }\n};",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 340,
-        "y": 300,
-        "wires": [
-            [
-                "4ee37088.4b80f"
-            ]
-        ]
-    },
-    {
-        "id": "8ab27e65.532f6",
-        "type": "function",
-        "z": "61cc80910aede988",
-        "name": "Is TV on?",
-        "func": "if (msg.payload.type === 'TRAFFIC' &&\n    msg.payload.source === 0 &&\n    msg.payload.target === 5 &&\n    msg.payload.event === 'REPORT_POWER_STATUS') {\n    const tvStatus = msg.payload.data.str === 'ON';\n\n    node.status({\n        fill: tvStatus ? 'blue' : 'yellow',\n        shape: \"dot\",\n        text: tvStatus ? 'on' : 'off'\n    });\n\n    const flowStatus = flow.get('tv_on');\n    if (flowStatus !== tvStatus) {\n        flow.set('tv_on', tvStatus);\n        return msg;\n    }\n}",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 280,
-        "y": 360,
-        "wires": [
-            [
-                "b6bf4e6d.2b16c"
-            ]
-        ]
-    },
-    {
         "id": "b6bf4e6d.2b16c",
         "type": "link out",
         "z": "61cc80910aede988",
@@ -230,8 +55,8 @@
             "bc4bddd9e7b73ff6",
             "fca32fff6a920574"
         ],
-        "x": 405,
-        "y": 360,
+        "x": 655,
+        "y": 420,
         "wires": []
     },
     {
@@ -245,8 +70,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 700,
-        "y": 240,
+        "x": 830,
+        "y": 300,
         "wires": [
             [
                 "8fc31dc0.fe6ff"
@@ -263,8 +88,8 @@
             "bc4bddd9e7b73ff6",
             "fca32fff6a920574"
         ],
-        "x": 795,
-        "y": 240,
+        "x": 925,
+        "y": 300,
         "wires": []
     },
     {
@@ -279,8 +104,8 @@
         "winHide": false,
         "oldrc": false,
         "name": "check",
-        "x": 570,
-        "y": 240,
+        "x": 680,
+        "y": 300,
         "wires": [
             [
                 "a9f14b34.b4b698"
@@ -300,9 +125,9 @@
         "timer": "",
         "winHide": false,
         "oldrc": false,
-        "name": "check",
-        "x": 290,
-        "y": 240,
+        "name": "check Google Home",
+        "x": 340,
+        "y": 300,
         "wires": [
             [
                 "645350d4.805c"
@@ -322,8 +147,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 430,
-        "y": 240,
+        "x": 540,
+        "y": 300,
         "wires": [
             [
                 "5c740848.5ee358"
@@ -349,14 +174,14 @@
         "id": "2d91cfa01f91ba30",
         "type": "function",
         "z": "61cc80910aede988",
-        "name": "get amp status",
+        "name": "amp status",
         "func": "/** @type {Buffer} */\nconst input = msg.payload;\n\nif (input.length === 4 &&\n    input[0] === 1 //msg type = status\n) {\n    const amp = {\n        on: input[1] !== 0,\n        channel: input[2],\n        volume: input[3],\n    };\n\n    node.status({\n        fill: \"blue\",\n        shape: \"dot\",\n        text: `${amp.on ? 'on' : 'off'} c-${amp.channel} v-${amp.volume}`\n    });\n    return {\n        payload: amp,\n    };\n}\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 460,
+        "x": 450,
         "y": 120,
         "wires": [
             [
@@ -369,7 +194,7 @@
         "type": "function",
         "z": "61cc80910aede988",
         "name": "update amp state",
-        "func": "const desiredPower = flow.get('tv_on') || flow.get('music_on');\nconst desiredChannel = flow.get('music_on') ? 6 : 4;\nconst state = flow.get('amp');\n\nif (desiredPower !== state?.on ||\n    desiredPower && desiredChannel !== state?.channel) {\n\n    if (!desiredPower) {\n        return {\n            payload: {\n                on: false,\n            }\n        };\n    } else {\n        return [\n            { reset: true },\n            {\n                payload: {\n                    on: true,\n                    channel: desiredChannel,\n                }\n            }\n        ]\n    }\n} else {\n    return { reset: true };\n}\n",
+        "func": "const desiredPower = flow.get('tv_on') || flow.get('music_on') ||\n    flow.get('mpd_on') || flow.get('pickup_on');\nconst desiredChannel = 6;\nconst state = flow.get('amp');\n\nif (desiredPower !== state?.on ||\n    desiredPower && desiredChannel !== state?.channel) {\n\n    if (!desiredPower) {\n        return {\n            payload: {\n                on: false,\n            }\n        };\n    } else {\n        return [\n            { reset: true },\n            {\n                payload: {\n                    on: true,\n                    channel: desiredChannel,\n                }\n            }\n        ]\n    }\n} else {\n    return { reset: true };\n}\n",
         "outputs": 2,
         "noerr": 0,
         "initialize": "",
@@ -415,6 +240,7 @@
         "id": "9502278b14c1c63d",
         "type": "serial in",
         "z": "61cc80910aede988",
+        "d": true,
         "name": "ir in",
         "serial": "7b2707f28190958d",
         "x": 130,
@@ -502,35 +328,6 @@
         ]
     },
     {
-        "id": "a32f630096bcf6d4",
-        "type": "inject",
-        "z": "61cc80910aede988",
-        "name": "repeat",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "5",
-        "crontab": "",
-        "once": true,
-        "onceDelay": "1",
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 140,
-        "y": 300,
-        "wires": [
-            [
-                "41bcfed6.234"
-            ]
-        ]
-    },
-    {
         "id": "63a3e87f72239626",
         "type": "trigger",
         "z": "61cc80910aede988",
@@ -610,7 +407,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 780,
+        "x": 820,
         "y": 180,
         "wires": [
             [
@@ -635,7 +432,9 @@
         "name": "link in 1",
         "links": [
             "8fc31dc0.fe6ff",
-            "b6bf4e6d.2b16c"
+            "b6bf4e6d.2b16c",
+            "c5314d368e3fdc95",
+            "253b433ba2e36077"
         ],
         "x": 95,
         "y": 80,
@@ -667,6 +466,232 @@
         "wires": [
             [
                 "a6b1d4e441d9274d"
+            ]
+        ]
+    },
+    {
+        "id": "72e745c5feb21fb9",
+        "type": "function",
+        "z": "61cc80910aede988",
+        "name": "change volume",
+        "func": "const amp = flow.get('amp');\nif (!amp?.on || !flow.get('tv_on')) {\n    return;\n}\n\nconst desiredVolume = msg.payload.mute\n    ? 10\n    : Math.round(msg.payload.volume * 1.7);\nconst currentVolume = amp.volume;\nif (Math.abs(desiredVolume - currentVolume) < 2) {\n    return;\n}\n\nnode.status({ fill: \"blue\", shape: \"dot\", text: `d: ${desiredVolume}` });\n\nreturn {\n    payload: {\n        volume: desiredVolume,\n    },\n};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 220,
+        "wires": [
+            [
+                "8cee9e70d8f260a0"
+            ]
+        ]
+    },
+    {
+        "id": "926d9d5a42bd0f61",
+        "type": "function",
+        "z": "61cc80910aede988",
+        "name": "LG - get volume",
+        "func": "",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "const spi = SPI.initialize(\"/dev/spidev0.0\");\n\nconst readSpdifStatus = Buffer.from([\n    0x01, //read\n    0xF6,\n    0x17,\n    0,\n    0,\n    0,\n    0,\n    0\n]);\n\nsetInterval(() => {\n    spi.transfer(readSpdifStatus, readSpdifStatus.length, onSpiMessage);\n}, 500);\n\n\n/**\n * @param {Error|null} e\n * @param {Buffer|undefined} d\n */\nfunction onSpiMessage(e, d) {\n    if (e) node.error(e);\n    else decode(d.slice(3));\n}\n\nlet lastVolume = -1;\nlet lastMute = null;\n\n/**\n * @param {Buffer} out\n */\nfunction decode(out) {\n    const padded = Buffer.concat([Buffer.alloc(3, 0), out]);\n    const value = padded.readBigInt64BE();\n\n    const SIGNATURE_MASK = 0xfffffn;\n    const SIGNATURE_VALUE = 0xf048an;\n\n    if ((value & SIGNATURE_MASK) !== SIGNATURE_VALUE) {\n        return;\n    }\n\n    const volumeByte = Number((value >> 20n) & 0xFFn);\n    const volume = volumeByte & 0x7F;\n    const mute = (volumeByte & 0x80) !== 0;\n\n    if (volume !== lastVolume || mute !== lastMute) {\n        lastVolume = volume;\n        lastMute = mute;\n        node.status({ fill: \"blue\", shape: \"dot\", text: `vol: ${volume}${mute ? ' mute' : ''}` });\n    }\n\n    node.send({\n        payload: {\n            mute,\n            volume,\n        }\n    });\n}\n",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "SPI",
+                "module": "pi-spi"
+            }
+        ],
+        "x": 300,
+        "y": 220,
+        "wires": [
+            [
+                "72e745c5feb21fb9"
+            ]
+        ]
+    },
+    {
+        "id": "8ab27e65.532f6",
+        "type": "function",
+        "z": "61cc80910aede988",
+        "name": "Is TV on?",
+        "func": "const tvStatus = msg.payload.code === 0;\n\nnode.status({\n    fill: tvStatus ? 'blue' : 'yellow',\n    shape: \"dot\",\n    text: tvStatus ? 'on' : 'off'\n});\n\nconst flowStatus = flow.get('tv_on');\nif (flowStatus !== tvStatus) {\n    flow.set('tv_on', tvStatus);\n    return msg;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 420,
+        "wires": [
+            [
+                "b6bf4e6d.2b16c"
+            ]
+        ]
+    },
+    {
+        "id": "a8b6f0d7673b1662",
+        "type": "exec",
+        "z": "61cc80910aede988",
+        "command": " ping 192.168.68.49 -c 1 -w 1",
+        "addpay": false,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "check TV",
+        "x": 300,
+        "y": 420,
+        "wires": [
+            [],
+            [],
+            [
+                "8ab27e65.532f6"
+            ]
+        ]
+    },
+    {
+        "id": "bdc5b717eb410f26",
+        "type": "inject",
+        "z": "61cc80910aede988",
+        "name": "repeat",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "2",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 360,
+        "wires": [
+            [
+                "a8b6f0d7673b1662",
+                "405fa020.fd7e",
+                "3b193b627d4296f7",
+                "926681effd534af1"
+            ]
+        ]
+    },
+    {
+        "id": "c5314d368e3fdc95",
+        "type": "link out",
+        "z": "61cc80910aede988",
+        "name": "update amp power",
+        "links": [
+            "50e2118a.c5d65",
+            "bc4bddd9e7b73ff6",
+            "fca32fff6a920574"
+        ],
+        "x": 655,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "e0bdc5ad6eb97354",
+        "type": "function",
+        "z": "61cc80910aede988",
+        "name": "MPD status",
+        "func": "const match = /\\[(\\w+)\\]/gm.exec(msg.payload);\nconst status = match?.[1];\n\nnode.status({\n    fill: status ? 'blue' : 'red',\n    shape: \"dot\",\n    text: status || 'stopped',\n});\n\nif (!status) {\n    return;\n}\n\nconst isPlaying = status === 'playing';\nconst flowStatus = flow.get('mpd_on');\nif (flowStatus !== isPlaying) {\n    flow.set('mpd_on', isPlaying);\n    return msg;\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 540,
+        "y": 480,
+        "wires": [
+            [
+                "c5314d368e3fdc95"
+            ]
+        ]
+    },
+    {
+        "id": "3b193b627d4296f7",
+        "type": "exec",
+        "z": "61cc80910aede988",
+        "command": "mpc",
+        "addpay": false,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "check MPD",
+        "x": 310,
+        "y": 480,
+        "wires": [
+            [
+                "e0bdc5ad6eb97354"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "253b433ba2e36077",
+        "type": "link out",
+        "z": "61cc80910aede988",
+        "name": "update amp power",
+        "mode": "link",
+        "links": [
+            "bc4bddd9e7b73ff6",
+            "fca32fff6a920574"
+        ],
+        "x": 655,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "926681effd534af1",
+        "type": "exec",
+        "z": "61cc80910aede988",
+        "command": "dbus-send --system --print-reply --dest=org.bluez /org/bluez/hci0/dev_F4_04_4C_1F_86_E1 org.freedesktop.DBus.Properties.Get string:org.bluez.MediaControl1 string:Connected || exit 0",
+        "addpay": false,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "check pickup",
+        "x": 310,
+        "y": 360,
+        "wires": [
+            [
+                "60531eca046b5249"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "60531eca046b5249",
+        "type": "function",
+        "z": "61cc80910aede988",
+        "name": "connected?",
+        "func": "const connected = msg.payload.indexOf('boolean true') >= 0;\nif (msg.payload.indexOf('boolean true') >= 0) {\n    node.status({ fill: \"blue\", shape: \"dot\", text: \"connected\" });\n} else {\n    node.status({ fill: \"yellow\", shape: \"dot\", text: \"disconnected\" });\n}\n\nconst flowPickupOn = flow.get('pickup_on');\nif (connected !== flowPickupOn) {\n    flow.set('pickup_on', connected);\n    return msg;\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 540,
+        "y": 360,
+        "wires": [
+            [
+                "253b433ba2e36077"
             ]
         ]
     }
