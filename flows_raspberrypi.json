@@ -456,7 +456,7 @@
         "type": "function",
         "z": "2de9a494ac1d6c71",
         "name": "decide",
-        "func": "const stopRecovery = flow.get('bypass_recovery') === 1;\nconst humidity = msg.payload.value;\nconst trigger = 55;\nconst histerezis = 3;\nconst compareTo = trigger + (stopRecovery ? -1 : 1) * histerezis;\nconst shouldStopRecovery = humidity >= compareTo;\n\nnode.status({\n    fill: shouldStopRecovery ? 'red' : \"blue\",\n    shape: \"dot\",\n    text: `recovery ${shouldStopRecovery ? 'off' : 'on'}`,\n});\n\nreturn {\n    payload: shouldStopRecovery ? 1 : 0,\n};\n",
+        "func": "const stopRecovery = flow.get('bypass_recovery') === 1;\nconst humidity = msg.payload.value;\nconst target = 45;\nconst histerezis = 2;\nconst compareTo = target + (stopRecovery ? -1 : 1) * histerezis;\nconst shouldStopRecovery = humidity >= compareTo;\n\nnode.status({\n    fill: shouldStopRecovery ? 'red' : \"blue\",\n    shape: \"dot\",\n    text: `recovery ${shouldStopRecovery ? 'off' : 'on'}`,\n});\n\nreturn {\n    payload: shouldStopRecovery ? 1 : 0,\n};\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -683,8 +683,8 @@
         "type": "node-espota",
         "z": "7d41aab9fd0b6a3e",
         "firmwareLink": "https://github.com/andrei-tatar/ha-wifi-switch/releases/latest/download/ha_switch_esp32.bin",
-        "includeTopics": "^ha-switch/(.+)/version$",
-        "excludeTopics": "",
+        "extractHost": "^ha-switch/(.+)/version$",
+        "excludeHost": "switch-dimmer-8",
         "name": "",
         "x": 430,
         "y": 140,
@@ -1484,7 +1484,7 @@
         "type": "function",
         "z": "7d41aab9fd0b6a3e",
         "name": "onoff",
-        "func": "if (msg.topic.startsWith('ha-switch/switch-onoff-')) {\n    return {\n        payload: {\n            ...msg.payload,\n            ...('on' in msg.payload\n                && Array.isArray(msg.payload.on)\n                && msg.payload.on.length\n                ? { on: msg.payload.on[0] }\n                : {}),\n        },\n        topic: msg.topic,\n    };\n}",
+        "func": "if (msg.topic.startsWith('ha-switch/switch-onoff-')) {\n    return {\n        payload: {\n            ...msg.payload,\n            ...('on' in msg.payload\n                && Array.isArray(msg.payload.on)\n                && msg.payload.on.length\n                ? { on: msg.payload.on.some(v => v) }\n                : {}),\n        },\n        topic: msg.topic,\n    };\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -3148,7 +3148,7 @@
         "type": "function",
         "z": "67e1c6f6bd2fab57",
         "name": "open/close blinds",
-        "func": "/** @type Array<{id: number, open?:number, close?: number, openLater?: number}> */\nconst BLINDS = [\n    { id: 1, open: 15, openLater: 100, close: 0 }, // guest\n    { id: 2, open: 100, close: 0 }, // kitchen-window\n    { id: 8, open: 15, close: 0 }, // kitchen-fixed\n    { id: 3, open: 15, openLater: 100, close: 0 }, // big bedroom\n    { id: 4, open: 100 }, // living-door\n    { id: 6, open: 15, openLater: 100, close: 0 }, // living-window\n    { id: 5, open: 100, close: 0 }, // office\n];\n\nconst KEY = 'blindsLastCommand';\n\n/** @type {'open'|'close'|'openLater'} */\n\nif (!msg.payload) {\n    blinds('close');\n} else {\n    const now = new Date();\n    const minTimeToOpenBlinds = new Date();\n    minTimeToOpenBlinds.setHours(7, 30, 0);\n\n    const openLaterTime = new Date();\n    openLaterTime.setHours(8, 0, 0);\n\n    if (now >= minTimeToOpenBlinds && now < openLaterTime) {\n        blinds('open');\n    } else if (now >= openLaterTime) {\n        blinds('openLater');\n    }\n}\n\n/** @param {'open'|'close'|'openLater'} type */\nfunction blinds(type) {\n    const last = context.get(KEY);\n    if (type === last) {\n        return;\n    }\n    context.set(KEY, type);\n    const msgs = BLINDS\n        .map(b => {\n            const stateTopic = `ha-switch/switch-blinds-${b.id}/state`;\n            const currentState = global.get(stateTopic);\n\n            const openPercent = b[type];\n            if (typeof openPercent !== 'number') {\n                return;\n            }\n\n            if (currentState) {\n                switch (type) {\n                    case 'open':\n                    case 'openLater':\n                        if (openPercent <= currentState.openPercent) {\n                            return;\n                        }\n                        break;\n                    case 'close':\n                        if (openPercent >= currentState.openPercent) {\n                            //blinds are already more closed\n                            return;\n                        }\n                        break;\n                }\n            }\n\n            return {\n                payload: { openPercent },\n                topic: `${stateTopic}/set`,\n                retain: true,\n            };\n        })\n        .filter(m => !!m);\n    node.send([msgs]);\n}\n",
+        "func": "if (!flow.get('auto_shutters')) {\n    return;\n}\n\n/** @type Array<{id: number, open?:number, close?: number, openLater?: number}> */\nconst BLINDS = [\n    { id: 1, open: 15, openLater: 100, close: 0 }, // guest\n    { id: 2, open: 100, close: 0 }, // kitchen-window\n    { id: 8, open: 15, close: 0 }, // kitchen-fixed\n    { id: 3, open: 15, openLater: 100, close: 0 }, // big bedroom\n    { id: 4, open: 100 }, // living-door\n    { id: 6, open: 15, openLater: 100, close: 0 }, // living-window\n    { id: 5, open: 100, close: 0 }, // office\n];\n\nconst KEY = 'blindsLastCommand';\n\n/** @type {'open'|'close'|'openLater'} */\n\nif (!msg.payload) {\n    blinds('close');\n} else {\n    const now = new Date();\n    const minTimeToOpenBlinds = new Date();\n    minTimeToOpenBlinds.setHours(7, 30, 0);\n\n    const openLaterTime = new Date();\n    openLaterTime.setHours(8, 0, 0);\n\n    if (now >= minTimeToOpenBlinds && now < openLaterTime) {\n        blinds('open');\n    } else if (now >= openLaterTime) {\n        blinds('openLater');\n    }\n}\n\n/** @param {'open'|'close'|'openLater'} type */\nfunction blinds(type) {\n    const last = context.get(KEY);\n    if (type === last) {\n        return;\n    }\n    context.set(KEY, type);\n    const msgs = BLINDS\n        .map(b => {\n            const stateTopic = `ha-switch/switch-blinds-${b.id}/state`;\n            const currentState = global.get(stateTopic);\n\n            const openPercent = b[type];\n            if (typeof openPercent !== 'number') {\n                return;\n            }\n\n            if (currentState) {\n                switch (type) {\n                    case 'open':\n                    case 'openLater':\n                        if (openPercent <= currentState.openPercent) {\n                            return;\n                        }\n                        break;\n                    case 'close':\n                        if (openPercent >= currentState.openPercent) {\n                            //blinds are already more closed\n                            return;\n                        }\n                        break;\n                }\n            }\n\n            return {\n                payload: { openPercent },\n                topic: `${stateTopic}/set`,\n                retain: true,\n            };\n        })\n        .filter(m => !!m);\n    node.send([msgs]);\n}\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -3169,7 +3169,7 @@
         "name": "",
         "topic": "",
         "qos": "0",
-        "retain": "",
+        "retain": "true",
         "respTopic": "",
         "contentType": "",
         "userProps": "",
@@ -3197,6 +3197,59 @@
             [
                 "0d243166fa4cb451"
             ],
+            []
+        ]
+    },
+    {
+        "id": "b13b868c36347d7c",
+        "type": "noraf-switch",
+        "z": "67e1c6f6bd2fab57",
+        "devicename": "Auto Shutters",
+        "roomhint": "Service Room",
+        "name": "",
+        "passthru": false,
+        "errorifstateunchaged": false,
+        "nora": "f1e538c1.0315f8",
+        "topic": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "twofactor": "ack",
+        "twofactorpin": "",
+        "filter": false,
+        "asyncCmd": false,
+        "outputs": 1,
+        "x": 460,
+        "y": 320,
+        "wires": [
+            [
+                "6811b29023348a73"
+            ]
+        ]
+    },
+    {
+        "id": "6811b29023348a73",
+        "type": "change",
+        "z": "67e1c6f6bd2fab57",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "auto_shutters",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 680,
+        "y": 320,
+        "wires": [
             []
         ]
     },
