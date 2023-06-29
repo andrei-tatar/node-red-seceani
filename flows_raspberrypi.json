@@ -99,7 +99,7 @@
         "type": "junction",
         "z": "7d41aab9fd0b6a3e",
         "x": 980,
-        "y": 620,
+        "y": 840,
         "wires": [
             [
                 "645b5b8f07f055fc",
@@ -125,7 +125,11 @@
                 "8714fba0422dd9f9",
                 "c78d7adf71b71c07",
                 "6ebdf6901c3c44a1",
-                "177b7b13cf11baf0"
+                "177b7b13cf11baf0",
+                "cfd8480b606b454e",
+                "72228fcd02ae304f",
+                "3013c47f8d5eef60",
+                "53e009712f4ba5db"
             ]
         ]
     },
@@ -345,7 +349,7 @@
         "name": "Living temp.",
         "register": "Roomsensor 2-1",
         "nibe": "89e46ce21c7f5128",
-        "interval": "300",
+        "interval": "60",
         "timeout": "5",
         "force": false,
         "topic": "living/temperature",
@@ -640,10 +644,10 @@
         "op2": "{\"value\":false}",
         "op1type": "json",
         "op2type": "json",
-        "duration": "1",
+        "duration": "30",
         "extend": true,
         "overrideDelay": false,
-        "units": "min",
+        "units": "s",
         "reset": "",
         "bytopic": "all",
         "topic": "topic",
@@ -851,7 +855,7 @@
         "name": "Bedroom temp.",
         "register": "Roomsensor 3-1",
         "nibe": "89e46ce21c7f5128",
-        "interval": "300",
+        "interval": "60",
         "timeout": "5",
         "force": false,
         "topic": "bedroom/temperature",
@@ -901,6 +905,72 @@
             [
                 "61d8d50274c6ed71"
             ]
+        ]
+    },
+    {
+        "id": "ddc09bbf19b398d4",
+        "type": "nibe-register",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "register": "Exhaust air fan speed normal (ERS 1)",
+        "nibe": "89e46ce21c7f5128",
+        "interval": "10",
+        "timeout": "5",
+        "force": false,
+        "topic": "",
+        "filter": false,
+        "x": 950,
+        "y": 680,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c2223332e9d6e8c6",
+        "type": "inject",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "45",
+        "payloadType": "num",
+        "x": 650,
+        "y": 640,
+        "wires": [
+            [
+                "ddc09bbf19b398d4",
+                "ebb15ae03ca2442a"
+            ]
+        ]
+    },
+    {
+        "id": "ebb15ae03ca2442a",
+        "type": "nibe-register",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "register": "Supply air fan speed normal (ERS 1)",
+        "nibe": "89e46ce21c7f5128",
+        "interval": "10",
+        "timeout": "5",
+        "force": false,
+        "topic": "",
+        "filter": false,
+        "x": 950,
+        "y": 740,
+        "wires": [
+            []
         ]
     },
     {
@@ -1130,7 +1200,7 @@
         "twofactorpin": "",
         "filter": true,
         "x": 1140,
-        "y": 620,
+        "y": 840,
         "wires": [
             [
                 "8ad4a13f3069f1ac"
@@ -1149,7 +1219,7 @@
         "finalize": "",
         "libs": [],
         "x": 1350,
-        "y": 620,
+        "y": 840,
         "wires": [
             [
                 "49583d9de218bf42"
@@ -1187,7 +1257,7 @@
         "finalize": "",
         "libs": [],
         "x": 890,
-        "y": 620,
+        "y": 840,
         "wires": [
             [
                 "841b001db8f4d3d5"
@@ -1219,7 +1289,7 @@
         "twofactorpin": "",
         "filter": true,
         "x": 1120,
-        "y": 680,
+        "y": 900,
         "wires": [
             [
                 "8ad4a13f3069f1ac"
@@ -1356,7 +1426,7 @@
         "twofactorpin": "",
         "filter": true,
         "x": 1140,
-        "y": 740,
+        "y": 960,
         "wires": [
             [
                 "8ad4a13f3069f1ac"
@@ -1388,7 +1458,7 @@
         "twofactorpin": "",
         "filter": true,
         "x": 1150,
-        "y": 800,
+        "y": 1020,
         "wires": [
             [
                 "8ad4a13f3069f1ac"
@@ -1420,7 +1490,7 @@
         "twofactorpin": "",
         "filter": true,
         "x": 1150,
-        "y": 860,
+        "y": 1080,
         "wires": [
             [
                 "8ad4a13f3069f1ac"
@@ -1452,7 +1522,7 @@
         "twofactorpin": "",
         "filter": true,
         "x": 1170,
-        "y": 920,
+        "y": 1140,
         "wires": [
             [
                 "8ad4a13f3069f1ac"
@@ -1596,7 +1666,7 @@
             "340c4ef4bedec8a6"
         ],
         "x": 805,
-        "y": 620,
+        "y": 840,
         "wires": [
             [
                 "821e92a25e3b217f"
@@ -1682,7 +1752,7 @@
             "d1bf6e5c3d819560"
         ],
         "x": 1445,
-        "y": 620,
+        "y": 840,
         "wires": []
     },
     {
@@ -1690,7 +1760,7 @@
         "type": "function",
         "z": "7d41aab9fd0b6a3e",
         "name": "map",
-        "func": "return {\n    payload: {\n        on: [msg.payload],\n    },\n    topic: msg.topic,\n};",
+        "func": "const m = /([^.]+)\\.(\\d+)/.exec(msg.topic);\nconst topic = m ? m[1] : msg.topic;\nconst index = m ? +m[2] : 0;\n\nconst on = [];\non[index] = msg.payload;\n\nreturn {\n    payload: {\n        on,\n    },\n    topic,\n};",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1709,7 +1779,7 @@
         "type": "function",
         "z": "7d41aab9fd0b6a3e",
         "name": "onoff",
-        "func": "if (msg.topic.startsWith('ha-switch/switch-onoff-')) {\n    return {\n        payload: {\n            ...msg.payload,\n            ...('on' in msg.payload\n                && Array.isArray(msg.payload.on)\n                && msg.payload.on.length\n                ? { on: msg.payload.on.some(v => v) }\n                : {}),\n        },\n        topic: msg.topic,\n    };\n}",
+        "func": "if (msg.topic.startsWith('ha-switch/switch-onoff-') &&\n    Array.isArray(msg.payload.on)) {\n\n    if (msg.payload.on.length > 1) {\n        //multiple states on switch\n        return [msg.payload.on.map((on, index) => ({\n            payload: {\n                ...msg.payload,\n                on,\n                topic: `${msg.topic}.${index}`\n            },\n        }))];\n    } else {\n        return {\n            payload: {\n                ...msg.payload,\n                on: msg.payload.on[0] ?? msg.payload.on,\n            },\n            topic: msg.topic,\n        };\n    }\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1791,6 +1861,7 @@
         "id": "144549cc6dc7cbe7",
         "type": "noraf-light",
         "z": "7d41aab9fd0b6a3e",
+        "d": true,
         "devicename": "Light",
         "lightcolor": false,
         "brightnesscontrol": false,
@@ -2101,10 +2172,12 @@
         "twofactor": "off",
         "twofactorpin": "",
         "filter": true,
-        "x": 550,
-        "y": 900,
+        "x": 1130,
+        "y": 560,
         "wires": [
-            []
+            [
+                "03e9def7ed68132d"
+            ]
         ]
     },
     {
@@ -2135,10 +2208,12 @@
         "twofactor": "off",
         "twofactorpin": "",
         "filter": true,
-        "x": 570,
-        "y": 940,
+        "x": 1150,
+        "y": 600,
         "wires": [
-            []
+            [
+                "03e9def7ed68132d"
+            ]
         ]
     },
     {
@@ -2166,7 +2241,7 @@
         "twofactorpin": "",
         "filter": true,
         "x": 1140,
-        "y": 560,
+        "y": 780,
         "wires": [
             [
                 "8ad4a13f3069f1ac"
@@ -2189,6 +2264,76 @@
         "wires": [
             [
                 "340c4ef4bedec8a6"
+            ]
+        ]
+    },
+    {
+        "id": "3013c47f8d5eef60",
+        "type": "noraf-light",
+        "z": "7d41aab9fd0b6a3e",
+        "devicename": "Work",
+        "lightcolor": false,
+        "brightnesscontrol": false,
+        "commandonlycolor": false,
+        "turnonwhenbrightnesschanges": false,
+        "passthru": false,
+        "errorifstateunchaged": false,
+        "statepayload": true,
+        "brightnessoverride": "",
+        "roomhint": "Garage",
+        "name": "d1.0 - garage - work",
+        "colortype": "hsv",
+        "nora": "f1e538c1.0315f8",
+        "topic": "ha-switch/switch-onoff-d-1/state.0",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "temperaturemin": "2700",
+        "temperaturemax": "5500",
+        "twofactor": "off",
+        "twofactorpin": "",
+        "filter": true,
+        "x": 1160,
+        "y": 640,
+        "wires": [
+            [
+                "03e9def7ed68132d"
+            ]
+        ]
+    },
+    {
+        "id": "53e009712f4ba5db",
+        "type": "noraf-light",
+        "z": "7d41aab9fd0b6a3e",
+        "devicename": "Door",
+        "lightcolor": false,
+        "brightnesscontrol": false,
+        "commandonlycolor": false,
+        "turnonwhenbrightnesschanges": false,
+        "passthru": false,
+        "errorifstateunchaged": false,
+        "statepayload": true,
+        "brightnessoverride": "",
+        "roomhint": "Garage",
+        "name": "d1.1 - garage - door",
+        "colortype": "hsv",
+        "nora": "f1e538c1.0315f8",
+        "topic": "ha-switch/switch-onoff-d-1/state.1",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "temperaturemin": "2700",
+        "temperaturemax": "5500",
+        "twofactor": "off",
+        "twofactorpin": "",
+        "filter": true,
+        "x": 1160,
+        "y": 700,
+        "wires": [
+            [
+                "03e9def7ed68132d"
             ]
         ]
     },
@@ -2341,6 +2486,7 @@
         "id": "42e556342bd34fe3",
         "type": "node-ups",
         "z": "13aa577370e4c4d7",
+        "d": true,
         "port": "/dev/serial/by-id/usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_Controller_0001-if00-port0",
         "name": "",
         "topic": "",
@@ -2530,7 +2676,7 @@
         "type": "function",
         "z": "13aa577370e4c4d7",
         "name": "Status",
-        "func": "const { grid: { voltage, frequency }, battery: { soc } } = msg.payload;\n\n\nnode.status({\n    fill: \"blue\",\n    shape: \"ring\",\n    text: `${voltage}V ${Math.round(frequency * 100) / 100}Hz ${soc}%`,\n});\n",
+        "func": "const { grid: { voltage, frequency }, battery: { soc } } = msg.payload;\n\nnode.status({\n    fill: \"blue\",\n    shape: \"ring\",\n    text: `${voltage}V ${Math.round(frequency * 100) / 100}Hz ${soc}%`,\n});\n\nsetTimeout(() => node.status({}), 30000);\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -2647,6 +2793,168 @@
                 "684884b00c3e9fad"
             ]
         ]
+    },
+    {
+        "id": "dee09762f6285202",
+        "type": "mqtt in",
+        "z": "13aa577370e4c4d7",
+        "name": "",
+        "topic": "zigbee2mqtt/leak/+",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "f569d34c.8c7ed",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 780,
+        "wires": [
+            [
+                "52228e2e95e8936e"
+            ]
+        ]
+    },
+    {
+        "id": "52228e2e95e8936e",
+        "type": "function",
+        "z": "13aa577370e4c4d7",
+        "name": "leak?",
+        "func": "const WAIT_SEC = 10;\nconst ON = {\n    payload: { on: true },\n    topic: 'ha-switch/switch-onoff-r1/state',\n};\nconst OFF = {\n    payload: { on: false },\n    topic: ON.topic,\n};\n\nif (msg.payload === 'cancel') {\n    this.timer = null;\n    clearTimeout(this.timer);\n    return;\n}\n\nif (msg.payload === 'start-water') {\n    node.send([, ON]);\n    return;\n}\n\nif (!msg.payload.water_leak || this.timer) {\n    return;\n}\n\nconst time = new Date().toLocaleString();\nconst parts = msg.topic.split('/');\nconst location = parts[parts.length - 1];\n\nconst base = {\n    tag: `water-leak`,\n    title: 'Water Leak',\n    body: `Water leak detected at ${time} - ${location}.`,\n};\n\nthis.timer = setTimeout(() => {\n    this.timer = null;\n    node.send([{\n        payload: {\n            ...base,\n            body: `${base.body} Stopped the water.`,\n            actions: [{\n                title: 'Start',\n                action: 'start-water'\n            }],\n        },\n    }, OFF]);\n}, WAIT_SEC * 1000);\n\nreturn {\n    payload: {\n        ...base,\n        body: `${base.body} Stopping the water in ${WAIT_SEC} sec.`,\n        actions: [{\n            title: 'Cancel',\n            action: 'cancel'\n        }],\n    },\n};\n",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 780,
+        "wires": [
+            [
+                "c37574baa8bb8ddf"
+            ],
+            [
+                "d02926676f707fa2"
+            ]
+        ]
+    },
+    {
+        "id": "de7e3a91aee2a01f",
+        "type": "mqtt in",
+        "z": "13aa577370e4c4d7",
+        "name": "",
+        "topic": "zigbee2mqtt/leak/+",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "f569d34c.8c7ed",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 60,
+        "wires": [
+            [
+                "e6892c53b951d955"
+            ]
+        ]
+    },
+    {
+        "id": "c3038920732427fa",
+        "type": "mqtt in",
+        "z": "13aa577370e4c4d7",
+        "name": "",
+        "topic": "zigbee2mqtt/contact/+",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "f569d34c.8c7ed",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 20,
+        "wires": [
+            [
+                "e6892c53b951d955"
+            ]
+        ]
+    },
+    {
+        "id": "609e08d7c9241c77",
+        "type": "mqtt in",
+        "z": "13aa577370e4c4d7",
+        "name": "",
+        "topic": "zigbee2mqtt/test/+",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "f569d34c.8c7ed",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 710,
+        "y": 80,
+        "wires": [
+            [
+                "ae821d7f2c3e2ba0"
+            ]
+        ]
+    },
+    {
+        "id": "ae821d7f2c3e2ba0",
+        "type": "function",
+        "z": "13aa577370e4c4d7",
+        "name": "store",
+        "func": "const ctx = context.get(msg.topic) || {};\n\nif (msg.payload.occupancy != ctx.occupancy) {\n    ctx.occupancy = msg.payload.occupancy;\n    ctx.changes = (ctx.changes ?? 0) + 1;\n}\n\nctx.last = new Date().toString();\ncontext.set(msg.topic, ctx);\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 890,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c37574baa8bb8ddf",
+        "type": "noraf-notify",
+        "z": "13aa577370e4c4d7",
+        "tag": "",
+        "title": "??",
+        "body": "??",
+        "icon": "",
+        "name": "Notify",
+        "nora": "f1e538c1.0315f8",
+        "topic": "",
+        "actions": [],
+        "closeNotification": false,
+        "x": 350,
+        "y": 700,
+        "wires": [
+            [
+                "52228e2e95e8936e"
+            ]
+        ]
+    },
+    {
+        "id": "d02926676f707fa2",
+        "type": "mqtt out",
+        "z": "13aa577370e4c4d7",
+        "name": "",
+        "topic": "",
+        "qos": "0",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "f569d34c.8c7ed",
+        "x": 530,
+        "y": 780,
+        "wires": []
     },
     {
         "id": "f08cfee748e21645",
@@ -3074,8 +3382,7 @@
         "y": 80,
         "wires": [
             [
-                "a0bf8cda615f1687",
-                "309ce3ec93316bc9"
+                "a0bf8cda615f1687"
             ]
         ]
     },
@@ -3083,9 +3390,8 @@
         "id": "a0bf8cda615f1687",
         "type": "function",
         "z": "05e865126427c1f9",
-        "d": true,
         "name": "When motion",
-        "func": "/**\n * @type Array<{src:Array<string>, target:string}>\n */\nconst targetByPir = [\n    {\n        src: ['hallway-1', 'hallway-2'],\n        target: 'switch-dimmer-3',\n    }, {\n        src: ['hallway-3'],\n        target: 'switch-dimmer-10',\n    }\n]\n\nconst parts = msg.topic.split('/');\nconst name = parts[parts.length - 1];\nconst found = targetByPir.find(t => t.src.includes(name));\n\nif (msg.payload.occupancy && found) {\n    return {\n        payload: {\n            'brightness': 15,\n            'for': 300\n        },\n        topic: `ha-switch/${found.target}/state/set`,\n    };\n}\n",
+        "func": "/**\n * @type Array<{src:Array<string>, target:string}>\n */\nconst targetByPir = [\n    {\n        src: ['pir/hallway-1', 'pir/hallway-2'],\n        target: 'switch-dimmer-3',\n    }, {\n        src: ['pir/hallway-3', 'contact/entrance'],\n        target: 'switch-dimmer-10',\n    }\n]\n\nconst name = msg.topic.split('/').slice(1).join('/');\nconst found = targetByPir.find(t => t.src.includes(name));\nif (!found) {\n    return;\n}\n\nconst p = msg.payload;\nif (p.occupancy || p.contact === false) {\n    return {\n        payload: {\n            'brightness': 100,\n            'for': 60 // seconds\n        },\n        topic: `ha-switch/${found.target}/state/set`,\n    };\n}\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "var  timer;\n",
@@ -3116,86 +3422,9 @@
         "correl": "",
         "expiry": "",
         "broker": "f569d34c.8c7ed",
-        "x": 830,
+        "x": 550,
         "y": 80,
         "wires": []
-    },
-    {
-        "id": "a42db8829c31d140",
-        "type": "inject",
-        "z": "05e865126427c1f9",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "ha-switch/switch-dimmer-8/state/set",
-        "payload": "{\"brightness\":20, \"for\": 3}",
-        "payloadType": "json",
-        "x": 650,
-        "y": 200,
-        "wires": [
-            [
-                "05ebecdb8b80ec34"
-            ]
-        ]
-    },
-    {
-        "id": "309ce3ec93316bc9",
-        "type": "function",
-        "z": "05e865126427c1f9",
-        "d": true,
-        "name": "When motion",
-        "func": "/**\n * @type Array<{src:Array<string>, target:string}>\n */\nconst targetByPir = [\n    {\n        src: ['hallway-1', 'hallway-2'],\n        target: 'switch-dimmer-3',\n    }, {\n        src: ['hallway-3'],\n        target: 'switch-dimmer-10',\n    }\n]\n\nconst parts = msg.topic.split('/');\nconst name = parts[parts.length - 1];\nconst found = targetByPir.find(t => t.src.includes(name));\n\nif (msg.payload.occupancy && found) {\n    return {\n        payload: { on: true },\n        topic: `ha-switch/${found.target}/state/set`,\n    };\n}\n",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "var  timer;\n",
-        "finalize": "",
-        "libs": [],
-        "x": 370,
-        "y": 120,
-        "wires": [
-            [
-                "94000ee52d0a0138"
-            ]
-        ],
-        "outputLabels": [
-            "battery low"
-        ]
-    },
-    {
-        "id": "94000ee52d0a0138",
-        "type": "trigger",
-        "z": "05e865126427c1f9",
-        "name": "",
-        "op1": "",
-        "op2": "{\"on\":false}",
-        "op1type": "pay",
-        "op2type": "json",
-        "duration": "5",
-        "extend": false,
-        "overrideDelay": false,
-        "units": "min",
-        "reset": "",
-        "bytopic": "topic",
-        "topic": "topic",
-        "outputs": 1,
-        "x": 550,
-        "y": 120,
-        "wires": [
-            [
-                "05ebecdb8b80ec34"
-            ]
-        ]
     },
     {
         "id": "bbbdecb1cda7db5e",
@@ -3308,6 +3537,27 @@
         "wires": [
             [
                 "bbbdecb1cda7db5e"
+            ]
+        ]
+    },
+    {
+        "id": "54e506afd7d7a753",
+        "type": "mqtt in",
+        "z": "05e865126427c1f9",
+        "name": "",
+        "topic": "zigbee2mqtt/contact/+",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "f569d34c.8c7ed",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 140,
+        "wires": [
+            [
+                "a0bf8cda615f1687"
             ]
         ]
     },
@@ -3670,7 +3920,8 @@
         "y": 80,
         "wires": [
             [
-                "724ffcb347b98a4b"
+                "724ffcb347b98a4b",
+                "bdefa59193e63a17"
             ]
         ]
     },
@@ -3681,7 +3932,7 @@
         "name": "",
         "topic": "",
         "qos": "",
-        "retain": "true",
+        "retain": "false",
         "respTopic": "",
         "contentType": "",
         "userProps": "",
@@ -3690,6 +3941,22 @@
         "broker": "f569d34c.8c7ed",
         "x": 790,
         "y": 80,
+        "wires": []
+    },
+    {
+        "id": "bdefa59193e63a17",
+        "type": "debug",
+        "z": "86c7bfe22f048e9c",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 660,
+        "y": 140,
         "wires": []
     },
     {
