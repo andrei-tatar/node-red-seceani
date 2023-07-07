@@ -157,39 +157,6 @@
         ]
     },
     {
-        "id": "22eaa8ece847ad55",
-        "type": "serial in",
-        "z": "61cc80910aede988",
-        "name": "amp in",
-        "serial": "2dd98965cb8d503c",
-        "x": 130,
-        "y": 120,
-        "wires": [
-            [
-                "6f4e96896c3676f2"
-            ]
-        ]
-    },
-    {
-        "id": "2d91cfa01f91ba30",
-        "type": "function",
-        "z": "61cc80910aede988",
-        "name": "amp status",
-        "func": "/** @type {Buffer} */\nconst input = msg.payload;\n\nif (input.length === 4 &&\n    input[0] === 1 //msg type = status\n) {\n    const amp = {\n        on: input[1] !== 0,\n        channel: input[2],\n        volume: input[3],\n    };\n\n    node.status({\n        fill: \"blue\",\n        shape: \"dot\",\n        text: `${amp.on ? 'on' : 'off'} c-${amp.channel} v-${amp.volume}`\n    });\n    return {\n        payload: amp,\n    };\n}\n",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 450,
-        "y": 120,
-        "wires": [
-            [
-                "4ec33041d75c6b43"
-            ]
-        ]
-    },
-    {
         "id": "a6b1d4e441d9274d",
         "type": "function",
         "z": "61cc80910aede988",
@@ -207,7 +174,7 @@
                 "63a3e87f72239626"
             ],
             [
-                "7309dc78973011ff"
+                "6c4064c82858dc07"
             ]
         ]
     },
@@ -230,8 +197,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 650,
-        "y": 120,
+        "x": 1050,
+        "y": 180,
         "wires": [
             []
         ]
@@ -271,25 +238,6 @@
         ]
     },
     {
-        "id": "6f4e96896c3676f2",
-        "type": "function",
-        "z": "61cc80910aede988",
-        "name": "decode",
-        "func": "/** @type {Buffer} */\nconst input = msg.payload;\n\nif (input.length > 6 &&\n    input[0] === 0xDE && //header1\n    input[1] === 0x5B && //header2\n    input[2] >= 1\n) {\n    const size = input[2];\n    if (size === input.length - 5) {\n        const data = input.slice(3, input.length - 2);\n        const checksum = getChecksum(data);\n        if (checksum === input.readUint16BE(3 + data.length)) {\n            return {\n                payload: data,\n            };\n        }\n    }\n}\n\n/**\n* @param {Buffer} data\n*/\nfunction getChecksum(data) {\n    let checksum = 0x1021;\n\n    const size = data.length;\n    for (let i = 0; i <= size; i++) {\n        const byte = i === 0 ? size : data[i - 1];\n        const roll = (checksum & 0x8000) !== 0 ? true : false;\n        checksum <<= 1;\n        checksum &= 0xFFFF;\n        if (roll) { checksum |= 1; }\n        checksum ^= byte;\n    }\n\n    return checksum;\n}",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 280,
-        "y": 120,
-        "wires": [
-            [
-                "2d91cfa01f91ba30"
-            ]
-        ]
-    },
-    {
         "id": "ab7a779b6528bfa8",
         "type": "function",
         "z": "61cc80910aede988",
@@ -323,7 +271,7 @@
         "y": 180,
         "wires": [
             [
-                "8cee9e70d8f260a0"
+                "55eab197e2677c50"
             ]
         ]
     },
@@ -348,7 +296,7 @@
         "y": 40,
         "wires": [
             [
-                "7309dc78973011ff"
+                "6c4064c82858dc07"
             ]
         ]
     },
@@ -369,61 +317,13 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 860,
+        "x": 770,
         "y": 60,
         "wires": [
             [
-                "1765c50cef4e89ae"
+                "55eab197e2677c50"
             ]
         ]
-    },
-    {
-        "id": "7309dc78973011ff",
-        "type": "function",
-        "z": "61cc80910aede988",
-        "name": "encode",
-        "func": "const todo = [];\n\nconst p = msg.payload;\nif ('on' in p) {\n    todo.push(Buffer.from([0xE0, p.on ? 1 : 0]));\n}\n\nif ('channel' in p && typeof p.channel === 'number' &&\n    p.channel >= 1 && p.channel <= 8) {\n    todo.push(Buffer.from([0xCA, p.channel]));\n}\n\nif ('volume' in p && typeof p.volume === 'number' &&\n    p.volume > 0 && p.volume <= 255) {\n    todo.push(Buffer.from([0x10, p.volume]));\n}\n\nfor (const data of todo) {\n    const packet = Buffer.alloc(data.length + 5);\n    let offset = packet.writeUInt8(0xDE, 0);\n    offset = packet.writeUInt8(0x5B, offset);\n    offset = packet.writeUInt8(data.length, offset);\n    offset += data.copy(packet, offset, 0, data.length);\n    const checksum = getChecksum(data);\n    packet.writeUInt16BE(checksum, offset);\n    node.send({ payload: packet });\n}\n\n/**\n* @param {Buffer} data\n*/\nfunction getChecksum(data) {\n    let checksum = 0x1021;\n\n    const size = data.length;\n    for (let i = 0; i <= size; i++) {\n        const byte = i === 0 ? size : data[i - 1];\n        const roll = (checksum & 0x8000) !== 0 ? true : false;\n        checksum <<= 1;\n        checksum &= 0xFFFF;\n        if (roll) { checksum |= 1; }\n        checksum ^= byte;\n    }\n\n    return checksum;\n}",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 700,
-        "y": 60,
-        "wires": [
-            [
-                "6c4064c82858dc07"
-            ]
-        ]
-    },
-    {
-        "id": "8cee9e70d8f260a0",
-        "type": "function",
-        "z": "61cc80910aede988",
-        "name": "encode",
-        "func": "const todo = [];\n\nconst p = msg.payload;\nif ('on' in p) {\n    todo.push(Buffer.from([0xE0, p.on ? 1 : 0]));\n}\n\nif ('channel' in p && typeof p.channel === 'number' &&\n    p.channel >= 1 && p.channel <= 8) {\n    todo.push(Buffer.from([0xCA, p.channel]));\n}\n\nif ('volume' in p && typeof p.volume === 'number' &&\n    p.volume > 0 && p.volume <= 255) {\n    todo.push(Buffer.from([0x10, p.volume]));\n}\n\nfor (const data of todo) {\n    const packet = Buffer.alloc(data.length + 5);\n    let offset = packet.writeUInt8(0xDE, 0);\n    offset = packet.writeUInt8(0x5B, offset);\n    offset = packet.writeUInt8(data.length, offset);\n    offset += data.copy(packet, offset, 0, data.length);\n    const checksum = getChecksum(data);\n    packet.writeUInt16BE(checksum, offset);\n    node.send({ payload: packet });\n}\n\n/**\n* @param {Buffer} data\n*/\nfunction getChecksum(data) {\n    let checksum = 0x1021;\n\n    const size = data.length;\n    for (let i = 0; i <= size; i++) {\n        const byte = i === 0 ? size : data[i - 1];\n        const roll = (checksum & 0x8000) !== 0 ? true : false;\n        checksum <<= 1;\n        checksum &= 0xFFFF;\n        if (roll) { checksum |= 1; }\n        checksum ^= byte;\n    }\n\n    return checksum;\n}",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 820,
-        "y": 180,
-        "wires": [
-            [
-                "1765c50cef4e89ae"
-            ]
-        ]
-    },
-    {
-        "id": "1765c50cef4e89ae",
-        "type": "serial out",
-        "z": "61cc80910aede988",
-        "name": "amp out",
-        "serial": "2dd98965cb8d503c",
-        "x": 980,
-        "y": 180,
-        "wires": []
     },
     {
         "id": "fca32fff6a920574",
@@ -484,7 +384,7 @@
         "y": 220,
         "wires": [
             [
-                "8cee9e70d8f260a0"
+                "55eab197e2677c50"
             ]
         ]
     },
@@ -694,5 +594,36 @@
                 "253b433ba2e36077"
             ]
         ]
+    },
+    {
+        "id": "55eab197e2677c50",
+        "type": "amp-node",
+        "z": "61cc80910aede988",
+        "port": "serial:///dev/serial/by-id/usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_Controller_0001-if00-port0?baudRate=57600",
+        "name": "Amp",
+        "x": 870,
+        "y": 180,
+        "wires": [
+            [
+                "975d84ef22ea8269",
+                "4ec33041d75c6b43"
+            ]
+        ]
+    },
+    {
+        "id": "975d84ef22ea8269",
+        "type": "debug",
+        "z": "61cc80910aede988",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1040,
+        "y": 120,
+        "wires": []
     }
 ]
