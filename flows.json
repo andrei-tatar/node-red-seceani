@@ -324,7 +324,7 @@
         "id": "a8b6f0d7673b1662",
         "type": "exec",
         "z": "61cc80910aede988",
-        "command": " ping 192.168.68.49 -c 1 -w 1",
+        "command": " ping 192.168.68.135 -c 1 -w 1",
         "addpay": false,
         "append": "",
         "useSpawn": "false",
