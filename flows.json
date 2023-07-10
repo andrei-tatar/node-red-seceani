@@ -46,20 +46,6 @@
         "responsetimeout": "10000"
     },
     {
-        "id": "b6bf4e6d.2b16c",
-        "type": "link out",
-        "z": "61cc80910aede988",
-        "name": "update amp power",
-        "links": [
-            "50e2118a.c5d65",
-            "bc4bddd9e7b73ff6",
-            "fca32fff6a920574"
-        ],
-        "x": 655,
-        "y": 420,
-        "wires": []
-    },
-    {
         "id": "a9f14b34.b4b698",
         "type": "function",
         "z": "61cc80910aede988",
@@ -71,7 +57,7 @@
         "finalize": "",
         "libs": [],
         "x": 830,
-        "y": 300,
+        "y": 240,
         "wires": [
             [
                 "8fc31dc0.fe6ff"
@@ -88,8 +74,8 @@
             "bc4bddd9e7b73ff6",
             "fca32fff6a920574"
         ],
-        "x": 925,
-        "y": 300,
+        "x": 835,
+        "y": 340,
         "wires": []
     },
     {
@@ -105,7 +91,7 @@
         "oldrc": false,
         "name": "check",
         "x": 680,
-        "y": 300,
+        "y": 240,
         "wires": [
             [
                 "a9f14b34.b4b698"
@@ -127,7 +113,7 @@
         "oldrc": false,
         "name": "check Google Home",
         "x": 340,
-        "y": 300,
+        "y": 240,
         "wires": [
             [
                 "645350d4.805c"
@@ -148,7 +134,7 @@
         "finalize": "",
         "libs": [],
         "x": 540,
-        "y": 300,
+        "y": 240,
         "wires": [
             [
                 "5c740848.5ee358"
@@ -168,7 +154,7 @@
         "finalize": "",
         "libs": [],
         "x": 310,
-        "y": 60,
+        "y": 80,
         "wires": [
             [
                 "63a3e87f72239626"
@@ -197,82 +183,10 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1050,
-        "y": 180,
+        "x": 850,
+        "y": 160,
         "wires": [
             []
-        ]
-    },
-    {
-        "id": "9502278b14c1c63d",
-        "type": "serial in",
-        "z": "61cc80910aede988",
-        "d": true,
-        "name": "ir in",
-        "serial": "7b2707f28190958d",
-        "x": 130,
-        "y": 180,
-        "wires": [
-            [
-                "2641f45143772992"
-            ]
-        ]
-    },
-    {
-        "id": "2641f45143772992",
-        "type": "function",
-        "z": "61cc80910aede988",
-        "name": "decode",
-        "func": "/** @type {Buffer} */\nconst input = msg.payload;\n\nif (input.length > 6 &&\n    input[0] === 0xDE && //header1\n    input[1] === 0x5B && //header2\n    input[2] >= 1\n) {\n    const size = input[2];\n    if (size === input.length - 5) {\n        const data = input.slice(3, input.length - 2);\n        const checksum = getChecksum(data);\n        if (checksum === input.readUint16BE(3 + data.length)) {\n            return {\n                payload: data,\n            };\n        }\n    }\n}\n\n/**\n* @param {Buffer} data\n*/\nfunction getChecksum(data) {\n    let checksum = 0x1021;\n\n    const size = data.length;\n    for (let i = 0; i <= size; i++) {\n        const byte = i === 0 ? size : data[i - 1];\n        const roll = (checksum & 0x8000) !== 0 ? true : false;\n        checksum <<= 1;\n        checksum &= 0xFFFF;\n        if (roll) { checksum |= 1; }\n        checksum ^= byte;\n    }\n\n    return checksum;\n}",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 280,
-        "y": 180,
-        "wires": [
-            [
-                "ab7a779b6528bfa8"
-            ]
-        ]
-    },
-    {
-        "id": "ab7a779b6528bfa8",
-        "type": "function",
-        "z": "61cc80910aede988",
-        "name": "ir decode",
-        "func": "/** @type {Buffer} */\nconst input = msg.payload;\n\nconst max_error = 21; // %\nconst header_mark = 9000;\nconst header_space = 4500;\nconst repeat_space = 2250;\nconst bit_mark = 562;\nconst zero_space = 562;\nconst one_space = 1687;\n\nif (input[0] === 1) {\n    /** @type {number[]} */\n    const pulses = [];\n    for (let i = 1; i < input.length; i++) {\n        pulses.push(input[i] * 50);\n    }\n\n    const decoded = decode(pulses);\n    if (decoded) {\n        node.status({ fill: \"green\", shape: \"dot\", text: decoded });\n        setTimeout(() => node.status({}), 3000);\n        return { payload: decoded };\n    }\n}\n\nfunction matches(value, target) {\n    return Math.abs(value - target) / target * 100 < max_error;\n}\n\nfunction decode(pulses) {\n    if (pulses.length < 3) {\n        return null;\n    }\n\n    if (!matches(pulses[0], header_mark)) {\n        return null;\n    }\n\n    if (matches(pulses[1], repeat_space)) {\n        if (matches(pulses[2], bit_mark) && pulses.length === 3) {\n            return 'NEC_REPEAT';\n        }\n\n        return null;\n    }\n\n    if (!matches(pulses[1], header_space) || pulses.length !== 67) {\n        return null;\n    }\n\n    let message = 0;\n    for (let i = 0; i < 32; i++) {\n        message *= 2;\n\n        if (!matches(pulses[2 + i * 2], bit_mark)) {\n            return null;\n        }\n\n        if (matches(pulses[3 + i * 2], zero_space)) {\n            continue;\n        }\n\n        if (matches(pulses[3 + i * 2], one_space)) {\n            message += 1;\n            continue;\n        }\n\n        return null;\n    }\n\n    if (!matches(pulses[66], bit_mark)) {\n        return null;\n    }\n\n    return 'NEC_' + message.toString(16);\n}",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 440,
-        "y": 180,
-        "wires": [
-            [
-                "e4eb2b9ff631534a"
-            ]
-        ]
-    },
-    {
-        "id": "e4eb2b9ff631534a",
-        "type": "function",
-        "z": "61cc80910aede988",
-        "name": "change volume",
-        "func": "if (!flow.get('amp')) {\n    return;\n}\n\nconst currentVolume = flow.get('amp').volume;\nconst delta = currentVolume < 23 ? 3 : 6;\n\nlet desiredVolume;\n\nif (msg.payload === 'NEC_20dfc03f') {\n    desiredVolume = currentVolume - delta;\n}\nif (msg.payload === 'NEC_20df40bf') {\n    desiredVolume = currentVolume + delta;\n}\n\ndesiredVolume = Math.min(120, Math.max(0, desiredVolume));\n\nif (desiredVolume !== currentVolume) {\n    return {\n        payload: {\n            volume: desiredVolume,\n        },\n    };\n}",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 620,
-        "y": 180,
-        "wires": [
-            [
-                "55eab197e2677c50"
-            ]
         ]
     },
     {
@@ -292,36 +206,11 @@
         "bytopic": "all",
         "topic": "topic",
         "outputs": 1,
-        "x": 530,
-        "y": 40,
-        "wires": [
-            [
-                "6c4064c82858dc07"
-            ]
-        ]
-    },
-    {
-        "id": "6c4064c82858dc07",
-        "type": "delay",
-        "z": "61cc80910aede988",
-        "name": "",
-        "pauseType": "rate",
-        "timeout": "5",
-        "timeoutUnits": "seconds",
-        "rate": "1",
-        "nbRateUnits": "1",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "allowrate": false,
-        "outputs": 1,
-        "x": 770,
+        "x": 490,
         "y": 60,
         "wires": [
             [
-                "55eab197e2677c50"
+                "6c4064c82858dc07"
             ]
         ]
     },
@@ -337,7 +226,7 @@
             "253b433ba2e36077"
         ],
         "x": 95,
-        "y": 80,
+        "y": 100,
         "wires": [
             [
                 "a6b1d4e441d9274d"
@@ -362,7 +251,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 140,
-        "y": 40,
+        "y": 60,
         "wires": [
             [
                 "a6b1d4e441d9274d"
@@ -381,7 +270,7 @@
         "finalize": "",
         "libs": [],
         "x": 480,
-        "y": 220,
+        "y": 120,
         "wires": [
             [
                 "55eab197e2677c50"
@@ -405,7 +294,7 @@
             }
         ],
         "x": 300,
-        "y": 220,
+        "y": 120,
         "wires": [
             [
                 "72e745c5feb21fb9"
@@ -424,10 +313,10 @@
         "finalize": "",
         "libs": [],
         "x": 530,
-        "y": 420,
+        "y": 360,
         "wires": [
             [
-                "b6bf4e6d.2b16c"
+                "8fc31dc0.fe6ff"
             ]
         ]
     },
@@ -444,7 +333,7 @@
         "oldrc": false,
         "name": "check TV",
         "x": 300,
-        "y": 420,
+        "y": 360,
         "wires": [
             [],
             [],
@@ -475,7 +364,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 140,
-        "y": 360,
+        "y": 300,
         "wires": [
             [
                 "a8b6f0d7673b1662",
@@ -484,20 +373,6 @@
                 "926681effd534af1"
             ]
         ]
-    },
-    {
-        "id": "c5314d368e3fdc95",
-        "type": "link out",
-        "z": "61cc80910aede988",
-        "name": "update amp power",
-        "links": [
-            "50e2118a.c5d65",
-            "bc4bddd9e7b73ff6",
-            "fca32fff6a920574"
-        ],
-        "x": 655,
-        "y": 480,
-        "wires": []
     },
     {
         "id": "e0bdc5ad6eb97354",
@@ -511,10 +386,10 @@
         "finalize": "",
         "libs": [],
         "x": 540,
-        "y": 480,
+        "y": 420,
         "wires": [
             [
-                "c5314d368e3fdc95"
+                "8fc31dc0.fe6ff"
             ]
         ]
     },
@@ -531,7 +406,7 @@
         "oldrc": false,
         "name": "check MPD",
         "x": 310,
-        "y": 480,
+        "y": 420,
         "wires": [
             [
                 "e0bdc5ad6eb97354"
@@ -539,20 +414,6 @@
             [],
             []
         ]
-    },
-    {
-        "id": "253b433ba2e36077",
-        "type": "link out",
-        "z": "61cc80910aede988",
-        "name": "update amp power",
-        "mode": "link",
-        "links": [
-            "bc4bddd9e7b73ff6",
-            "fca32fff6a920574"
-        ],
-        "x": 655,
-        "y": 360,
-        "wires": []
     },
     {
         "id": "926681effd534af1",
@@ -567,7 +428,7 @@
         "oldrc": false,
         "name": "check pickup",
         "x": 310,
-        "y": 360,
+        "y": 300,
         "wires": [
             [
                 "60531eca046b5249"
@@ -588,10 +449,10 @@
         "finalize": "",
         "libs": [],
         "x": 540,
-        "y": 360,
+        "y": 300,
         "wires": [
             [
-                "253b433ba2e36077"
+                "8fc31dc0.fe6ff"
             ]
         ]
     },
@@ -601,29 +462,37 @@
         "z": "61cc80910aede988",
         "port": "serial:///dev/serial/by-id/usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_Controller_0001-if00-port0?baudRate=57600",
         "name": "Amp",
-        "x": 870,
-        "y": 180,
+        "x": 690,
+        "y": 160,
         "wires": [
             [
-                "975d84ef22ea8269",
                 "4ec33041d75c6b43"
             ]
         ]
     },
     {
-        "id": "975d84ef22ea8269",
-        "type": "debug",
+        "id": "6c4064c82858dc07",
+        "type": "delay",
         "z": "61cc80910aede988",
-        "name": "debug 1",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1040,
-        "y": 120,
-        "wires": []
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 670,
+        "y": 100,
+        "wires": [
+            [
+                "55eab197e2677c50"
+            ]
+        ]
     }
 ]
