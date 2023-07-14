@@ -1779,7 +1779,7 @@
         "type": "function",
         "z": "7d41aab9fd0b6a3e",
         "name": "onoff",
-        "func": "if (msg.topic.startsWith('ha-switch/switch-onoff-') &&\n    Array.isArray(msg.payload.on)) {\n\n    if (msg.payload.on.length > 1) {\n        //multiple states on switch\n        return [msg.payload.on.map((on, index) => ({\n            payload: {\n                ...msg.payload,\n                on,\n                topic: `${msg.topic}.${index}`\n            },\n        }))];\n    } else {\n        return {\n            payload: {\n                ...msg.payload,\n                on: msg.payload.on[0] ?? msg.payload.on,\n            },\n            topic: msg.topic,\n        };\n    }\n}",
+        "func": "if (msg.topic.startsWith('ha-switch/switch-onoff-') &&\n    Array.isArray(msg.payload.on)) {\n\n    if (msg.payload.on.length > 1) {\n        //multiple states on switch\n        return [msg.payload.on.map((on, index) => ({\n            payload: {\n                ...msg.payload,\n                on,\n            },\n            topic: `${msg.topic}.${index}`\n        }))];\n    } else {\n        return {\n            payload: {\n                ...msg.payload,\n                on: msg.payload.on[0] ?? msg.payload.on,\n            },\n            topic: msg.topic,\n        };\n    }\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -1789,8 +1789,7 @@
         "y": 260,
         "wires": [
             [
-                "af0b3ee1164dc74c",
-                "e52e55b5a5364596"
+                "af0b3ee1164dc74c"
             ]
         ]
     },
@@ -1806,8 +1805,7 @@
         "y": 260,
         "wires": [
             [
-                "26e27a446f7b7444",
-                "e52e55b5a5364596"
+                "26e27a446f7b7444"
             ]
         ]
     },
@@ -2338,22 +2336,6 @@
                 "03e9def7ed68132d"
             ]
         ]
-    },
-    {
-        "id": "e52e55b5a5364596",
-        "type": "debug",
-        "z": "7d41aab9fd0b6a3e",
-        "name": "debug 2",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 880,
-        "y": 420,
-        "wires": []
     },
     {
         "id": "e6892c53b951d955",
