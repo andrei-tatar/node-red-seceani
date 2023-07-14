@@ -203,7 +203,7 @@
         "id": "89e46ce21c7f5128",
         "type": "nibe-config",
         "name": "nibe config",
-        "address": "tcp://192.168.68.82:0502",
+        "address": "tcp://192.168.68.6:0502",
         "registerFile": ""
     },
     {
