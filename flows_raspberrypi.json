@@ -55,6 +55,14 @@
         "env": []
     },
     {
+        "id": "80b4c729fedf25c4",
+        "type": "tab",
+        "label": "Entrance",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "4289ddd18011b400",
         "type": "tab",
         "label": "Dogo",
@@ -1779,7 +1787,7 @@
         "type": "function",
         "z": "7d41aab9fd0b6a3e",
         "name": "onoff",
-        "func": "if (msg.topic.startsWith('ha-switch/switch-onoff-') &&\n    Array.isArray(msg.payload.on)) {\n\n    if (msg.payload.on.length > 1) {\n        //multiple states on switch\n        return [msg.payload.on.map((on, index) => ({\n            payload: {\n                ...msg.payload,\n                on,\n            },\n            topic: `${msg.topic}.${index}`\n        }))];\n    } else {\n        return {\n            payload: {\n                ...msg.payload,\n                on: msg.payload.on[0] ?? msg.payload.on,\n            },\n            topic: msg.topic,\n        };\n    }\n}",
+        "func": "if (msg.topic.startsWith('ha-switch/switch-onoff-')) {\n    if (msg.payload.on.length > 1) {\n        //multiple states on switch\n        return [msg.payload.on.map((on, index) => ({\n            payload: {\n                ...msg.payload,\n                on,\n            },\n            topic: `${msg.topic}.${index}`\n        }))];\n    } else {\n        return {\n            payload: {\n                ...msg.payload,\n                on: msg.payload.on[0] ?? msg.payload.on,\n            },\n            topic: msg.topic,\n        };\n    }\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -2820,7 +2828,7 @@
         "type": "function",
         "z": "13aa577370e4c4d7",
         "name": "leak?",
-        "func": "const WAIT_SEC = 10;\nconst ON = {\n    payload: { on: true },\n    topic: 'ha-switch/switch-onoff-r1/state',\n};\nconst OFF = {\n    payload: { on: false },\n    topic: ON.topic,\n};\n\nif (msg.payload === 'cancel') {\n    this.timer = null;\n    clearTimeout(this.timer);\n    return;\n}\n\nif (msg.payload === 'start-water') {\n    node.send([, ON]);\n    return;\n}\n\nif (!msg.payload.water_leak || this.timer) {\n    return;\n}\n\nconst time = new Date().toLocaleString();\nconst parts = msg.topic.split('/');\nconst location = parts[parts.length - 1];\n\nconst base = {\n    tag: `water-leak`,\n    title: 'Water Leak',\n    body: `Water leak detected at ${time} - ${location}.`,\n};\n\nthis.timer = setTimeout(() => {\n    this.timer = null;\n    node.send([{\n        payload: {\n            ...base,\n            body: `${base.body} Stopped the water.`,\n            actions: [{\n                title: 'Start',\n                action: 'start-water'\n            }],\n        },\n    }, OFF]);\n}, WAIT_SEC * 1000);\n\nreturn {\n    payload: {\n        ...base,\n        body: `${base.body} Stopping the water in ${WAIT_SEC} sec.`,\n        actions: [{\n            title: 'Cancel',\n            action: 'cancel'\n        }],\n    },\n};\n",
+        "func": "const WAIT_SEC = 20;\nconst ON = {\n    payload: { on: true },\n    topic: 'ha-switch/switch-onoff-r1/state/set',\n};\nconst OFF = {\n    payload: { on: false },\n    topic: ON.topic,\n};\n\nif (msg.payload === 'cancel') {\n    this.timer = null;\n    clearTimeout(this.timer);\n    return;\n}\n\nif (msg.payload === 'start-water') {\n    node.send([, ON]);\n    return;\n}\n\nif (!msg.payload.water_leak || this.timer) {\n    return;\n}\n\nconst time = new Date().toLocaleString();\nconst parts = msg.topic.split('/');\nconst location = parts[parts.length - 1];\n\nconst base = {\n    tag: `water-leak`,\n    title: 'Water Leak',\n    body: `Water leak detected at ${time} - ${location}.`,\n};\n\nthis.timer = setTimeout(() => {\n    this.timer = null;\n    node.send([{\n        payload: {\n            ...base,\n            body: `${base.body} Stopped the water.`,\n            actions: [{\n                title: 'Start',\n                action: 'start-water'\n            }],\n        },\n    }, OFF]);\n}, WAIT_SEC * 1000);\n\nreturn {\n    payload: {\n        ...base,\n        body: `${base.body} Stopping the water in ${WAIT_SEC} sec.`,\n        actions: [{\n            title: 'Cancel',\n            action: 'cancel'\n        }],\n    },\n};\n",
         "outputs": 2,
         "noerr": 0,
         "initialize": "",
@@ -3391,7 +3399,7 @@
         "type": "function",
         "z": "05e865126427c1f9",
         "name": "When motion",
-        "func": "/**\n * @type Array<{src:Array<string>, target:string}>\n */\nconst targetByPir = [\n    {\n        src: ['pir/hallway-1', 'pir/hallway-2'],\n        target: 'switch-dimmer-3',\n    }, {\n        src: ['pir/hallway-3', 'contact/entrance'],\n        target: 'switch-dimmer-10',\n    }\n]\n\nconst name = msg.topic.split('/').slice(1).join('/');\nconst found = targetByPir.find(t => t.src.includes(name));\nif (!found) {\n    return;\n}\n\nconst p = msg.payload;\nif (p.occupancy || p.contact === false) {\n    return {\n        payload: {\n            'brightness': 100,\n            'for': 60 // seconds\n        },\n        topic: `ha-switch/${found.target}/state/set`,\n    };\n}\n",
+        "func": "if (!flow.get('auto_light')) {\n    return;\n}\n\n/**\n * @type Array<{src:Array<string>, target:string, timeoutMin: number}>\n */\nconst targetByPir = [\n    {\n        src: ['pir/hallway-1', 'pir/hallway-2'],\n        target: 'switch-dimmer-3',\n        timeoutMin: 1,\n    }, {\n        src: ['pir/hallway-3', 'contact/entrance'],\n        target: 'switch-dimmer-10',\n        timeoutMin: 3,\n    }\n]\n\nconst name = msg.topic.split('/').slice(1).join('/');\nconst found = targetByPir.find(t => t.src.includes(name));\nif (!found) {\n    return;\n}\n\nconst p = msg.payload;\nif (p.occupancy || p.contact === false) {\n    return {\n        payload: {\n            'brightness': 100,\n            'for': found.timeoutMin * 60,\n        },\n        topic: `ha-switch/${found.target}/state/set`,\n    };\n}\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "var  timer;\n",
@@ -3562,6 +3570,59 @@
         ]
     },
     {
+        "id": "5363e241ad979a02",
+        "type": "noraf-switch",
+        "z": "05e865126427c1f9",
+        "devicename": "Auto light",
+        "roomhint": "Service Room",
+        "name": "",
+        "passthru": false,
+        "errorifstateunchaged": false,
+        "nora": "f1e538c1.0315f8",
+        "topic": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "twofactor": "ack",
+        "twofactorpin": "",
+        "filter": false,
+        "asyncCmd": false,
+        "outputs": 1,
+        "x": 380,
+        "y": 200,
+        "wires": [
+            [
+                "54830d2c3b73bb4b"
+            ]
+        ]
+    },
+    {
+        "id": "54830d2c3b73bb4b",
+        "type": "change",
+        "z": "05e865126427c1f9",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "auto_light",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 570,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
         "id": "244c26807bc68f0e",
         "type": "sunrise",
         "z": "67e1c6f6bd2fab57",
@@ -3586,7 +3647,7 @@
         "type": "function",
         "z": "67e1c6f6bd2fab57",
         "name": "outside light on/off",
-        "func": "if (!msg.payload) {\n    context.set('light_on', true);\n    turn(true);\n} else if (context.get('light_on')) {\n    context.set('light_on', false);\n    turn(false);\n}\n\n/**\n * @param {boolean} on\n */\nfunction turn(on) {\n    node.send([[\n        {\n            payload: { on },\n            topic: 'ha-switch/switch-dimmer-11/state/set',\n        },\n        {\n            payload: { on: [on] },\n            topic: 'ha-switch/switch-onoff-7/state/set',\n        },\n        {\n            topic: 'zigbee2mqtt-garage/light/outside/set',\n            payload: { state: on ? 'ON' : 'OFF' },\n        },\n        ...getDeckMessages(on),\n    ]]);\n}\n\nfunction getDeckMessages(on) {\n    const deckBase = 'cmnd/tasmota_0F10CB/';\n    const deckDimmer = `${deckBase}/Dimmer`;\n    const deckPower = `${deckBase}/Power`;\n    return on\n        ? [{\n            topic: deckPower,\n            payload: 'ON',\n        }, {\n            topic: deckDimmer,\n            payload: 15,\n        }]\n        : [{\n            topic: deckPower,\n            payload: 'OFF',\n        }];\n}",
+        "func": "if (!msg.payload) {\n    context.set('light_on', true);\n    turn(true);\n} else if (context.get('light_on')) {\n    context.set('light_on', false);\n    turn(false);\n}\n\n/**\n * @param {boolean} on\n */\nfunction turn(on) {\n    node.send([[\n        {\n            payload: { on },\n            topic: 'ha-switch/switch-dimmer-11/state/set',\n            retain: true,\n        },\n        {\n            payload: { on: [on] },\n            topic: 'ha-switch/switch-onoff-7/state/set',\n            retain: true,\n        },\n        {\n            topic: 'zigbee2mqtt-garage/light/outside/set',\n            payload: { state: on ? 'ON' : 'OFF' },\n        },\n        ...getDeckMessages(on),\n    ]]);\n}\n\nfunction getDeckMessages(on) {\n    const deckBase = 'cmnd/tasmota_0F10CB/';\n    const deckDimmer = `${deckBase}/Dimmer`;\n    const deckPower = `${deckBase}/Power`;\n    return on\n        ? [{\n            topic: deckPower,\n            payload: 'ON',\n        }, {\n            topic: deckDimmer,\n            payload: 15,\n        }]\n        : [{\n            topic: deckPower,\n            payload: 'OFF',\n        }];\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -3607,7 +3668,7 @@
         "name": "",
         "topic": "",
         "qos": "0",
-        "retain": "false",
+        "retain": "",
         "respTopic": "",
         "contentType": "",
         "userProps": "",
@@ -3623,7 +3684,7 @@
         "type": "function",
         "z": "67e1c6f6bd2fab57",
         "name": "open/close blinds",
-        "func": "\n/** @type Array<{id: number, open?:number, close?: number, openLater?: number}> */\nconst BLINDS = [\n    { id: 1, open: 15, openLater: 100, close: 0 }, // guest\n    { id: 2, open: 100, close: 0 }, // kitchen-window\n    { id: 8, open: 15, close: 0 }, // kitchen-fixed\n    { id: 3, open: 15, openLater: 100, close: 0 }, // big bedroom\n    { id: 4, open: 100 }, // living-door\n    { id: 6, open: 15, openLater: 100, close: 0 }, // living-window\n    { id: 5, open: 100, close: 0 }, // office\n];\n\nconst KEY = 'blindsLastCommand';\n\n/** @type {'open'|'close'|'openLater'} */\n\nif (!msg.payload) {\n    blinds('close');\n} else {\n    const now = new Date();\n    const minTimeToOpenBlinds = new Date();\n    minTimeToOpenBlinds.setHours(7, 30, 0);\n\n    const openLaterTime = new Date();\n    openLaterTime.setHours(8, 0, 0);\n\n    if (now >= minTimeToOpenBlinds && now < openLaterTime) {\n        blinds('open');\n    } else if (now >= openLaterTime) {\n        blinds('openLater');\n    }\n}\n\n/** @param {'open'|'close'|'openLater'} type */\nfunction blinds(type) {\n    const last = context.get(KEY);\n    if (type === last) {\n        return;\n    }\n    context.set(KEY, type);\n\n    if (type.startsWith('open') &&\n        !flow.get('autoOpenBlinds')) {\n        return;\n    }\n\n    const msgs = BLINDS\n        .map(b => {\n            const stateTopic = `ha-switch/switch-blinds-${b.id}/state`;\n            const currentState = global.get(stateTopic);\n\n            const openPercent = b[type];\n            if (typeof openPercent !== 'number') {\n                return;\n            }\n\n            if (currentState) {\n                switch (type) {\n                    case 'open':\n                    case 'openLater':\n                        if (openPercent <= currentState.openPercent) {\n                            return;\n                        }\n                        break;\n                    case 'close':\n                        if (openPercent >= currentState.openPercent) {\n                            //blinds are already more closed\n                            return;\n                        }\n                        break;\n                }\n            }\n\n            return {\n                payload: { openPercent },\n                topic: `${stateTopic}/set`,\n                retain: true,\n            };\n        })\n        .filter(m => !!m);\n    node.send([msgs]);\n}\n",
+        "func": "\n/** @type Array<{id: number, open?:number, close?: number, openLater?: number}> */\nconst BLINDS = [\n    { id: 1, open: 15, openLater: 100, close: 0 }, // guest\n    { id: 2, open: 100, close: 0 }, // kitchen-window\n    { id: 8, open: 15, close: 0 }, // kitchen-fixed\n    { id: 3, /*open: 15, openLater: 100,*/ close: 0 }, // big bedroom\n    { id: 4, open: 100 }, // living-door\n    { id: 6, open: 15, openLater: 100, close: 0 }, // living-window\n    { id: 5, open: 100, close: 0 }, // office\n];\n\nconst KEY = 'blindsLastCommand';\n\n/** @type {'open'|'close'|'openLater'} */\n\nif (!msg.payload) {\n    blinds('close');\n} else {\n    const now = new Date();\n    const minTimeToOpenBlinds = new Date();\n    minTimeToOpenBlinds.setHours(7, 30, 0);\n\n    const openLaterTime = new Date();\n    openLaterTime.setHours(8, 30, 0);\n\n    if (now >= minTimeToOpenBlinds && now < openLaterTime) {\n        blinds('open');\n    } else if (now >= openLaterTime) {\n        blinds('openLater');\n    }\n}\n\n/** @param {'open'|'close'|'openLater'} type */\nfunction blinds(type) {\n    const last = context.get(KEY);\n    if (type === last) {\n        return;\n    }\n    context.set(KEY, type);\n\n    if (type.startsWith('open') &&\n        !flow.get('autoOpenBlinds')) {\n        return;\n    }\n\n    const msgs = BLINDS\n        .map(b => {\n            const stateTopic = `ha-switch/switch-blinds-${b.id}/state`;\n            const currentState = global.get(stateTopic);\n\n            const openPercent = b[type];\n            if (typeof openPercent !== 'number') {\n                return;\n            }\n\n            if (currentState) {\n                switch (type) {\n                    case 'open':\n                    case 'openLater':\n                        if (openPercent <= currentState.openPercent) {\n                            return;\n                        }\n                        break;\n                    case 'close':\n                        if (openPercent >= currentState.openPercent) {\n                            //blinds are already more closed\n                            return;\n                        }\n                        break;\n                }\n            }\n\n            return {\n                payload: { openPercent },\n                topic: `${stateTopic}/set`,\n                retain: true,\n            };\n        })\n        .filter(m => !!m);\n    node.send([msgs]);\n}\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -3920,8 +3981,7 @@
         "y": 80,
         "wires": [
             [
-                "724ffcb347b98a4b",
-                "bdefa59193e63a17"
+                "724ffcb347b98a4b"
             ]
         ]
     },
@@ -3944,20 +4004,223 @@
         "wires": []
     },
     {
-        "id": "bdefa59193e63a17",
-        "type": "debug",
-        "z": "86c7bfe22f048e9c",
-        "name": "debug 1",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 660,
-        "y": 140,
+        "id": "37340c22d7542ee5",
+        "type": "mqtt out",
+        "z": "80b4c729fedf25c4",
+        "name": "",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "f569d34c.8c7ed",
+        "x": 370,
+        "y": 100,
         "wires": []
+    },
+    {
+        "id": "b95a68b8f79f2b2f",
+        "type": "inject",
+        "z": "80b4c729fedf25c4",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "ha-switch/switch-car-gate/state/set",
+        "payload": "{\"on\": true}",
+        "payloadType": "json",
+        "x": 160,
+        "y": 80,
+        "wires": [
+            [
+                "37340c22d7542ee5"
+            ]
+        ]
+    },
+    {
+        "id": "db37f144f5b3c0bc",
+        "type": "inject",
+        "z": "80b4c729fedf25c4",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "ha-switch/switch-car-gate/state/set",
+        "payload": "{\"on\": false}",
+        "payloadType": "json",
+        "x": 170,
+        "y": 120,
+        "wires": [
+            [
+                "37340c22d7542ee5"
+            ]
+        ]
+    },
+    {
+        "id": "c5d36e995dc37c5f",
+        "type": "mqtt out",
+        "z": "80b4c729fedf25c4",
+        "name": "",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "f569d34c.8c7ed",
+        "x": 410,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "349e156cf2eb186e",
+        "type": "inject",
+        "z": "80b4c729fedf25c4",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "ha-switch/switch-human-gate/state/set",
+        "payload": "{\"on\": true, \"for\": 1}",
+        "payloadType": "json",
+        "x": 190,
+        "y": 260,
+        "wires": [
+            [
+                "c5d36e995dc37c5f"
+            ]
+        ]
+    },
+    {
+        "id": "8c1bc9879d0fa57e",
+        "type": "inject",
+        "z": "80b4c729fedf25c4",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "ha-switch/switch-human-gate/state/set",
+        "payload": "{\"on\": false}",
+        "payloadType": "json",
+        "x": 170,
+        "y": 340,
+        "wires": [
+            [
+                "c5d36e995dc37c5f"
+            ]
+        ]
+    },
+    {
+        "id": "323088792418082b",
+        "type": "inject",
+        "z": "80b4c729fedf25c4",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "ha-switch/switch-human-gate/state/set",
+        "payload": "{\"on\": true, \"for\": 8}",
+        "payloadType": "json",
+        "x": 190,
+        "y": 300,
+        "wires": [
+            [
+                "c5d36e995dc37c5f"
+            ]
+        ]
+    },
+    {
+        "id": "f142e212351f6365",
+        "type": "mqtt in",
+        "z": "80b4c729fedf25c4",
+        "name": "",
+        "topic": "ha-switch/switch-human-gate/state",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "f569d34c.8c7ed",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 220,
+        "y": 440,
+        "wires": [
+            [
+                "f75ecee06b4f3c9c"
+            ]
+        ]
+    },
+    {
+        "id": "f75ecee06b4f3c9c",
+        "type": "function",
+        "z": "80b4c729fedf25c4",
+        "name": "state",
+        "func": "node.status({ fill: \"blue\", shape: \"ring\", text: JSON.stringify(msg.payload) });",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 440,
+        "wires": [
+            []
+        ]
     },
     {
         "id": "0cd4f1385c4acbae",
