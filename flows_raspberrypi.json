@@ -8,6 +8,14 @@
         "env": []
     },
     {
+        "id": "d02cf25fa8114475",
+        "type": "tab",
+        "label": "PV",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "7d41aab9fd0b6a3e",
         "type": "tab",
         "label": "ESP32",
@@ -142,16 +150,15 @@
         ]
     },
     {
-        "id": "3d478a662ee44292",
+        "id": "eab604a5a4453da9",
         "type": "junction",
-        "z": "13aa577370e4c4d7",
-        "x": 180,
-        "y": 380,
+        "z": "d02cf25fa8114475",
+        "x": 340,
+        "y": 260,
         "wires": [
             [
-                "b7e650722bc17863",
-                "5b83184da40ca65f",
-                "357104d13b31bb08"
+                "acf00a2d42111e5f",
+                "af672b4bd5a4f9eb"
             ]
         ]
     },
@@ -213,6 +220,26 @@
         "name": "nibe config",
         "address": "tcp://192.168.68.6:0502",
         "registerFile": ""
+    },
+    {
+        "id": "63bdbe3c09b491f2",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": "8086",
+        "protocol": "http",
+        "database": "database",
+        "name": "",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "2.0",
+        "url": "http://homemedia.local:8086",
+        "rejectUnauthorized": false
+    },
+    {
+        "id": "50383ae4cbb82921",
+        "type": "mpp-config",
+        "name": "mpp serial",
+        "path": "/dev/serial/by-id/usb-Prolific_Technology_Inc._USB-Serial_Controller_D-if00-port0"
     },
     {
         "id": "651eb38aa48c6e2a",
@@ -281,15 +308,17 @@
         "name": "Fan speed (AZ30-GQ3)",
         "register": "40136",
         "nibe": "89e46ce21c7f5128",
-        "interval": "30",
+        "interval": "60",
         "timeout": "5",
         "force": false,
-        "topic": "",
+        "topic": "nibe/fan-spped-gq3",
         "filter": false,
-        "x": 1010,
-        "y": 280,
+        "x": 850,
+        "y": 940,
         "wires": [
-            []
+            [
+                "3a75e22cbaeb5f90"
+            ]
         ]
     },
     {
@@ -299,15 +328,17 @@
         "name": "Fan speed (AZ30-GQ2)",
         "register": "40135",
         "nibe": "89e46ce21c7f5128",
-        "interval": "30",
+        "interval": "60",
         "timeout": "5",
         "force": false,
-        "topic": "",
+        "topic": "nibe/fan-spped-gq2",
         "filter": false,
-        "x": 1010,
-        "y": 220,
+        "x": 850,
+        "y": 880,
         "wires": [
-            []
+            [
+                "3a75e22cbaeb5f90"
+            ]
         ]
     },
     {
@@ -317,7 +348,7 @@
         "name": "Living setpoint (heat)",
         "register": "id:12802",
         "nibe": "89e46ce21c7f5128",
-        "interval": "5",
+        "interval": "20",
         "timeout": "5",
         "force": false,
         "topic": "living/setpointLow",
@@ -326,7 +357,8 @@
         "y": 520,
         "wires": [
             [
-                "25ecd6270bd33719"
+                "25ecd6270bd33719",
+                "dc49bf19798833ec"
             ]
         ]
     },
@@ -337,7 +369,7 @@
         "name": "Bedroom setpoint (heat)",
         "register": "id:12803",
         "nibe": "89e46ce21c7f5128",
-        "interval": "5",
+        "interval": "20",
         "timeout": "5",
         "force": false,
         "topic": "bedroom/setpointLow",
@@ -346,7 +378,8 @@
         "y": 640,
         "wires": [
             [
-                "25ecd6270bd33719"
+                "25ecd6270bd33719",
+                "dc49bf19798833ec"
             ]
         ]
     },
@@ -366,45 +399,9 @@
         "y": 400,
         "wires": [
             [
-                "25ecd6270bd33719"
+                "25ecd6270bd33719",
+                "dc49bf19798833ec"
             ]
-        ]
-    },
-    {
-        "id": "59d2b8582a86cef6",
-        "type": "nibe-register",
-        "z": "2de9a494ac1d6c71",
-        "name": "",
-        "register": "Priority",
-        "nibe": "89e46ce21c7f5128",
-        "interval": "60",
-        "timeout": "5",
-        "force": false,
-        "topic": "",
-        "filter": false,
-        "x": 960,
-        "y": 400,
-        "wires": [
-            [
-                "649a67b05469e039"
-            ]
-        ]
-    },
-    {
-        "id": "649a67b05469e039",
-        "type": "function",
-        "z": "2de9a494ac1d6c71",
-        "name": "Priority",
-        "func": "const map = {\n    '10': 'off',\n    '20': 'hotwater',\n    '30': 'heat',\n    '40': 'pool',\n    '60': 'cooling',\n};\n\nnode.status({ fill: \"blue\", shape: \"dot\", text: map[msg.payload.value] });\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1120,
-        "y": 400,
-        "wires": [
-            []
         ]
     },
     {
@@ -675,7 +672,7 @@
         "name": "Living setpoint (cool)",
         "register": "id:12842",
         "nibe": "89e46ce21c7f5128",
-        "interval": "5",
+        "interval": "20",
         "timeout": "5",
         "force": false,
         "topic": "living/setpointHigh",
@@ -684,7 +681,8 @@
         "y": 580,
         "wires": [
             [
-                "25ecd6270bd33719"
+                "25ecd6270bd33719",
+                "dc49bf19798833ec"
             ]
         ]
     },
@@ -695,7 +693,7 @@
         "name": "Bedroom setpoint (cool)",
         "register": "id:12843",
         "nibe": "89e46ce21c7f5128",
-        "interval": "5",
+        "interval": "20",
         "timeout": "5",
         "force": false,
         "topic": "bedroom/setpointHigh",
@@ -705,7 +703,8 @@
         "wires": [
             [
                 "25ecd6270bd33719",
-                "df27d4e5b15bc14e"
+                "df27d4e5b15bc14e",
+                "dc49bf19798833ec"
             ]
         ]
     },
@@ -753,7 +752,8 @@
         "y": 340,
         "wires": [
             [
-                "25ecd6270bd33719"
+                "25ecd6270bd33719",
+                "dc49bf19798833ec"
             ]
         ]
     },
@@ -872,7 +872,8 @@
         "y": 460,
         "wires": [
             [
-                "25ecd6270bd33719"
+                "25ecd6270bd33719",
+                "dc49bf19798833ec"
             ]
         ]
     },
@@ -977,6 +978,529 @@
         "filter": false,
         "x": 950,
         "y": 740,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9d978d4c29e3fede",
+        "type": "influxdb out",
+        "z": "2de9a494ac1d6c71",
+        "influxdb": "63bdbe3c09b491f2",
+        "name": "",
+        "measurement": "",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "home",
+        "bucket": "home",
+        "x": 720,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "dc49bf19798833ec",
+        "type": "function",
+        "z": "2de9a494ac1d6c71",
+        "name": "map",
+        "func": "return {\n    payload: msg.payload.value,\n    measurement: msg.topic,\n};\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 380,
+        "wires": [
+            [
+                "9d978d4c29e3fede"
+            ]
+        ]
+    },
+    {
+        "id": "f0ba748f1ac0e5cb",
+        "type": "nibe-register",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "register": "Current outdoor temperature (BT1)",
+        "nibe": "89e46ce21c7f5128",
+        "interval": "60",
+        "timeout": "5",
+        "force": false,
+        "topic": "outdoor/temperature",
+        "filter": true,
+        "x": 280,
+        "y": 820,
+        "wires": [
+            [
+                "3a75e22cbaeb5f90"
+            ]
+        ]
+    },
+    {
+        "id": "3a75e22cbaeb5f90",
+        "type": "function",
+        "z": "2de9a494ac1d6c71",
+        "name": "map",
+        "func": "return {\n    payload: msg.payload.value,\n    measurement: msg.topic,\n};\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 820,
+        "wires": [
+            [
+                "192c99f16f9eaaee"
+            ]
+        ]
+    },
+    {
+        "id": "192c99f16f9eaaee",
+        "type": "influxdb out",
+        "z": "2de9a494ac1d6c71",
+        "influxdb": "63bdbe3c09b491f2",
+        "name": "",
+        "measurement": "",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "home",
+        "bucket": "nibe",
+        "x": 740,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "b24637742b59a545",
+        "type": "nibe-register",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "register": "Supply line (BT2)",
+        "nibe": "89e46ce21c7f5128",
+        "interval": "60",
+        "timeout": "5",
+        "force": false,
+        "topic": "nibe/supply-line-bt2",
+        "filter": true,
+        "x": 230,
+        "y": 880,
+        "wires": [
+            [
+                "3a75e22cbaeb5f90"
+            ]
+        ]
+    },
+    {
+        "id": "031d282094febaef",
+        "type": "nibe-register",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "register": "Return line (BT3)",
+        "nibe": "89e46ce21c7f5128",
+        "interval": "60",
+        "timeout": "5",
+        "force": false,
+        "topic": "nibe/return-line-bt3",
+        "filter": true,
+        "x": 230,
+        "y": 940,
+        "wires": [
+            [
+                "3a75e22cbaeb5f90"
+            ]
+        ]
+    },
+    {
+        "id": "dd47cceaba61a5f7",
+        "type": "nibe-register",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "register": "Supp. air (AZ30-BT22)",
+        "nibe": "89e46ce21c7f5128",
+        "interval": "60",
+        "timeout": "5",
+        "force": false,
+        "topic": "outdoor/supp-air-temperature",
+        "filter": true,
+        "x": 520,
+        "y": 940,
+        "wires": [
+            [
+                "3a75e22cbaeb5f90"
+            ]
+        ]
+    },
+    {
+        "id": "996240fd23d720a0",
+        "type": "nibe-register",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "register": "Outd temperature (AZ30-BT23)",
+        "nibe": "89e46ce21c7f5128",
+        "interval": "60",
+        "timeout": "5",
+        "force": false,
+        "topic": "outdoor/temperature-az30-bt23",
+        "filter": true,
+        "x": 550,
+        "y": 880,
+        "wires": [
+            [
+                "3a75e22cbaeb5f90"
+            ]
+        ]
+    },
+    {
+        "id": "5ec95ea45d80a286",
+        "type": "nibe-register",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "register": "Extr. air (AZ30-BT21)",
+        "nibe": "89e46ce21c7f5128",
+        "interval": "60",
+        "timeout": "5",
+        "force": false,
+        "topic": "outdoor/extract-air-temp-az30-bt21",
+        "filter": true,
+        "x": 520,
+        "y": 1000,
+        "wires": [
+            [
+                "3a75e22cbaeb5f90"
+            ]
+        ]
+    },
+    {
+        "id": "63ba0783caa8bb63",
+        "type": "nibe-register",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "register": "Exh. air (AZ30-BT20)",
+        "nibe": "89e46ce21c7f5128",
+        "interval": "60",
+        "timeout": "5",
+        "force": false,
+        "topic": "outdoor/exhaust-air-temp-az30-bt20",
+        "filter": true,
+        "x": 520,
+        "y": 1060,
+        "wires": [
+            [
+                "3a75e22cbaeb5f90"
+            ]
+        ]
+    },
+    {
+        "id": "890018e7cbc90cd7",
+        "type": "nibe-register",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "register": "Priority",
+        "nibe": "89e46ce21c7f5128",
+        "interval": "60",
+        "timeout": "5",
+        "force": false,
+        "topic": "nibe/priority",
+        "filter": false,
+        "x": 800,
+        "y": 1000,
+        "wires": [
+            [
+                "6c724be7f6fd897c"
+            ]
+        ]
+    },
+    {
+        "id": "6c724be7f6fd897c",
+        "type": "function",
+        "z": "2de9a494ac1d6c71",
+        "name": "Priority",
+        "func": "const map = {\n    '10': 'off',\n    '20': 'hotwater',\n    '30': 'heat',\n    '40': 'pool',\n    '60': 'cooling',\n};\n\nnode.status({ fill: \"blue\", shape: \"dot\", text: map[msg.payload.value] });\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 960,
+        "y": 1000,
+        "wires": [
+            [
+                "3a75e22cbaeb5f90"
+            ]
+        ]
+    },
+    {
+        "id": "52532f840d2ce09f",
+        "type": "nibe-register",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "register": "Brine in (BT10)",
+        "nibe": "89e46ce21c7f5128",
+        "interval": "60",
+        "timeout": "5",
+        "force": false,
+        "topic": "nibe/brine-in",
+        "filter": false,
+        "x": 820,
+        "y": 1060,
+        "wires": [
+            [
+                "3a75e22cbaeb5f90"
+            ]
+        ]
+    },
+    {
+        "id": "31b0c9a4bf89bbab",
+        "type": "nibe-register",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "register": "Brine out (BT11)",
+        "nibe": "89e46ce21c7f5128",
+        "interval": "60",
+        "timeout": "5",
+        "force": false,
+        "topic": "nibe/brine-out",
+        "filter": false,
+        "x": 820,
+        "y": 1120,
+        "wires": [
+            [
+                "3a75e22cbaeb5f90"
+            ]
+        ]
+    },
+    {
+        "id": "8755301a8c241477",
+        "type": "mpp-input",
+        "z": "d02cf25fa8114475",
+        "name": "mpp general status",
+        "mpp": "50383ae4cbb82921",
+        "interval": "2",
+        "timeout": "2",
+        "query": "GeneralStatus",
+        "x": 170,
+        "y": 120,
+        "wires": [
+            [
+                "ee29764d6322b235",
+                "eab604a5a4453da9"
+            ]
+        ]
+    },
+    {
+        "id": "0cb2bd44a8edc2d3",
+        "type": "mpp-input",
+        "z": "d02cf25fa8114475",
+        "name": "mpp power status",
+        "mpp": "50383ae4cbb82921",
+        "interval": "2",
+        "timeout": "2",
+        "query": "PowerStatus",
+        "x": 170,
+        "y": 180,
+        "wires": [
+            [
+                "151e85104313bf09",
+                "4d5a91dbb440c2e4",
+                "8012606b2ccfea72"
+            ]
+        ]
+    },
+    {
+        "id": "658c70c17f292167",
+        "type": "influxdb out",
+        "z": "d02cf25fa8114475",
+        "influxdb": "63bdbe3c09b491f2",
+        "name": "",
+        "measurement": "",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "home",
+        "bucket": "power",
+        "x": 620,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "ee29764d6322b235",
+        "type": "function",
+        "z": "d02cf25fa8114475",
+        "name": "map",
+        "func": "return [[{\n    payload: msg.payload.acInput.voltage,\n    measurement: 'ac-input-voltage',\n}, {\n    payload: msg.payload.acInput.frequency,\n    measurement: 'ac-input-freq',\n}, {\n    payload: msg.payload.acOutput.voltage,\n    measurement: 'ac-output-voltage',\n}, {\n    payload: msg.payload.acOutput.frequency,\n    measurement: 'ac-output-freq',\n}, {\n    payload: {\n        voltage: msg.payload.battery.voltage,\n        current: msg.payload.battery.current,\n        capacity: msg.payload.battery.capacity,\n    },\n    measurement: 'battery',\n}]];",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 120,
+        "wires": [
+            [
+                "658c70c17f292167"
+            ]
+        ]
+    },
+    {
+        "id": "151e85104313bf09",
+        "type": "function",
+        "z": "d02cf25fa8114475",
+        "name": "map",
+        "func": "return [[{\n    payload: msg.payload.acInput.activePower,\n    measurement: 'ac-input-active-power',\n}, {\n    payload: msg.payload.acOutput.activePower,\n    measurement: 'ac-output-active-power',\n}, {\n    payload: msg.payload.acOutput.apparentPower,\n    measurement: 'ac-output-apparent-power',\n}]];",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 180,
+        "wires": [
+            [
+                "658c70c17f292167"
+            ]
+        ]
+    },
+    {
+        "id": "acf00a2d42111e5f",
+        "type": "function",
+        "z": "d02cf25fa8114475",
+        "name": "notify grid status",
+        "func": "const lastPowerStatus = context.get('power_status');\nconst powerStatus = msg.payload.acInput.frequency > 45;\n\nif (powerStatus === lastPowerStatus) {\n    return;\n}\n\ncontext.set('power_status', powerStatus);\n\nlet changes = context.get('changes');\nconst today = new Date().toLocaleDateString();\nconst key = powerStatus ? 'recovered' : 'lost';\nif (changes?.key === today) {\n    changes[key]++;\n} else {\n    changes = {\n        key: today,\n        recovered: 0,\n        lost: 0,\n        [key]: 1,\n    };\n}\ncontext.set('changes', changes);\n\nconst timestamp = new Date().toLocaleString();\nconst body = `Power ${key} at ${timestamp}, (lost: ${changes.lost}, recovered: ${changes.recovered})`;\n\nreturn {\n    payload: {\n        tag: 'power-status',\n        title: 'Power Status',\n        body: body,\n    },\n};\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 240,
+        "wires": [
+            [
+                "002fbcc4b5600960"
+            ]
+        ]
+    },
+    {
+        "id": "002fbcc4b5600960",
+        "type": "noraf-notify",
+        "z": "d02cf25fa8114475",
+        "tag": "",
+        "title": "",
+        "body": "",
+        "icon": "",
+        "name": "notify",
+        "nora": "f1e538c1.0315f8",
+        "topic": "",
+        "actions": [],
+        "closeNotification": false,
+        "x": 870,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6211e9ebc3399079",
+        "type": "function",
+        "z": "d02cf25fa8114475",
+        "name": "notify battery",
+        "func": "const capacity = msg.payload;\nconst notifyAt = [10, 25, 30, 50, 80];\nconst lastNotifyAt = context.get('notify_at');\n\nif (flow.get('batteryStatus') === 'charge') {\n    if (lastNotifyAt) {\n        context.set('notify_at', null)\n    }\n    return;\n}\n\nlet i;\nfor (i = 0; i < notifyAt.length; i++) {\n    const step = notifyAt[i];\n    let threshold = step;\n    if (lastNotifyAt === step) {\n        threshold += 5;\n    }\n    if (capacity <= threshold) {\n        if (lastNotifyAt !== step) {\n            context.set('notify_at', step)\n\n            const timestamp = new Date().toLocaleString();\n            const body = `Battery capacity ${capacity}%, at ${timestamp}`;\n\n            return {\n                payload: {\n                    tag: 'battery-capacity',\n                    title: 'Battery capacity',\n                    body: body,\n                },\n            };\n        }\n\n        break;\n    }\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 630,
+        "y": 280,
+        "wires": [
+            [
+                "002fbcc4b5600960"
+            ]
+        ]
+    },
+    {
+        "id": "8012606b2ccfea72",
+        "type": "trigger",
+        "z": "d02cf25fa8114475",
+        "name": "",
+        "op1": "true",
+        "op2": "false",
+        "op1type": "bool",
+        "op2type": "bool",
+        "duration": "10",
+        "extend": true,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 390,
+        "y": 360,
+        "wires": [
+            [
+                "3fa4c0f648cfb1d0"
+            ]
+        ]
+    },
+    {
+        "id": "3fa4c0f648cfb1d0",
+        "type": "function",
+        "z": "d02cf25fa8114475",
+        "name": "notify inverter connection",
+        "func": "const status = msg.payload ? 'restored' : 'lost';\nconst at = new Date().toLocaleString();\nlet afterText = '';\nif (!msg.payload) {\n    context.set('lost_at', new Date().getTime());\n} else {\n    let after = new Date().getTime() - context.get('lost_at');\n    let unit = 'sec';\n    after /= 1000;\n    if (after > 60) {\n        after /= 60;\n        unit = 'min';\n    }\n    if (after > 60) {\n        after /= 60;\n        unit = 'hour';\n    }\n    afterText = `, after ${after.toFixed(1)} ${unit}`\n}\n\nreturn {\n    payload: {\n        tag: \"inverter-connection\",\n        title: \"Inverter connection\",\n        body: `Inverter connection ${status} at ${at}${afterText}`,\n    }\n};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 360,
+        "wires": [
+            [
+                "002fbcc4b5600960"
+            ]
+        ]
+    },
+    {
+        "id": "af672b4bd5a4f9eb",
+        "type": "function",
+        "z": "d02cf25fa8114475",
+        "name": "average",
+        "func": "const capacity = msg.payload.battery.capacity;\nconst values = this.past_values ?? [];\nvalues.splice(900);\nvalues.splice(0, 0, capacity);\nthis.past_values = values;\n\nconst average = values.reduce((a, b) => a + b, 0) / values.length;\nnode.status({ fill: \"blue\", shape: \"ring\", text: `${average.toFixed(2)}%` });\n\nreturn { payload: average };",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 280,
+        "wires": [
+            [
+                "6211e9ebc3399079"
+            ]
+        ]
+    },
+    {
+        "id": "4d5a91dbb440c2e4",
+        "type": "function",
+        "z": "d02cf25fa8114475",
+        "name": "set flow.batteryStatus",
+        "func": "const lastValue = flow.get('batteryStatus');\nconst newValue = msg.payload.status.batteryPowerDirectionStatus;\nif (newValue !== lastValue) {\n    flow.set('batteryStatus', newValue);\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 420,
         "wires": [
             []
         ]
@@ -1787,7 +2311,7 @@
         "type": "function",
         "z": "7d41aab9fd0b6a3e",
         "name": "onoff",
-        "func": "if (msg.topic.startsWith('ha-switch/switch-onoff-')) {\n    if (msg.payload.on.length > 1) {\n        //multiple states on switch\n        return [msg.payload.on.map((on, index) => ({\n            payload: {\n                ...msg.payload,\n                on,\n            },\n            topic: `${msg.topic}.${index}`\n        }))];\n    } else {\n        return {\n            payload: {\n                ...msg.payload,\n                on: msg.payload.on[0] ?? msg.payload.on,\n            },\n            topic: msg.topic,\n        };\n    }\n}",
+        "func": "if (msg.topic.startsWith('ha-switch/switch-onoff-') &&\n    'on' in msg.payload) {\n\n    if (Array.isArray(msg.payload.on) && msg.payload.on.length > 1) {\n        //multiple states on switch\n        return [msg.payload.on.map((on, index) => ({\n            payload: {\n                ...msg.payload,\n                on,\n            },\n            topic: `${msg.topic}.${index}`\n        }))];\n    } else {\n        return {\n            payload: {\n                ...msg.payload,\n                on: msg.payload.on[0] ?? msg.payload.on,\n            },\n            topic: msg.topic,\n        };\n    }\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -2346,6 +2870,101 @@
         ]
     },
     {
+        "id": "2c6fd4fdcf461e64",
+        "type": "noraf-openclose",
+        "z": "7d41aab9fd0b6a3e",
+        "devicename": "Car Gate",
+        "roomhint": "Outside",
+        "name": "",
+        "directions": "",
+        "openclosetype": "GATE",
+        "passthru": false,
+        "errorifstateunchaged": false,
+        "discrete": true,
+        "lockunlock": false,
+        "commandonly": true,
+        "queryonly": false,
+        "nora": "f1e538c1.0315f8",
+        "topic": "",
+        "openvalue": "true",
+        "openvalueType": "bool",
+        "closevalue": "false",
+        "closevalueType": "bool",
+        "twofactor": "ack",
+        "twofactorpin": "",
+        "filter": false,
+        "x": 160,
+        "y": 920,
+        "wires": [
+            [
+                "dbd38345f8d938d3"
+            ]
+        ]
+    },
+    {
+        "id": "29a9cd51606f3522",
+        "type": "mqtt out",
+        "z": "7d41aab9fd0b6a3e",
+        "name": "",
+        "topic": "",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "f569d34c.8c7ed",
+        "x": 470,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "dbd38345f8d938d3",
+        "type": "function",
+        "z": "7d41aab9fd0b6a3e",
+        "name": "map",
+        "func": "if (msg.payload) {\n    return {\n        payload: {\n            on: [true],\n            for: 1\n        },\n        topic: 'ha-switch/switch-car-gate/state/set',\n    };\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 920,
+        "wires": [
+            [
+                "29a9cd51606f3522",
+                "27081a74d2d37bb1"
+            ]
+        ]
+    },
+    {
+        "id": "27081a74d2d37bb1",
+        "type": "trigger",
+        "z": "7d41aab9fd0b6a3e",
+        "name": "",
+        "op1": "",
+        "op2": "false",
+        "op1type": "nul",
+        "op2type": "bool",
+        "duration": "2",
+        "extend": true,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 480,
+        "y": 980,
+        "wires": [
+            [
+                "2c6fd4fdcf461e64"
+            ]
+        ]
+    },
+    {
         "id": "e6892c53b951d955",
         "type": "function",
         "z": "13aa577370e4c4d7",
@@ -2491,44 +3110,6 @@
         ]
     },
     {
-        "id": "42e556342bd34fe3",
-        "type": "node-ups",
-        "z": "13aa577370e4c4d7",
-        "d": true,
-        "port": "/dev/serial/by-id/usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_Controller_0001-if00-port0",
-        "name": "",
-        "topic": "",
-        "x": 90,
-        "y": 400,
-        "wires": [
-            [
-                "3d478a662ee44292"
-            ],
-            [
-                "66f0242e1156827d"
-            ]
-        ]
-    },
-    {
-        "id": "66f0242e1156827d",
-        "type": "function",
-        "z": "13aa577370e4c4d7",
-        "name": "GRID status",
-        "func": "const now = new Date();\nconst status = msg.payload === 'POWER' ? 'ONLINE' : 'OFFLINE';\nnode.status({\n    fill: status === 'ONLINE' ? 'green' : 'red',\n    shape: 'dot',\n    text: status,\n});\n\nflow.set('grid_offline', status === 'OFFLINE');\nflow.set('last_grid_status_change', new Date().getTime());\n\nconst key = `${now.getMonth() + 1}-${now.getDate()}`;\nconst powerLosses = flow.get('power') || {};\nlet perDay = powerLosses[key];\nif (!perDay) {\n    powerLosses[key] = perDay = [];\n}\nif (perDay[perDay.length - 1]?.status === status) {\n    //handle restarts of nodered...\n    return;\n}\nperDay.push({ at: now.toLocaleTimeString(), status });\nflow.set('power', powerLosses);\n\nlet recovered = '';\nif (status === 'OFFLINE') {\n    context.set('offline', now.getTime());\n} else {\n    const offlineAt = context.get('offline');\n    context.set('offline', null);\n    if (typeof offlineAt === 'number') {\n        let span = (now.getTime() - offlineAt) / 1000;\n        let unit = 'sec';\n        if (span >= 60) {\n            span /= 60;\n            unit = 'min';\n\n            if (span >= 60) {\n                span /= 60;\n                unit = 'h';\n\n                if (span >= 24) {\n                    span /= 24;\n                    unit = 'day';\n                }\n            }\n        }\n\n        recovered = ` Recovered after ${span} ${unit}.`;\n    }\n}\n\n\nreturn {\n    payload: {\n        tag: `power`,\n        title: 'Grid Status',\n        body: `${status} at ${now.toLocaleString()}.${recovered}`,\n    },\n};",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 310,
-        "y": 480,
-        "wires": [
-            [
-                "684884b00c3e9fad"
-            ]
-        ]
-    },
-    {
         "id": "684884b00c3e9fad",
         "type": "noraf-notify",
         "z": "13aa577370e4c4d7",
@@ -2548,25 +3129,6 @@
         ]
     },
     {
-        "id": "b7e650722bc17863",
-        "type": "function",
-        "z": "13aa577370e4c4d7",
-        "name": "UPS battery",
-        "func": "if (msg.payload.battery.soc < 25) {\n    return {\n        payload: {\n            tag: 'ups-battery',\n            title: 'Warning',\n            body: `UPS battery low (${msg.payload.battery.soc}%)`,\n        },\n    };\n}",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 310,
-        "y": 380,
-        "wires": [
-            [
-                "2222fb495b79673f"
-            ]
-        ]
-    },
-    {
         "id": "a2c9d6a36b64dbb9",
         "type": "function",
         "z": "13aa577370e4c4d7",
@@ -2582,75 +3144,6 @@
         "wires": [
             [
                 "6ac061a53b0101c8"
-            ]
-        ]
-    },
-    {
-        "id": "5b83184da40ca65f",
-        "type": "trigger",
-        "z": "13aa577370e4c4d7",
-        "name": "",
-        "op1": "",
-        "op2": "true",
-        "op1type": "nul",
-        "op2type": "bool",
-        "duration": "30",
-        "extend": true,
-        "overrideDelay": false,
-        "units": "s",
-        "reset": "",
-        "bytopic": "all",
-        "topic": "topic",
-        "outputs": 1,
-        "x": 310,
-        "y": 340,
-        "wires": [
-            [
-                "d10c6183a957ae08"
-            ]
-        ]
-    },
-    {
-        "id": "d10c6183a957ae08",
-        "type": "function",
-        "z": "13aa577370e4c4d7",
-        "name": "UPS connection down",
-        "func": "const now = new Date();\nreturn {\n    payload: {\n        tag: 'ups-connection',\n        title: 'Warning',\n        body: `UPS connection is down ${now.toLocaleString()}`,\n    }\n};\n",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 500,
-        "y": 340,
-        "wires": [
-            [
-                "684884b00c3e9fad"
-            ]
-        ]
-    },
-    {
-        "id": "2222fb495b79673f",
-        "type": "trigger",
-        "z": "13aa577370e4c4d7",
-        "name": "",
-        "op1": "",
-        "op2": "",
-        "op1type": "pay",
-        "op2type": "nul",
-        "duration": "15",
-        "extend": false,
-        "overrideDelay": false,
-        "units": "min",
-        "reset": "",
-        "bytopic": "all",
-        "topic": "topic",
-        "outputs": 1,
-        "x": 490,
-        "y": 380,
-        "wires": [
-            [
-                "684884b00c3e9fad"
             ]
         ]
     },
@@ -2680,64 +3173,6 @@
         ]
     },
     {
-        "id": "357104d13b31bb08",
-        "type": "function",
-        "z": "13aa577370e4c4d7",
-        "name": "Status",
-        "func": "const { grid: { voltage, frequency }, battery: { soc } } = msg.payload;\n\nnode.status({\n    fill: \"blue\",\n    shape: \"ring\",\n    text: `${voltage}V ${Math.round(frequency * 100) / 100}Hz ${soc}%`,\n});\n\nsetTimeout(() => node.status({}), 30000);\n",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 290,
-        "y": 420,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "c34a5e4a5660de91",
-        "type": "mqtt in",
-        "z": "13aa577370e4c4d7",
-        "name": "",
-        "topic": "ha-switch/+/online",
-        "qos": "0",
-        "datatype": "json",
-        "broker": "f569d34c.8c7ed",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 130,
-        "y": 560,
-        "wires": [
-            [
-                "184032aab20a73e0"
-            ]
-        ]
-    },
-    {
-        "id": "184032aab20a73e0",
-        "type": "function",
-        "z": "13aa577370e4c4d7",
-        "d": true,
-        "name": "notify when offline",
-        "func": "if (typeof msg.payload !== 'boolean' || msg.payload) {\n    return;\n}\n\nconst now = new Date().getTime();\n\nconst lastGridStatusChange = flow.get('last_grid_status_change');\nif (typeof lastGridStatusChange === 'number') {\n    if (now - lastGridStatusChange < 300000) {\n        // grid status changed in the last 5 mins, ignore offline messages\n        return;\n    }\n}\n\nconst lastOfflines = context.get('last5min') || {};\nfor (const key of Object.keys(lastOfflines)) {\n    const delta = (now - lastOfflines[key]) / 1000;\n    if (delta > 60) {\n        delete lastOfflines[key];\n    }\n}\n\nconst name = msg.topic.split('/')[1];\nlastOfflines[name] = now;\ncontext.set('last5min', lastOfflines);\n\nif (flow.get('grid_offline') === false) {\n    const names = Object.keys(lastOfflines).join(',');\n    const nowString = new Date().toLocaleString();\n    node.send({\n        payload: {\n            tag: `devices-offline`,\n            title: 'Device(s) offline',\n            body: `${names} at ${nowString}`,\n        },\n    });\n}\n",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 330,
-        "y": 560,
-        "wires": [
-            [
-                "a24cb7686bd98421"
-            ]
-        ]
-    },
-    {
         "id": "3f3c88e152b83b07",
         "type": "mqtt in",
         "z": "13aa577370e4c4d7",
@@ -2751,7 +3186,7 @@
         "rh": 0,
         "inputs": 0,
         "x": 150,
-        "y": 620,
+        "y": 380,
         "wires": [
             [
                 "344c6d12cc3b6df2"
@@ -2763,14 +3198,14 @@
         "type": "function",
         "z": "13aa577370e4c4d7",
         "name": "notify reason",
-        "func": "const RESET_CAUSE = {\n    '0': 'NO_MEAN',\n    '1': 'POWERON',\n    '3': 'SW',\n    '4': 'OWDT',\n    '5': 'DEEPSLEEP',\n    '6': 'SDIO',\n    '7': 'TG0WDT_SYS',\n    '8': 'TG1WDT_SYS',\n    '9': 'RTCWDT_SYS',\n    '10': 'INTRUSION',\n    '11': 'TGWDT_CPU',\n    '12': 'SW_CPU',\n    '13': 'RTCWDT_CPU',\n    '14': 'EXT_CPU',\n    '15': 'RTCWDT_BROWN_OUT',\n    '16': 'RTCWDT_RTC',\n};\n\nconst reason = msg.payload;\nconst name = msg.topic.split('/')[1];\nconst last = context.get('last5min') || {};\nconst now = new Date().getTime();\n\nfor (const key of Object.keys(last)) {\n    const delta = (now - last[key].at) / 1000;\n    if (delta > 60) {\n        delete last[key];\n    }\n}\n\nlast[name] = { at: now, reason: RESET_CAUSE[reason] ?? 'unknown' };\ncontext.set('last5min', last);\n\nconst lastGridChange = flow.get('last_grid_status_change');\nif (lastGridChange && Math.abs(now - lastGridChange) < 30000) {\n    return;\n}\n\nconst names = Object.keys(last).map(k => `${k}-${last[k].reason}`).join(', ');\nconst nowString = new Date().toLocaleString();\nnode.send({\n    payload: {\n        tag: `devices-reset`,\n        title: 'Device(s) reset',\n        body: `${names}`,\n    },\n});\n",
+        "func": "const RESET_CAUSE = {\n    '0': 'NO_MEAN',\n    '1': 'POWERON',\n    '3': 'SW',\n    '4': 'OWDT',\n    '5': 'DEEPSLEEP',\n    '6': 'SDIO',\n    '7': 'TG0WDT_SYS',\n    '8': 'TG1WDT_SYS',\n    '9': 'RTCWDT_SYS',\n    '10': 'INTRUSION',\n    '11': 'TGWDT_CPU',\n    '12': 'SW_CPU',\n    '13': 'RTCWDT_CPU',\n    '14': 'EXT_CPU',\n    '15': 'RTCWDT_BROWN_OUT',\n    '16': 'RTCWDT_RTC',\n};\n\nconst reason = msg.payload;\nconst name = msg.topic.split('/')[1];\nconst last = context.get('last5min') || {};\nconst now = new Date().getTime();\n\nfor (const key of Object.keys(last)) {\n    const delta = (now - last[key].at) / 1000;\n    if (delta > 60) {\n        delete last[key];\n    }\n}\n\nlast[name] = { at: now, reason: RESET_CAUSE[reason] ?? 'unknown' };\ncontext.set('last5min', last);\n\nconst names = Object.keys(last).map(k => `${k}-${last[k].reason}`).join(', ');\nconst nowString = new Date().toLocaleString();\nnode.send({\n    payload: {\n        tag: `devices-reset`,\n        title: 'Device(s) reset',\n        body: `${names}`,\n    },\n});\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
         "x": 350,
-        "y": 620,
+        "y": 380,
         "wires": [
             [
                 "a24cb7686bd98421"
@@ -2795,7 +3230,7 @@
         "topic": "payload.tag",
         "outputs": 1,
         "x": 530,
-        "y": 580,
+        "y": 380,
         "wires": [
             [
                 "684884b00c3e9fad"
@@ -2815,8 +3250,8 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 150,
-        "y": 780,
+        "x": 130,
+        "y": 580,
         "wires": [
             [
                 "52228e2e95e8936e"
@@ -2835,7 +3270,7 @@
         "finalize": "",
         "libs": [],
         "x": 350,
-        "y": 780,
+        "y": 580,
         "wires": [
             [
                 "c37574baa8bb8ddf"
@@ -2939,7 +3374,7 @@
         "actions": [],
         "closeNotification": false,
         "x": 350,
-        "y": 700,
+        "y": 500,
         "wires": [
             [
                 "52228e2e95e8936e"
@@ -2961,7 +3396,7 @@
         "expiry": "",
         "broker": "f569d34c.8c7ed",
         "x": 530,
-        "y": 780,
+        "y": 580,
         "wires": []
     },
     {
