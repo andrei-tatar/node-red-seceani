@@ -405,24 +405,6 @@
         ]
     },
     {
-        "id": "ab2ab1c68494a0de",
-        "type": "nibe-register",
-        "z": "2de9a494ac1d6c71",
-        "name": "",
-        "register": "Current hot water mode",
-        "nibe": "89e46ce21c7f5128",
-        "interval": "10",
-        "timeout": "5",
-        "force": false,
-        "topic": "",
-        "filter": false,
-        "x": 1010,
-        "y": 340,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "99b78cb07dd4c043",
         "type": "nibe-register",
         "z": "2de9a494ac1d6c71",
@@ -1434,7 +1416,7 @@
         "op2": "false",
         "op1type": "bool",
         "op2type": "bool",
-        "duration": "10",
+        "duration": "5",
         "extend": true,
         "overrideDelay": false,
         "units": "s",
@@ -1442,7 +1424,7 @@
         "bytopic": "all",
         "topic": "topic",
         "outputs": 1,
-        "x": 390,
+        "x": 380,
         "y": 360,
         "wires": [
             [
