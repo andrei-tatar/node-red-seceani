@@ -225,33 +225,8 @@
             "c5314d368e3fdc95",
             "253b433ba2e36077"
         ],
-        "x": 95,
-        "y": 100,
-        "wires": [
-            [
-                "a6b1d4e441d9274d"
-            ]
-        ]
-    },
-    {
-        "id": "169444f0f10f41cd",
-        "type": "inject",
-        "z": "61cc80910aede988",
-        "name": "repeat",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "5",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 140,
-        "y": 60,
+        "x": 165,
+        "y": 80,
         "wires": [
             [
                 "a6b1d4e441d9274d"
@@ -263,7 +238,7 @@
         "type": "function",
         "z": "61cc80910aede988",
         "name": "change volume",
-        "func": "const amp = flow.get('amp');\nif (!amp?.on || !flow.get('tv_on')) {\n    return;\n}\n\nconst desiredVolume = msg.payload.mute\n    ? 10\n    : Math.round(msg.payload.volume * 1.7);\nconst currentVolume = amp.volume;\nif (Math.abs(desiredVolume - currentVolume) < 2) {\n    return;\n}\n\nnode.status({ fill: \"blue\", shape: \"dot\", text: `d: ${desiredVolume}` });\n\nreturn {\n    payload: {\n        volume: desiredVolume,\n    },\n};",
+        "func": "const amp = flow.get('amp');\nif (!amp?.on || !flow.get('tv_on')) {\n    node.status({\n        fill: \"yellow\",\n        text: `ignore TV`\n    });\n    return;\n}\n\nconst desiredVolume = msg.payload.mute\n    ? 10\n    : Math.round(msg.payload.volume * 1.7);\nconst currentVolume = amp.volume;\nif (Math.abs(desiredVolume - currentVolume) < 2) {\n    return;\n}\n\nnode.status({ fill: \"blue\", shape: \"dot\", text: `d: ${desiredVolume}` });\n\nreturn {\n    payload: {\n        volume: desiredVolume,\n    },\n};",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
