@@ -8,17 +8,17 @@
         "env": []
     },
     {
-        "id": "d02cf25fa8114475",
+        "id": "7d41aab9fd0b6a3e",
         "type": "tab",
-        "label": "PV",
+        "label": "ESP32",
         "disabled": false,
         "info": "",
         "env": []
     },
     {
-        "id": "7d41aab9fd0b6a3e",
+        "id": "d02cf25fa8114475",
         "type": "tab",
-        "label": "ESP32",
+        "label": "PV",
         "disabled": false,
         "info": "",
         "env": []
@@ -63,104 +63,11 @@
         "env": []
     },
     {
-        "id": "80b4c729fedf25c4",
-        "type": "tab",
-        "label": "Entrance",
-        "disabled": false,
-        "info": "",
-        "env": []
-    },
-    {
         "id": "4289ddd18011b400",
         "type": "tab",
         "label": "Dogo",
         "disabled": true,
         "info": ""
-    },
-    {
-        "id": "fd418eb5a2d37315",
-        "type": "junction",
-        "z": "7d41aab9fd0b6a3e",
-        "x": 300,
-        "y": 320,
-        "wires": [
-            [
-                "f648133e35429919",
-                "8521a26270a7f5ed",
-                "d2f287de8e2b7bdb",
-                "b7b0b4d5c552d29a",
-                "0450c2ce91a72b78",
-                "dfc52bfc266069f0",
-                "6762d86fa674744b",
-                "b2a67d17df0195f8",
-                "31ccd8e9f0a2e09e",
-                "917568c1def8a578"
-            ]
-        ]
-    },
-    {
-        "id": "80206ddcbd9d94f1",
-        "type": "junction",
-        "z": "7d41aab9fd0b6a3e",
-        "x": 680,
-        "y": 320,
-        "wires": [
-            [
-                "6af1216eb7c5c03f"
-            ]
-        ]
-    },
-    {
-        "id": "841b001db8f4d3d5",
-        "type": "junction",
-        "z": "7d41aab9fd0b6a3e",
-        "x": 980,
-        "y": 840,
-        "wires": [
-            [
-                "645b5b8f07f055fc",
-                "dc8db494b158e485",
-                "7426cbb773e5162c",
-                "efac8720a10238d0",
-                "6b14f65c73a0bf69",
-                "ba592d172f57dd43",
-                "a3dbdc255ebe8243"
-            ]
-        ]
-    },
-    {
-        "id": "af0b3ee1164dc74c",
-        "type": "junction",
-        "z": "7d41aab9fd0b6a3e",
-        "x": 980,
-        "y": 260,
-        "wires": [
-            [
-                "1eeea8ddfe40852e",
-                "144549cc6dc7cbe7",
-                "8714fba0422dd9f9",
-                "c78d7adf71b71c07",
-                "6ebdf6901c3c44a1",
-                "177b7b13cf11baf0",
-                "cfd8480b606b454e",
-                "72228fcd02ae304f",
-                "3013c47f8d5eef60",
-                "53e009712f4ba5db"
-            ]
-        ]
-    },
-    {
-        "id": "eab604a5a4453da9",
-        "type": "junction",
-        "z": "d02cf25fa8114475",
-        "x": 340,
-        "y": 260,
-        "wires": [
-            [
-                "acf00a2d42111e5f",
-                "af672b4bd5a4f9eb"
-            ]
-        ]
     },
     {
         "id": "f1e538c1.0315f8",
@@ -253,7 +160,7 @@
         "force": false,
         "topic": "",
         "filter": false,
-        "x": 160,
+        "x": 240,
         "y": 60,
         "wires": [
             [
@@ -274,7 +181,7 @@
         "topic": "ventilation-boost",
         "filter": true,
         "x": 240,
-        "y": 220,
+        "y": 200,
         "wires": [
             [
                 "1cd1125ce32c5aca"
@@ -293,11 +200,11 @@
         "force": false,
         "topic": "",
         "filter": false,
-        "x": 570,
+        "x": 650,
         "y": 60,
         "wires": [
             [
-                "639e21cb7adb71ba"
+                "5d3dfd6ae641f427"
             ]
         ]
     },
@@ -311,13 +218,13 @@
         "interval": "60",
         "timeout": "5",
         "force": false,
-        "topic": "nibe/fan-spped-gq3",
+        "topic": "ventilation/speed-gq3",
         "filter": false,
-        "x": 850,
-        "y": 940,
+        "x": 930,
+        "y": 760,
         "wires": [
             [
-                "3a75e22cbaeb5f90"
+                "b3dde27634dd2e4c"
             ]
         ]
     },
@@ -331,13 +238,13 @@
         "interval": "60",
         "timeout": "5",
         "force": false,
-        "topic": "nibe/fan-spped-gq2",
+        "topic": "ventilation/speed-gq2",
         "filter": false,
-        "x": 850,
-        "y": 880,
+        "x": 930,
+        "y": 700,
         "wires": [
             [
-                "3a75e22cbaeb5f90"
+                "b3dde27634dd2e4c"
             ]
         ]
     },
@@ -354,11 +261,10 @@
         "topic": "living/setpointLow",
         "filter": true,
         "x": 240,
-        "y": 520,
+        "y": 320,
         "wires": [
             [
-                "25ecd6270bd33719",
-                "dc49bf19798833ec"
+                "34e4236db446efad"
             ]
         ]
     },
@@ -375,11 +281,10 @@
         "topic": "bedroom/setpointLow",
         "filter": true,
         "x": 250,
-        "y": 640,
+        "y": 440,
         "wires": [
             [
-                "25ecd6270bd33719",
-                "dc49bf19798833ec"
+                "34e4236db446efad"
             ]
         ]
     },
@@ -395,12 +300,11 @@
         "force": false,
         "topic": "living/temperature",
         "filter": false,
-        "x": 210,
-        "y": 400,
+        "x": 590,
+        "y": 380,
         "wires": [
             [
-                "25ecd6270bd33719",
-                "dc49bf19798833ec"
+                "69a2359c3bf3f716"
             ]
         ]
     },
@@ -417,7 +321,7 @@
         "topic": "more-hot-water",
         "filter": true,
         "x": 220,
-        "y": 280,
+        "y": 260,
         "wires": [
             [
                 "1cd1125ce32c5aca"
@@ -429,87 +333,14 @@
         "type": "function",
         "z": "2de9a494ac1d6c71",
         "name": "decide",
-        "func": "const stopRecovery = flow.get('bypass_recovery') === 1;\nconst humidity = msg.payload.value;\nconst target = 45;\nconst histerezis = 2;\nconst compareTo = target + (stopRecovery ? -1 : 1) * histerezis;\nconst shouldStopRecovery = humidity >= compareTo;\n\nnode.status({\n    fill: shouldStopRecovery ? 'red' : \"blue\",\n    shape: \"dot\",\n    text: `recovery ${shouldStopRecovery ? 'off' : 'on'}`,\n});\n\nreturn {\n    payload: shouldStopRecovery ? 1 : 0,\n};\n",
+        "func": "const humidity = msg.payload.value;\nif (humidity < 0 || humidity > 100) {\n    return;\n}\n\nconst stopRecovery = flow.get('bypass_recovery') === 1;\nconst target = 45;\nconst histerezis = 2;\nconst compareTo = target + (stopRecovery ? -1 : 1) * histerezis;\nconst shouldStopRecovery = humidity >= compareTo;\n\nnode.status({\n    fill: shouldStopRecovery ? 'red' : \"blue\",\n    shape: \"dot\",\n    text: `recovery ${shouldStopRecovery ? 'off' : 'on'}`,\n});\n\nreturn {\n    payload: shouldStopRecovery ? 1 : 0,\n};\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 330,
+        "x": 430,
         "y": 60,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "639e21cb7adb71ba",
-        "type": "change",
-        "z": "2de9a494ac1d6c71",
-        "name": "",
-        "rules": [
-            {
-                "t": "set",
-                "p": "bypass_recovery",
-                "pt": "flow",
-                "to": "payload.value",
-                "tot": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 870,
-        "y": 60,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "b4f19b227252fe50",
-        "type": "inject",
-        "z": "2de9a494ac1d6c71",
-        "name": "on",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "1",
-        "payloadType": "num",
-        "x": 326.1999816894531,
-        "y": 128.1999969482422,
-        "wires": [
-            [
-                "27d499b6a6e0d7e5"
-            ]
-        ]
-    },
-    {
-        "id": "696ea15c4918cf37",
-        "type": "inject",
-        "z": "2de9a494ac1d6c71",
-        "name": "off",
-        "props": [
-            {
-                "p": "payload"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "0",
-        "payloadType": "num",
-        "x": 326.1999816894531,
-        "y": 168.1999969482422,
         "wires": [
             [
                 "27d499b6a6e0d7e5"
@@ -537,7 +368,7 @@
         "asyncCmd": false,
         "outputs": 1,
         "x": 610,
-        "y": 220,
+        "y": 200,
         "wires": [
             [
                 "660188df0186d9af"
@@ -556,7 +387,7 @@
         "finalize": "",
         "libs": [],
         "x": 430,
-        "y": 260,
+        "y": 240,
         "wires": [
             [
                 "46b0b3fc4d086f1e",
@@ -585,7 +416,7 @@
         "asyncCmd": false,
         "outputs": 1,
         "x": 600,
-        "y": 280,
+        "y": 260,
         "wires": [
             [
                 "660188df0186d9af"
@@ -601,11 +432,12 @@
             "660188df0186d9af"
         ],
         "x": 75,
-        "y": 260,
+        "y": 200,
         "wires": [
             [
                 "ed13633a52b01660",
-                "99b78cb07dd4c043"
+                "99b78cb07dd4c043",
+                "8c036ed2e6442271"
             ]
         ]
     },
@@ -619,7 +451,7 @@
             "9f8ecdb12e5082f5"
         ],
         "x": 765,
-        "y": 260,
+        "y": 200,
         "wires": []
     },
     {
@@ -639,8 +471,8 @@
         "bytopic": "all",
         "topic": "topic",
         "outputs": 1,
-        "x": 310,
-        "y": 740,
+        "x": 490,
+        "y": 500,
         "wires": [
             [
                 "3760822f76a88122"
@@ -660,11 +492,10 @@
         "topic": "living/setpointHigh",
         "filter": true,
         "x": 240,
-        "y": 580,
+        "y": 380,
         "wires": [
             [
-                "25ecd6270bd33719",
-                "dc49bf19798833ec"
+                "34e4236db446efad"
             ]
         ]
     },
@@ -681,12 +512,11 @@
         "topic": "bedroom/setpointHigh",
         "filter": true,
         "x": 250,
-        "y": 700,
+        "y": 500,
         "wires": [
             [
-                "25ecd6270bd33719",
                 "df27d4e5b15bc14e",
-                "dc49bf19798833ec"
+                "34e4236db446efad"
             ]
         ]
     },
@@ -710,8 +540,8 @@
         "twofactor": "off",
         "twofactorpin": "",
         "filter": true,
-        "x": 750,
-        "y": 500,
+        "x": 330,
+        "y": 560,
         "wires": [
             [
                 "a5df44a963725282"
@@ -730,12 +560,11 @@
         "force": false,
         "topic": "humidity",
         "filter": false,
-        "x": 240,
-        "y": 340,
+        "x": 620,
+        "y": 320,
         "wires": [
             [
-                "25ecd6270bd33719",
-                "dc49bf19798833ec"
+                "69a2359c3bf3f716"
             ]
         ]
     },
@@ -743,15 +572,15 @@
         "id": "25ecd6270bd33719",
         "type": "function",
         "z": "2de9a494ac1d6c71",
-        "name": "map",
-        "func": "const parts = msg.topic.split('/');\nconst rooms = parts.length === 2\n    ? [parts[0]]\n    : (context.keys() ?? []);\nconst prop = parts[parts.length - 1];\n\nconst msgs = rooms.map(room => {\n    const state = {\n        ...(context.get(room) ?? {}),\n        mode: 'heatcool',\n        activeMode: 'cool',\n    };\n    state[prop] = msg.payload.value;\n    context.set(room, state);\n    return { topic: room, payload: state };\n});\n\nreturn [msgs];\n",
+        "name": "th.in",
+        "func": "if (msg.payload.value < -300) {\n    return;\n}\n\nconst parts = msg.topic.split('/');\nconst rooms = parts.length === 2\n    ? [parts[0]]\n    : (context.keys() ?? []);\nconst prop = parts[parts.length - 1];\n\nconst msgs = rooms.map(room => {\n    const state = {\n        ...(context.get(room) ?? {}),\n        mode: 'heatcool',\n        activeMode: 'cool',\n    };\n    state[prop] = msg.payload.value;\n    context.set(room, state);\n    return { topic: room, payload: state };\n});\n\nreturn [msgs];\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 590,
-        "y": 540,
+        "x": 190,
+        "y": 560,
         "wires": [
             [
                 "e56377cc659b2c95",
@@ -779,8 +608,8 @@
         "twofactor": "off",
         "twofactorpin": "",
         "filter": true,
-        "x": 760,
-        "y": 560,
+        "x": 340,
+        "y": 620,
         "wires": [
             [
                 "a5df44a963725282"
@@ -791,15 +620,15 @@
         "id": "a5df44a963725282",
         "type": "function",
         "z": "2de9a494ac1d6c71",
-        "name": "map",
+        "name": "th.out",
         "func": "const propsToCopy = ['setpointLow', 'setpointHigh'];\nconst messages = propsToCopy.map(key => ({\n    topic: `${msg.topic}/${key}`,\n    payload: msg.payload[key],\n}));\nreturn [messages]",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 950,
-        "y": 540,
+        "x": 530,
+        "y": 560,
         "wires": [
             [
                 "847b62e1d562ef8b"
@@ -815,8 +644,8 @@
         "links": [
             "50badacef6b71f47"
         ],
-        "x": 1155,
-        "y": 540,
+        "x": 745,
+        "y": 560,
         "wires": []
     },
     {
@@ -828,7 +657,7 @@
             "61d8d50274c6ed71"
         ],
         "x": 75,
-        "y": 540,
+        "y": 320,
         "wires": [
             [
                 "8a2d91b19d4ef994",
@@ -850,12 +679,11 @@
         "force": false,
         "topic": "bedroom/temperature",
         "filter": false,
-        "x": 220,
-        "y": 460,
+        "x": 600,
+        "y": 440,
         "wires": [
             [
-                "25ecd6270bd33719",
-                "dc49bf19798833ec"
+                "69a2359c3bf3f716"
             ]
         ]
     },
@@ -870,11 +698,11 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 450,
-        "y": 740,
+        "x": 650,
+        "y": 500,
         "wires": [
             [
-                "25ecd6270bd33719"
+                "e41d6b0ea38ad5e3"
             ]
         ]
     },
@@ -890,78 +718,12 @@
         "septopics": true,
         "property": "payload",
         "topi": "topic",
-        "x": 1070,
-        "y": 540,
+        "x": 650,
+        "y": 560,
         "wires": [
             [
                 "61d8d50274c6ed71"
             ]
-        ]
-    },
-    {
-        "id": "ddc09bbf19b398d4",
-        "type": "nibe-register",
-        "z": "2de9a494ac1d6c71",
-        "name": "",
-        "register": "Exhaust air fan speed normal (ERS 1)",
-        "nibe": "89e46ce21c7f5128",
-        "interval": "10",
-        "timeout": "5",
-        "force": false,
-        "topic": "",
-        "filter": false,
-        "x": 950,
-        "y": 680,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "c2223332e9d6e8c6",
-        "type": "inject",
-        "z": "2de9a494ac1d6c71",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "45",
-        "payloadType": "num",
-        "x": 650,
-        "y": 640,
-        "wires": [
-            [
-                "ddc09bbf19b398d4",
-                "ebb15ae03ca2442a"
-            ]
-        ]
-    },
-    {
-        "id": "ebb15ae03ca2442a",
-        "type": "nibe-register",
-        "z": "2de9a494ac1d6c71",
-        "name": "",
-        "register": "Supply air fan speed normal (ERS 1)",
-        "nibe": "89e46ce21c7f5128",
-        "interval": "10",
-        "timeout": "5",
-        "force": false,
-        "topic": "",
-        "filter": false,
-        "x": 950,
-        "y": 740,
-        "wires": [
-            []
         ]
     },
     {
@@ -978,8 +740,8 @@
         "retentionPolicyV18Flux": "",
         "org": "home",
         "bucket": "home",
-        "x": 720,
-        "y": 380,
+        "x": 380,
+        "y": 1000,
         "wires": []
     },
     {
@@ -987,14 +749,14 @@
         "type": "function",
         "z": "2de9a494ac1d6c71",
         "name": "map",
-        "func": "return {\n    payload: msg.payload.value,\n    measurement: msg.topic,\n};\n",
+        "func": "if (msg.payload.value < -300) {\n    return;\n}\n\nconst parts = msg.topic.split('/');\nconst measurement = parts[0];\nconst payload = parts.length === 1\n    ? msg.payload.value\n    : { [parts[1]]: msg.payload.value }\n\nreturn {\n    payload,\n    measurement,\n};\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 510,
-        "y": 380,
+        "x": 170,
+        "y": 1000,
         "wires": [
             [
                 "9d978d4c29e3fede"
@@ -1011,13 +773,13 @@
         "interval": "60",
         "timeout": "5",
         "force": false,
-        "topic": "outdoor/temperature",
+        "topic": "outdoor/temperature-bt1",
         "filter": true,
-        "x": 280,
-        "y": 820,
+        "x": 220,
+        "y": 700,
         "wires": [
             [
-                "3a75e22cbaeb5f90"
+                "7ca97a871eef0253"
             ]
         ]
     },
@@ -1026,14 +788,14 @@
         "type": "function",
         "z": "2de9a494ac1d6c71",
         "name": "map",
-        "func": "return {\n    payload: msg.payload.value,\n    measurement: msg.topic,\n};\n",
+        "func": "if (msg.payload.value < -300) {\n    return;\n}\n\nconst [measurement, valueName] = msg.topic.split('/');\nreturn {\n    payload: { [valueName]: msg.payload.value },\n    measurement,\n};\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 510,
-        "y": 820,
+        "x": 170,
+        "y": 1040,
         "wires": [
             [
                 "192c99f16f9eaaee"
@@ -1054,8 +816,8 @@
         "retentionPolicyV18Flux": "",
         "org": "home",
         "bucket": "nibe",
-        "x": 740,
-        "y": 820,
+        "x": 380,
+        "y": 1040,
         "wires": []
     },
     {
@@ -1068,13 +830,13 @@
         "interval": "60",
         "timeout": "5",
         "force": false,
-        "topic": "nibe/supply-line-bt2",
+        "topic": "line/supply-bt2",
         "filter": true,
-        "x": 230,
-        "y": 880,
+        "x": 170,
+        "y": 760,
         "wires": [
             [
-                "3a75e22cbaeb5f90"
+                "7ca97a871eef0253"
             ]
         ]
     },
@@ -1088,13 +850,13 @@
         "interval": "60",
         "timeout": "5",
         "force": false,
-        "topic": "nibe/return-line-bt3",
+        "topic": "line/return-bt3",
         "filter": true,
-        "x": 230,
-        "y": 940,
+        "x": 170,
+        "y": 820,
         "wires": [
             [
-                "3a75e22cbaeb5f90"
+                "7ca97a871eef0253"
             ]
         ]
     },
@@ -1108,13 +870,13 @@
         "interval": "60",
         "timeout": "5",
         "force": false,
-        "topic": "outdoor/supp-air-temperature",
+        "topic": "ventilation/supp-air-temperature-bt22",
         "filter": true,
-        "x": 520,
-        "y": 940,
+        "x": 560,
+        "y": 760,
         "wires": [
             [
-                "3a75e22cbaeb5f90"
+                "772ab499b9243a81"
             ]
         ]
     },
@@ -1128,13 +890,13 @@
         "interval": "60",
         "timeout": "5",
         "force": false,
-        "topic": "outdoor/temperature-az30-bt23",
+        "topic": "ventilation/outdoor-temperature-bt23",
         "filter": true,
-        "x": 550,
-        "y": 880,
+        "x": 590,
+        "y": 700,
         "wires": [
             [
-                "3a75e22cbaeb5f90"
+                "772ab499b9243a81"
             ]
         ]
     },
@@ -1148,13 +910,13 @@
         "interval": "60",
         "timeout": "5",
         "force": false,
-        "topic": "outdoor/extract-air-temp-az30-bt21",
+        "topic": "ventilation/extract-air-temp-bt21",
         "filter": true,
-        "x": 520,
-        "y": 1000,
+        "x": 560,
+        "y": 820,
         "wires": [
             [
-                "3a75e22cbaeb5f90"
+                "772ab499b9243a81"
             ]
         ]
     },
@@ -1168,13 +930,13 @@
         "interval": "60",
         "timeout": "5",
         "force": false,
-        "topic": "outdoor/exhaust-air-temp-az30-bt20",
+        "topic": "ventilation/exhaust-air-temp-bt20",
         "filter": true,
-        "x": 520,
-        "y": 1060,
+        "x": 560,
+        "y": 880,
         "wires": [
             [
-                "3a75e22cbaeb5f90"
+                "772ab499b9243a81"
             ]
         ]
     },
@@ -1188,10 +950,10 @@
         "interval": "60",
         "timeout": "5",
         "force": false,
-        "topic": "nibe/priority",
+        "topic": "operation/priority",
         "filter": false,
-        "x": 800,
-        "y": 1000,
+        "x": 880,
+        "y": 820,
         "wires": [
             [
                 "6c724be7f6fd897c"
@@ -1209,11 +971,11 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 960,
-        "y": 1000,
+        "x": 1040,
+        "y": 820,
         "wires": [
             [
-                "3a75e22cbaeb5f90"
+                "b3dde27634dd2e4c"
             ]
         ]
     },
@@ -1227,13 +989,13 @@
         "interval": "60",
         "timeout": "5",
         "force": false,
-        "topic": "nibe/brine-in",
+        "topic": "brine/in-bt10",
         "filter": false,
-        "x": 820,
-        "y": 1060,
+        "x": 900,
+        "y": 880,
         "wires": [
             [
-                "3a75e22cbaeb5f90"
+                "b3dde27634dd2e4c"
             ]
         ]
     },
@@ -1247,10 +1009,242 @@
         "interval": "60",
         "timeout": "5",
         "force": false,
-        "topic": "nibe/brine-out",
+        "topic": "brine/out-bt11",
         "filter": false,
-        "x": 820,
-        "y": 1120,
+        "x": 900,
+        "y": 940,
+        "wires": [
+            [
+                "b3dde27634dd2e4c"
+            ]
+        ]
+    },
+    {
+        "id": "732ffd78751c6902",
+        "type": "nibe-register",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "register": "Ventilation mode",
+        "nibe": "89e46ce21c7f5128",
+        "interval": "60",
+        "timeout": "5",
+        "force": false,
+        "topic": "ventilation/mode",
+        "filter": false,
+        "x": 550,
+        "y": 940,
+        "wires": [
+            [
+                "772ab499b9243a81"
+            ]
+        ]
+    },
+    {
+        "id": "8c036ed2e6442271",
+        "type": "nibe-register",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "register": "Ventilation mode",
+        "nibe": "89e46ce21c7f5128",
+        "interval": "5",
+        "timeout": "5",
+        "force": false,
+        "topic": "ventilation-mode",
+        "filter": true,
+        "x": 230,
+        "y": 140,
+        "wires": [
+            [
+                "7e80dd6fcb41cdda"
+            ]
+        ]
+    },
+    {
+        "id": "7e80dd6fcb41cdda",
+        "type": "function",
+        "z": "2de9a494ac1d6c71",
+        "name": "map",
+        "func": "node.status({ fill: \"blue\", text: `${msg.payload.value} - ${status()}` });\n\nreturn {\n    payload: msg.payload.value === 1 ? 1 : 0,\n    topic: msg.topic,\n};\n\nfunction status() {\n    switch (msg.payload.value) {\n        case 0: return 'normal';\n        case 1: return 'off';\n        case 2: return 'low';\n        case 3: return 'high';\n        case 4: return 'boost';\n    }\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 140,
+        "wires": [
+            [
+                "f0a4665aecc7e7e1"
+            ]
+        ]
+    },
+    {
+        "id": "f0a4665aecc7e7e1",
+        "type": "noraf-switch",
+        "z": "2de9a494ac1d6c71",
+        "devicename": "Ventilation",
+        "roomhint": "Service Room",
+        "name": "",
+        "passthru": false,
+        "errorifstateunchaged": false,
+        "nora": "f1e538c1.0315f8",
+        "topic": "ventilation-mode",
+        "onvalue": "0",
+        "onvalueType": "num",
+        "offvalue": "1",
+        "offvalueType": "num",
+        "twofactor": "ack",
+        "twofactorpin": "",
+        "filter": true,
+        "asyncCmd": false,
+        "outputs": 1,
+        "x": 590,
+        "y": 140,
+        "wires": [
+            [
+                "660188df0186d9af"
+            ]
+        ]
+    },
+    {
+        "id": "5d3dfd6ae641f427",
+        "type": "function",
+        "z": "2de9a494ac1d6c71",
+        "name": "set flow.bypass_recovery",
+        "func": "const oldValue = flow.get('bypass_recovery');\nconst newValue = msg.payload.value;\nif (newValue !== oldValue) {\n    flow.set('bypass_recovery', newValue);\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 930,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7b6e8ee91a219ed4",
+        "type": "nibe-register",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "register": "Hot water charging (BT6)",
+        "nibe": "89e46ce21c7f5128",
+        "interval": "60",
+        "timeout": "5",
+        "force": false,
+        "topic": "hot-water/charging-bt6",
+        "filter": false,
+        "x": 190,
+        "y": 880,
+        "wires": [
+            [
+                "7ca97a871eef0253"
+            ]
+        ]
+    },
+    {
+        "id": "3b13ed9084ac3922",
+        "type": "link in",
+        "z": "2de9a494ac1d6c71",
+        "name": "link in 19",
+        "links": [
+            "69a2359c3bf3f716",
+            "34e4236db446efad"
+        ],
+        "x": 85,
+        "y": 1000,
+        "wires": [
+            [
+                "dc49bf19798833ec"
+            ]
+        ]
+    },
+    {
+        "id": "69a2359c3bf3f716",
+        "type": "link out",
+        "z": "2de9a494ac1d6c71",
+        "name": "link out 17",
+        "mode": "link",
+        "links": [
+            "3b13ed9084ac3922",
+            "ceabaec499757bb4"
+        ],
+        "x": 785,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "ceabaec499757bb4",
+        "type": "link in",
+        "z": "2de9a494ac1d6c71",
+        "name": "link in 20",
+        "links": [
+            "69a2359c3bf3f716",
+            "e41d6b0ea38ad5e3",
+            "34e4236db446efad"
+        ],
+        "x": 85,
+        "y": 560,
+        "wires": [
+            [
+                "25ecd6270bd33719"
+            ]
+        ]
+    },
+    {
+        "id": "e41d6b0ea38ad5e3",
+        "type": "link out",
+        "z": "2de9a494ac1d6c71",
+        "name": "link out 18",
+        "mode": "link",
+        "links": [
+            "ceabaec499757bb4"
+        ],
+        "x": 745,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "34e4236db446efad",
+        "type": "link out",
+        "z": "2de9a494ac1d6c71",
+        "name": "link out 19",
+        "mode": "link",
+        "links": [
+            "3b13ed9084ac3922",
+            "ceabaec499757bb4"
+        ],
+        "x": 425,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "7ca97a871eef0253",
+        "type": "link out",
+        "z": "2de9a494ac1d6c71",
+        "name": "link out 20",
+        "mode": "link",
+        "links": [
+            "9443fc43a7aab52a",
+            "47ae0eea20515ee1"
+        ],
+        "x": 415,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "9443fc43a7aab52a",
+        "type": "link in",
+        "z": "2de9a494ac1d6c71",
+        "name": "link in 21",
+        "links": [
+            "7ca97a871eef0253",
+            "772ab499b9243a81",
+            "b3dde27634dd2e4c"
+        ],
+        "x": 85,
+        "y": 1040,
         "wires": [
             [
                 "3a75e22cbaeb5f90"
@@ -1258,234 +1252,32 @@
         ]
     },
     {
-        "id": "8755301a8c241477",
-        "type": "mpp-input",
-        "z": "d02cf25fa8114475",
-        "name": "mpp general status",
-        "mpp": "50383ae4cbb82921",
-        "interval": "2",
-        "timeout": "2",
-        "query": "GeneralStatus",
-        "x": 170,
-        "y": 120,
-        "wires": [
-            [
-                "ee29764d6322b235",
-                "eab604a5a4453da9"
-            ]
-        ]
-    },
-    {
-        "id": "0cb2bd44a8edc2d3",
-        "type": "mpp-input",
-        "z": "d02cf25fa8114475",
-        "name": "mpp power status",
-        "mpp": "50383ae4cbb82921",
-        "interval": "2",
-        "timeout": "2",
-        "query": "PowerStatus",
-        "x": 170,
-        "y": 180,
-        "wires": [
-            [
-                "151e85104313bf09",
-                "4d5a91dbb440c2e4",
-                "8012606b2ccfea72"
-            ]
-        ]
-    },
-    {
-        "id": "658c70c17f292167",
-        "type": "influxdb out",
-        "z": "d02cf25fa8114475",
-        "influxdb": "63bdbe3c09b491f2",
-        "name": "",
-        "measurement": "",
-        "precision": "",
-        "retentionPolicy": "",
-        "database": "database",
-        "precisionV18FluxV20": "ms",
-        "retentionPolicyV18Flux": "",
-        "org": "home",
-        "bucket": "power",
-        "x": 620,
-        "y": 120,
+        "id": "772ab499b9243a81",
+        "type": "link out",
+        "z": "2de9a494ac1d6c71",
+        "name": "link out 21",
+        "mode": "link",
+        "links": [
+            "9443fc43a7aab52a",
+            "47ae0eea20515ee1"
+        ],
+        "x": 775,
+        "y": 700,
         "wires": []
     },
     {
-        "id": "ee29764d6322b235",
-        "type": "function",
-        "z": "d02cf25fa8114475",
-        "name": "map",
-        "func": "return [[{\n    payload: msg.payload.acInput.voltage,\n    measurement: 'ac-input-voltage',\n}, {\n    payload: msg.payload.acInput.frequency,\n    measurement: 'ac-input-freq',\n}, {\n    payload: msg.payload.acOutput.voltage,\n    measurement: 'ac-output-voltage',\n}, {\n    payload: msg.payload.acOutput.frequency,\n    measurement: 'ac-output-freq',\n}, {\n    payload: {\n        voltage: msg.payload.battery.voltage,\n        current: msg.payload.battery.current,\n        capacity: msg.payload.battery.capacity,\n    },\n    measurement: 'battery',\n}]];",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 370,
-        "y": 120,
-        "wires": [
-            [
-                "658c70c17f292167"
-            ]
-        ]
-    },
-    {
-        "id": "151e85104313bf09",
-        "type": "function",
-        "z": "d02cf25fa8114475",
-        "name": "map",
-        "func": "return [[{\n    payload: msg.payload.acInput.activePower,\n    measurement: 'ac-input-active-power',\n}, {\n    payload: msg.payload.acOutput.activePower,\n    measurement: 'ac-output-active-power',\n}, {\n    payload: msg.payload.acOutput.apparentPower,\n    measurement: 'ac-output-apparent-power',\n}]];",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 370,
-        "y": 180,
-        "wires": [
-            [
-                "658c70c17f292167"
-            ]
-        ]
-    },
-    {
-        "id": "acf00a2d42111e5f",
-        "type": "function",
-        "z": "d02cf25fa8114475",
-        "name": "notify grid status",
-        "func": "const lastPowerStatus = context.get('power_status');\nconst powerStatus = msg.payload.acInput.frequency > 45;\n\nif (powerStatus === lastPowerStatus) {\n    return;\n}\n\ncontext.set('power_status', powerStatus);\n\nlet changes = context.get('changes');\nconst today = new Date().toLocaleDateString();\nconst key = powerStatus ? 'recovered' : 'lost';\nif (changes?.key === today) {\n    changes[key]++;\n} else {\n    changes = {\n        key: today,\n        recovered: 0,\n        lost: 0,\n        [key]: 1,\n    };\n}\ncontext.set('changes', changes);\n\nconst timestamp = new Date().toLocaleString();\nconst body = `Power ${key} at ${timestamp}, (lost: ${changes.lost}, recovered: ${changes.recovered})`;\n\nreturn {\n    payload: {\n        tag: 'power-status',\n        title: 'Power Status',\n        body: body,\n    },\n};\n",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 500,
-        "y": 240,
-        "wires": [
-            [
-                "002fbcc4b5600960"
-            ]
-        ]
-    },
-    {
-        "id": "002fbcc4b5600960",
-        "type": "noraf-notify",
-        "z": "d02cf25fa8114475",
-        "tag": "",
-        "title": "",
-        "body": "",
-        "icon": "",
-        "name": "notify",
-        "nora": "f1e538c1.0315f8",
-        "topic": "",
-        "actions": [],
-        "closeNotification": false,
-        "x": 870,
-        "y": 260,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "6211e9ebc3399079",
-        "type": "function",
-        "z": "d02cf25fa8114475",
-        "name": "notify battery",
-        "func": "const capacity = msg.payload;\nconst notifyAt = [10, 25, 30, 50, 80];\nconst lastNotifyAt = context.get('notify_at');\n\nif (flow.get('batteryStatus') === 'charge') {\n    if (lastNotifyAt) {\n        context.set('notify_at', null)\n    }\n    return;\n}\n\nlet i;\nfor (i = 0; i < notifyAt.length; i++) {\n    const step = notifyAt[i];\n    let threshold = step;\n    if (lastNotifyAt === step) {\n        threshold += 5;\n    }\n    if (capacity <= threshold) {\n        if (lastNotifyAt !== step) {\n            context.set('notify_at', step)\n\n            const timestamp = new Date().toLocaleString();\n            const body = `Battery capacity ${capacity}%, at ${timestamp}`;\n\n            return {\n                payload: {\n                    tag: 'battery-capacity',\n                    title: 'Battery capacity',\n                    body: body,\n                },\n            };\n        }\n\n        break;\n    }\n}\n",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 630,
-        "y": 280,
-        "wires": [
-            [
-                "002fbcc4b5600960"
-            ]
-        ]
-    },
-    {
-        "id": "8012606b2ccfea72",
-        "type": "trigger",
-        "z": "d02cf25fa8114475",
-        "name": "",
-        "op1": "true",
-        "op2": "false",
-        "op1type": "bool",
-        "op2type": "bool",
-        "duration": "5",
-        "extend": true,
-        "overrideDelay": false,
-        "units": "s",
-        "reset": "",
-        "bytopic": "all",
-        "topic": "topic",
-        "outputs": 1,
-        "x": 380,
-        "y": 360,
-        "wires": [
-            [
-                "3fa4c0f648cfb1d0"
-            ]
-        ]
-    },
-    {
-        "id": "3fa4c0f648cfb1d0",
-        "type": "function",
-        "z": "d02cf25fa8114475",
-        "name": "notify inverter connection",
-        "func": "const status = msg.payload ? 'restored' : 'lost';\nconst at = new Date().toLocaleString();\nlet afterText = '';\nif (!msg.payload) {\n    context.set('lost_at', new Date().getTime());\n} else {\n    let after = new Date().getTime() - context.get('lost_at');\n    let unit = 'sec';\n    after /= 1000;\n    if (after > 60) {\n        after /= 60;\n        unit = 'min';\n    }\n    if (after > 60) {\n        after /= 60;\n        unit = 'hour';\n    }\n    afterText = `, after ${after.toFixed(1)} ${unit}`\n}\n\nreturn {\n    payload: {\n        tag: \"inverter-connection\",\n        title: \"Inverter connection\",\n        body: `Inverter connection ${status} at ${at}${afterText}`,\n    }\n};",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 610,
-        "y": 360,
-        "wires": [
-            [
-                "002fbcc4b5600960"
-            ]
-        ]
-    },
-    {
-        "id": "af672b4bd5a4f9eb",
-        "type": "function",
-        "z": "d02cf25fa8114475",
-        "name": "average",
-        "func": "const capacity = msg.payload.battery.capacity;\nconst values = this.past_values ?? [];\nvalues.splice(900);\nvalues.splice(0, 0, capacity);\nthis.past_values = values;\n\nconst average = values.reduce((a, b) => a + b, 0) / values.length;\nnode.status({ fill: \"blue\", shape: \"ring\", text: `${average.toFixed(2)}%` });\n\nreturn { payload: average };",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 460,
-        "y": 280,
-        "wires": [
-            [
-                "6211e9ebc3399079"
-            ]
-        ]
-    },
-    {
-        "id": "4d5a91dbb440c2e4",
-        "type": "function",
-        "z": "d02cf25fa8114475",
-        "name": "set flow.batteryStatus",
-        "func": "const lastValue = flow.get('batteryStatus');\nconst newValue = msg.payload.status.batteryPowerDirectionStatus;\nif (newValue !== lastValue) {\n    flow.set('batteryStatus', newValue);\n}",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 420,
-        "y": 420,
-        "wires": [
-            []
-        ]
+        "id": "b3dde27634dd2e4c",
+        "type": "link out",
+        "z": "2de9a494ac1d6c71",
+        "name": "link out 22",
+        "mode": "link",
+        "links": [
+            "9443fc43a7aab52a",
+            "47ae0eea20515ee1"
+        ],
+        "x": 1145,
+        "y": 700,
+        "wires": []
     },
     {
         "id": "5bb98af947157223",
@@ -1495,8 +1287,8 @@
         "extractHost": "^ha-switch/(.+)/version$",
         "excludeHost": "switch-dimmer-8",
         "name": "",
-        "x": 430,
-        "y": 140,
+        "x": 330,
+        "y": 60,
         "wires": []
     },
     {
@@ -1512,8 +1304,8 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 190,
-        "y": 140,
+        "x": 170,
+        "y": 100,
         "wires": [
             [
                 "5bb98af947157223"
@@ -1524,7 +1316,7 @@
         "id": "b5f045d301d04cf3",
         "type": "inject",
         "z": "7d41aab9fd0b6a3e",
-        "name": "",
+        "name": "UPDATE",
         "props": [
             {
                 "p": "payload"
@@ -1541,8 +1333,8 @@
         "topic": "update",
         "payload": "",
         "payloadType": "date",
-        "x": 190,
-        "y": 100,
+        "x": 140,
+        "y": 60,
         "wires": [
             [
                 "5bb98af947157223"
@@ -1576,11 +1368,11 @@
         "twofactor": "off",
         "twofactorpin": "",
         "filter": true,
-        "x": 470,
+        "x": 750,
         "y": 200,
         "wires": [
             [
-                "80206ddcbd9d94f1"
+                "6af1216eb7c5c03f"
             ]
         ]
     },
@@ -1611,11 +1403,11 @@
         "twofactor": "off",
         "twofactorpin": "",
         "filter": true,
-        "x": 470,
+        "x": 750,
         "y": 380,
         "wires": [
             [
-                "80206ddcbd9d94f1"
+                "6af1216eb7c5c03f"
             ]
         ]
     },
@@ -1646,11 +1438,11 @@
         "twofactor": "off",
         "twofactorpin": "",
         "filter": true,
-        "x": 470,
+        "x": 750,
         "y": 440,
         "wires": [
             [
-                "80206ddcbd9d94f1"
+                "6af1216eb7c5c03f"
             ]
         ]
     },
@@ -1681,11 +1473,11 @@
         "twofactor": "off",
         "twofactorpin": "",
         "filter": true,
-        "x": 460,
-        "y": 500,
+        "x": 1140,
+        "y": 200,
         "wires": [
             [
-                "80206ddcbd9d94f1"
+                "769bb33f49f1c02b"
             ]
         ]
     },
@@ -1713,11 +1505,11 @@
         "twofactor": "off",
         "twofactorpin": "",
         "filter": true,
-        "x": 1140,
+        "x": 740,
         "y": 840,
         "wires": [
             [
-                "8ad4a13f3069f1ac"
+                "c78bcabe4f6f913b"
             ]
         ]
     },
@@ -1725,18 +1517,18 @@
         "id": "8ad4a13f3069f1ac",
         "type": "function",
         "z": "7d41aab9fd0b6a3e",
-        "name": "map",
+        "name": "blinds.out",
         "func": "return {\n    payload: {\n        openPercent: msg.payload.open,\n    },\n    topic: msg.topic,\n};",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1350,
-        "y": 840,
+        "x": 420,
+        "y": 320,
         "wires": [
             [
-                "49583d9de218bf42"
+                "43ff6ea09782443a"
             ]
         ]
     },
@@ -1744,18 +1536,18 @@
         "id": "b18a911a13f74c55",
         "type": "function",
         "z": "7d41aab9fd0b6a3e",
-        "name": "dimmers",
+        "name": "dimmers.in",
         "func": "if (msg.topic.startsWith('ha-switch/switch-dimmer-'))\n    return msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 200,
-        "y": 320,
+        "x": 170,
+        "y": 240,
         "wires": [
             [
-                "fd418eb5a2d37315"
+                "8775f81eb190b655"
             ]
         ]
     },
@@ -1763,18 +1555,18 @@
         "id": "821e92a25e3b217f",
         "type": "function",
         "z": "7d41aab9fd0b6a3e",
-        "name": "blinds",
+        "name": "blinds.in",
         "func": "if (msg.topic.startsWith('ha-switch/switch-blinds-')) {\n    return {\n        payload: {\n            open: msg.payload.openPercent,\n            online: msg.payload.online,\n        },\n        topic: msg.topic,\n    };\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 890,
-        "y": 840,
+        "x": 160,
+        "y": 320,
         "wires": [
             [
-                "841b001db8f4d3d5"
+                "99f8a5fa2751fc29"
             ]
         ]
     },
@@ -1802,11 +1594,11 @@
         "twofactor": "off",
         "twofactorpin": "",
         "filter": true,
-        "x": 1120,
+        "x": 720,
         "y": 900,
         "wires": [
             [
-                "8ad4a13f3069f1ac"
+                "c78bcabe4f6f913b"
             ]
         ]
     },
@@ -1837,11 +1629,11 @@
         "twofactor": "off",
         "twofactorpin": "",
         "filter": true,
-        "x": 440,
-        "y": 620,
+        "x": 1120,
+        "y": 320,
         "wires": [
             [
-                "80206ddcbd9d94f1"
+                "769bb33f49f1c02b"
             ]
         ]
     },
@@ -1872,11 +1664,11 @@
         "twofactor": "off",
         "twofactorpin": "",
         "filter": true,
-        "x": 460,
+        "x": 740,
         "y": 320,
         "wires": [
             [
-                "80206ddcbd9d94f1"
+                "6af1216eb7c5c03f"
             ]
         ]
     },
@@ -1907,11 +1699,11 @@
         "twofactor": "off",
         "twofactorpin": "",
         "filter": true,
-        "x": 440,
-        "y": 680,
+        "x": 1120,
+        "y": 380,
         "wires": [
             [
-                "80206ddcbd9d94f1"
+                "769bb33f49f1c02b"
             ]
         ]
     },
@@ -1939,11 +1731,11 @@
         "twofactor": "off",
         "twofactorpin": "",
         "filter": true,
-        "x": 1140,
+        "x": 740,
         "y": 960,
         "wires": [
             [
-                "8ad4a13f3069f1ac"
+                "c78bcabe4f6f913b"
             ]
         ]
     },
@@ -1972,10 +1764,10 @@
         "twofactorpin": "",
         "filter": true,
         "x": 1150,
-        "y": 1020,
+        "y": 780,
         "wires": [
             [
-                "8ad4a13f3069f1ac"
+                "dcf06f55dca5f699"
             ]
         ]
     },
@@ -2004,10 +1796,10 @@
         "twofactorpin": "",
         "filter": true,
         "x": 1150,
-        "y": 1080,
+        "y": 840,
         "wires": [
             [
-                "8ad4a13f3069f1ac"
+                "dcf06f55dca5f699"
             ]
         ]
     },
@@ -2036,10 +1828,10 @@
         "twofactorpin": "",
         "filter": true,
         "x": 1170,
-        "y": 1140,
+        "y": 900,
         "wires": [
             [
-                "8ad4a13f3069f1ac"
+                "dcf06f55dca5f699"
             ]
         ]
     },
@@ -2070,11 +1862,11 @@
         "twofactor": "off",
         "twofactorpin": "",
         "filter": true,
-        "x": 490,
-        "y": 560,
+        "x": 1170,
+        "y": 260,
         "wires": [
             [
-                "80206ddcbd9d94f1"
+                "769bb33f49f1c02b"
             ]
         ]
     },
@@ -2085,12 +1877,12 @@
         "name": "state changed",
         "mode": "link",
         "links": [
-            "3fdd728b0585df23",
-            "b8a5316364ec5fe8",
             "1b4bb0df8c93cc89",
-            "b3a359bc7a838527"
+            "3fdd728b0585df23",
+            "b3a359bc7a838527",
+            "b8a5316364ec5fe8"
         ],
-        "x": 1045,
+        "x": 905,
         "y": 60,
         "wires": []
     },
@@ -2107,7 +1899,7 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 610,
+        "x": 580,
         "y": 60,
         "wires": [
             [
@@ -2128,7 +1920,7 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 600,
+        "x": 590,
         "y": 120,
         "wires": [
             [
@@ -2147,43 +1939,11 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 790,
+        "x": 760,
         "y": 120,
         "wires": [
             [
                 "cb6ee814173dbfcd"
-            ]
-        ]
-    },
-    {
-        "id": "b8a5316364ec5fe8",
-        "type": "link in",
-        "z": "7d41aab9fd0b6a3e",
-        "name": "link in 1",
-        "links": [
-            "340c4ef4bedec8a6"
-        ],
-        "x": 105,
-        "y": 320,
-        "wires": [
-            [
-                "b18a911a13f74c55"
-            ]
-        ]
-    },
-    {
-        "id": "3fdd728b0585df23",
-        "type": "link in",
-        "z": "7d41aab9fd0b6a3e",
-        "name": "link in 2",
-        "links": [
-            "340c4ef4bedec8a6"
-        ],
-        "x": 805,
-        "y": 840,
-        "wires": [
-            [
-                "821e92a25e3b217f"
             ]
         ]
     },
@@ -2193,13 +1953,12 @@
         "z": "7d41aab9fd0b6a3e",
         "name": "update state",
         "links": [
-            "6af1216eb7c5c03f",
             "49583d9de218bf42",
             "43ff6ea09782443a",
             "bd1a7b07efa6d260"
         ],
-        "x": 1145,
-        "y": 100,
+        "x": 965,
+        "y": 60,
         "wires": [
             [
                 "f51b18a179ad290d"
@@ -2207,39 +1966,21 @@
         ]
     },
     {
-        "id": "71abf52c70a50205",
-        "type": "mqtt out",
-        "z": "7d41aab9fd0b6a3e",
-        "name": "",
-        "topic": "",
-        "qos": "0",
-        "retain": "true",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "f569d34c.8c7ed",
-        "x": 1370,
-        "y": 100,
-        "wires": []
-    },
-    {
         "id": "f51b18a179ad290d",
         "type": "function",
         "z": "7d41aab9fd0b6a3e",
         "name": "set state",
-        "func": "return {\n    ...msg,\n    topic: `${msg.topic}/set`,\n};\n",
+        "func": "return {\n    retain: true,\n    ...msg,\n    topic: `${msg.topic}/set`\n};",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1240,
-        "y": 100,
+        "x": 1060,
+        "y": 60,
         "wires": [
             [
-                "71abf52c70a50205"
+                "a3019ae0eb0a0e72"
             ]
         ]
     },
@@ -2250,38 +1991,25 @@
         "name": "link out 1",
         "mode": "link",
         "links": [
-            "d1bf6e5c3d819560"
+            "6dda18477b42006d"
         ],
-        "x": 735,
-        "y": 320,
-        "wires": []
-    },
-    {
-        "id": "49583d9de218bf42",
-        "type": "link out",
-        "z": "7d41aab9fd0b6a3e",
-        "name": "link out 2",
-        "mode": "link",
-        "links": [
-            "d1bf6e5c3d819560"
-        ],
-        "x": 1445,
-        "y": 840,
+        "x": 905,
+        "y": 200,
         "wires": []
     },
     {
         "id": "03e9def7ed68132d",
         "type": "function",
         "z": "7d41aab9fd0b6a3e",
-        "name": "map",
+        "name": "onoff.out",
         "func": "const m = /([^.]+)\\.(\\d+)/.exec(msg.topic);\nconst topic = m ? m[1] : msg.topic;\nconst index = m ? +m[2] : 0;\n\nconst on = [];\non[index] = msg.payload;\n\nreturn {\n    payload: {\n        on,\n    },\n    topic,\n};",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1350,
-        "y": 260,
+        "x": 420,
+        "y": 280,
         "wires": [
             [
                 "43ff6ea09782443a"
@@ -2292,18 +2020,18 @@
         "id": "26e27a446f7b7444",
         "type": "function",
         "z": "7d41aab9fd0b6a3e",
-        "name": "onoff",
-        "func": "if (msg.topic.startsWith('ha-switch/switch-onoff-') &&\n    'on' in msg.payload) {\n\n    if (Array.isArray(msg.payload.on) && msg.payload.on.length > 1) {\n        //multiple states on switch\n        return [msg.payload.on.map((on, index) => ({\n            payload: {\n                ...msg.payload,\n                on,\n            },\n            topic: `${msg.topic}.${index}`\n        }))];\n    } else {\n        return {\n            payload: {\n                ...msg.payload,\n                on: msg.payload.on[0] ?? msg.payload.on,\n            },\n            topic: msg.topic,\n        };\n    }\n}",
+        "name": "onoff.in",
+        "func": "if (msg.topic.startsWith('ha-switch/switch-onoff-')) {\n\n    if (Array.isArray(msg.payload.on) && msg.payload.on.length > 1) {\n        //multiple states on switch\n        return [msg.payload.on.map((on, index) => ({\n            payload: {\n                ...msg.payload,\n                on,\n            },\n            topic: `${msg.topic}.${index}`\n        }))];\n    } else {\n        return {\n            payload: {\n                ...msg.payload,\n                on: msg.payload?.on?.[0] ?? msg.payload?.on,\n            },\n            topic: msg.topic,\n        };\n    }\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 890,
-        "y": 260,
+        "x": 160,
+        "y": 280,
         "wires": [
             [
-                "af0b3ee1164dc74c"
+                "8093f83674525563"
             ]
         ]
     },
@@ -2315,11 +2043,15 @@
         "links": [
             "340c4ef4bedec8a6"
         ],
-        "x": 805,
-        "y": 260,
+        "x": 45,
+        "y": 200,
         "wires": [
             [
-                "26e27a446f7b7444"
+                "26e27a446f7b7444",
+                "b18a911a13f74c55",
+                "821e92a25e3b217f",
+                "52cbf133f2f61326",
+                "3e2d1afb89aa35ed"
             ]
         ]
     },
@@ -2332,8 +2064,8 @@
         "links": [
             "d1bf6e5c3d819560"
         ],
-        "x": 1445,
-        "y": 260,
+        "x": 515,
+        "y": 200,
         "wires": []
     },
     {
@@ -2363,11 +2095,11 @@
         "twofactor": "off",
         "twofactorpin": "",
         "filter": true,
-        "x": 1140,
-        "y": 200,
+        "x": 740,
+        "y": 500,
         "wires": [
             [
-                "03e9def7ed68132d"
+                "23cf6c6f6605894d"
             ]
         ]
     },
@@ -2399,11 +2131,11 @@
         "twofactor": "off",
         "twofactorpin": "",
         "filter": true,
-        "x": 1150,
-        "y": 260,
+        "x": 750,
+        "y": 560,
         "wires": [
             [
-                "03e9def7ed68132d"
+                "23cf6c6f6605894d"
             ]
         ]
     },
@@ -2434,11 +2166,11 @@
         "twofactor": "off",
         "twofactorpin": "",
         "filter": true,
-        "x": 1140,
-        "y": 320,
+        "x": 740,
+        "y": 600,
         "wires": [
             [
-                "03e9def7ed68132d"
+                "23cf6c6f6605894d"
             ]
         ]
     },
@@ -2469,11 +2201,11 @@
         "twofactor": "off",
         "twofactorpin": "",
         "filter": true,
-        "x": 470,
-        "y": 740,
+        "x": 1150,
+        "y": 440,
         "wires": [
             [
-                "80206ddcbd9d94f1"
+                "769bb33f49f1c02b"
             ]
         ]
     },
@@ -2504,11 +2236,11 @@
         "twofactor": "off",
         "twofactorpin": "",
         "filter": true,
-        "x": 480,
+        "x": 760,
         "y": 260,
         "wires": [
             [
-                "80206ddcbd9d94f1"
+                "6af1216eb7c5c03f"
             ]
         ]
     },
@@ -2539,11 +2271,11 @@
         "twofactor": "off",
         "twofactorpin": "",
         "filter": true,
-        "x": 1160,
-        "y": 380,
+        "x": 760,
+        "y": 660,
         "wires": [
             [
-                "03e9def7ed68132d"
+                "23cf6c6f6605894d"
             ]
         ]
     },
@@ -2567,11 +2299,11 @@
         "filter": true,
         "asyncCmd": false,
         "outputs": 1,
-        "x": 1140,
-        "y": 440,
+        "x": 740,
+        "y": 720,
         "wires": [
             [
-                "03e9def7ed68132d"
+                "23cf6c6f6605894d"
             ]
         ]
     },
@@ -2586,42 +2318,13 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 230,
-        "y": 840,
+        "x": 290,
+        "y": 200,
         "wires": [
             [
-                "bd1a7b07efa6d260"
+                "43ff6ea09782443a"
             ]
         ]
-    },
-    {
-        "id": "b3a359bc7a838527",
-        "type": "link in",
-        "z": "7d41aab9fd0b6a3e",
-        "name": "link in 5",
-        "links": [
-            "340c4ef4bedec8a6"
-        ],
-        "x": 115,
-        "y": 840,
-        "wires": [
-            [
-                "52cbf133f2f61326"
-            ]
-        ]
-    },
-    {
-        "id": "bd1a7b07efa6d260",
-        "type": "link out",
-        "z": "7d41aab9fd0b6a3e",
-        "name": "link out 5",
-        "mode": "link",
-        "links": [
-            "d1bf6e5c3d819560"
-        ],
-        "x": 345,
-        "y": 840,
-        "wires": []
     },
     {
         "id": "177b7b13cf11baf0",
@@ -2654,7 +2357,7 @@
         "y": 500,
         "wires": [
             [
-                "03e9def7ed68132d"
+                "f90095c9a660a010"
             ]
         ]
     },
@@ -2690,7 +2393,7 @@
         "y": 560,
         "wires": [
             [
-                "03e9def7ed68132d"
+                "f90095c9a660a010"
             ]
         ]
     },
@@ -2726,7 +2429,7 @@
         "y": 600,
         "wires": [
             [
-                "03e9def7ed68132d"
+                "f90095c9a660a010"
             ]
         ]
     },
@@ -2754,11 +2457,11 @@
         "twofactor": "off",
         "twofactorpin": "",
         "filter": true,
-        "x": 1140,
+        "x": 740,
         "y": 780,
         "wires": [
             [
-                "8ad4a13f3069f1ac"
+                "c78bcabe4f6f913b"
             ]
         ]
     },
@@ -2773,7 +2476,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 910,
+        "x": 790,
         "y": 60,
         "wires": [
             [
@@ -2812,7 +2515,7 @@
         "y": 640,
         "wires": [
             [
-                "03e9def7ed68132d"
+                "f90095c9a660a010"
             ]
         ]
     },
@@ -2847,7 +2550,7 @@
         "y": 700,
         "wires": [
             [
-                "03e9def7ed68132d"
+                "f90095c9a660a010"
             ]
         ]
     },
@@ -2867,62 +2570,56 @@
         "commandonly": true,
         "queryonly": false,
         "nora": "f1e538c1.0315f8",
-        "topic": "",
+        "topic": "ha-switch/switch-car-gate/state",
         "openvalue": "true",
         "openvalueType": "bool",
         "closevalue": "false",
         "closevalueType": "bool",
         "twofactor": "ack",
         "twofactorpin": "",
-        "filter": false,
-        "x": 160,
-        "y": 920,
+        "filter": true,
+        "x": 220,
+        "y": 500,
         "wires": [
             [
-                "dbd38345f8d938d3"
+                "6824adfe2ef43b30"
             ]
         ]
     },
     {
-        "id": "29a9cd51606f3522",
-        "type": "mqtt out",
+        "id": "4c24a422c018775f",
+        "type": "noraf-openclose",
         "z": "7d41aab9fd0b6a3e",
+        "devicename": "Human Gate",
+        "roomhint": "Outside",
         "name": "",
-        "topic": "",
-        "qos": "0",
-        "retain": "false",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "f569d34c.8c7ed",
-        "x": 470,
-        "y": 920,
-        "wires": []
-    },
-    {
-        "id": "dbd38345f8d938d3",
-        "type": "function",
-        "z": "7d41aab9fd0b6a3e",
-        "name": "map",
-        "func": "if (msg.payload) {\n    return {\n        payload: {\n            on: [true],\n            for: 1\n        },\n        topic: 'ha-switch/switch-car-gate/state/set',\n    };\n}\n",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 310,
-        "y": 920,
+        "directions": "",
+        "openclosetype": "GATE",
+        "passthru": false,
+        "errorifstateunchaged": false,
+        "discrete": true,
+        "lockunlock": false,
+        "commandonly": true,
+        "queryonly": false,
+        "nora": "f1e538c1.0315f8",
+        "topic": "ha-switch/switch-human-gate/state",
+        "openvalue": "true",
+        "openvalueType": "bool",
+        "closevalue": "false",
+        "closevalueType": "bool",
+        "twofactor": "ack",
+        "twofactorpin": "",
+        "filter": true,
+        "x": 230,
+        "y": 560,
         "wires": [
             [
-                "29a9cd51606f3522",
-                "27081a74d2d37bb1"
+                "6824adfe2ef43b30"
             ]
         ]
     },
     {
-        "id": "27081a74d2d37bb1",
+        "id": "b35d5cb5c64994be",
         "type": "trigger",
         "z": "7d41aab9fd0b6a3e",
         "name": "",
@@ -2930,7 +2627,588 @@
         "op2": "false",
         "op1type": "nul",
         "op2type": "bool",
-        "duration": "2",
+        "duration": "5",
+        "extend": true,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "topic",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 420,
+        "y": 400,
+        "wires": [
+            [
+                "5eea34281d67c83b"
+            ]
+        ]
+    },
+    {
+        "id": "8775f81eb190b655",
+        "type": "link out",
+        "z": "7d41aab9fd0b6a3e",
+        "name": "link out 9",
+        "mode": "link",
+        "links": [
+            "3671ebcac6a33473",
+            "f0c595fd2cbfab7e"
+        ],
+        "x": 275,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "3671ebcac6a33473",
+        "type": "link in",
+        "z": "7d41aab9fd0b6a3e",
+        "name": "link in 11",
+        "links": [
+            "8775f81eb190b655"
+        ],
+        "x": 575,
+        "y": 200,
+        "wires": [
+            [
+                "f648133e35429919",
+                "8521a26270a7f5ed",
+                "d2f287de8e2b7bdb",
+                "0450c2ce91a72b78",
+                "31ccd8e9f0a2e09e"
+            ]
+        ]
+    },
+    {
+        "id": "f0c595fd2cbfab7e",
+        "type": "link in",
+        "z": "7d41aab9fd0b6a3e",
+        "name": "link in 12",
+        "links": [
+            "8775f81eb190b655"
+        ],
+        "x": 985,
+        "y": 200,
+        "wires": [
+            [
+                "b7b0b4d5c552d29a",
+                "6762d86fa674744b",
+                "917568c1def8a578",
+                "dfc52bfc266069f0",
+                "b2a67d17df0195f8"
+            ]
+        ]
+    },
+    {
+        "id": "769bb33f49f1c02b",
+        "type": "link out",
+        "z": "7d41aab9fd0b6a3e",
+        "name": "link out 10",
+        "mode": "link",
+        "links": [
+            "6dda18477b42006d"
+        ],
+        "x": 1305,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "8093f83674525563",
+        "type": "link out",
+        "z": "7d41aab9fd0b6a3e",
+        "name": "link out 11",
+        "mode": "link",
+        "links": [
+            "6b2f234d07a39253",
+            "69b6eafb0ccb804f"
+        ],
+        "x": 275,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "6b2f234d07a39253",
+        "type": "link in",
+        "z": "7d41aab9fd0b6a3e",
+        "name": "link in 13",
+        "links": [
+            "8093f83674525563"
+        ],
+        "x": 575,
+        "y": 500,
+        "wires": [
+            [
+                "1eeea8ddfe40852e",
+                "144549cc6dc7cbe7",
+                "8714fba0422dd9f9",
+                "c78d7adf71b71c07",
+                "6ebdf6901c3c44a1"
+            ]
+        ]
+    },
+    {
+        "id": "69b6eafb0ccb804f",
+        "type": "link in",
+        "z": "7d41aab9fd0b6a3e",
+        "name": "link in 14",
+        "links": [
+            "8093f83674525563"
+        ],
+        "x": 985,
+        "y": 500,
+        "wires": [
+            [
+                "177b7b13cf11baf0",
+                "cfd8480b606b454e",
+                "72228fcd02ae304f",
+                "3013c47f8d5eef60",
+                "53e009712f4ba5db"
+            ]
+        ]
+    },
+    {
+        "id": "23cf6c6f6605894d",
+        "type": "link out",
+        "z": "7d41aab9fd0b6a3e",
+        "name": "link out 12",
+        "mode": "link",
+        "links": [
+            "f3cec6f29b539695"
+        ],
+        "x": 905,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "f3cec6f29b539695",
+        "type": "link in",
+        "z": "7d41aab9fd0b6a3e",
+        "name": "link in 15",
+        "links": [
+            "23cf6c6f6605894d",
+            "f90095c9a660a010"
+        ],
+        "x": 325,
+        "y": 280,
+        "wires": [
+            [
+                "03e9def7ed68132d"
+            ]
+        ]
+    },
+    {
+        "id": "f90095c9a660a010",
+        "type": "link out",
+        "z": "7d41aab9fd0b6a3e",
+        "name": "link out 13",
+        "mode": "link",
+        "links": [
+            "f3cec6f29b539695"
+        ],
+        "x": 1315,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "c1e22f0be8354b42",
+        "type": "link in",
+        "z": "7d41aab9fd0b6a3e",
+        "name": "link in 16",
+        "links": [
+            "99f8a5fa2751fc29"
+        ],
+        "x": 575,
+        "y": 780,
+        "wires": [
+            [
+                "645b5b8f07f055fc",
+                "dc8db494b158e485",
+                "7426cbb773e5162c",
+                "a3dbdc255ebe8243"
+            ]
+        ]
+    },
+    {
+        "id": "99f8a5fa2751fc29",
+        "type": "link out",
+        "z": "7d41aab9fd0b6a3e",
+        "name": "link out 14",
+        "mode": "link",
+        "links": [
+            "c1e22f0be8354b42",
+            "7103c86fddd0b4c4"
+        ],
+        "x": 275,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "c78bcabe4f6f913b",
+        "type": "link out",
+        "z": "7d41aab9fd0b6a3e",
+        "name": "link out 15",
+        "mode": "link",
+        "links": [
+            "acc065a79178bb58"
+        ],
+        "x": 915,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "acc065a79178bb58",
+        "type": "link in",
+        "z": "7d41aab9fd0b6a3e",
+        "name": "link in 17",
+        "links": [
+            "c78bcabe4f6f913b",
+            "dcf06f55dca5f699"
+        ],
+        "x": 325,
+        "y": 320,
+        "wires": [
+            [
+                "8ad4a13f3069f1ac"
+            ]
+        ]
+    },
+    {
+        "id": "7103c86fddd0b4c4",
+        "type": "link in",
+        "z": "7d41aab9fd0b6a3e",
+        "name": "link in 18",
+        "links": [
+            "99f8a5fa2751fc29"
+        ],
+        "x": 985,
+        "y": 780,
+        "wires": [
+            [
+                "efac8720a10238d0",
+                "6b14f65c73a0bf69",
+                "ba592d172f57dd43"
+            ]
+        ]
+    },
+    {
+        "id": "dcf06f55dca5f699",
+        "type": "link out",
+        "z": "7d41aab9fd0b6a3e",
+        "name": "link out 16",
+        "mode": "link",
+        "links": [
+            "acc065a79178bb58"
+        ],
+        "x": 1315,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "3e2d1afb89aa35ed",
+        "type": "function",
+        "z": "7d41aab9fd0b6a3e",
+        "name": "gates.in",
+        "func": "const regex = /^ha-switch\\/switch-.+-gate\\/state$/\nif (regex.test(msg.topic)) {\n    return {\n        payload: {\n            online: msg.payload.online,\n        },\n        topic: msg.topic,\n    };\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 160,
+        "y": 360,
+        "wires": [
+            [
+                "cf7e8d5ba2601ea3"
+            ]
+        ]
+    },
+    {
+        "id": "cf7e8d5ba2601ea3",
+        "type": "link out",
+        "z": "7d41aab9fd0b6a3e",
+        "name": "link out 23",
+        "mode": "link",
+        "links": [
+            "dd3deb2b19626528"
+        ],
+        "x": 275,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "dd3deb2b19626528",
+        "type": "link in",
+        "z": "7d41aab9fd0b6a3e",
+        "name": "link in 22",
+        "links": [
+            "5eea34281d67c83b",
+            "cf7e8d5ba2601ea3"
+        ],
+        "x": 95,
+        "y": 500,
+        "wires": [
+            [
+                "4c24a422c018775f",
+                "2c6fd4fdcf461e64"
+            ]
+        ]
+    },
+    {
+        "id": "82a73fd14fe3431f",
+        "type": "function",
+        "z": "7d41aab9fd0b6a3e",
+        "name": "gates.out",
+        "func": "if (msg.payload) {\n    return {\n        payload: {\n            on: [true],\n            for: 2\n        },\n        topic: msg.topic,\n        retain: false,\n    };\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 360,
+        "wires": [
+            [
+                "43ff6ea09782443a"
+            ]
+        ]
+    },
+    {
+        "id": "6824adfe2ef43b30",
+        "type": "link out",
+        "z": "7d41aab9fd0b6a3e",
+        "name": "link out 24",
+        "mode": "link",
+        "links": [
+            "d330cbbb1892d1c5"
+        ],
+        "x": 345,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "d330cbbb1892d1c5",
+        "type": "link in",
+        "z": "7d41aab9fd0b6a3e",
+        "name": "link in 23",
+        "links": [
+            "6824adfe2ef43b30"
+        ],
+        "x": 325,
+        "y": 360,
+        "wires": [
+            [
+                "82a73fd14fe3431f",
+                "b35d5cb5c64994be"
+            ]
+        ]
+    },
+    {
+        "id": "5eea34281d67c83b",
+        "type": "link out",
+        "z": "7d41aab9fd0b6a3e",
+        "name": "link out 25",
+        "mode": "link",
+        "links": [
+            "dd3deb2b19626528"
+        ],
+        "x": 515,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "a3019ae0eb0a0e72",
+        "type": "mqtt out",
+        "z": "7d41aab9fd0b6a3e",
+        "name": "mqtt",
+        "topic": "",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "f569d34c.8c7ed",
+        "x": 1190,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "6dda18477b42006d",
+        "type": "link in",
+        "z": "7d41aab9fd0b6a3e",
+        "name": "link in 24",
+        "links": [
+            "6af1216eb7c5c03f",
+            "769bb33f49f1c02b"
+        ],
+        "x": 325,
+        "y": 240,
+        "wires": [
+            [
+                "43ff6ea09782443a"
+            ]
+        ]
+    },
+    {
+        "id": "8755301a8c241477",
+        "type": "mpp-input",
+        "z": "d02cf25fa8114475",
+        "name": "mpp general status",
+        "mpp": "50383ae4cbb82921",
+        "interval": "2",
+        "timeout": "2",
+        "query": "GeneralStatus",
+        "x": 130,
+        "y": 140,
+        "wires": [
+            [
+                "ee29764d6322b235",
+                "acf00a2d42111e5f",
+                "af672b4bd5a4f9eb"
+            ]
+        ]
+    },
+    {
+        "id": "0cb2bd44a8edc2d3",
+        "type": "mpp-input",
+        "z": "d02cf25fa8114475",
+        "name": "mpp power status",
+        "mpp": "50383ae4cbb82921",
+        "interval": "2",
+        "timeout": "2",
+        "query": "PowerStatus",
+        "x": 130,
+        "y": 200,
+        "wires": [
+            [
+                "151e85104313bf09",
+                "4d5a91dbb440c2e4",
+                "8012606b2ccfea72"
+            ]
+        ]
+    },
+    {
+        "id": "658c70c17f292167",
+        "type": "influxdb out",
+        "z": "d02cf25fa8114475",
+        "influxdb": "63bdbe3c09b491f2",
+        "name": "",
+        "measurement": "",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "home",
+        "bucket": "power",
+        "x": 560,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "ee29764d6322b235",
+        "type": "function",
+        "z": "d02cf25fa8114475",
+        "name": "map",
+        "func": "return [[{\n    payload: msg.payload.acInput.voltage,\n    measurement: 'ac-input-voltage',\n}, {\n    payload: msg.payload.acInput.frequency,\n    measurement: 'ac-input-freq',\n}, {\n    payload: msg.payload.acOutput.voltage,\n    measurement: 'ac-output-voltage',\n}, {\n    payload: msg.payload.acOutput.frequency,\n    measurement: 'ac-output-freq',\n}, {\n    payload: {\n        voltage: msg.payload.battery.voltage,\n        current: msg.payload.battery.current,\n        capacity: msg.payload.battery.capacity,\n    },\n    measurement: 'battery',\n}]];",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 160,
+        "wires": [
+            [
+                "658c70c17f292167"
+            ]
+        ]
+    },
+    {
+        "id": "151e85104313bf09",
+        "type": "function",
+        "z": "d02cf25fa8114475",
+        "name": "map",
+        "func": "return [[{\n    payload: msg.payload.acInput.activePower,\n    measurement: 'ac-input-active-power',\n}, {\n    payload: msg.payload.acOutput.activePower,\n    measurement: 'ac-output-active-power',\n}, {\n    payload: msg.payload.acOutput.apparentPower,\n    measurement: 'ac-output-apparent-power',\n}]];",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 200,
+        "wires": [
+            [
+                "658c70c17f292167"
+            ]
+        ]
+    },
+    {
+        "id": "acf00a2d42111e5f",
+        "type": "function",
+        "z": "d02cf25fa8114475",
+        "name": "notify grid status",
+        "func": "const lastPowerStatus = context.get('power_status');\nconst powerStatus = msg.payload.acInput.frequency > 45;\n\nif (powerStatus === lastPowerStatus) {\n    return;\n}\n\ncontext.set('power_status', powerStatus);\n\nnode.status({\n    fill: powerStatus ? 'blue' : 'red',\n    text: powerStatus ? 'online' : 'offline',\n});\n\nlet changes = context.get('changes');\nconst today = new Date().toLocaleDateString();\nconst key = powerStatus ? 'recovered' : 'lost';\nif (changes?.key === today) {\n    changes[key]++;\n} else {\n    changes = {\n        key: today,\n        recovered: 0,\n        lost: 0,\n        [key]: 1,\n    };\n}\nlet timeToRecover = '';\nif (!powerStatus) {\n    context.set('lostAt', new Date().getTime());\n} else {\n    const lostAt = context.get('lostAt');\n    if (typeof lostAt === 'number') {\n        let time = (new Date().getTime() - lostAt) / 1000;\n        let unit = 'sec';\n        if (time > 60) {\n            time /= 60;\n            unit = 'min';\n        }\n        if (time > 60) {\n            time /= 60;\n            unit = 'hour';\n        }\n        timeToRecover = `Recovered after ${time.toFixed(1)} ${unit}.`\n    }\n}\ncontext.set('changes', changes);\n\nconst timestamp = new Date().toLocaleString();\nconst body = `Power ${key} at ${timestamp}, (lost: ${changes.lost}, recovered: ${changes.recovered})\\n${timeToRecover}`;\n\nreturn {\n    payload: {\n        tag: 'power-status',\n        title: 'Power Status',\n        body: body,\n        silent: true,\n    },\n};\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 40,
+        "wires": [
+            [
+                "002fbcc4b5600960"
+            ]
+        ]
+    },
+    {
+        "id": "002fbcc4b5600960",
+        "type": "noraf-notify",
+        "z": "d02cf25fa8114475",
+        "tag": "",
+        "title": "",
+        "body": "",
+        "icon": "",
+        "name": "notify",
+        "nora": "f1e538c1.0315f8",
+        "topic": "",
+        "actions": [],
+        "closeNotification": false,
+        "x": 870,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6211e9ebc3399079",
+        "type": "function",
+        "z": "d02cf25fa8114475",
+        "name": "notify battery",
+        "func": "const capacity = msg.payload;\nconst notifyAt = [10, 25, 30, 50, 80];\nconst lastNotifyAt = context.get('notify_at');\n\nif (flow.get('batteryStatus') === 'charge') {\n    if (lastNotifyAt) {\n        context.set('notify_at', null)\n    }\n    return;\n}\n\nlet i;\nfor (i = 0; i < notifyAt.length; i++) {\n    const step = notifyAt[i];\n    let threshold = step;\n    if (lastNotifyAt === step) {\n        threshold += 5;\n    }\n    if (capacity <= threshold) {\n        if (lastNotifyAt !== step) {\n            context.set('notify_at', step)\n\n            const timestamp = new Date().toLocaleString();\n            const body = `Battery capacity ${capacity}%, at ${timestamp}`;\n\n            return {\n                payload: {\n                    tag: 'battery-capacity',\n                    title: 'Battery capacity',\n                    body: body,\n                },\n            };\n        }\n\n        break;\n    }\n}\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 100,
+        "wires": [
+            [
+                "002fbcc4b5600960"
+            ]
+        ]
+    },
+    {
+        "id": "8012606b2ccfea72",
+        "type": "trigger",
+        "z": "d02cf25fa8114475",
+        "name": "",
+        "op1": "true",
+        "op2": "false",
+        "op1type": "bool",
+        "op2type": "bool",
+        "duration": "5",
         "extend": true,
         "overrideDelay": false,
         "units": "s",
@@ -2938,12 +3216,67 @@
         "bytopic": "all",
         "topic": "topic",
         "outputs": 1,
-        "x": 480,
-        "y": 980,
+        "x": 340,
+        "y": 280,
         "wires": [
             [
-                "2c6fd4fdcf461e64"
+                "3fa4c0f648cfb1d0"
             ]
+        ]
+    },
+    {
+        "id": "3fa4c0f648cfb1d0",
+        "type": "function",
+        "z": "d02cf25fa8114475",
+        "name": "notify inverter connection",
+        "func": "const status = msg.payload ? 'restored' : 'lost';\nconst at = new Date().toLocaleString();\nlet afterText = '';\nif (!msg.payload) {\n    context.set('lost_at', new Date().getTime());\n} else {\n    let after = new Date().getTime() - context.get('lost_at');\n    let unit = 'sec';\n    after /= 1000;\n    if (after > 60) {\n        after /= 60;\n        unit = 'min';\n    }\n    if (after > 60) {\n        after /= 60;\n        unit = 'hour';\n    }\n    afterText = `, after ${after.toFixed(1)} ${unit}`\n}\n\nreturn {\n    payload: {\n        tag: \"inverter-connection\",\n        title: \"Inverter connection\",\n        body: `Inverter connection ${status} at ${at}${afterText}`,\n    }\n};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 280,
+        "wires": [
+            [
+                "002fbcc4b5600960"
+            ]
+        ]
+    },
+    {
+        "id": "af672b4bd5a4f9eb",
+        "type": "function",
+        "z": "d02cf25fa8114475",
+        "name": "average",
+        "func": "const capacity = msg.payload.battery.capacity;\nconst values = this.past_values ?? [];\nvalues.splice(900);\nvalues.splice(0, 0, capacity);\nthis.past_values = values;\n\nconst average = values.reduce((a, b) => a + b, 0) / values.length;\nnode.status({ fill: \"blue\", shape: \"ring\", text: `${average.toFixed(2)}%` });\n\nreturn { payload: average };",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 100,
+        "wires": [
+            [
+                "6211e9ebc3399079"
+            ]
+        ]
+    },
+    {
+        "id": "4d5a91dbb440c2e4",
+        "type": "function",
+        "z": "d02cf25fa8114475",
+        "name": "set flow.batteryStatus",
+        "func": "const lastValue = flow.get('batteryStatus');\nconst newValue = msg.payload.status.batteryPowerDirectionStatus;\nif (newValue !== lastValue) {\n    flow.set('batteryStatus', newValue);\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 240,
+        "wires": [
+            []
         ]
     },
     {
@@ -3115,7 +3448,7 @@
         "type": "function",
         "z": "13aa577370e4c4d7",
         "name": "Battery low",
-        "func": "if (msg.payload?.battery_low === true ||\n    msg.payload?.battery < 20) {\n    const now = new Date().toLocaleString();\n    const location = msg.topic.substring(msg.topic.indexOf('/') + 1);\n    return {\n        topic: location,\n        payload: {\n            tag: location,\n            title: 'Battery low',\n            body: `${location} at ${now}. Battery: ${msg.payload.battery ?? -1}. Low: ${msg.payload.battery_low}`,\n        },\n    };\n}\n",
+        "func": "if (msg.payload?.battery_low === true ||\n    msg.payload?.battery < 20) {\n    const now = new Date().toLocaleString();\n    const location = msg.topic.substring(msg.topic.indexOf('/') + 1);\n    return {\n        topic: location,\n        payload: {\n            tag: location,\n            title: 'Battery low',\n            body: `${location} at ${now}. Battery: ${msg.payload.battery ?? -1}. Low: ${msg.payload.battery_low}`,\n\n            //zigbee logo\n            icon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAACXBIWXMAAAsTAAALEwEAmpwYAAAI+UlEQVR4nO1de6wcZRX/KmrvnLO3KFij+H5iwDdqKkE3e87cctWiRlNiYogaXyCiNhgxxICP4ANUlEciCjZR/xAJmqJoFYLEBI1Jm9qKhtJUsNJ73T3f3tsWQUDomvPNNtDbu7uzO9/sN7OdX3L+uDf3zpzzm2++x3mNMRUqVKhQoUKFChUqVKhQIMzjzDMt0oxF+qQFutoC3SrA2y3SbgFeEKSHnQAvJL+jHQJ0i/tb5PMsNNbO1WZXh7ajNNhr1kEL4ncI0LeVaEE+aJE7WUSvkTwY/o5EjXfuMWui0HYWDgKNUwTouwLUzkp4CnlQgH8mEZ3RMeuPMUcr7jazKyWisy3Q3WMgvYfQbqnF59xj6lPmaIEaq3O6IP8rHPFHPIg5QTpfp0AzyWhB4+2CfE94wrnXenFfu0brzaRBovgEnXdDE2zTy6aFqcYLzCRAInq3AC8WgNTOUG+D6lyL32PKCt1hCPIXBemx0GTaTELX6IbBlAn7Vq09zgLdHp489vU23KE2mTKgCfVn6cGnpzHucEVz7kQLfJsAXa8nV0H+kkX+lAX6oC6Eeopt1egtekZormq85N8r+cV6Mt537GlPX05sRM/Rv2lj42T9H/3fNsZn6jUF+RJB3ihIvxl19yXAf2tPrX2eKTJ04RKgv1vgXYL8awG6wiJ9WgltTzVOVQM65pSnhNZzrja7ug3x6QLx5wVps7ozUj0EpD1SW/sKU1Toa1oEgofF4rH1pwk0zlJfU5qHUPg3ocyQKH6DRb5p0HRUmjVhOeiuogWnP7uNM69s1eJ6C3idm6aAPiJI5wrQBYL0FYv89cOFrul6Og/7va4f7n8S14ZbQ3SK0Ws7P9N040SdHnWtSKtjC+l9/XxTgvTHQu6ODtTqz2hP8Zu7C+AGAb5cgG9QhQX5Xgt8f7AdDdBFw9ii871uGHq/CXSFCYkW0Ou7o/U6RzCQDb1ltD2FvjaKjRLxGwX5kZ7XrfF7TaiRboGa4YnlgaKu7iy2CtJXe1+bF4O4LXRaKQX5SNd1jFmR/WDJB/rc5yYzTmgwoxzk88aOufhJXmxG3tj3XhGdYcaBjqk/WbdhhScf+AbV1Zfduqsa8Kb9YyzhThfsLjz5dKNP8h8PJPGDA+69weQJ3fdapL2hCbb9R+Jm3/tz9exaoJ+kuP98rm9BC+KPFnzk3+I7vqsLuEX6fmodIjrb5/0PVwT4rtAk214CdLvvmG5CPn9vOF1od9Zd17LQY31wkrHHqEP6kxx/6rRvmy3SpaPoo1z51kW3YT8MTbRdfsRty8Mx1u/wNXhA8LXG+w6g/0EkzMgH3r5/mo/PgfwvZ9OL9ntdjNtAbwtNtl0qQDs1+mY8wwJd6EM/9fB6UyqJbBWJfN6lqS7GMzR65+/tpG/5UwxoZ3DSsWsY8r0LU/HzjWcksYjsycCPC23zopgGMfwqlon8+zRAbzzDAn3Yt42ajqMe4+zKufz88ORbdX3X6CTjGRo4EqRHc9I7zqygAH0uNPkCLBq+NJ6hmW+C/L/83lg6N7uSQ58EvZO/0AJ+nfEMifhdfSNdXnT3ELJU51Y48mm/jehNxjN0W502FyjbG8C/zaxsMN8/8P2azOWF8SfagzFb5P+OZwDx9swK98sKyE/oAUFqGM/QBzrOrAwN0mRWWoD2jZN8QXpYpwjjGTaK14zbnaKbh8yK571Q2SXkez3Cd9GEmdeOqQBwidBDmZUfx2JlkwXrES0jNZ6xgPGrQuUrqU2ZDRjHyBGkRzUV0HhGa5pfrmHCEOQ7u4D2ZTbCpRPmTL4gv994Rms6flmYDcQTheYyGyJAf82PfD6ocWbjGeqsK0I1ppdtqOu9UCLybVR/rsZlQ5PflZuzG5Skg3sn34ufZAk05T1s5f0Rdv7AZIWr2/L+atIFJoeyIwG+MzTp3hO1BqXkDS1AF5ocSows8tYCEL7kDfBwmncjy1ewYsgCiSHI31I88vmgt2yNfmWnQ5B/sfGMeTODFvgPocle9gEA7fBmqDY7Khr5e806sEC/D0107wfAl3szVl0ERSJ/j1kTpSkpDSnaGcarwSN5RXMgv2PWP9Ui/TI0wQNG/4LqGTY1MR/yjylD2xvvqYkK3VKFJ5+uD01uGmnVGm/1bb/RWqs0R3xtUZPLvYF/HJrYVKMf+M5c0tMVUuNPDFTAczOLjjEr9JUOTewQD+BjJmSJkqb4eS4KuSo0qemF9uZeqKfdBfuPALrR171s0guiU5rRn1d50tIDUD9fu4bh1CuZ9T6CfEloQocSoJ3et54ZDmaXZbm+BbooOKEhD16pSELe1O8tGDWRVgqQizpInH1Jyv7Nzk0DjQ+ZMO3JerejdKHM42ZXhY492JEIdp0e57ud2n/VLVA5rw0821xVf6nvIvCs2cU9XdUazmyurtfSXKu5ul4TaHxWp6/uqXtTNxy6RfvQCdI/Xct6J7Q/RYNu97cuMJ9EybZok0B1YwjQT5PmT/xN7RtngT+gyWBNaLxG169SNfVOUb60VbsZhtZzsrugA9/R/yHQAxb4C6Xus2YSR+DiypkXaR3wAtKrTVGgxKbLoqb/CPLPLdJnXJ84bJxclI7lWujtesvV4tO0C1Z3PbpM/U/aDUwPWYe6AOvaMEz/ubFAWzlqS8eRFj6gpiD/Wedm9/WMpOXx+Zq2cqgBn/ahSz70cLjobkunOHWB6M8uAxo5PtQIUOd3dQ9oIoBF/ob2fXDNppJ4wlZdW4ZKVwfelUd5rBc4EkZ9CFh8UdsWV9ZfaErQqn77xJEPtKM0DVvdmuDmzYkZ+ZvzaAYyht1RwSrscQQBurowB6+RqxHdgah0xDdVdzMJULfFoH7Mtljyi4n8AJy2dtTCteKOer5rIj/ic0RCFfKGgjX/m5eIPl7quX6kRboWnxM2l5+26SFNUxzN0YqOMStcm3nka8dREtu9x4/0ZB3a9sJhj1kTqQuh6474i68vMCV1A3Sp5jaV8QsfwXBAO7QjzSQfdeArBfh3+mC6n65tJyW09JAFaqmPxsUOtLcF8FU6p6tjrXBOswoVKlSoUKFChQoVKpijHf8HpXkJmmVvB/kAAAAASUVORK5CYII='\n        },\n    };\n}\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -3180,7 +3513,7 @@
         "type": "function",
         "z": "13aa577370e4c4d7",
         "name": "notify reason",
-        "func": "const RESET_CAUSE = {\n    '0': 'NO_MEAN',\n    '1': 'POWERON',\n    '3': 'SW',\n    '4': 'OWDT',\n    '5': 'DEEPSLEEP',\n    '6': 'SDIO',\n    '7': 'TG0WDT_SYS',\n    '8': 'TG1WDT_SYS',\n    '9': 'RTCWDT_SYS',\n    '10': 'INTRUSION',\n    '11': 'TGWDT_CPU',\n    '12': 'SW_CPU',\n    '13': 'RTCWDT_CPU',\n    '14': 'EXT_CPU',\n    '15': 'RTCWDT_BROWN_OUT',\n    '16': 'RTCWDT_RTC',\n};\n\nconst reason = msg.payload;\nconst name = msg.topic.split('/')[1];\nconst last = context.get('last5min') || {};\nconst now = new Date().getTime();\n\nfor (const key of Object.keys(last)) {\n    const delta = (now - last[key].at) / 1000;\n    if (delta > 60) {\n        delete last[key];\n    }\n}\n\nlast[name] = { at: now, reason: RESET_CAUSE[reason] ?? 'unknown' };\ncontext.set('last5min', last);\n\nconst names = Object.keys(last).map(k => `${k}-${last[k].reason}`).join(', ');\nconst nowString = new Date().toLocaleString();\nnode.send({\n    payload: {\n        tag: `devices-reset`,\n        title: 'Device(s) reset',\n        body: `${names}`,\n    },\n});\n",
+        "func": "const RESET_CAUSE = {\n    '0': 'NO_MEAN',\n    '1': 'POWERON',\n    '3': 'SW',\n    '4': 'OWDT',\n    '5': 'DEEPSLEEP',\n    '6': 'SDIO',\n    '7': 'TG0WDT_SYS',\n    '8': 'TG1WDT_SYS',\n    '9': 'RTCWDT_SYS',\n    '10': 'INTRUSION',\n    '11': 'TGWDT_CPU',\n    '12': 'SW_CPU',\n    '13': 'RTCWDT_CPU',\n    '14': 'EXT_CPU',\n    '15': 'RTCWDT_BROWN_OUT',\n    '16': 'RTCWDT_RTC',\n};\n\nconst reason = msg.payload;\nconst name = msg.topic.split('/')[1];\nconst last = context.get('last5min') || {};\nconst now = new Date().getTime();\n\nfor (const key of Object.keys(last)) {\n    const delta = (now - last[key].at) / 1000;\n    if (delta > 60) {\n        delete last[key];\n    }\n}\n\nlast[name] = { at: now, reason: RESET_CAUSE[reason] ?? 'unknown' };\ncontext.set('last5min', last);\n\nconst names = Object.keys(last).map(k => `${k}-${last[k].reason}`).join(', ');\nconst nowString = new Date().toLocaleString();\nnode.send({\n    payload: {\n        tag: `devices-reset`,\n        title: 'Device(s) reset',\n        body: `${names}`,\n        silent: true,\n    },\n});\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -3236,7 +3569,8 @@
         "y": 580,
         "wires": [
             [
-                "52228e2e95e8936e"
+                "52228e2e95e8936e",
+                "dae1ee13dce83183"
             ]
         ]
     },
@@ -3379,6 +3713,43 @@
         "broker": "f569d34c.8c7ed",
         "x": 530,
         "y": 580,
+        "wires": []
+    },
+    {
+        "id": "dae1ee13dce83183",
+        "type": "function",
+        "z": "13aa577370e4c4d7",
+        "name": "map",
+        "func": "const valueName = msg.topic.split('/').slice(-1)[0];\nif (typeof msg.payload.water_leak !== 'boolean') {\n    return;\n}\n\nreturn {\n    payload: { [valueName]: msg.payload.water_leak ? 1 : 0 },\n    measurement: 'water-leak',\n};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 640,
+        "wires": [
+            [
+                "92c831e50bcd68a1"
+            ]
+        ]
+    },
+    {
+        "id": "92c831e50bcd68a1",
+        "type": "influxdb out",
+        "z": "13aa577370e4c4d7",
+        "influxdb": "63bdbe3c09b491f2",
+        "name": "",
+        "measurement": "",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "home",
+        "bucket": "home",
+        "x": 620,
+        "y": 640,
         "wires": []
     },
     {
@@ -3803,11 +4174,12 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 140,
-        "y": 80,
+        "x": 160,
+        "y": 220,
         "wires": [
             [
-                "a0bf8cda615f1687"
+                "a0bf8cda615f1687",
+                "8ab75f8eee4ef8d5"
             ]
         ]
     },
@@ -3815,22 +4187,26 @@
         "id": "a0bf8cda615f1687",
         "type": "function",
         "z": "05e865126427c1f9",
-        "name": "When motion",
-        "func": "if (!flow.get('auto_light')) {\n    return;\n}\n\n/**\n * @type Array<{src:Array<string>, target:string, timeoutMin: number}>\n */\nconst targetByPir = [\n    {\n        src: ['pir/hallway-1', 'pir/hallway-2'],\n        target: 'switch-dimmer-3',\n        timeoutMin: 1,\n    }, {\n        src: ['pir/hallway-3', 'contact/entrance'],\n        target: 'switch-dimmer-10',\n        timeoutMin: 3,\n    }\n]\n\nconst name = msg.topic.split('/').slice(1).join('/');\nconst found = targetByPir.find(t => t.src.includes(name));\nif (!found) {\n    return;\n}\n\nconst p = msg.payload;\nif (p.occupancy || p.contact === false) {\n    return {\n        payload: {\n            'brightness': 100,\n            'for': found.timeoutMin * 60,\n        },\n        topic: `ha-switch/${found.target}/state/set`,\n    };\n}\n",
-        "outputs": 1,
+        "name": "when motion",
+        "func": "if (!flow.get('auto_light')) {\n    return;\n}\n\n/**\n * @type Array<{\n *  src:Array<string>, \n *  target:string, \n *  timeoutMin: number, \n *  turn:'on'|'off'\n * }>\n */\nconst targetByPir = [\n    {\n        src: ['pir/hallway-1', 'pir/hallway-2'],\n        target: 'switch-dimmer-3',\n        timeoutMin: 1,\n        turn: 'on',\n    }, {\n        src: ['pir/hallway-3', 'contact/entrance'],\n        target: 'switch-dimmer-10',\n        timeoutMin: 3,\n        turn: 'on',\n    }, {\n        src: ['pir/small-bathroom'],\n        target: 'switch-onoff-3',\n        timeoutMin: 15,\n        turn: 'off',\n    }\n]\n\nconst name = msg.topic.split('/').slice(1).join('/');\nconst found = targetByPir.find(t => t.src.includes(name));\nif (!found) {\n    return;\n}\n\nconst p = msg.payload;\nif (found.turn === 'on') {\n    if (p.occupancy || p.contact === false) {\n        return {\n            payload: {\n                'brightness': 100,\n                'for': found.timeoutMin * 60,\n            },\n            topic: `ha-switch/${found.target}/state/set`,\n        };\n    }\n} else if (found.turn === 'off') {\n    if (p.occupancy) {\n        return [, {\n            payload: {\n                on: false\n            },\n            delay: found.timeoutMin * 60 * 1000,\n            topic: `ha-switch/${found.target}/state/set`,\n        }];\n    }\n}\n",
+        "outputs": 2,
         "noerr": 0,
-        "initialize": "var  timer;\n",
+        "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 370,
-        "y": 80,
+        "x": 450,
+        "y": 100,
         "wires": [
             [
                 "05ebecdb8b80ec34"
+            ],
+            [
+                "4d1c7f5bb7516b99"
             ]
         ],
         "outputLabels": [
-            "battery low"
+            "battery low",
+            ""
         ]
     },
     {
@@ -3847,8 +4223,8 @@
         "correl": "",
         "expiry": "",
         "broker": "f569d34c.8c7ed",
-        "x": 550,
-        "y": 80,
+        "x": 790,
+        "y": 100,
         "wires": []
     },
     {
@@ -3979,10 +4355,11 @@
         "rh": 0,
         "inputs": 0,
         "x": 160,
-        "y": 140,
+        "y": 100,
         "wires": [
             [
-                "a0bf8cda615f1687"
+                "a0bf8cda615f1687",
+                "d445960ecb358d5a"
             ]
         ]
     },
@@ -4006,8 +4383,8 @@
         "filter": false,
         "asyncCmd": false,
         "outputs": 1,
-        "x": 380,
-        "y": 200,
+        "x": 220,
+        "y": 280,
         "wires": [
             [
                 "54830d2c3b73bb4b"
@@ -4033,10 +4410,91 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 570,
-        "y": 200,
+        "x": 410,
+        "y": 280,
         "wires": [
             []
+        ]
+    },
+    {
+        "id": "6615d0e84e2ff43a",
+        "type": "influxdb out",
+        "z": "05e865126427c1f9",
+        "influxdb": "63bdbe3c09b491f2",
+        "name": "",
+        "measurement": "",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "home",
+        "bucket": "home",
+        "x": 620,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "8ab75f8eee4ef8d5",
+        "type": "function",
+        "z": "05e865126427c1f9",
+        "name": "map",
+        "func": "const valueName = msg.topic.split('/').slice(-1)[0];\nif (typeof msg.payload.occupancy !== 'boolean') {\n    return;\n}\n\nreturn {\n    payload: { [valueName]: msg.payload.occupancy ? 1 : 0 },\n    measurement: 'occupancy',\n};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 220,
+        "wires": [
+            [
+                "6615d0e84e2ff43a"
+            ]
+        ]
+    },
+    {
+        "id": "d445960ecb358d5a",
+        "type": "function",
+        "z": "05e865126427c1f9",
+        "name": "map",
+        "func": "const valueName = msg.topic.split('/').slice(-1)[0];\nif (typeof msg.payload.contact !== 'boolean') {\n    return;\n}\n\nreturn {\n    payload: { [valueName]: msg.payload.contact ? 1 : 0 },\n    measurement: 'contact',\n};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 180,
+        "wires": [
+            [
+                "6615d0e84e2ff43a"
+            ]
+        ]
+    },
+    {
+        "id": "4d1c7f5bb7516b99",
+        "type": "trigger",
+        "z": "05e865126427c1f9",
+        "name": "wait for delay",
+        "op1": "",
+        "op2": "",
+        "op1type": "nul",
+        "op2type": "payl",
+        "duration": "1",
+        "extend": true,
+        "overrideDelay": true,
+        "units": "min",
+        "reset": "",
+        "bytopic": "topic",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 650,
+        "y": 140,
+        "wires": [
+            [
+                "05ebecdb8b80ec34"
+            ]
         ]
     },
     {
@@ -4101,7 +4559,7 @@
         "type": "function",
         "z": "67e1c6f6bd2fab57",
         "name": "open/close blinds",
-        "func": "\n/** @type Array<{id: number, open?:number, close?: number, openLater?: number}> */\nconst BLINDS = [\n    { id: 1, open: 15, openLater: 100, close: 0 }, // guest\n    { id: 2, open: 100, close: 0 }, // kitchen-window\n    { id: 8, open: 15, close: 0 }, // kitchen-fixed\n    { id: 3, /*open: 15, openLater: 100,*/ close: 0 }, // big bedroom\n    { id: 4, open: 100 }, // living-door\n    { id: 6, open: 15, openLater: 100, close: 0 }, // living-window\n    { id: 5, open: 100, close: 0 }, // office\n];\n\nconst KEY = 'blindsLastCommand';\n\n/** @type {'open'|'close'|'openLater'} */\n\nif (!msg.payload) {\n    blinds('close');\n} else {\n    const now = new Date();\n    const minTimeToOpenBlinds = new Date();\n    minTimeToOpenBlinds.setHours(7, 30, 0);\n\n    const openLaterTime = new Date();\n    openLaterTime.setHours(8, 30, 0);\n\n    if (now >= minTimeToOpenBlinds && now < openLaterTime) {\n        blinds('open');\n    } else if (now >= openLaterTime) {\n        blinds('openLater');\n    }\n}\n\n/** @param {'open'|'close'|'openLater'} type */\nfunction blinds(type) {\n    const last = context.get(KEY);\n    if (type === last) {\n        return;\n    }\n    context.set(KEY, type);\n\n    if (type.startsWith('open') &&\n        !flow.get('autoOpenBlinds')) {\n        return;\n    }\n\n    const msgs = BLINDS\n        .map(b => {\n            const stateTopic = `ha-switch/switch-blinds-${b.id}/state`;\n            const currentState = global.get(stateTopic);\n\n            const openPercent = b[type];\n            if (typeof openPercent !== 'number') {\n                return;\n            }\n\n            if (currentState) {\n                switch (type) {\n                    case 'open':\n                    case 'openLater':\n                        if (openPercent <= currentState.openPercent) {\n                            return;\n                        }\n                        break;\n                    case 'close':\n                        if (openPercent >= currentState.openPercent) {\n                            //blinds are already more closed\n                            return;\n                        }\n                        break;\n                }\n            }\n\n            return {\n                payload: { openPercent },\n                topic: `${stateTopic}/set`,\n                retain: true,\n            };\n        })\n        .filter(m => !!m);\n    node.send([msgs]);\n}\n",
+        "func": "\n/** @type Array<{id: number, open?:number, close?: number, openLater?: number}> */\nconst BLINDS = [\n    { id: 1, open: 15, openLater: 100, close: 0 }, // guest\n    { id: 2, open: 100, close: 0 }, // kitchen-window\n    { id: 8, open: 15, close: 0 }, // kitchen-fixed\n    { id: 3, /*open: 15, openLater: 100,*/ close: 0 }, // big bedroom\n    { id: 4, open: 100 }, // living-door\n    { id: 6, open: 15, openLater: 40, close: 0 }, // living-window\n    { id: 5, open: 100, close: 0 }, // office\n];\n\nconst KEY = 'blindsLastCommand';\n\n/** @type {'open'|'close'|'openLater'} */\n\nif (!msg.payload) {\n    blinds('close');\n} else {\n    const now = new Date();\n    const minTimeToOpenBlinds = new Date();\n    minTimeToOpenBlinds.setHours(7, 30, 0);\n\n    const openLaterTime = new Date();\n    openLaterTime.setHours(8, 30, 0);\n\n    if (now >= minTimeToOpenBlinds && now < openLaterTime) {\n        blinds('open');\n    } else if (now >= openLaterTime) {\n        blinds('openLater');\n    }\n}\n\n/** @param {'open'|'close'|'openLater'} type */\nfunction blinds(type) {\n    const last = context.get(KEY);\n    if (type === last) {\n        return;\n    }\n    context.set(KEY, type);\n\n    if (type.startsWith('open') &&\n        !flow.get('autoOpenBlinds')) {\n        return;\n    }\n\n    const msgs = BLINDS\n        .map(b => {\n            const stateTopic = `ha-switch/switch-blinds-${b.id}/state`;\n            const currentState = global.get(stateTopic);\n\n            const openPercent = b[type];\n            if (typeof openPercent !== 'number') {\n                return;\n            }\n\n            if (currentState) {\n                switch (type) {\n                    case 'open':\n                    case 'openLater':\n                        if (openPercent <= currentState.openPercent) {\n                            return;\n                        }\n                        break;\n                    case 'close':\n                        if (openPercent >= currentState.openPercent) {\n                            //blinds are already more closed\n                            return;\n                        }\n                        break;\n                }\n            }\n\n            return {\n                payload: { openPercent },\n                topic: `${stateTopic}/set`,\n                retain: true,\n            };\n        })\n        .filter(m => !!m);\n    node.send([msgs]);\n}\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -4419,225 +4877,6 @@
         "x": 790,
         "y": 80,
         "wires": []
-    },
-    {
-        "id": "37340c22d7542ee5",
-        "type": "mqtt out",
-        "z": "80b4c729fedf25c4",
-        "name": "",
-        "topic": "",
-        "qos": "",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "f569d34c.8c7ed",
-        "x": 370,
-        "y": 100,
-        "wires": []
-    },
-    {
-        "id": "b95a68b8f79f2b2f",
-        "type": "inject",
-        "z": "80b4c729fedf25c4",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "ha-switch/switch-car-gate/state/set",
-        "payload": "{\"on\": true}",
-        "payloadType": "json",
-        "x": 160,
-        "y": 80,
-        "wires": [
-            [
-                "37340c22d7542ee5"
-            ]
-        ]
-    },
-    {
-        "id": "db37f144f5b3c0bc",
-        "type": "inject",
-        "z": "80b4c729fedf25c4",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "ha-switch/switch-car-gate/state/set",
-        "payload": "{\"on\": false}",
-        "payloadType": "json",
-        "x": 170,
-        "y": 120,
-        "wires": [
-            [
-                "37340c22d7542ee5"
-            ]
-        ]
-    },
-    {
-        "id": "c5d36e995dc37c5f",
-        "type": "mqtt out",
-        "z": "80b4c729fedf25c4",
-        "name": "",
-        "topic": "",
-        "qos": "",
-        "retain": "",
-        "respTopic": "",
-        "contentType": "",
-        "userProps": "",
-        "correl": "",
-        "expiry": "",
-        "broker": "f569d34c.8c7ed",
-        "x": 410,
-        "y": 300,
-        "wires": []
-    },
-    {
-        "id": "349e156cf2eb186e",
-        "type": "inject",
-        "z": "80b4c729fedf25c4",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "ha-switch/switch-human-gate/state/set",
-        "payload": "{\"on\": true, \"for\": 1}",
-        "payloadType": "json",
-        "x": 190,
-        "y": 260,
-        "wires": [
-            [
-                "c5d36e995dc37c5f"
-            ]
-        ]
-    },
-    {
-        "id": "8c1bc9879d0fa57e",
-        "type": "inject",
-        "z": "80b4c729fedf25c4",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "ha-switch/switch-human-gate/state/set",
-        "payload": "{\"on\": false}",
-        "payloadType": "json",
-        "x": 170,
-        "y": 340,
-        "wires": [
-            [
-                "c5d36e995dc37c5f"
-            ]
-        ]
-    },
-    {
-        "id": "323088792418082b",
-        "type": "inject",
-        "z": "80b4c729fedf25c4",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "ha-switch/switch-human-gate/state/set",
-        "payload": "{\"on\": true, \"for\": 8}",
-        "payloadType": "json",
-        "x": 190,
-        "y": 300,
-        "wires": [
-            [
-                "c5d36e995dc37c5f"
-            ]
-        ]
-    },
-    {
-        "id": "f142e212351f6365",
-        "type": "mqtt in",
-        "z": "80b4c729fedf25c4",
-        "name": "",
-        "topic": "ha-switch/switch-human-gate/state",
-        "qos": "2",
-        "datatype": "auto-detect",
-        "broker": "f569d34c.8c7ed",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 220,
-        "y": 440,
-        "wires": [
-            [
-                "f75ecee06b4f3c9c"
-            ]
-        ]
-    },
-    {
-        "id": "f75ecee06b4f3c9c",
-        "type": "function",
-        "z": "80b4c729fedf25c4",
-        "name": "state",
-        "func": "node.status({ fill: \"blue\", shape: \"ring\", text: JSON.stringify(msg.payload) });",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 450,
-        "y": 440,
-        "wires": [
-            []
-        ]
     },
     {
         "id": "0cd4f1385c4acbae",
