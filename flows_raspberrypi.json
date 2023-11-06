@@ -142,7 +142,62 @@
         "hidden": false
     },
     {
-        "id": "26dd4a514dff065c",
+        "id": "16a95fc0b1c58900",
+        "type": "ui_group",
+        "name": "Energy today",
+        "tab": "e18cedd70c93f843",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "46510dc1aab73a6d",
+        "type": "ui_group",
+        "name": "Battery",
+        "tab": "e18cedd70c93f843",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "9d1871108d73a07a",
+        "type": "ui_group",
+        "name": "Power",
+        "tab": "e18cedd70c93f843",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "236088c4a8c426ef",
+        "type": "ui_group",
+        "name": "Energy this week",
+        "tab": "e18cedd70c93f843",
+        "order": 4,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "7b126afe2d280420",
+        "type": "ui_group",
+        "name": "Energy this month",
+        "tab": "e18cedd70c93f843",
+        "order": 5,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "e16800f51cf528e0",
         "type": "ui_base",
         "theme": {
             "name": "theme-light",
@@ -220,7 +275,7 @@
             }
         },
         "site": {
-            "name": "Home",
+            "name": "Node-RED Dashboard",
             "hideToolbar": "false",
             "allowSwipe": "false",
             "lockMenu": "false",
@@ -239,81 +294,6 @@
         }
     },
     {
-        "id": "16a95fc0b1c58900",
-        "type": "ui_group",
-        "name": "Energy today",
-        "tab": "e18cedd70c93f843",
-        "order": 3,
-        "disp": true,
-        "width": "6",
-        "collapse": false,
-        "className": ""
-    },
-    {
-        "id": "46510dc1aab73a6d",
-        "type": "ui_group",
-        "name": "Battery",
-        "tab": "e18cedd70c93f843",
-        "order": 1,
-        "disp": true,
-        "width": "6",
-        "collapse": false,
-        "className": ""
-    },
-    {
-        "id": "9d1871108d73a07a",
-        "type": "ui_group",
-        "name": "Power",
-        "tab": "e18cedd70c93f843",
-        "order": 2,
-        "disp": true,
-        "width": "6",
-        "collapse": false,
-        "className": ""
-    },
-    {
-        "id": "236088c4a8c426ef",
-        "type": "ui_group",
-        "name": "Energy this week",
-        "tab": "e18cedd70c93f843",
-        "order": 4,
-        "disp": true,
-        "width": "6",
-        "collapse": false,
-        "className": ""
-    },
-    {
-        "id": "7b126afe2d280420",
-        "type": "ui_group",
-        "name": "Energy this month",
-        "tab": "e18cedd70c93f843",
-        "order": 5,
-        "disp": true,
-        "width": "6",
-        "collapse": false,
-        "className": ""
-    },
-    {
-        "id": "ed13633a52b01660",
-        "type": "nibe-register",
-        "z": "2de9a494ac1d6c71",
-        "name": "",
-        "register": "Increased ventilation 1",
-        "nibe": "89e46ce21c7f5128",
-        "interval": "5",
-        "timeout": "5",
-        "force": true,
-        "topic": "ventilation-boost",
-        "filter": true,
-        "x": 240,
-        "y": 100,
-        "wires": [
-            [
-                "1cd1125ce32c5aca"
-            ]
-        ]
-    },
-    {
         "id": "719187bb860811ae",
         "type": "nibe-register",
         "z": "2de9a494ac1d6c71",
@@ -326,7 +306,7 @@
         "topic": "ventilation/speed-gq3",
         "filter": false,
         "x": 930,
-        "y": 700,
+        "y": 860,
         "wires": [
             [
                 "b3dde27634dd2e4c"
@@ -346,7 +326,7 @@
         "topic": "ventilation/speed-gq2",
         "filter": false,
         "x": 930,
-        "y": 640,
+        "y": 800,
         "wires": [
             [
                 "b3dde27634dd2e4c"
@@ -366,7 +346,7 @@
         "topic": "living/setpoint",
         "filter": true,
         "x": 240,
-        "y": 240,
+        "y": 280,
         "wires": [
             [
                 "34e4236db446efad"
@@ -386,7 +366,7 @@
         "topic": "bedroom/setpoint",
         "filter": true,
         "x": 250,
-        "y": 360,
+        "y": 400,
         "wires": [
             [
                 "34e4236db446efad"
@@ -406,7 +386,7 @@
         "topic": "living/temperature",
         "filter": false,
         "x": 590,
-        "y": 300,
+        "y": 340,
         "wires": [
             [
                 "69a2359c3bf3f716"
@@ -443,8 +423,8 @@
         "passthru": false,
         "errorifstateunchaged": false,
         "nora": "f1e538c1.0315f8",
-        "topic": "ventilation-boost",
-        "onvalue": "1",
+        "topic": "ventilation-mode",
+        "onvalue": "4",
         "onvalueType": "num",
         "offvalue": "0",
         "offvalueType": "num",
@@ -473,11 +453,11 @@
         "finalize": "",
         "libs": [],
         "x": 430,
-        "y": 140,
+        "y": 160,
         "wires": [
             [
-                "46b0b3fc4d086f1e",
-                "f07580f20f9c8e5f"
+                "f07580f20f9c8e5f",
+                "cc668fc7fdbd504b"
             ]
         ]
     },
@@ -522,9 +502,9 @@
         "y": 100,
         "wires": [
             [
-                "ed13633a52b01660",
                 "99b78cb07dd4c043",
-                "8c036ed2e6442271"
+                "8c036ed2e6442271",
+                "4412eeb85ec5796a"
             ]
         ]
     },
@@ -559,7 +539,7 @@
         "topic": "topic",
         "outputs": 1,
         "x": 490,
-        "y": 420,
+        "y": 460,
         "wires": [
             [
                 "3760822f76a88122"
@@ -579,7 +559,7 @@
         "topic": "living/setpoint",
         "filter": true,
         "x": 240,
-        "y": 300,
+        "y": 340,
         "wires": [
             []
         ]
@@ -597,7 +577,7 @@
         "topic": "bedroom/setpoint",
         "filter": true,
         "x": 250,
-        "y": 420,
+        "y": 460,
         "wires": [
             [
                 "df27d4e5b15bc14e"
@@ -625,7 +605,7 @@
         "twofactorpin": "",
         "filter": true,
         "x": 330,
-        "y": 500,
+        "y": 540,
         "wires": [
             [
                 "a5df44a963725282"
@@ -645,7 +625,7 @@
         "topic": "humidity",
         "filter": false,
         "x": 620,
-        "y": 240,
+        "y": 280,
         "wires": [
             [
                 "69a2359c3bf3f716"
@@ -664,7 +644,7 @@
         "finalize": "",
         "libs": [],
         "x": 190,
-        "y": 500,
+        "y": 540,
         "wires": [
             [
                 "e56377cc659b2c95",
@@ -693,7 +673,7 @@
         "twofactorpin": "",
         "filter": true,
         "x": 340,
-        "y": 560,
+        "y": 600,
         "wires": [
             [
                 "a5df44a963725282"
@@ -712,7 +692,7 @@
         "finalize": "",
         "libs": [],
         "x": 530,
-        "y": 500,
+        "y": 540,
         "wires": [
             [
                 "847b62e1d562ef8b"
@@ -729,7 +709,7 @@
             "50badacef6b71f47"
         ],
         "x": 745,
-        "y": 500,
+        "y": 540,
         "wires": []
     },
     {
@@ -741,7 +721,7 @@
             "61d8d50274c6ed71"
         ],
         "x": 75,
-        "y": 240,
+        "y": 280,
         "wires": [
             [
                 "8a2d91b19d4ef994",
@@ -764,7 +744,7 @@
         "topic": "bedroom/temperature",
         "filter": false,
         "x": 600,
-        "y": 360,
+        "y": 400,
         "wires": [
             [
                 "69a2359c3bf3f716"
@@ -783,7 +763,7 @@
         "finalize": "",
         "libs": [],
         "x": 650,
-        "y": 420,
+        "y": 460,
         "wires": [
             [
                 "e41d6b0ea38ad5e3"
@@ -803,7 +783,7 @@
         "property": "payload",
         "topi": "topic",
         "x": 650,
-        "y": 500,
+        "y": 540,
         "wires": [
             [
                 "61d8d50274c6ed71"
@@ -825,7 +805,7 @@
         "org": "home",
         "bucket": "home",
         "x": 300,
-        "y": 940,
+        "y": 980,
         "wires": []
     },
     {
@@ -840,7 +820,7 @@
         "finalize": "",
         "libs": [],
         "x": 170,
-        "y": 940,
+        "y": 980,
         "wires": [
             [
                 "9d978d4c29e3fede"
@@ -860,7 +840,7 @@
         "topic": "outdoor/temperature-bt1",
         "filter": true,
         "x": 220,
-        "y": 640,
+        "y": 680,
         "wires": [
             [
                 "7ca97a871eef0253"
@@ -879,7 +859,7 @@
         "finalize": "",
         "libs": [],
         "x": 170,
-        "y": 980,
+        "y": 1020,
         "wires": [
             [
                 "192c99f16f9eaaee"
@@ -901,7 +881,7 @@
         "org": "home",
         "bucket": "nibe",
         "x": 300,
-        "y": 980,
+        "y": 1020,
         "wires": []
     },
     {
@@ -917,7 +897,7 @@
         "topic": "line/supply-bt2",
         "filter": true,
         "x": 170,
-        "y": 700,
+        "y": 740,
         "wires": [
             [
                 "7ca97a871eef0253"
@@ -937,7 +917,7 @@
         "topic": "line/return-bt3",
         "filter": true,
         "x": 170,
-        "y": 760,
+        "y": 800,
         "wires": [
             [
                 "7ca97a871eef0253"
@@ -957,7 +937,7 @@
         "topic": "ventilation/supp-air-temperature-bt22",
         "filter": true,
         "x": 560,
-        "y": 700,
+        "y": 740,
         "wires": [
             [
                 "772ab499b9243a81"
@@ -977,7 +957,7 @@
         "topic": "ventilation/outdoor-temperature-bt23",
         "filter": true,
         "x": 590,
-        "y": 640,
+        "y": 680,
         "wires": [
             [
                 "772ab499b9243a81"
@@ -997,7 +977,7 @@
         "topic": "ventilation/extract-air-temp-bt21",
         "filter": true,
         "x": 560,
-        "y": 760,
+        "y": 800,
         "wires": [
             [
                 "772ab499b9243a81"
@@ -1017,7 +997,7 @@
         "topic": "ventilation/exhaust-air-temp-bt20",
         "filter": true,
         "x": 560,
-        "y": 820,
+        "y": 860,
         "wires": [
             [
                 "772ab499b9243a81"
@@ -1037,7 +1017,7 @@
         "topic": "operation/priority",
         "filter": false,
         "x": 880,
-        "y": 760,
+        "y": 920,
         "wires": [
             [
                 "6c724be7f6fd897c"
@@ -1056,7 +1036,7 @@
         "finalize": "",
         "libs": [],
         "x": 1040,
-        "y": 760,
+        "y": 920,
         "wires": [
             [
                 "b3dde27634dd2e4c",
@@ -1077,7 +1057,7 @@
         "topic": "brine/in-bt10",
         "filter": false,
         "x": 900,
-        "y": 820,
+        "y": 680,
         "wires": [
             [
                 "b3dde27634dd2e4c"
@@ -1097,7 +1077,7 @@
         "topic": "brine/out-bt11",
         "filter": false,
         "x": 900,
-        "y": 880,
+        "y": 740,
         "wires": [
             [
                 "b3dde27634dd2e4c"
@@ -1117,7 +1097,7 @@
         "topic": "ventilation/mode",
         "filter": false,
         "x": 550,
-        "y": 880,
+        "y": 920,
         "wires": [
             [
                 "772ab499b9243a81"
@@ -1149,8 +1129,8 @@
         "type": "function",
         "z": "2de9a494ac1d6c71",
         "name": "map",
-        "func": "node.status({ fill: \"blue\", text: `${msg.payload.value} - ${status()}` });\n\nreturn {\n    payload: msg.payload.value === 1 ? 1 : 0,\n    topic: msg.topic,\n};\n\nfunction status() {\n    switch (msg.payload.value) {\n        case 0: return 'normal';\n        case 1: return 'off';\n        case 2: return 'low';\n        case 3: return 'high';\n        case 4: return 'boost';\n    }\n}",
-        "outputs": 1,
+        "func": "node.status({ fill: \"blue\", text: `${msg.payload.value} - ${status()}` });\n\nreturn [{\n    payload: msg.payload.value === 1 ? 1 : 0,\n    topic: msg.topic,\n}, {\n    payload: msg.payload.value === 4 ? 4 : 0,\n    topic: msg.topic,\n}];\n\nfunction status() {\n    switch (msg.payload.value) {\n        case 0: return 'normal';\n        case 1: return 'off';\n        case 2: return 'low';\n        case 3: return 'high';\n        case 4: return 'boost';\n    }\n}",
+        "outputs": 2,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -1160,6 +1140,9 @@
         "wires": [
             [
                 "f0a4665aecc7e7e1"
+            ],
+            [
+                "46b0b3fc4d086f1e"
             ]
         ]
     },
@@ -1204,7 +1187,7 @@
         "topic": "hot-water/charging-bt6",
         "filter": false,
         "x": 190,
-        "y": 820,
+        "y": 860,
         "wires": [
             [
                 "7ca97a871eef0253"
@@ -1221,7 +1204,7 @@
             "34e4236db446efad"
         ],
         "x": 85,
-        "y": 940,
+        "y": 980,
         "wires": [
             [
                 "dc49bf19798833ec"
@@ -1239,7 +1222,7 @@
             "ceabaec499757bb4"
         ],
         "x": 785,
-        "y": 240,
+        "y": 280,
         "wires": []
     },
     {
@@ -1254,7 +1237,7 @@
             "4495116d6ff821e7"
         ],
         "x": 85,
-        "y": 500,
+        "y": 540,
         "wires": [
             [
                 "25ecd6270bd33719"
@@ -1271,7 +1254,7 @@
             "ceabaec499757bb4"
         ],
         "x": 745,
-        "y": 420,
+        "y": 460,
         "wires": []
     },
     {
@@ -1285,7 +1268,7 @@
             "ceabaec499757bb4"
         ],
         "x": 425,
-        "y": 240,
+        "y": 280,
         "wires": []
     },
     {
@@ -1299,7 +1282,7 @@
             "47ae0eea20515ee1"
         ],
         "x": 415,
-        "y": 640,
+        "y": 680,
         "wires": []
     },
     {
@@ -1313,7 +1296,7 @@
             "b3dde27634dd2e4c"
         ],
         "x": 85,
-        "y": 980,
+        "y": 1020,
         "wires": [
             [
                 "3a75e22cbaeb5f90"
@@ -1331,7 +1314,7 @@
             "47ae0eea20515ee1"
         ],
         "x": 775,
-        "y": 640,
+        "y": 680,
         "wires": []
     },
     {
@@ -1345,7 +1328,7 @@
             "47ae0eea20515ee1"
         ],
         "x": 1145,
-        "y": 640,
+        "y": 680,
         "wires": []
     },
     {
@@ -1361,7 +1344,7 @@
         "topic": "operation/priority",
         "filter": false,
         "x": 900,
-        "y": 940,
+        "y": 980,
         "wires": [
             [
                 "777c440cff6e50f7"
@@ -1380,7 +1363,7 @@
         "finalize": "",
         "libs": [],
         "x": 1060,
-        "y": 940,
+        "y": 980,
         "wires": [
             []
         ]
@@ -1397,7 +1380,7 @@
         "finalize": "",
         "libs": [],
         "x": 1190,
-        "y": 760,
+        "y": 920,
         "wires": [
             [
                 "4495116d6ff821e7"
@@ -1414,8 +1397,56 @@
             "ceabaec499757bb4"
         ],
         "x": 1275,
-        "y": 760,
+        "y": 920,
         "wires": []
+    },
+    {
+        "id": "4412eeb85ec5796a",
+        "type": "nibe-register",
+        "z": "2de9a494ac1d6c71",
+        "name": "Bypass recovery",
+        "register": "Bypass during heating (ERS 1)",
+        "nibe": "89e46ce21c7f5128",
+        "interval": "300",
+        "timeout": "5",
+        "force": false,
+        "topic": "bypass-heating-recovery",
+        "filter": true,
+        "x": 220,
+        "y": 220,
+        "wires": [
+            [
+                "1cd1125ce32c5aca"
+            ]
+        ]
+    },
+    {
+        "id": "cc668fc7fdbd504b",
+        "type": "noraf-switch",
+        "z": "2de9a494ac1d6c71",
+        "devicename": "Bypass recovery",
+        "roomhint": "Service Room",
+        "name": "",
+        "passthru": false,
+        "errorifstateunchaged": false,
+        "nora": "f1e538c1.0315f8",
+        "topic": "bypass-heating-recovery",
+        "onvalue": "1",
+        "onvalueType": "num",
+        "offvalue": "0",
+        "offvalueType": "num",
+        "twofactor": "ack",
+        "twofactorpin": "",
+        "filter": true,
+        "asyncCmd": false,
+        "outputs": 1,
+        "x": 600,
+        "y": 220,
+        "wires": [
+            [
+                "660188df0186d9af"
+            ]
+        ]
     },
     {
         "id": "5bb98af947157223",
@@ -4132,7 +4163,7 @@
         "type": "function",
         "z": "d02cf25fa8114475",
         "name": "connect grid?",
-        "func": "const isGridConnected = context.get('gridConnected') ?? false;\n\nlet batteryCurrent = context.get('batteryCurrent');\nlet solarPower = context.get('solarPower');\nconst batteryCapacity = global.get('batteryCapacity');\n\nif (typeof msg.payload?.battery?.current === 'number') {\n    const currentBatteryCurrent = msg.payload.battery.current;\n    if (currentBatteryCurrent !== batteryCurrent) {\n        context.set('batteryCurrent', batteryCurrent = currentBatteryCurrent);\n    }\n}\n\nif (typeof msg.payload?.solarInput?.power1 === 'number') {\n    const currentSolarPower = msg.payload.solarInput.power1 + msg.payload.solarInput.power2;\n    if (currentSolarPower !== solarPower) {\n        context.set('solarPower', solarPower = currentSolarPower);\n    }\n}\n\nif (typeof batteryCurrent !== 'number' ||\n    typeof batteryCapacity !== 'number' ||\n    typeof solarPower !== 'number') {\n    return;\n}\n\nlet shouldConnectGrid;\n\nif (!isGridConnected) {\n    shouldConnectGrid = batteryCapacity < 15;\n} else {\n    const shouldDisconnectGrid =\n        (solarPower > 5000 || batteryCurrent > 50) && batteryCapacity > 30 ||\n        batteryCapacity > 65;\n\n    shouldConnectGrid = !shouldDisconnectGrid;\n}\n\nnode.status({\n    fill: shouldConnectGrid ? 'blue' : 'yellow',\n    text: shouldConnectGrid ? 'yes' : 'nope',\n});\n\nif (shouldConnectGrid !== isGridConnected) {\n    const at = new Date().toLocaleString();\n    context.set('gridConnected', shouldConnectGrid);\n    return [\n        {\n            payload: shouldConnectGrid ? 'on' : 'off'\n        },\n        {\n            payload: {\n                tag: \"grid-connection\",\n                title: \"Grid connection\",\n                body: `Grid ${shouldConnectGrid ? 'connected' : 'disconnected'}, at ${at}`,\n            }\n        }\n    ];\n}\n",
+        "func": "const isGridConnected = context.get('gridConnected') ?? false;\n\nlet batteryCurrent = context.get('batteryCurrent');\nlet batteryVoltage = context.get('batteryVoltage');\nlet solarPower = context.get('solarPower');\nconst batteryCapacity = global.get('batteryCapacity');\n\nif (typeof msg.payload?.battery?.current === 'number') {\n    const currentBatteryCurrent = msg.payload.battery.current;\n    if (currentBatteryCurrent !== batteryCurrent) {\n        context.set('batteryCurrent', batteryCurrent = currentBatteryCurrent);\n    }\n}\n\nif (typeof msg.payload?.battery?.voltage === 'number') {\n    const currentBatteryVoltage = msg.payload.battery.voltage;\n    if (currentBatteryVoltage !== batteryVoltage) {\n        context.set('batteryVoltage', batteryVoltage = currentBatteryVoltage);\n    }\n}\n\nif (typeof msg.payload?.solarInput?.power1 === 'number') {\n    const currentSolarPower = msg.payload.solarInput.power1 + msg.payload.solarInput.power2;\n    if (currentSolarPower !== solarPower) {\n        context.set('solarPower', solarPower = currentSolarPower);\n    }\n}\n\nif (typeof batteryCurrent !== 'number' ||\n    typeof batteryCapacity !== 'number' ||\n    typeof solarPower !== 'number' ||\n    typeof batteryVoltage !== 'number') {\n    return;\n}\n\nlet shouldConnectGrid;\n\nif (!isGridConnected) {\n    shouldConnectGrid = batteryVoltage < 48;\n} else {\n    const shouldDisconnectGrid =\n        (solarPower > 5000 || batteryCurrent > 50) && batteryCapacity > 40 ||\n        batteryCapacity >= 70;\n\n    shouldConnectGrid = !shouldDisconnectGrid;\n}\n\nnode.status({\n    fill: shouldConnectGrid ? 'blue' : 'yellow',\n    text: shouldConnectGrid ? 'yes' : 'nope',\n});\n\nif (shouldConnectGrid !== isGridConnected) {\n    const at = new Date().toLocaleString();\n    context.set('gridConnected', shouldConnectGrid);\n    return [\n        {\n            payload: shouldConnectGrid ? 'on' : 'off'\n        },\n        {\n            payload: {\n                tag: \"grid-connection\",\n                title: \"Grid connection\",\n                body: `Grid ${shouldConnectGrid ? 'connected' : 'disconnected'}, at ${at}`,\n            }\n        }\n    ];\n}\n",
         "outputs": 2,
         "noerr": 0,
         "initialize": "",
@@ -5460,7 +5491,7 @@
             },
             {
                 "name": "turn off",
-                "topic": " cron",
+                "topic": "cron",
                 "payloadType": "bool",
                 "payload": "false",
                 "expressionType": "cron",
@@ -5502,7 +5533,7 @@
         "type": "function",
         "z": "67e1c6f6bd2fab57",
         "name": "check away mode",
-        "func": "if (msg.topic === 'cron') {\n    context.set('cron', msg.payload);\n}\n\nconst payload = global.get('awayMode')\n    ? 'OFF'\n    : (context.get('cron') ? 'ON' : 'OFF');\n\nreturn {\n    topic: 'zigbee2mqtt/relay/water-pump/set',\n    payload,\n}\n",
+        "func": "if (msg.topic === 'cron') {\n    context.set('cron', msg.payload);\n}\n\nconst state = global.get('awayMode')\n    ? 'OFF'\n    : (context.get('cron') ? 'ON' : 'OFF');\n\nreturn {\n    topic: 'zigbee2mqtt/relay/water-pump/set',\n    payload: { state },\n}\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -5520,6 +5551,7 @@
         "id": "651eb38aa48c6e2a",
         "type": "nibe-register",
         "z": "67e1c6f6bd2fab57",
+        "d": true,
         "name": "",
         "register": "Humidity (AZ30-BM20)",
         "nibe": "89e46ce21c7f5128",
@@ -5529,7 +5561,7 @@
         "topic": "",
         "filter": false,
         "x": 160,
-        "y": 300,
+        "y": 580,
         "wires": [
             [
                 "1895125bc221a5c6"
@@ -5540,6 +5572,7 @@
         "id": "27d499b6a6e0d7e5",
         "type": "nibe-register",
         "z": "67e1c6f6bd2fab57",
+        "d": true,
         "name": "",
         "register": "Bypass during heating (ERS 1)",
         "nibe": "89e46ce21c7f5128",
@@ -5549,7 +5582,7 @@
         "topic": "",
         "filter": false,
         "x": 530,
-        "y": 300,
+        "y": 580,
         "wires": [
             [
                 "5d3dfd6ae641f427"
@@ -5560,6 +5593,7 @@
         "id": "1895125bc221a5c6",
         "type": "function",
         "z": "67e1c6f6bd2fab57",
+        "d": true,
         "name": "decide",
         "func": "const humidity = msg.payload.value;\nif (humidity < 0 || humidity > 100) {\n    return;\n}\n\nconst stopRecovery = flow.get('bypass_recovery') === 1;\nconst target = 46;\nconst histerezis = 2;\nconst compareTo = target + (stopRecovery ? 0 : 1) * histerezis;\nconst shouldStopRecovery = humidity >= compareTo;\n\nnode.status({\n    fill: shouldStopRecovery ? 'red' : \"blue\",\n    shape: \"dot\",\n    text: `recovery ${shouldStopRecovery ? 'off' : 'on'}`,\n});\n\nreturn {\n    payload: shouldStopRecovery ? 1 : 0,\n};\n",
         "outputs": 1,
@@ -5568,7 +5602,7 @@
         "finalize": "",
         "libs": [],
         "x": 330,
-        "y": 300,
+        "y": 580,
         "wires": [
             [
                 "27d499b6a6e0d7e5"
@@ -5579,6 +5613,7 @@
         "id": "5d3dfd6ae641f427",
         "type": "function",
         "z": "67e1c6f6bd2fab57",
+        "d": true,
         "name": "set flow.bypass_recovery",
         "func": "const oldValue = flow.get('bypass_recovery');\nconst newValue = msg.payload.value;\nif (newValue !== oldValue) {\n    flow.set('bypass_recovery', newValue);\n}\n",
         "outputs": 1,
@@ -5587,7 +5622,7 @@
         "finalize": "",
         "libs": [],
         "x": 790,
-        "y": 300,
+        "y": 580,
         "wires": [
             []
         ]
@@ -5619,7 +5654,7 @@
         "type": "function",
         "z": "67e1c6f6bd2fab57",
         "name": "lights on/off when motion or contact",
-        "func": "if (!flow.get('auto_light')) {\n    return;\n}\n\n/**\n * @type Array<{\n *  src:Array<string>, \n *  target:string, \n *  timeoutMin: number, \n *  turn:'on'|'off'\n * }>\n */\nconst targetByPir = [\n    {\n        src: ['pir/hallway-1', 'pir/hallway-2'],\n        target: 'switch-dimmer-3',\n        timeoutMin: 1,\n        turn: 'on',\n    }, {\n        src: ['pir/hallway-3', 'contact/entrance'],\n        target: 'switch-dimmer-10',\n        timeoutMin: 3,\n        turn: 'on',\n    }, {\n        src: ['pir/small-bathroom'],\n        target: 'switch-onoff-3',\n        timeoutMin: 15,\n        turn: 'off',\n    }\n]\n\nconst name = msg.topic.split('/').slice(1).join('/');\nconst found = targetByPir.find(t => t.src.includes(name));\nif (!found) {\n    return;\n}\n\nconst p = msg.payload;\nif (found.turn === 'on') {\n    if (p.occupancy || p.contact === false) {\n        return {\n            payload: {\n                'brightness': 100,\n                'for': found.timeoutMin * 60,\n            },\n            topic: `ha-switch/${found.target}/state/set`,\n            retain: false,\n        };\n    }\n} else if (found.turn === 'off') {\n    if (p.occupancy) {\n        return [, {\n            payload: {\n                on: false\n            },\n            delay: found.timeoutMin * 60 * 1000,\n            topic: `ha-switch/${found.target}/state/set`,\n            retain: true,\n        }];\n    }\n}\n",
+        "func": "if (!flow.get('auto_light')) {\n    return;\n}\n\n/**\n * @type Array<{\n *  src:Array<string>, \n *  target:string, \n *  timeoutMin: number, \n *  turn:'on'|'off'\n * }>\n */\nconst targetByPir = [\n    {\n        src: ['pir/hallway-1', 'pir/hallway-2'],\n        target: 'switch-dimmer-3',\n        timeoutMin: 1,\n        turn: 'on',\n    }, {\n        src: ['pir/hallway-3', 'contact/entrance'],\n        target: 'switch-dimmer-10',\n        timeoutMin: 3,\n        turn: 'on',\n    }, {\n        src: ['pir/small-bathroom'],\n        target: 'switch-onoff-3',\n        timeoutMin: 15,\n        turn: 'off',\n    }\n]\n\nconst name = msg.topic.split('/').slice(1).join('/');\nconst found = targetByPir.find(t => t.src.includes(name));\nif (!found) {\n    return;\n}\n\nconst p = msg.payload;\nif (found.turn === 'on') {\n    let turnOn = false;\n\n    if ('occupancy' in p) {\n        const last = context.get(`last-${name}`);\n        if (p.occupancy || last) {\n            turnOn = true;\n        }\n        context.set(`last-${name}`, p.occupancy);\n    }\n\n    if ('contact' in p) {\n        const last = context.get(`last-${name}`);\n        if (p.contact !== last) {\n            turnOn = true;\n        }\n        context.set(`last-${name}`, p.contact);\n    }\n\n    if (turnOn) {\n        return {\n            payload: {\n                'brightness': 100,\n                'for': found.timeoutMin * 60,\n            },\n            topic: `ha-switch/${found.target}/state/set`,\n            retain: false,\n        };\n    }\n} else if (found.turn === 'off') {\n    if (p.occupancy) {\n        return [, {\n            payload: {\n                on: false\n            },\n            delay: found.timeoutMin * 60 * 1000,\n            topic: `ha-switch/${found.target}/state/set`,\n            retain: true,\n        }];\n    }\n}\n",
         "outputs": 2,
         "noerr": 0,
         "initialize": "",
@@ -5950,14 +5985,14 @@
         "id": "dc6b8e05d474395b",
         "type": "function",
         "z": "67e1c6f6bd2fab57",
-        "name": "not away mode and dark",
-        "func": "if (!global.get('awayMode') && \n    !msg.payload && \n    global.get('batteryCapacity') > 98) {\n    return {\n        payload: 1,\n        topic: 'more-hot-water',\n    };\n}\n",
+        "name": "not away mode",
+        "func": "if (!global.get('awayMode') && \n    !msg.payload && \n    global.get('batteryCapacity') > 96) {\n    return {\n        payload: 1,\n        topic: 'more-hot-water',\n    };\n}\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 510,
+        "x": 360,
         "y": 360,
         "wires": [
             [
@@ -5979,27 +6014,7 @@
         "x": 150,
         "y": 360,
         "wires": [
-            [
-                "05469a49a6a7cca7"
-            ],
-            []
-        ]
-    },
-    {
-        "id": "05469a49a6a7cca7",
-        "type": "rbe",
-        "z": "67e1c6f6bd2fab57",
-        "name": "",
-        "func": "rbe",
-        "gap": "",
-        "start": "",
-        "inout": "out",
-        "septopics": false,
-        "property": "payload",
-        "topi": "topic",
-        "x": 330,
-        "y": 360,
-        "wires": [
+            [],
             [
                 "dc6b8e05d474395b"
             ]
@@ -6014,7 +6029,7 @@
         "links": [
             "9f8ecdb12e5082f5"
         ],
-        "x": 655,
+        "x": 485,
         "y": 360,
         "wires": []
     },
@@ -6084,7 +6099,8 @@
         "y": 80,
         "wires": [
             [
-                "31a7614427673b14"
+                "31a7614427673b14",
+                "9b1fa38348a4bbe9"
             ]
         ]
     },
@@ -6102,8 +6118,8 @@
         "correl": "",
         "expiry": "",
         "broker": "f569d34c.8c7ed",
-        "x": 430,
-        "y": 240,
+        "x": 450,
+        "y": 300,
         "wires": []
     },
     {
@@ -6126,64 +6142,6 @@
         ]
     },
     {
-        "id": "cd5adb8fd6a89364",
-        "type": "inject",
-        "z": "86c7bfe22f048e9c",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "60",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "cmnd/tasmota_0F10CB/Dimmer",
-        "payload": "",
-        "payloadType": "str",
-        "x": 200,
-        "y": 220,
-        "wires": [
-            [
-                "07e1d3f3b09b4c2f"
-            ]
-        ]
-    },
-    {
-        "id": "72d29178a2ee85d1",
-        "type": "inject",
-        "z": "86c7bfe22f048e9c",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "60",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "cmnd/tasmota_0F10CB/Power",
-        "payload": "",
-        "payloadType": "str",
-        "x": 190,
-        "y": 260,
-        "wires": [
-            [
-                "07e1d3f3b09b4c2f"
-            ]
-        ]
-    },
-    {
         "id": "527b1b616ecc0448",
         "type": "trigger",
         "z": "86c7bfe22f048e9c",
@@ -6197,7 +6155,7 @@
         "overrideDelay": false,
         "units": "min",
         "reset": "",
-        "bytopic": "all",
+        "bytopic": "topic",
         "topic": "topic",
         "outputs": 1,
         "x": 190,
@@ -6260,5 +6218,78 @@
         "x": 790,
         "y": 80,
         "wires": []
+    },
+    {
+        "id": "9b1fa38348a4bbe9",
+        "type": "noraf-light",
+        "z": "86c7bfe22f048e9c",
+        "devicename": "Lamp",
+        "lightcolor": false,
+        "brightnesscontrol": false,
+        "commandonlycolor": false,
+        "turnonwhenbrightnesschanges": false,
+        "passthru": false,
+        "errorifstateunchaged": false,
+        "statepayload": true,
+        "brightnessoverride": "",
+        "roomhint": "Living Room",
+        "name": "",
+        "colortype": "hsv",
+        "nora": "f1e538c1.0315f8",
+        "topic": "power_t1",
+        "onvalue": "{\"on\": true}",
+        "onvalueType": "json",
+        "offvalue": "{\"on\": false}",
+        "offvalueType": "json",
+        "temperaturemin": "2700",
+        "temperaturemax": "5500",
+        "twofactor": "off",
+        "twofactorpin": "",
+        "filter": true,
+        "x": 470,
+        "y": 140,
+        "wires": [
+            [
+                "724ffcb347b98a4b"
+            ]
+        ]
+    },
+    {
+        "id": "fd78c10160589955",
+        "type": "function",
+        "z": "86c7bfe22f048e9c",
+        "name": "query",
+        "func": "const keys = flow.keys();\n\nconst queryTopics = [];\n\nfor (const key of keys) {\n    const state = flow.get(key);\n\n    if (typeof state !== 'object') {\n        continue;\n    }\n\n    if ('on' in state) {\n        queryTopics.push(`cmnd/${key}/Power`);\n    }\n\n    if ('brightness' in state) {\n        queryTopics.push(`cmnd/${key}/Dimmer`);\n    }\n}\n\nif (queryTopics.length) {\n    return [queryTopics.map(q => ({\n        payload: '',\n        topic: q,\n    }))];\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 300,
+        "wires": [
+            [
+                "07e1d3f3b09b4c2f"
+            ]
+        ]
+    },
+    {
+        "id": "e181aecc22b289f2",
+        "type": "inject",
+        "z": "86c7bfe22f048e9c",
+        "name": "periodic",
+        "props": [],
+        "repeat": "60",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 160,
+        "y": 300,
+        "wires": [
+            [
+                "fd78c10160589955"
+            ]
+        ]
     }
 ]
