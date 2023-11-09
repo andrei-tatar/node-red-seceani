@@ -3325,7 +3325,7 @@
         "topic": "",
         "actions": [],
         "closeNotification": false,
-        "x": 730,
+        "x": 870,
         "y": 320,
         "wires": [
             []
@@ -3444,7 +3444,7 @@
                 "vt": "str"
             }
         ],
-        "repeat": "1800",
+        "repeat": "300",
         "crontab": "",
         "once": true,
         "onceDelay": "5",
@@ -4528,6 +4528,46 @@
         ]
     },
     {
+        "id": "a363becba48402b2",
+        "type": "mqtt in",
+        "z": "d02cf25fa8114475",
+        "name": "",
+        "topic": "sw-grid/online",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "f569d34c.8c7ed",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 610,
+        "y": 380,
+        "wires": [
+            [
+                "291bdf656757a188"
+            ]
+        ]
+    },
+    {
+        "id": "291bdf656757a188",
+        "type": "function",
+        "z": "d02cf25fa8114475",
+        "name": "map",
+        "func": "const isOnline = msg.payload;\nconst status = isOnline ? 'online' : 'offline';\nconst at = new Date().toLocaleString();\n\nreturn {\n    payload: {\n        tag: \"grid-online\",\n        title: \"Grid\",\n        body: `Grid changed to ${status}, at ${at}`,\n        silent: true,\n    }\n};",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 750,
+        "y": 380,
+        "wires": [
+            [
+                "002fbcc4b5600960"
+            ]
+        ]
+    },
+    {
         "id": "e6892c53b951d955",
         "type": "function",
         "z": "13aa577370e4c4d7",
@@ -5269,7 +5309,7 @@
         "type": "function",
         "z": "67e1c6f6bd2fab57",
         "name": "outside light on/off",
-        "func": "if (msg.topic === 'dark') {\n    context.set('darkOutside', !msg.payload);\n}\n\nconst lightOn =\n    context.get('darkOutside') &&\n    flow.get('autoLightOutside');\n\nturn(lightOn);\n\n/**\n * @param {boolean} on\n */\nfunction turn(on) {\n    node.send([[\n        {\n            payload: { on },\n            topic: 'ha-switch/switch-dimmer-11/state/set',\n            retain: true,\n        },\n        {\n            payload: { on: [on] },\n            topic: 'ha-switch/switch-onoff-7/state/set',\n            retain: true,\n        },\n        {\n            topic: 'zigbee2mqtt-garage/light/outside/set',\n            payload: { state: on ? 'ON' : 'OFF' },\n        },\n        ...getDeckMessages(on),\n    ]]);\n}\n\nfunction getDeckMessages(on) {\n    const deckBase = 'cmnd/tasmota_0F10CB/';\n    const deckDimmer = `${deckBase}/Dimmer`;\n    const deckPower = `${deckBase}/Power`;\n    return on\n        ? [{\n            topic: deckPower,\n            payload: 'ON',\n        }, {\n            topic: deckDimmer,\n            payload: 15,\n        }]\n        : [{\n            topic: deckPower,\n            payload: 'OFF',\n        }];\n}",
+        "func": "if (msg.topic === 'dark') {\n    context.set('darkOutside', !msg.payload);\n}\n\nconst lightOn =\n    context.get('darkOutside') &&\n    flow.get('autoLightOutside');\n\nturn(lightOn);\n\n/**\n * @param {boolean} on\n */\nfunction turn(on) {\n    node.send([[\n        {\n            payload: { on },\n            topic: 'ha-switch/switch-dimmer-11/state/set',\n            retain: true,\n        },\n        {\n            payload: { on: [on] },\n            topic: 'ha-switch/switch-onoff-7/state/set',\n            retain: true,\n        },\n        {\n            topic: 'zigbee2mqtt-garage/light/outside/set',\n            payload: { state: on ? 'ON' : 'OFF' },\n        },\n        ...getDeckMessages(on),\n    ]]);\n}\n\nfunction getDeckMessages(on) {\n    const deckBase = 'cmnd/dimmer_terasa/';\n    const deckDimmer = `${deckBase}/Dimmer`;\n    const deckPower = `${deckBase}/Power`;\n    return on\n        ? [{\n            topic: deckPower,\n            payload: 'ON',\n        }, {\n            topic: deckDimmer,\n            payload: 15,\n        }]\n        : [{\n            topic: deckPower,\n            payload: 'OFF',\n        }];\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -6100,7 +6140,8 @@
         "wires": [
             [
                 "31a7614427673b14",
-                "9b1fa38348a4bbe9"
+                "9b1fa38348a4bbe9",
+                "c9f86e52c399a757"
             ]
         ]
     },
@@ -6183,7 +6224,7 @@
         "name": "",
         "colortype": "hsv",
         "nora": "f1e538c1.0315f8",
-        "topic": "tasmota_0F10CB",
+        "topic": "dimmer_terasa",
         "onvalue": "true",
         "onvalueType": "bool",
         "offvalue": "false",
@@ -6259,7 +6300,7 @@
         "type": "function",
         "z": "86c7bfe22f048e9c",
         "name": "query",
-        "func": "const keys = flow.keys();\n\nconst queryTopics = [];\n\nfor (const key of keys) {\n    const state = flow.get(key);\n\n    if (typeof state !== 'object') {\n        continue;\n    }\n\n    if ('on' in state) {\n        queryTopics.push(`cmnd/${key}/Power`);\n    }\n\n    if ('brightness' in state) {\n        queryTopics.push(`cmnd/${key}/Dimmer`);\n    }\n}\n\nif (queryTopics.length) {\n    return [queryTopics.map(q => ({\n        payload: '',\n        topic: q,\n    }))];\n}",
+        "func": "const keys = flow.keys();\n\nconst queryTopics = [];\n\nfor (const key of keys) {\n    const state = flow.get(key);\n\n    if (typeof state !== 'object') {\n        continue;\n    }\n\n    if ('on' in state) {\n        queryTopics.push(`cmnd/${key}/Power`);\n    }\n\n    if ('brightness' in state || key.indexOf('dimmer') >= 0) {\n        queryTopics.push(`cmnd/${key}/Dimmer`);\n    }\n}\n\nif (queryTopics.length) {\n    return [queryTopics.map(q => ({\n        payload: '',\n        topic: q,\n    }))];\n}",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -6289,6 +6330,42 @@
         "wires": [
             [
                 "fd78c10160589955"
+            ]
+        ]
+    },
+    {
+        "id": "c9f86e52c399a757",
+        "type": "noraf-light",
+        "z": "86c7bfe22f048e9c",
+        "d": true,
+        "devicename": "Power 3",
+        "lightcolor": false,
+        "brightnesscontrol": false,
+        "commandonlycolor": false,
+        "turnonwhenbrightnesschanges": false,
+        "passthru": false,
+        "errorifstateunchaged": false,
+        "statepayload": true,
+        "brightnessoverride": "",
+        "roomhint": "",
+        "name": "",
+        "colortype": "hsv",
+        "nora": "f1e538c1.0315f8",
+        "topic": "power_t3",
+        "onvalue": "{\"on\": true}",
+        "onvalueType": "json",
+        "offvalue": "{\"on\": false}",
+        "offvalueType": "json",
+        "temperaturemin": "2700",
+        "temperaturemax": "5500",
+        "twofactor": "off",
+        "twofactorpin": "",
+        "filter": true,
+        "x": 480,
+        "y": 200,
+        "wires": [
+            [
+                "724ffcb347b98a4b"
             ]
         ]
     }
