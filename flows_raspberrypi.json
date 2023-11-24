@@ -110,7 +110,7 @@
         "id": "89e46ce21c7f5128",
         "type": "nibe-config",
         "name": "nibe config",
-        "address": "tcp://192.168.68.6:0502",
+        "address": "tcp://NIBE-06545022180002.local:0502",
         "registerFile": ""
     },
     {
@@ -306,7 +306,7 @@
         "topic": "ventilation/speed-gq3",
         "filter": false,
         "x": 930,
-        "y": 860,
+        "y": 920,
         "wires": [
             [
                 "b3dde27634dd2e4c"
@@ -326,7 +326,7 @@
         "topic": "ventilation/speed-gq2",
         "filter": false,
         "x": 930,
-        "y": 800,
+        "y": 860,
         "wires": [
             [
                 "b3dde27634dd2e4c"
@@ -346,7 +346,7 @@
         "topic": "living/setpoint",
         "filter": true,
         "x": 240,
-        "y": 280,
+        "y": 340,
         "wires": [
             [
                 "34e4236db446efad"
@@ -366,7 +366,7 @@
         "topic": "bedroom/setpoint",
         "filter": true,
         "x": 250,
-        "y": 400,
+        "y": 460,
         "wires": [
             [
                 "34e4236db446efad"
@@ -386,7 +386,7 @@
         "topic": "living/temperature",
         "filter": false,
         "x": 590,
-        "y": 340,
+        "y": 400,
         "wires": [
             [
                 "69a2359c3bf3f716"
@@ -406,7 +406,7 @@
         "topic": "more-hot-water",
         "filter": true,
         "x": 220,
-        "y": 160,
+        "y": 220,
         "wires": [
             [
                 "1cd1125ce32c5aca"
@@ -434,7 +434,7 @@
         "asyncCmd": false,
         "outputs": 1,
         "x": 610,
-        "y": 100,
+        "y": 160,
         "wires": [
             [
                 "660188df0186d9af"
@@ -448,12 +448,13 @@
         "name": "map",
         "func": "return {\n    payload: msg.payload.value,\n    topic: msg.topic,\n};",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
         "x": 430,
-        "y": 160,
+        "y": 220,
         "wires": [
             [
                 "f07580f20f9c8e5f",
@@ -482,7 +483,7 @@
         "asyncCmd": false,
         "outputs": 1,
         "x": 600,
-        "y": 160,
+        "y": 220,
         "wires": [
             [
                 "660188df0186d9af"
@@ -499,7 +500,7 @@
             "795f23756f1e446b"
         ],
         "x": 75,
-        "y": 100,
+        "y": 160,
         "wires": [
             [
                 "99b78cb07dd4c043",
@@ -518,7 +519,7 @@
             "9f8ecdb12e5082f5"
         ],
         "x": 785,
-        "y": 100,
+        "y": 160,
         "wires": []
     },
     {
@@ -530,7 +531,7 @@
         "op2": "{\"value\":false}",
         "op1type": "json",
         "op2type": "json",
-        "duration": "30",
+        "duration": "10",
         "extend": true,
         "overrideDelay": false,
         "units": "s",
@@ -538,8 +539,8 @@
         "bytopic": "all",
         "topic": "topic",
         "outputs": 1,
-        "x": 490,
-        "y": 460,
+        "x": 450,
+        "y": 40,
         "wires": [
             [
                 "3760822f76a88122"
@@ -559,7 +560,7 @@
         "topic": "living/setpoint",
         "filter": true,
         "x": 240,
-        "y": 340,
+        "y": 400,
         "wires": [
             []
         ]
@@ -577,18 +578,16 @@
         "topic": "bedroom/setpoint",
         "filter": true,
         "x": 250,
-        "y": 460,
+        "y": 520,
         "wires": [
-            [
-                "df27d4e5b15bc14e"
-            ]
+            []
         ]
     },
     {
         "id": "e56377cc659b2c95",
         "type": "noraf-thermostat",
         "z": "2de9a494ac1d6c71",
-        "devicename": "Thermostat",
+        "devicename": "Living Thermostat",
         "roomhint": "Living Room",
         "name": "living",
         "modes": "off,heat,cool",
@@ -605,7 +604,7 @@
         "twofactorpin": "",
         "filter": true,
         "x": 330,
-        "y": 540,
+        "y": 600,
         "wires": [
             [
                 "a5df44a963725282"
@@ -625,7 +624,7 @@
         "topic": "humidity",
         "filter": false,
         "x": 620,
-        "y": 280,
+        "y": 340,
         "wires": [
             [
                 "69a2359c3bf3f716"
@@ -639,12 +638,13 @@
         "name": "th.in",
         "func": "if (msg.payload.value < -300) {\n    return;\n}\n\nconst parts = msg.topic.split('/');\nconst rooms = parts.length === 2\n    ? [parts[0]]\n    : (context.keys() ?? []);\nconst prop = parts[parts.length - 1];\n\nconst msgs = rooms.map(room => {\n    const state = {\n        ...(context.get(room) ?? {}),\n        mode: 'heat',\n    };\n    state[prop] = msg.payload.value;\n    context.set(room, state);\n    return { topic: room, payload: state };\n});\n\nreturn [msgs];\n",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
         "x": 190,
-        "y": 540,
+        "y": 600,
         "wires": [
             [
                 "e56377cc659b2c95",
@@ -656,7 +656,7 @@
         "id": "b7cb59e0445cf704",
         "type": "noraf-thermostat",
         "z": "2de9a494ac1d6c71",
-        "devicename": "Thermostat",
+        "devicename": "Office Thermostat",
         "roomhint": "Office",
         "name": "bedroom",
         "modes": "off,heat,cool",
@@ -673,7 +673,7 @@
         "twofactorpin": "",
         "filter": true,
         "x": 340,
-        "y": 600,
+        "y": 660,
         "wires": [
             [
                 "a5df44a963725282"
@@ -687,12 +687,13 @@
         "name": "th.out",
         "func": "const propsToCopy = ['setpoint'];\nconst messages = propsToCopy.map(key => ({\n    topic: `${msg.topic}/${key}`,\n    payload: msg.payload[key],\n}));\nreturn [messages]",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
         "x": 530,
-        "y": 540,
+        "y": 600,
         "wires": [
             [
                 "847b62e1d562ef8b"
@@ -709,7 +710,7 @@
             "50badacef6b71f47"
         ],
         "x": 745,
-        "y": 540,
+        "y": 600,
         "wires": []
     },
     {
@@ -721,7 +722,7 @@
             "61d8d50274c6ed71"
         ],
         "x": 75,
-        "y": 280,
+        "y": 340,
         "wires": [
             [
                 "8a2d91b19d4ef994",
@@ -744,7 +745,7 @@
         "topic": "bedroom/temperature",
         "filter": false,
         "x": 600,
-        "y": 400,
+        "y": 460,
         "wires": [
             [
                 "69a2359c3bf3f716"
@@ -756,17 +757,21 @@
         "type": "function",
         "z": "2de9a494ac1d6c71",
         "name": "online",
-        "func": "return {\n    ...msg,\n    topic: 'online',\n}",
-        "outputs": 1,
+        "func": "const status = msg.payload.value ? 'restored' : 'lost';\nconst at = new Date().toLocaleString();\nlet afterText = '';\nif (!msg.payload.value) {\n    context.set('lost_at', new Date().getTime());\n} else {\n    let after = new Date().getTime() - context.get('lost_at');\n    let unit = 'sec';\n    after /= 1000;\n    if (after > 60) {\n        after /= 60;\n        unit = 'min';\n    }\n    if (after > 60) {\n        after /= 60;\n        unit = 'hour';\n    }\n    afterText = `, after ${after.toFixed(1)} ${unit}`\n}\n\nreturn [{\n    ...msg,\n    topic: 'online',\n}, {\n    payload: {\n        tag: \"nibe-connection\",\n        title: \"Nibe connection\",\n        body: `Nibe connection ${status} at ${at}${afterText}`,\n        silent: true,\n    }\n}];\n",
+        "outputs": 2,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 650,
-        "y": 460,
+        "x": 610,
+        "y": 40,
         "wires": [
             [
                 "e41d6b0ea38ad5e3"
+            ],
+            [
+                "79840687cbc01295"
             ]
         ]
     },
@@ -783,7 +788,7 @@
         "property": "payload",
         "topi": "topic",
         "x": 650,
-        "y": 540,
+        "y": 600,
         "wires": [
             [
                 "61d8d50274c6ed71"
@@ -805,7 +810,7 @@
         "org": "home",
         "bucket": "home",
         "x": 300,
-        "y": 980,
+        "y": 1040,
         "wires": []
     },
     {
@@ -815,12 +820,13 @@
         "name": "map",
         "func": "if (msg.payload.value < -300) {\n    return;\n}\n\nconst parts = msg.topic.split('/');\nconst measurement = parts[0];\nconst payload = parts.length === 1\n    ? msg.payload.value\n    : { [parts[1]]: msg.payload.value }\n\nreturn {\n    payload,\n    measurement,\n};\n",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
         "x": 170,
-        "y": 980,
+        "y": 1040,
         "wires": [
             [
                 "9d978d4c29e3fede"
@@ -840,7 +846,7 @@
         "topic": "outdoor/temperature-bt1",
         "filter": true,
         "x": 220,
-        "y": 680,
+        "y": 740,
         "wires": [
             [
                 "7ca97a871eef0253"
@@ -854,12 +860,13 @@
         "name": "map",
         "func": "if (msg.payload.value < -300) {\n    return;\n}\n\nconst [measurement, valueName] = msg.topic.split('/');\nreturn {\n    payload: { [valueName]: msg.payload.value },\n    measurement,\n};\n",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
         "x": 170,
-        "y": 1020,
+        "y": 1080,
         "wires": [
             [
                 "192c99f16f9eaaee"
@@ -881,7 +888,7 @@
         "org": "home",
         "bucket": "nibe",
         "x": 300,
-        "y": 1020,
+        "y": 1080,
         "wires": []
     },
     {
@@ -897,7 +904,7 @@
         "topic": "line/supply-bt2",
         "filter": true,
         "x": 170,
-        "y": 740,
+        "y": 800,
         "wires": [
             [
                 "7ca97a871eef0253"
@@ -917,7 +924,7 @@
         "topic": "line/return-bt3",
         "filter": true,
         "x": 170,
-        "y": 800,
+        "y": 860,
         "wires": [
             [
                 "7ca97a871eef0253"
@@ -937,7 +944,7 @@
         "topic": "ventilation/supp-air-temperature-bt22",
         "filter": true,
         "x": 560,
-        "y": 740,
+        "y": 800,
         "wires": [
             [
                 "772ab499b9243a81"
@@ -957,7 +964,7 @@
         "topic": "ventilation/outdoor-temperature-bt23",
         "filter": true,
         "x": 590,
-        "y": 680,
+        "y": 740,
         "wires": [
             [
                 "772ab499b9243a81"
@@ -977,7 +984,7 @@
         "topic": "ventilation/extract-air-temp-bt21",
         "filter": true,
         "x": 560,
-        "y": 800,
+        "y": 860,
         "wires": [
             [
                 "772ab499b9243a81"
@@ -997,7 +1004,7 @@
         "topic": "ventilation/exhaust-air-temp-bt20",
         "filter": true,
         "x": 560,
-        "y": 860,
+        "y": 920,
         "wires": [
             [
                 "772ab499b9243a81"
@@ -1017,7 +1024,7 @@
         "topic": "operation/priority",
         "filter": false,
         "x": 880,
-        "y": 920,
+        "y": 980,
         "wires": [
             [
                 "6c724be7f6fd897c"
@@ -1031,12 +1038,13 @@
         "name": "Priority",
         "func": "const map = {\n    '10': 'off',\n    '20': 'hotwater',\n    '30': 'heat',\n    '40': 'pool',\n    '60': 'cooling',\n};\n\nnode.status({ fill: \"blue\", shape: \"dot\", text: map[msg.payload.value] });\nreturn msg;",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
         "x": 1040,
-        "y": 920,
+        "y": 980,
         "wires": [
             [
                 "b3dde27634dd2e4c",
@@ -1057,7 +1065,7 @@
         "topic": "brine/in-bt10",
         "filter": false,
         "x": 900,
-        "y": 680,
+        "y": 740,
         "wires": [
             [
                 "b3dde27634dd2e4c"
@@ -1077,7 +1085,7 @@
         "topic": "brine/out-bt11",
         "filter": false,
         "x": 900,
-        "y": 740,
+        "y": 800,
         "wires": [
             [
                 "b3dde27634dd2e4c"
@@ -1097,7 +1105,7 @@
         "topic": "ventilation/mode",
         "filter": false,
         "x": 550,
-        "y": 920,
+        "y": 980,
         "wires": [
             [
                 "772ab499b9243a81"
@@ -1120,7 +1128,8 @@
         "y": 40,
         "wires": [
             [
-                "7e80dd6fcb41cdda"
+                "7e80dd6fcb41cdda",
+                "df27d4e5b15bc14e"
             ]
         ]
     },
@@ -1131,12 +1140,13 @@
         "name": "map",
         "func": "node.status({ fill: \"blue\", text: `${msg.payload.value} - ${status()}` });\n\nreturn [{\n    payload: msg.payload.value === 1 ? 1 : 0,\n    topic: msg.topic,\n}, {\n    payload: msg.payload.value === 4 ? 4 : 0,\n    topic: msg.topic,\n}];\n\nfunction status() {\n    switch (msg.payload.value) {\n        case 0: return 'normal';\n        case 1: return 'off';\n        case 2: return 'low';\n        case 3: return 'high';\n        case 4: return 'boost';\n    }\n}",
         "outputs": 2,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
         "x": 430,
-        "y": 40,
+        "y": 120,
         "wires": [
             [
                 "f0a4665aecc7e7e1"
@@ -1167,7 +1177,7 @@
         "asyncCmd": false,
         "outputs": 1,
         "x": 590,
-        "y": 40,
+        "y": 100,
         "wires": [
             [
                 "660188df0186d9af"
@@ -1187,7 +1197,7 @@
         "topic": "hot-water/charging-bt6",
         "filter": false,
         "x": 190,
-        "y": 860,
+        "y": 920,
         "wires": [
             [
                 "7ca97a871eef0253"
@@ -1204,7 +1214,7 @@
             "34e4236db446efad"
         ],
         "x": 85,
-        "y": 980,
+        "y": 1040,
         "wires": [
             [
                 "dc49bf19798833ec"
@@ -1222,7 +1232,7 @@
             "ceabaec499757bb4"
         ],
         "x": 785,
-        "y": 280,
+        "y": 340,
         "wires": []
     },
     {
@@ -1237,7 +1247,7 @@
             "4495116d6ff821e7"
         ],
         "x": 85,
-        "y": 540,
+        "y": 600,
         "wires": [
             [
                 "25ecd6270bd33719"
@@ -1253,8 +1263,8 @@
         "links": [
             "ceabaec499757bb4"
         ],
-        "x": 745,
-        "y": 460,
+        "x": 765,
+        "y": 40,
         "wires": []
     },
     {
@@ -1268,7 +1278,7 @@
             "ceabaec499757bb4"
         ],
         "x": 425,
-        "y": 280,
+        "y": 340,
         "wires": []
     },
     {
@@ -1282,7 +1292,7 @@
             "47ae0eea20515ee1"
         ],
         "x": 415,
-        "y": 680,
+        "y": 740,
         "wires": []
     },
     {
@@ -1296,7 +1306,7 @@
             "b3dde27634dd2e4c"
         ],
         "x": 85,
-        "y": 1020,
+        "y": 1080,
         "wires": [
             [
                 "3a75e22cbaeb5f90"
@@ -1314,7 +1324,7 @@
             "47ae0eea20515ee1"
         ],
         "x": 775,
-        "y": 680,
+        "y": 740,
         "wires": []
     },
     {
@@ -1328,7 +1338,7 @@
             "47ae0eea20515ee1"
         ],
         "x": 1145,
-        "y": 680,
+        "y": 740,
         "wires": []
     },
     {
@@ -1344,7 +1354,7 @@
         "topic": "operation/priority",
         "filter": false,
         "x": 900,
-        "y": 980,
+        "y": 1040,
         "wires": [
             [
                 "777c440cff6e50f7"
@@ -1358,12 +1368,13 @@
         "name": "op. mode",
         "func": "const map = new Map([\n    [0, 'auto'],\n    [1, 'manual'],\n    [2, 'add. heat only'],\n]);\n\nnode.status({\n    fill: 'blue',\n    text: map.get(msg.payload.value),\n});\n",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
         "x": 1060,
-        "y": 980,
+        "y": 1040,
         "wires": [
             []
         ]
@@ -1375,12 +1386,13 @@
         "name": "map",
         "func": "return {\n    payload: {\n        value: msg.payload.value === 30\n            ? 'heat'\n            : 'none',\n    },\n    topic: 'activeMode',\n}",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
         "x": 1190,
-        "y": 920,
+        "y": 980,
         "wires": [
             [
                 "4495116d6ff821e7"
@@ -1397,7 +1409,7 @@
             "ceabaec499757bb4"
         ],
         "x": 1275,
-        "y": 920,
+        "y": 980,
         "wires": []
     },
     {
@@ -1413,7 +1425,7 @@
         "topic": "bypass-heating-recovery",
         "filter": true,
         "x": 220,
-        "y": 220,
+        "y": 280,
         "wires": [
             [
                 "1cd1125ce32c5aca"
@@ -1441,11 +1453,30 @@
         "asyncCmd": false,
         "outputs": 1,
         "x": 600,
-        "y": 220,
+        "y": 280,
         "wires": [
             [
                 "660188df0186d9af"
             ]
+        ]
+    },
+    {
+        "id": "79840687cbc01295",
+        "type": "noraf-notify",
+        "z": "2de9a494ac1d6c71",
+        "tag": "",
+        "title": "",
+        "body": "",
+        "icon": "",
+        "name": "notify",
+        "nora": "f1e538c1.0315f8",
+        "topic": "",
+        "actions": [],
+        "closeNotification": false,
+        "x": 770,
+        "y": 80,
+        "wires": [
+            []
         ]
     },
     {
@@ -1689,6 +1720,7 @@
         "name": "blinds.out",
         "func": "return {\n    payload: {\n        openPercent: msg.payload.open,\n    },\n    topic: msg.topic,\n};",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -1708,6 +1740,7 @@
         "name": "dimmers.in",
         "func": "if (msg.topic.startsWith('ha-switch/switch-dimmer-'))\n    return msg;",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -1727,6 +1760,7 @@
         "name": "blinds.in",
         "func": "if (msg.topic.startsWith('ha-switch/switch-blinds-')) {\n    return {\n        payload: {\n            open: msg.payload.openPercent,\n            online: msg.payload.online,\n        },\n        topic: msg.topic,\n    };\n}",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -1775,6 +1809,7 @@
         "id": "917568c1def8a578",
         "type": "noraf-light",
         "z": "7d41aab9fd0b6a3e",
+        "d": true,
         "devicename": "Light",
         "lightcolor": false,
         "brightnesscontrol": true,
@@ -2104,6 +2139,7 @@
         "name": "set online",
         "func": "if (typeof msg.payload !== 'boolean') {\n    return;\n}\n\nconst parts = msg.topic.split('/');\nparts[parts.length - 1] = 'state';\n\nreturn {\n    payload: {\n        online: msg.payload,\n    },\n    topic: parts.join('/'),\n};",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -2141,6 +2177,7 @@
         "name": "set state",
         "func": "return {\n    retain: true,\n    ...msg,\n    topic: `${msg.topic}/set`\n};",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -2173,6 +2210,7 @@
         "name": "onoff.out",
         "func": "const m = /([^.]+)\\.(\\d+)/.exec(msg.topic);\nconst topic = m ? m[1] : msg.topic;\nconst index = m ? +m[2] : 0;\n\nconst on = [];\non[index] = msg.payload;\n\nreturn {\n    payload: {\n        on,\n    },\n    topic,\n};",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -2192,6 +2230,7 @@
         "name": "onoff.in",
         "func": "if (msg.topic.startsWith('ha-switch/switch-onoff-')) {\n\n    if (Array.isArray(msg.payload.on) && msg.payload.on.length > 1) {\n        //multiple states on switch\n        return [msg.payload.on.map((on, index) => ({\n            payload: {\n                ...msg.payload,\n                on,\n            },\n            topic: `${msg.topic}.${index}`\n        }))];\n    } else {\n        return {\n            payload: {\n                ...msg.payload,\n                on: msg.payload?.on?.[0] ?? msg.payload?.on,\n            },\n            topic: msg.topic,\n        };\n    }\n}",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -2483,6 +2522,7 @@
         "name": "Clone On/Off",
         "func": "/**\n * @type Map<string, {topic:string, type:'onoff'|'offonly'}>\n */\nconst CTRL = new Map([\n    ['ha-switch/switch-dimmer-5/state', { topic: 'ha-switch/switch-onoff-4/state', type: 'onoff' }],\n    ['ha-switch/switch-dimmer-9/state', { topic: 'ha-switch/switch-onoff-6/state', type: 'onoff' }],\n    ['ha-switch/switch-onoff-5/state', { topic: 'ha-switch/switch-onoff-8/state', type: 'offonly' }],\n]);\n\nconst topic = msg.topic;\nconst to = CTRL.get(topic);\nif (!to) {\n    return;\n}\n\nlet on = msg.payload.on;\nif (Array.isArray(on) && on.length) {\n    on = on[0];\n}\nif (typeof on != 'boolean') {\n    return;\n}\n\nconst lastOn = context.get(topic);\nif (lastOn !== on) {\n    context.set(topic, on);\n\n    if (to.type === 'offonly' && on) {\n        return;\n    }\n\n    return {\n        topic: to.topic,\n        payload: {\n            on: [on],\n        },\n    };\n}\n",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -2641,6 +2681,7 @@
         "name": "store state",
         "func": "const value = global.get(msg.topic) || { online: true };\n\nif (Array.isArray(msg.payload.on) && msg.payload.on.length === 1) {\n    msg.payload.on = msg.payload.on[0];\n}\n\nglobal.set(msg.topic, {\n    ...value,\n    ...msg.payload,\n});\n\nreturn msg;",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -3075,8 +3116,9 @@
         "type": "function",
         "z": "7d41aab9fd0b6a3e",
         "name": "gates.in",
-        "func": "const regex = /^ha-switch\\/switch-.+-gate\\/state$/\nif (regex.test(msg.topic)) {\n    return {\n        payload: {\n            online: msg.payload.online,\n        },\n        topic: msg.topic,\n    };\n}\n",
+        "func": "const regex = /^ha-switch\\/switch-.*(-gate|garage)\\/state$/\nif (regex.test(msg.topic)) {\n    return {\n        payload: {\n            online: msg.payload.online,\n        },\n        topic: msg.topic,\n    };\n}\n",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -3116,7 +3158,8 @@
         "wires": [
             [
                 "4c24a422c018775f",
-                "2c6fd4fdcf461e64"
+                "2c6fd4fdcf461e64",
+                "6b043e0c546a5e30"
             ]
         ]
     },
@@ -3127,6 +3170,7 @@
         "name": "gates.out",
         "func": "if (msg.payload) {\n    return {\n        payload: {\n            on: [true],\n            for: 2\n        },\n        topic: msg.topic,\n        retain: false,\n    };\n}\n",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -3218,6 +3262,38 @@
         ]
     },
     {
+        "id": "6b043e0c546a5e30",
+        "type": "noraf-openclose",
+        "z": "7d41aab9fd0b6a3e",
+        "devicename": "Garage",
+        "roomhint": "Garage",
+        "name": "",
+        "directions": "",
+        "openclosetype": "DOOR",
+        "passthru": false,
+        "errorifstateunchaged": false,
+        "discrete": true,
+        "lockunlock": false,
+        "commandonly": true,
+        "queryonly": false,
+        "nora": "f1e538c1.0315f8",
+        "topic": "ha-switch/switch-garage/state",
+        "openvalue": "true",
+        "openvalueType": "bool",
+        "closevalue": "false",
+        "closevalueType": "bool",
+        "twofactor": "ack",
+        "twofactorpin": "",
+        "filter": true,
+        "x": 220,
+        "y": 620,
+        "wires": [
+            [
+                "6824adfe2ef43b30"
+            ]
+        ]
+    },
+    {
         "id": "8755301a8c241477",
         "type": "mpp-input",
         "z": "d02cf25fa8114475",
@@ -3281,6 +3357,7 @@
         "name": "map",
         "func": "return [[{\n    payload: msg.payload.acInput.voltage,\n    measurement: 'ac-input-voltage',\n}, {\n    payload: msg.payload.acInput.frequency,\n    measurement: 'ac-input-freq',\n}, {\n    payload: msg.payload.acOutput.voltage,\n    measurement: 'ac-output-voltage',\n}, {\n    payload: msg.payload.acOutput.frequency,\n    measurement: 'ac-output-freq',\n}, {\n    payload: {\n        voltage: msg.payload.battery.voltage,\n        current: msg.payload.battery.current,\n        capacity: msg.payload.battery.capacity,\n        power: msg.payload.battery.voltage *\n            msg.payload.battery.current,\n    },\n    measurement: 'battery',\n}, {\n    payload: {\n        voltage1: msg.payload.solarInput.voltage1,\n        voltage2: msg.payload.solarInput.voltage2,\n        current1: msg.payload.solarInput.current1,\n        current2: msg.payload.solarInput.current2,\n    },\n    measurement: 'solar-input',\n}]];",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -3298,14 +3375,15 @@
         "type": "function",
         "z": "d02cf25fa8114475",
         "name": "map",
-        "func": "return [[{\n    payload: msg.payload.acInput.activePower,\n    measurement: 'ac-input-active-power',\n}, {\n    payload: msg.payload.acOutput.activePower,\n    measurement: 'ac-output-active-power',\n}, {\n    payload: msg.payload.acOutput.apparentPower,\n    measurement: 'ac-output-apparent-power',\n}, {\n    payload: {\n        string1: msg.payload.solarInput.power1,\n        string2: msg.payload.solarInput.power2,\n        total: msg.payload.solarInput.power1 +\n            msg.payload.solarInput.power2,\n    },\n    measurement: 'solar-input-power',\n}]];",
+        "func": "const totalSolar = msg.payload.solarInput.power1 +\n    msg.payload.solarInput.power2;\n\nnode.status({\n    fill: \"blue\",\n    text: `in: ${Math.round(totalSolar / 1000)} kW`,\n});\n\nreturn [[{\n    payload: msg.payload.acInput.activePower,\n    measurement: 'ac-input-active-power',\n}, {\n    payload: msg.payload.acOutput.activePower,\n    measurement: 'ac-output-active-power',\n}, {\n    payload: msg.payload.acOutput.apparentPower,\n    measurement: 'ac-output-apparent-power',\n}, {\n    payload: {\n        string1: msg.payload.solarInput.power1,\n        string2: msg.payload.solarInput.power2,\n        total: msg.payload.solarInput.power1 +\n            msg.payload.solarInput.power2,\n    },\n    measurement: 'solar-input-power',\n}]];",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
         "x": 330,
-        "y": 240,
+        "y": 220,
         "wires": [
             [
                 "658c70c17f292167"
@@ -3363,6 +3441,7 @@
         "name": "notify inverter connection",
         "func": "const status = msg.payload ? 'restored' : 'lost';\nconst at = new Date().toLocaleString();\nlet afterText = '';\nif (!msg.payload) {\n    context.set('lost_at', new Date().getTime());\n} else {\n    let after = new Date().getTime() - context.get('lost_at');\n    let unit = 'sec';\n    after /= 1000;\n    if (after > 60) {\n        after /= 60;\n        unit = 'min';\n    }\n    if (after > 60) {\n        after /= 60;\n        unit = 'hour';\n    }\n    afterText = `, after ${after.toFixed(1)} ${unit}`\n}\n\nreturn {\n    payload: {\n        tag: \"inverter-connection\",\n        title: \"Inverter connection\",\n        body: `Inverter connection ${status} at ${at}${afterText}`,\n    }\n};",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -3382,6 +3461,7 @@
         "name": "battery capacity",
         "func": "const capacity = msg.payload.battery.capacity;\nconst values = this.past_values ?? [];\nvalues.splice(500);\nvalues.splice(0, 0, capacity);\nthis.past_values = values;\n\nlet average = values.reduce((a, b) => a + b, 0) / values.length;\naverage = Math.round(average);\n\nnode.status({ fill: \"blue\", shape: \"ring\", text: `${average}%` });\n\nreturn { payload: average };",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -3401,6 +3481,7 @@
         "name": "set flow.batteryStatus",
         "func": "const lastValue = flow.get('batteryStatus');\nconst newValue = msg.payload.status.batteryPowerDirectionStatus;\nif (newValue !== lastValue) {\n    flow.set('batteryStatus', newValue);\n}",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -3466,6 +3547,7 @@
         "name": "query",
         "func": "const TURN_ON_TIME = new Date('2023-10-03T10:00:00.000Z');\n\ngetIntegral({ measurement: 'solar', range: 'today' });\ngetIntegral({ measurement: 'solar', range: 'week' });\ngetIntegral({ measurement: 'solar', range: 'month' });\n\ngetIntegral({ measurement: 'out-active', range: 'today' });\ngetIntegral({ measurement: 'out-active', range: 'week' });\ngetIntegral({ measurement: 'out-active', range: 'month' });\n\ngetIntegral({ measurement: 'grid', range: 'today' });\ngetIntegral({ measurement: 'grid', range: 'week' });\ngetIntegral({ measurement: 'grid', range: 'month' });\n\nfunction getIntegral(\n  /** @type {{\n   * measurement: 'solar'|'out-active'|'grid', \n   * range: 'today'|'week'|'month'\n   * }} */\n  { measurement, range }\n) {\n  const now = new Date();\n  now.setHours(0, 0, 0, 0);\n\n  let start;\n\n  if (range === 'today') {\n    start = now.toISOString()\n  } else if (range === 'week') {\n    const day = now.getDay();\n    const diff = now.getDate() - day + (day == 0 ? -6 : 1); // adjust when day is sunday\n    now.setDate(diff);\n    if (now < TURN_ON_TIME) {\n      start = TURN_ON_TIME.toISOString();\n    } else {\n      start = now.toISOString()\n    }\n  } else if (range === 'month') {\n    now.setDate(1);\n    if (now < TURN_ON_TIME) {\n      start = TURN_ON_TIME.toISOString();\n    } else {\n      start = now.toISOString()\n    }\n  }\n\n  let q;\n  switch (measurement) {\n    case 'solar': q = \"solar-input-power\"; break;\n    case 'out-active': q = \"ac-output-active-power\"; break;\n    case 'grid': q = \"ac-input-active-power\"; break;\n  }\n\n\n  node.send({\n    query: `from(bucket: \"power\")\n  |> range(start: ${start}, stop: 1d )\n  |> filter(fn: (r) => r[\"_measurement\"] == \"${q}\")\n  |> filter(fn: (r) => r[\"_field\"] == \"total\")\n  |> integral(unit: 1h, column: \"_value\")`,\n    topic: `${measurement}-${range}`,\n  });\n}\n",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -3485,6 +3567,7 @@
         "name": "set unit",
         "func": "/** @type {number} */\nlet value = msg.payload[0]._value / 1000;\nvalue = Math.round(value * 10) / 10;\n\nconst unit = msg.topic.indexOf('apparent') >= 0\n    ? 'kVAh'\n    : 'kWh';\n\nreturn {\n    ...msg,\n    payload: `${value} ${unit}`,\n}\n\n",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -3743,8 +3826,8 @@
             "600938fcf232ad14",
             "0120f22e197cc1f6"
         ],
-        "x": 295,
-        "y": 200,
+        "x": 365,
+        "y": 180,
         "wires": []
     },
     {
@@ -4165,6 +4248,7 @@
         "name": "connect grid?",
         "func": "const isGridConnected = context.get('gridConnected') ?? false;\n\nlet batteryCurrent = context.get('batteryCurrent');\nlet batteryVoltage = context.get('batteryVoltage');\nlet solarPower = context.get('solarPower');\nconst batteryCapacity = global.get('batteryCapacity');\n\nif (typeof msg.payload?.battery?.current === 'number') {\n    const currentBatteryCurrent = msg.payload.battery.current;\n    if (currentBatteryCurrent !== batteryCurrent) {\n        context.set('batteryCurrent', batteryCurrent = currentBatteryCurrent);\n    }\n}\n\nif (typeof msg.payload?.battery?.voltage === 'number') {\n    const currentBatteryVoltage = msg.payload.battery.voltage;\n    if (currentBatteryVoltage !== batteryVoltage) {\n        context.set('batteryVoltage', batteryVoltage = currentBatteryVoltage);\n    }\n}\n\nif (typeof msg.payload?.solarInput?.power1 === 'number') {\n    const currentSolarPower = msg.payload.solarInput.power1 + msg.payload.solarInput.power2;\n    if (currentSolarPower !== solarPower) {\n        context.set('solarPower', solarPower = currentSolarPower);\n    }\n}\n\nif (typeof batteryCurrent !== 'number' ||\n    typeof batteryCapacity !== 'number' ||\n    typeof solarPower !== 'number' ||\n    typeof batteryVoltage !== 'number') {\n    return;\n}\n\nlet shouldConnectGrid;\n\nif (!isGridConnected) {\n    shouldConnectGrid = batteryVoltage < 48;\n} else {\n    const shouldDisconnectGrid =\n        (solarPower > 5000 || batteryCurrent > 50) && batteryCapacity > 40 ||\n        batteryCapacity >= 70;\n\n    shouldConnectGrid = !shouldDisconnectGrid;\n}\n\nnode.status({\n    fill: shouldConnectGrid ? 'blue' : 'yellow',\n    text: shouldConnectGrid ? 'yes' : 'nope',\n});\n\nif (shouldConnectGrid !== isGridConnected) {\n    const at = new Date().toLocaleString();\n    context.set('gridConnected', shouldConnectGrid);\n    return [\n        {\n            payload: shouldConnectGrid ? 'on' : 'off'\n        },\n        {\n            payload: {\n                tag: \"grid-connection\",\n                title: \"Grid connection\",\n                body: `Grid ${shouldConnectGrid ? 'connected' : 'disconnected'}, at ${at}`,\n            }\n        }\n    ];\n}\n",
         "outputs": 2,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -4555,6 +4639,7 @@
         "name": "map",
         "func": "const isOnline = msg.payload;\nconst status = isOnline ? 'online' : 'offline';\nconst at = new Date().toLocaleString();\n\nreturn {\n    payload: {\n        tag: \"grid-online\",\n        title: \"Grid\",\n        body: `Grid changed to ${status}, at ${at}`,\n        silent: true,\n    }\n};",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -4574,6 +4659,7 @@
         "name": "Last Message",
         "func": "const now = new Date();\nconst last = context.get(msg.topic) || {};\nconst span = last ? (now.getTime() - last.lastTick) / 1000 : null;\nconst maxSpan = last && span ? Math.max(last.maxSpan, span) : null;\n\ncontext.set(msg.topic, {\n    lastTick: now.getTime(),\n    last: now.toLocaleString(),\n    maxSpan,\n});\n\nreturn msg;",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -4738,6 +4824,7 @@
         "name": "Battery low",
         "func": "if (msg.payload?.battery_low === true ||\n    msg.payload?.battery < 20) {\n    const now = new Date().toLocaleString();\n    const location = msg.topic.substring(msg.topic.indexOf('/') + 1);\n    return {\n        topic: location,\n        payload: {\n            tag: location,\n            title: 'Battery low',\n            body: `${location} at ${now}. Battery: ${msg.payload.battery ?? -1}. Low: ${msg.payload.battery_low}`,\n\n            //zigbee logo\n            icon: 'data:image/png;base64,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'\n        },\n    };\n}\n",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -4804,6 +4891,7 @@
         "name": "leak?",
         "func": "const WAIT_SEC = 20;\nconst ON = {\n    payload: { on: true },\n    topic: 'ha-switch/switch-onoff-r1/state/set',\n};\nconst OFF = {\n    payload: { on: false },\n    topic: ON.topic,\n};\n\nif (msg.payload === 'cancel') {\n    this.timer = null;\n    clearTimeout(this.timer);\n    return;\n}\n\nif (msg.payload === 'start-water') {\n    node.send([, ON]);\n    return;\n}\n\nif (!msg.payload.water_leak || this.timer) {\n    return;\n}\n\nconst time = new Date().toLocaleString();\nconst parts = msg.topic.split('/');\nconst location = parts[parts.length - 1];\n\nconst base = {\n    tag: `water-leak`,\n    title: 'Water Leak',\n    body: `Water leak detected at ${time} - ${location}.`,\n};\n\nthis.timer = setTimeout(() => {\n    this.timer = null;\n    node.send([{\n        payload: {\n            ...base,\n            body: `${base.body} Stopped the water.`,\n            actions: [{\n                title: 'Start',\n                action: 'start-water'\n            }],\n        },\n    }, OFF]);\n}, WAIT_SEC * 1000);\n\nreturn {\n    payload: {\n        ...base,\n        body: `${base.body} Stopping the water in ${WAIT_SEC} sec.`,\n        actions: [{\n            title: 'Cancel',\n            action: 'cancel'\n        }],\n    },\n};\n",
         "outputs": 2,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -4907,6 +4995,7 @@
         "name": "map",
         "func": "const valueName = msg.topic.split('/').slice(-1)[0];\nif (typeof msg.payload.water_leak !== 'boolean') {\n    return;\n}\n\nreturn {\n    payload: { [valueName]: msg.payload.water_leak ? 1 : 0 },\n    measurement: 'water-leak',\n};",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -4942,17 +5031,19 @@
         "type": "function",
         "z": "536b0e9eda614fd2",
         "name": "Map",
-        "func": "let name = msg.topic.substring(msg.topic.indexOf('/') + 1);\n\nconst PREFIX = '/RESULT';\nif (name.endsWith(PREFIX)) {\n    name = name.substring(0, name.length - PREFIX.length);\n}\n\nconst previousPayload = global.get(name) ?? {};\nconst payload = {\n    ...previousPayload,\n    ...v('temperature'),\n    ...v('humidity'),\n    ...v('state', 'on', p => p === 'ON'),\n    ...v('POWER', 'on', p => p === 'ON'),\n    ...v('Dimmer', 'brightness'),\n    ...v('occupancy'),\n    online: msg.payload?.online ?? true,\n};\nglobal.set(name, payload);\n\nreturn {\n    payload,\n    topic: msg.topic,\n};\n\n/**\n* @param {string} input\n* @param {string} output\n* @param {(a:any)=>any} transform\n* @returns {Record<string, *>}\n*/\nfunction v(input, output = input, transform = x => x) {\n    if (input in msg.payload) {\n        return {\n            [output]: transform(msg.payload[input])\n        };\n    }\n    return {};\n}\n",
+        "func": "let name = msg.topic.substring(msg.topic.indexOf('/') + 1);\n\nconst PREFIX = '/RESULT';\nif (name.endsWith(PREFIX)) {\n    name = name.substring(0, name.length - PREFIX.length);\n}\n\nconst previousPayload = global.get(name) ?? {};\nconst payload = {\n    ...previousPayload,\n    ...v('temperature'),\n    ...v('humidity'),\n    ...v('state', 'on', p => p === 'ON'),\n    ...v('occupancy'),\n    ...v('brightness', 'brightness', v => Math.round(v / 254 * 100)),\n    online: msg.payload?.online ?? true,\n};\nglobal.set(name, payload);\n\nreturn {\n    payload,\n    topic: msg.topic,\n};\n\n/**\n* @param {string} input\n* @param {string} output\n* @param {(a:any)=>any} transform\n* @returns {Record<string, *>}\n*/\nfunction v(input, output = input, transform = x => x) {\n    if (input in msg.payload) {\n        return {\n            [output]: transform(msg.payload[input])\n        };\n    }\n    return {};\n}\n",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
         "x": 190,
-        "y": 240,
+        "y": 340,
         "wires": [
             [
-                "38687e0ac546600f"
+                "38687e0ac546600f",
+                "939503bc765e4d79"
             ]
         ]
     },
@@ -4977,7 +5068,7 @@
         "asyncCmd": false,
         "outputs": 1,
         "x": 370,
-        "y": 240,
+        "y": 280,
         "wires": [
             [
                 "7d559a43a7ec6440"
@@ -4989,14 +5080,15 @@
         "type": "function",
         "z": "536b0e9eda614fd2",
         "name": "Map",
-        "func": "return {\n    payload: {\n        state: msg.payload ? 'ON' : 'OFF',\n    },\n    topic: msg.topic + '/set',\n};",
+        "func": "const payload = {};\n\nconst state = typeof msg.payload === 'boolean'\n    ? msg.payload\n    : msg.payload?.on;\n\nif (typeof state === 'boolean') {\n    payload.state = state ? 'ON' : 'OFF';\n}\n\nif ('brightness' in msg.payload) {\n    payload.brightness = Math.round(msg.payload.brightness / 100 * 254);\n}\n\nreturn {\n    payload,\n    topic: msg.topic + '/set',\n};",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 570,
-        "y": 240,
+        "x": 550,
+        "y": 340,
         "wires": [
             [
                 "b02b6ceb7687e947"
@@ -5017,8 +5109,8 @@
         "correl": "",
         "expiry": "",
         "broker": "f569d34c.8c7ed",
-        "x": 790,
-        "y": 240,
+        "x": 690,
+        "y": 340,
         "wires": []
     },
     {
@@ -5031,7 +5123,7 @@
         "rules": [
             {
                 "t": "regex",
-                "v": ".+\\/relay\\/.+",
+                "v": ".+\\/(relay|dimmer)\\/.+",
                 "vt": "str",
                 "case": false
             },
@@ -5239,7 +5331,7 @@
             "18ee405180e7ef0d"
         ],
         "x": 75,
-        "y": 240,
+        "y": 340,
         "wires": [
             [
                 "f08cfee748e21645"
@@ -5285,6 +5377,62 @@
         ]
     },
     {
+        "id": "939503bc765e4d79",
+        "type": "noraf-light",
+        "z": "536b0e9eda614fd2",
+        "devicename": "Light",
+        "lightcolor": false,
+        "brightnesscontrol": true,
+        "commandonlycolor": false,
+        "turnonwhenbrightnesschanges": true,
+        "passthru": false,
+        "errorifstateunchaged": false,
+        "statepayload": true,
+        "brightnessoverride": "",
+        "roomhint": "Office",
+        "name": "office-dimmer",
+        "colortype": "hsv",
+        "nora": "f1e538c1.0315f8",
+        "topic": "zigbee2mqtt/dimmer/office",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "temperaturemin": "2700",
+        "temperaturemax": "5500",
+        "twofactor": "off",
+        "twofactorpin": "",
+        "filter": true,
+        "x": 360,
+        "y": 340,
+        "wires": [
+            [
+                "7d559a43a7ec6440"
+            ]
+        ]
+    },
+    {
+        "id": "31934cdca9f932ec",
+        "type": "mqtt in",
+        "z": "536b0e9eda614fd2",
+        "name": "",
+        "topic": "zigbee2mqtt/dimmer/+",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "f569d34c.8c7ed",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 200,
+        "wires": [
+            [
+                "59a6f1a86fee64bb"
+            ]
+        ]
+    },
+    {
         "id": "244c26807bc68f0e",
         "type": "sunrise",
         "z": "67e1c6f6bd2fab57",
@@ -5311,6 +5459,7 @@
         "name": "outside light on/off",
         "func": "if (msg.topic === 'dark') {\n    context.set('darkOutside', !msg.payload);\n}\n\nconst lightOn =\n    context.get('darkOutside') &&\n    flow.get('autoLightOutside');\n\nturn(lightOn);\n\n/**\n * @param {boolean} on\n */\nfunction turn(on) {\n    node.send([[\n        {\n            payload: { on },\n            topic: 'ha-switch/switch-dimmer-11/state/set',\n            retain: true,\n        },\n        {\n            payload: { on: [on] },\n            topic: 'ha-switch/switch-onoff-7/state/set',\n            retain: true,\n        },\n        {\n            topic: 'zigbee2mqtt-garage/light/outside/set',\n            payload: { state: on ? 'ON' : 'OFF' },\n        },\n        ...getDeckMessages(on),\n    ]]);\n}\n\nfunction getDeckMessages(on) {\n    const deckBase = 'cmnd/dimmer_terasa/';\n    const deckDimmer = `${deckBase}/Dimmer`;\n    const deckPower = `${deckBase}/Power`;\n    return on\n        ? [{\n            topic: deckPower,\n            payload: 'ON',\n        }, {\n            topic: deckDimmer,\n            payload: 15,\n        }]\n        : [{\n            topic: deckPower,\n            payload: 'OFF',\n        }];\n}",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -5348,6 +5497,7 @@
         "name": "open/close blinds",
         "func": "/** @type boolean */\nconst away = global.get('awayMode');\n\n/** @type Array<{id: number, open?:number, close?: number, openLater?: number}> */\nconst BLINDS = [\n    { id: 1, open: 15, openLater: 100, close: 0 }, // guest\n    { id: 2, open: 100, close: 0 }, // kitchen-window\n    { id: 8, open: 15, close: 0 }, // kitchen-fixed\n    { id: 3, open: away && 15, openLater: away && 80, close: 0 }, // big bedroom\n    { id: 4, open: 100 }, // living-door\n    { id: 6, open: 40, openLater: away ? 80 : 100, close: 0 }, // living-window\n    { id: 5, open: 100, close: 0 }, // office\n];\n\nconst KEY = 'blindsLastCommand';\n\n/** @type {'open'|'close'|'openLater'} */\n\nif (!msg.payload) {\n    blinds('close');\n} else {\n    const now = new Date();\n    const minTimeToOpenBlinds = new Date();\n    minTimeToOpenBlinds.setHours(7, 30, 0);\n\n    const openLaterTime = new Date();\n    openLaterTime.setHours(8, 30, 0);\n\n    if (now >= minTimeToOpenBlinds && now < openLaterTime) {\n        blinds('open');\n    } else if (now >= openLaterTime) {\n        blinds('openLater');\n    }\n}\n\n/** @param {'open'|'close'|'openLater'} type */\nfunction blinds(type) {\n    const last = context.get(KEY);\n    if (type === last) {\n        return;\n    }\n    context.set(KEY, type);\n\n    if (type.startsWith('open') &&\n        !flow.get('autoOpenBlinds')) {\n        return;\n    }\n\n    const msgs = BLINDS\n        .map(b => {\n            const stateTopic = `ha-switch/switch-blinds-${b.id}/state`;\n            const currentState = global.get(stateTopic);\n\n            const openPercent = b[type];\n            if (typeof openPercent !== 'number') {\n                return;\n            }\n\n            if (currentState) {\n                switch (type) {\n                    case 'open':\n                    case 'openLater':\n                        if (openPercent <= currentState.openPercent) {\n                            return;\n                        }\n                        break;\n                    case 'close':\n                        if (openPercent >= currentState.openPercent) {\n                            //blinds are already more closed\n                            return;\n                        }\n                        break;\n                }\n            }\n\n            return {\n                payload: { openPercent },\n                topic: `${stateTopic}/set`,\n                retain: true,\n            };\n        })\n        .filter(m => !!m);\n    node.send([msgs]);\n}\n",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -5575,6 +5725,7 @@
         "name": "check away mode",
         "func": "if (msg.topic === 'cron') {\n    context.set('cron', msg.payload);\n}\n\nconst state = global.get('awayMode')\n    ? 'OFF'\n    : (context.get('cron') ? 'ON' : 'OFF');\n\nreturn {\n    topic: 'zigbee2mqtt/relay/water-pump/set',\n    payload: { state },\n}\n",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -5637,6 +5788,7 @@
         "name": "decide",
         "func": "const humidity = msg.payload.value;\nif (humidity < 0 || humidity > 100) {\n    return;\n}\n\nconst stopRecovery = flow.get('bypass_recovery') === 1;\nconst target = 46;\nconst histerezis = 2;\nconst compareTo = target + (stopRecovery ? 0 : 1) * histerezis;\nconst shouldStopRecovery = humidity >= compareTo;\n\nnode.status({\n    fill: shouldStopRecovery ? 'red' : \"blue\",\n    shape: \"dot\",\n    text: `recovery ${shouldStopRecovery ? 'off' : 'on'}`,\n});\n\nreturn {\n    payload: shouldStopRecovery ? 1 : 0,\n};\n",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -5657,6 +5809,7 @@
         "name": "set flow.bypass_recovery",
         "func": "const oldValue = flow.get('bypass_recovery');\nconst newValue = msg.payload.value;\nif (newValue !== oldValue) {\n    flow.set('bypass_recovery', newValue);\n}\n",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -5696,6 +5849,7 @@
         "name": "lights on/off when motion or contact",
         "func": "if (!flow.get('auto_light')) {\n    return;\n}\n\n/**\n * @type Array<{\n *  src:Array<string>, \n *  target:string, \n *  timeoutMin: number, \n *  turn:'on'|'off'\n * }>\n */\nconst targetByPir = [\n    {\n        src: ['pir/hallway-1', 'pir/hallway-2'],\n        target: 'switch-dimmer-3',\n        timeoutMin: 1,\n        turn: 'on',\n    }, {\n        src: ['pir/hallway-3', 'contact/entrance'],\n        target: 'switch-dimmer-10',\n        timeoutMin: 3,\n        turn: 'on',\n    }, {\n        src: ['pir/small-bathroom'],\n        target: 'switch-onoff-3',\n        timeoutMin: 15,\n        turn: 'off',\n    }\n]\n\nconst name = msg.topic.split('/').slice(1).join('/');\nconst found = targetByPir.find(t => t.src.includes(name));\nif (!found) {\n    return;\n}\n\nconst p = msg.payload;\nif (found.turn === 'on') {\n    let turnOn = false;\n\n    if ('occupancy' in p) {\n        const last = context.get(`last-${name}`);\n        if (p.occupancy || last) {\n            turnOn = true;\n        }\n        context.set(`last-${name}`, p.occupancy);\n    }\n\n    if ('contact' in p) {\n        const last = context.get(`last-${name}`);\n        if (p.contact !== last) {\n            turnOn = true;\n        }\n        context.set(`last-${name}`, p.contact);\n    }\n\n    if (turnOn) {\n        return {\n            payload: {\n                'brightness': 100,\n                'for': found.timeoutMin * 60,\n            },\n            topic: `ha-switch/${found.target}/state/set`,\n            retain: false,\n        };\n    }\n} else if (found.turn === 'off') {\n    if (p.occupancy) {\n        return [, {\n            payload: {\n                on: false\n            },\n            delay: found.timeoutMin * 60 * 1000,\n            topic: `ha-switch/${found.target}/state/set`,\n            retain: true,\n        }];\n    }\n}\n",
         "outputs": 2,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -5780,6 +5934,7 @@
         "name": "map",
         "func": "const valueName = msg.topic.split('/').slice(-1)[0];\nif (typeof msg.payload.occupancy !== 'boolean') {\n    return;\n}\n\nreturn {\n    payload: { [valueName]: msg.payload.occupancy ? 1 : 0 },\n    measurement: 'occupancy',\n};",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -5799,6 +5954,7 @@
         "name": "map",
         "func": "const valueName = msg.topic.split('/').slice(-1)[0];\nif (typeof msg.payload.contact !== 'boolean') {\n    return;\n}\n\nreturn {\n    payload: { [valueName]: msg.payload.contact ? 1 : 0 },\n    measurement: 'contact',\n};",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -5980,6 +6136,7 @@
         "name": "t",
         "func": "return {\n    ...msg,\n    topic: 'dark',\n}",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -6028,6 +6185,7 @@
         "name": "not away mode",
         "func": "if (!global.get('awayMode') && \n    !msg.payload && \n    global.get('batteryCapacity') > 96) {\n    return {\n        payload: 1,\n        topic: 'more-hot-water',\n    };\n}\n",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -6103,6 +6261,181 @@
         "wires": []
     },
     {
+        "id": "44f03731dd6e3522",
+        "type": "inject",
+        "z": "67e1c6f6bd2fab57",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"value\":0}",
+        "payloadType": "json",
+        "x": 320,
+        "y": 720,
+        "wires": [
+            [
+                "e40c577b424939c9"
+            ]
+        ]
+    },
+    {
+        "id": "e40c577b424939c9",
+        "type": "mqtt out",
+        "z": "67e1c6f6bd2fab57",
+        "name": "",
+        "topic": "ha-vent/state/set",
+        "qos": "0",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "f569d34c.8c7ed",
+        "x": 570,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "9994256e79b7d045",
+        "type": "inject",
+        "z": "67e1c6f6bd2fab57",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"value\":100}",
+        "payloadType": "json",
+        "x": 330,
+        "y": 800,
+        "wires": [
+            [
+                "e40c577b424939c9"
+            ]
+        ]
+    },
+    {
+        "id": "4e718508101f8074",
+        "type": "mqtt in",
+        "z": "67e1c6f6bd2fab57",
+        "name": "",
+        "topic": "ha-vent/online",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "f569d34c.8c7ed",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 840,
+        "wires": [
+            [
+                "b6abe71a4ff1687d"
+            ]
+        ]
+    },
+    {
+        "id": "b6abe71a4ff1687d",
+        "type": "debug",
+        "z": "67e1c6f6bd2fab57",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 320,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "e2a0e25f997986ea",
+        "type": "inject",
+        "z": "67e1c6f6bd2fab57",
+        "name": "every min",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "60",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 660,
+        "wires": [
+            [
+                "0a7e8a5273220a20"
+            ]
+        ]
+    },
+    {
+        "id": "0a7e8a5273220a20",
+        "type": "function",
+        "z": "67e1c6f6bd2fab57",
+        "name": "map",
+        "func": "const now = new Date();\nconst isWorkingDay = now.getDay() >= 1 && now.getDay() <= 5;\nconst isWorkingHour = now.getHours() >= 9 && now.getHours() <= 20;\n\n// percentage of an hour that should be on\nconst timeSpentOn = isWorkingDay && isWorkingHour\n    ? .15\n    : .05;\n\nconst isAway = !!global.get('awayMode');\nconst dutyOn = now.getMinutes() <= timeSpentOn * 60;\nconst shouldBeOn = !isAway && dutyOn;\nconst value = shouldBeOn ? 100 : 0;\n\nconst lastValue = context.get('lastValue');\nif (lastValue === value) {\n    return;\n}\n\ncontext.set('lastValue', value);\nnode.status({\n    fill: 'blue',\n    text: `${shouldBeOn ? 'on' : 'off'} - ${timeSpentOn * 100}% duty`\n});\n\nreturn { payload: { value } };\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 660,
+        "wires": [
+            [
+                "e40c577b424939c9"
+            ]
+        ]
+    },
+    {
+        "id": "9ea23f458493db4e",
+        "type": "inject",
+        "z": "67e1c6f6bd2fab57",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"value\":50}",
+        "payloadType": "json",
+        "x": 330,
+        "y": 760,
+        "wires": [
+            [
+                "e40c577b424939c9"
+            ]
+        ]
+    },
+    {
         "id": "c0db6845e0edacfa",
         "type": "mqtt in",
         "z": "86c7bfe22f048e9c",
@@ -6131,6 +6464,7 @@
         "name": "map",
         "func": "const start = msg.topic.indexOf('/') + 1;\nconst deviceName = msg.topic.substring(start, msg.topic.lastIndexOf('/'));\n\nlet state = flow.get(deviceName) ?? {};\nstate = {\n    ...state,\n    ...('POWER' in msg.payload ? { on: msg.payload.POWER == 'ON' } : {}),\n    ...('Dimmer' in msg.payload ? { brightness: msg.payload.Dimmer } : {}),\n    online: 'online' in msg.payload ? msg.payload.online : true,\n};\nflow.set(deviceName, state);\n\nreturn {\n    payload: state,\n    topic: deviceName,\n};",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -6170,6 +6504,7 @@
         "name": "map",
         "func": "const deviceName = msg.topic;\nconst state = flow.get(deviceName);\n\nconst messages = [{\n    payload: msg.payload.on ? 'ON' : 'OFF',\n    topic: `cmnd/${deviceName}/Power`,\n}];\n\nif (msg.payload.brightness !== state?.brightness) {\n    messages.push({\n        payload: msg.payload.brightness,\n        topic: `cmnd/${deviceName}/Dimmer`,\n    });\n}\n\nreturn [messages];",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
@@ -6302,6 +6637,7 @@
         "name": "query",
         "func": "const keys = flow.keys();\n\nconst queryTopics = [];\n\nfor (const key of keys) {\n    const state = flow.get(key);\n\n    if (typeof state !== 'object') {\n        continue;\n    }\n\n    if ('on' in state) {\n        queryTopics.push(`cmnd/${key}/Power`);\n    }\n\n    if ('brightness' in state || key.indexOf('dimmer') >= 0) {\n        queryTopics.push(`cmnd/${key}/Dimmer`);\n    }\n}\n\nif (queryTopics.length) {\n    return [queryTopics.map(q => ({\n        payload: '',\n        topic: q,\n    }))];\n}",
         "outputs": 1,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
