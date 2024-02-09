@@ -142,31 +142,9 @@
         "hidden": false
     },
     {
-        "id": "16a95fc0b1c58900",
-        "type": "ui_group",
-        "name": "Energy today",
-        "tab": "e18cedd70c93f843",
-        "order": 3,
-        "disp": true,
-        "width": "6",
-        "collapse": false,
-        "className": ""
-    },
-    {
         "id": "46510dc1aab73a6d",
         "type": "ui_group",
-        "name": "Battery",
-        "tab": "e18cedd70c93f843",
-        "order": 1,
-        "disp": true,
-        "width": "6",
-        "collapse": false,
-        "className": ""
-    },
-    {
-        "id": "9d1871108d73a07a",
-        "type": "ui_group",
-        "name": "Power",
+        "name": "battery",
         "tab": "e18cedd70c93f843",
         "order": 2,
         "disp": true,
@@ -175,22 +153,11 @@
         "className": ""
     },
     {
-        "id": "236088c4a8c426ef",
+        "id": "9d1871108d73a07a",
         "type": "ui_group",
-        "name": "Energy this week",
+        "name": "power",
         "tab": "e18cedd70c93f843",
-        "order": 4,
-        "disp": true,
-        "width": "6",
-        "collapse": false,
-        "className": ""
-    },
-    {
-        "id": "7b126afe2d280420",
-        "type": "ui_group",
-        "name": "Energy this month",
-        "tab": "e18cedd70c93f843",
-        "order": 5,
+        "order": 3,
         "disp": true,
         "width": "6",
         "collapse": false,
@@ -200,7 +167,7 @@
         "id": "e16800f51cf528e0",
         "type": "ui_base",
         "theme": {
-            "name": "theme-light",
+            "name": "theme-custom",
             "lightTheme": {
                 "default": "#0094CE",
                 "baseColor": "#0094CE",
@@ -212,54 +179,56 @@
                 "default": "#097479",
                 "baseColor": "#097479",
                 "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
-                "edited": false
+                "edited": true,
+                "reset": false
             },
             "customTheme": {
                 "name": "Untitled Theme 1",
                 "default": "#4B7930",
-                "baseColor": "#4B7930",
-                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                "baseColor": "#40618c",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "reset": false
             },
             "themeState": {
                 "base-color": {
-                    "default": "#0094CE",
-                    "value": "#0094CE",
-                    "edited": false
+                    "default": "#4B7930",
+                    "value": "#40618c",
+                    "edited": true
                 },
                 "page-titlebar-backgroundColor": {
-                    "value": "#0094CE",
+                    "value": "#40618c",
                     "edited": false
                 },
                 "page-backgroundColor": {
-                    "value": "#fafafa",
-                    "edited": false
-                },
-                "page-sidebar-backgroundColor": {
-                    "value": "#ffffff",
-                    "edited": false
-                },
-                "group-textColor": {
-                    "value": "#1bbfff",
-                    "edited": false
-                },
-                "group-borderColor": {
-                    "value": "#ffffff",
-                    "edited": false
-                },
-                "group-backgroundColor": {
-                    "value": "#ffffff",
-                    "edited": false
-                },
-                "widget-textColor": {
                     "value": "#111111",
                     "edited": false
                 },
+                "page-sidebar-backgroundColor": {
+                    "value": "#333333",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#6287b7",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#555555",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#333333",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#eeeeee",
+                    "edited": false
+                },
                 "widget-backgroundColor": {
-                    "value": "#0094ce",
+                    "value": "#40618c",
                     "edited": false
                 },
                 "widget-borderColor": {
-                    "value": "#ffffff",
+                    "value": "#333333",
                     "edited": false
                 },
                 "base-font": {
@@ -275,7 +244,7 @@
             }
         },
         "site": {
-            "name": "Node-RED Dashboard",
+            "name": "Dashboard",
             "hideToolbar": "false",
             "allowSwipe": "false",
             "lockMenu": "false",
@@ -292,6 +261,61 @@
                 "py": 0
             }
         }
+    },
+    {
+        "id": "827cf95cdf202cb4",
+        "type": "ui_group",
+        "name": "control",
+        "tab": "e18cedd70c93f843",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "ba44977d7b6ec35b",
+        "type": "ui_group",
+        "name": "last year",
+        "tab": "e18cedd70c93f843",
+        "order": 7,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "3b7b403039fa5965",
+        "type": "ui_group",
+        "name": "last week",
+        "tab": "e18cedd70c93f843",
+        "order": 6,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "b53a900ec325bc65",
+        "type": "ui_group",
+        "name": "today",
+        "tab": "e18cedd70c93f843",
+        "order": 4,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "73c9d7077dcee7d3",
+        "type": "ui_group",
+        "name": "today vs yesterday",
+        "tab": "e18cedd70c93f843",
+        "order": 5,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
     },
     {
         "id": "719187bb860811ae",
@@ -366,7 +390,7 @@
         "topic": "bedroom/setpoint",
         "filter": true,
         "x": 250,
-        "y": 460,
+        "y": 400,
         "wires": [
             [
                 "34e4236db446efad"
@@ -453,14 +477,15 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 430,
+        "x": 425,
         "y": 220,
         "wires": [
             [
                 "f07580f20f9c8e5f",
                 "cc668fc7fdbd504b"
             ]
-        ]
+        ],
+        "l": false
     },
     {
         "id": "f07580f20f9c8e5f",
@@ -560,9 +585,11 @@
         "topic": "living/setpoint",
         "filter": true,
         "x": 240,
-        "y": 400,
+        "y": 460,
         "wires": [
-            []
+            [
+                "34e4236db446efad"
+            ]
         ]
     },
     {
@@ -580,7 +607,9 @@
         "x": 250,
         "y": 520,
         "wires": [
-            []
+            [
+                "34e4236db446efad"
+            ]
         ]
     },
     {
@@ -603,7 +632,7 @@
         "twofactor": "off",
         "twofactorpin": "",
         "filter": true,
-        "x": 330,
+        "x": 270,
         "y": 600,
         "wires": [
             [
@@ -643,14 +672,15 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 190,
+        "x": 155,
         "y": 600,
         "wires": [
             [
                 "e56377cc659b2c95",
                 "b7cb59e0445cf704"
             ]
-        ]
+        ],
+        "l": false
     },
     {
         "id": "b7cb59e0445cf704",
@@ -672,7 +702,7 @@
         "twofactor": "off",
         "twofactorpin": "",
         "filter": true,
-        "x": 340,
+        "x": 280,
         "y": 660,
         "wires": [
             [
@@ -692,13 +722,14 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 530,
+        "x": 415,
         "y": 600,
         "wires": [
             [
                 "847b62e1d562ef8b"
             ]
-        ]
+        ],
+        "l": false
     },
     {
         "id": "61d8d50274c6ed71",
@@ -709,7 +740,7 @@
         "links": [
             "50badacef6b71f47"
         ],
-        "x": 745,
+        "x": 605,
         "y": 600,
         "wires": []
     },
@@ -722,7 +753,7 @@
             "61d8d50274c6ed71"
         ],
         "x": 75,
-        "y": 340,
+        "y": 420,
         "wires": [
             [
                 "8a2d91b19d4ef994",
@@ -787,7 +818,7 @@
         "septopics": true,
         "property": "payload",
         "topi": "topic",
-        "x": 650,
+        "x": 510,
         "y": 600,
         "wires": [
             [
@@ -849,7 +880,8 @@
         "y": 740,
         "wires": [
             [
-                "7ca97a871eef0253"
+                "7ca97a871eef0253",
+                "3228600d9d24a04c"
             ]
         ]
     },
@@ -1047,8 +1079,8 @@
         "y": 980,
         "wires": [
             [
-                "b3dde27634dd2e4c",
-                "cce88af52e63bf82"
+                "cce88af52e63bf82",
+                "b3dde27634dd2e4c"
             ]
         ]
     },
@@ -1231,8 +1263,8 @@
             "3b13ed9084ac3922",
             "ceabaec499757bb4"
         ],
-        "x": 785,
-        "y": 340,
+        "x": 775,
+        "y": 400,
         "wires": []
     },
     {
@@ -1278,7 +1310,7 @@
             "ceabaec499757bb4"
         ],
         "x": 425,
-        "y": 340,
+        "y": 420,
         "wires": []
     },
     {
@@ -1391,13 +1423,14 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1190,
+        "x": 1155,
         "y": 980,
         "wires": [
             [
                 "4495116d6ff821e7"
             ]
-        ]
+        ],
+        "l": false
     },
     {
         "id": "4495116d6ff821e7",
@@ -1408,7 +1441,7 @@
         "links": [
             "ceabaec499757bb4"
         ],
-        "x": 1275,
+        "x": 1215,
         "y": 980,
         "wires": []
     },
@@ -1475,6 +1508,31 @@
         "closeNotification": false,
         "x": 770,
         "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3228600d9d24a04c",
+        "type": "change",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "outdoorTemperature",
+                "pt": "global",
+                "to": "payload.value",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 590,
+        "y": 1060,
         "wires": [
             []
         ]
@@ -1586,7 +1644,7 @@
         "commandonlycolor": false,
         "turnonwhenbrightnesschanges": true,
         "passthru": false,
-        "errorifstateunchaged": false,
+        "errorifstateunchaged": true,
         "statepayload": true,
         "brightnessoverride": "",
         "roomhint": "Living Room",
@@ -1656,7 +1714,7 @@
         "commandonlycolor": false,
         "turnonwhenbrightnesschanges": true,
         "passthru": false,
-        "errorifstateunchaged": false,
+        "errorifstateunchaged": true,
         "statepayload": true,
         "brightnessoverride": "",
         "roomhint": "Bedroom",
@@ -1851,7 +1909,7 @@
         "commandonlycolor": false,
         "turnonwhenbrightnesschanges": true,
         "passthru": false,
-        "errorifstateunchaged": false,
+        "errorifstateunchaged": true,
         "statepayload": true,
         "brightnessoverride": "",
         "roomhint": "Living Room",
@@ -1886,7 +1944,7 @@
         "commandonlycolor": false,
         "turnonwhenbrightnesschanges": true,
         "passthru": false,
-        "errorifstateunchaged": false,
+        "errorifstateunchaged": true,
         "statepayload": true,
         "brightnessoverride": "",
         "roomhint": "Kitchen",
@@ -2704,7 +2762,7 @@
         "commandonlycolor": false,
         "turnonwhenbrightnesschanges": false,
         "passthru": false,
-        "errorifstateunchaged": false,
+        "errorifstateunchaged": true,
         "statepayload": true,
         "brightnessoverride": "",
         "roomhint": "Garage",
@@ -2739,7 +2797,7 @@
         "commandonlycolor": false,
         "turnonwhenbrightnesschanges": false,
         "passthru": false,
-        "errorifstateunchaged": false,
+        "errorifstateunchaged": true,
         "statepayload": true,
         "brightnessoverride": "",
         "roomhint": "Garage",
@@ -3346,8 +3404,8 @@
         "retentionPolicyV18Flux": "",
         "org": "home",
         "bucket": "power",
-        "x": 510,
-        "y": 160,
+        "x": 470,
+        "y": 120,
         "wires": []
     },
     {
@@ -3355,7 +3413,7 @@
         "type": "function",
         "z": "d02cf25fa8114475",
         "name": "map",
-        "func": "return [[{\n    payload: msg.payload.acInput.voltage,\n    measurement: 'ac-input-voltage',\n}, {\n    payload: msg.payload.acInput.frequency,\n    measurement: 'ac-input-freq',\n}, {\n    payload: msg.payload.acOutput.voltage,\n    measurement: 'ac-output-voltage',\n}, {\n    payload: msg.payload.acOutput.frequency,\n    measurement: 'ac-output-freq',\n}, {\n    payload: {\n        voltage: msg.payload.battery.voltage,\n        current: msg.payload.battery.current,\n        capacity: msg.payload.battery.capacity,\n        power: msg.payload.battery.voltage *\n            msg.payload.battery.current,\n    },\n    measurement: 'battery',\n}, {\n    payload: {\n        voltage1: msg.payload.solarInput.voltage1,\n        voltage2: msg.payload.solarInput.voltage2,\n        current1: msg.payload.solarInput.current1,\n        current2: msg.payload.solarInput.current2,\n    },\n    measurement: 'solar-input',\n}]];",
+        "func": "const batPower = (\n    msg.payload.battery.voltage *\n    msg.payload.battery.current / 1000).toFixed(1);\n\nnode.status({\n    fill: 'blue',\n    text: `bat: ${batPower} kW`,\n});\n\nreturn [[{\n    payload: msg.payload.acInput.voltage,\n    measurement: 'ac-input-voltage',\n}, {\n    payload: msg.payload.acInput.frequency,\n    measurement: 'ac-input-freq',\n}, {\n    payload: msg.payload.acOutput.voltage,\n    measurement: 'ac-output-voltage',\n}, {\n    payload: msg.payload.acOutput.frequency,\n    measurement: 'ac-output-freq',\n}, {\n    payload: {\n        voltage: msg.payload.battery.voltage,\n        current: msg.payload.battery.current,\n        capacity: msg.payload.battery.capacity,\n        power: msg.payload.battery.voltage *\n            msg.payload.battery.current,\n    },\n    measurement: 'battery',\n}, {\n    payload: {\n        voltage1: msg.payload.solarInput.voltage1,\n        voltage2: msg.payload.solarInput.voltage2,\n        current1: msg.payload.solarInput.current1,\n        current2: msg.payload.solarInput.current2,\n    },\n    measurement: 'solar-input',\n}]];",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -3375,7 +3433,7 @@
         "type": "function",
         "z": "d02cf25fa8114475",
         "name": "map",
-        "func": "const totalSolar = msg.payload.solarInput.power1 +\n    msg.payload.solarInput.power2;\n\nnode.status({\n    fill: \"blue\",\n    text: `in: ${Math.round(totalSolar / 1000)} kW`,\n});\n\nreturn [[{\n    payload: msg.payload.acInput.activePower,\n    measurement: 'ac-input-active-power',\n}, {\n    payload: msg.payload.acOutput.activePower,\n    measurement: 'ac-output-active-power',\n}, {\n    payload: msg.payload.acOutput.apparentPower,\n    measurement: 'ac-output-apparent-power',\n}, {\n    payload: {\n        string1: msg.payload.solarInput.power1,\n        string2: msg.payload.solarInput.power2,\n        total: msg.payload.solarInput.power1 +\n            msg.payload.solarInput.power2,\n    },\n    measurement: 'solar-input-power',\n}]];",
+        "func": "const totalSolar = (\n    (msg.payload.solarInput.power1 +\n        msg.payload.solarInput.power2) / 1000).toFixed(1);\n\nconst totalgrid = (msg.payload.acInput.activePower.total / 1000).toFixed(1);\n\nconst totalOutput = (msg.payload.acOutput.activePower.total / 1000).toFixed(1);\n\nnode.status({\n    fill: \"blue\",\n    text: `solar: ${totalSolar} kW, grid: ${totalgrid} kW, out: ${totalOutput} kW`,\n});\n\nreturn [[{\n    payload: msg.payload.acInput.activePower,\n    measurement: 'ac-input-active-power',\n}, {\n    payload: msg.payload.acOutput.activePower,\n    measurement: 'ac-output-active-power',\n}, {\n    payload: msg.payload.acOutput.apparentPower,\n    measurement: 'ac-output-apparent-power',\n}, {\n    payload: {\n        string1: msg.payload.solarInput.power1,\n        string2: msg.payload.solarInput.power2,\n        total: msg.payload.solarInput.power1 +\n            msg.payload.solarInput.power2,\n    },\n    measurement: 'solar-input-power',\n}]];",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -3403,7 +3461,7 @@
         "topic": "",
         "actions": [],
         "closeNotification": false,
-        "x": 870,
+        "x": 810,
         "y": 320,
         "wires": [
             []
@@ -3438,7 +3496,7 @@
         "id": "3fa4c0f648cfb1d0",
         "type": "function",
         "z": "d02cf25fa8114475",
-        "name": "notify inverter connection",
+        "name": "notify inv. connection",
         "func": "const status = msg.payload ? 'restored' : 'lost';\nconst at = new Date().toLocaleString();\nlet afterText = '';\nif (!msg.payload) {\n    context.set('lost_at', new Date().getTime());\n} else {\n    let after = new Date().getTime() - context.get('lost_at');\n    let unit = 'sec';\n    after /= 1000;\n    if (after > 60) {\n        after /= 60;\n        unit = 'min';\n    }\n    if (after > 60) {\n        after /= 60;\n        unit = 'hour';\n    }\n    afterText = `, after ${after.toFixed(1)} ${unit}`\n}\n\nreturn {\n    payload: {\n        tag: \"inverter-connection\",\n        title: \"Inverter connection\",\n        body: `Inverter connection ${status} at ${at}${afterText}`,\n    }\n};",
         "outputs": 1,
         "timeout": "",
@@ -3446,7 +3504,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 530,
+        "x": 520,
         "y": 320,
         "wires": [
             [
@@ -3459,7 +3517,7 @@
         "type": "function",
         "z": "d02cf25fa8114475",
         "name": "battery capacity",
-        "func": "const capacity = msg.payload.battery.capacity;\nconst values = this.past_values ?? [];\nvalues.splice(500);\nvalues.splice(0, 0, capacity);\nthis.past_values = values;\n\nlet average = values.reduce((a, b) => a + b, 0) / values.length;\naverage = Math.round(average);\n\nnode.status({ fill: \"blue\", shape: \"ring\", text: `${average}%` });\n\nreturn { payload: average };",
+        "func": "/** @type {number} */\nconst capacity = msg.payload.battery.capacity;\n\n/** @type {number[]} */\nconst values = this.past_values ?? [];\nvalues.splice(500);\nvalues.splice(0, 0, capacity);\nthis.past_values = values;\n\nlet average = values.reduce((a, b) => a + b, 0) / values.length;\naverage = Math.round(average);\n\nnode.status({ fill: \"blue\", shape: \"ring\", text: `${average}%` });\n\nreturn { payload: average };",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -3479,7 +3537,7 @@
         "type": "function",
         "z": "d02cf25fa8114475",
         "name": "set flow.batteryStatus",
-        "func": "const lastValue = flow.get('batteryStatus');\nconst newValue = msg.payload.status.batteryPowerDirectionStatus;\nif (newValue !== lastValue) {\n    flow.set('batteryStatus', newValue);\n}",
+        "func": "const lastValue = flow.get('batteryStatus');\nconst newValue = msg.payload.status.batteryPowerDirectionStatus;\nif (newValue !== lastValue) {\n    flow.set('batteryStatus', newValue);\n    return msg;\n}",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -3489,117 +3547,10 @@
         "x": 380,
         "y": 280,
         "wires": [
-            []
-        ]
-    },
-    {
-        "id": "2aab131e2ee3025e",
-        "type": "influxdb in",
-        "z": "d02cf25fa8114475",
-        "influxdb": "63bdbe3c09b491f2",
-        "name": "db",
-        "query": "",
-        "rawOutput": false,
-        "precision": "",
-        "retentionPolicy": "",
-        "org": "home",
-        "x": 430,
-        "y": 500,
-        "wires": [
             [
-                "ab88d18768b3de58"
+                "8bb4278aca29cc84"
             ]
         ]
-    },
-    {
-        "id": "71053da009406d7d",
-        "type": "inject",
-        "z": "d02cf25fa8114475",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "300",
-        "crontab": "",
-        "once": true,
-        "onceDelay": "5",
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 130,
-        "y": 500,
-        "wires": [
-            [
-                "8603e9cf35a407d0"
-            ]
-        ]
-    },
-    {
-        "id": "8603e9cf35a407d0",
-        "type": "function",
-        "z": "d02cf25fa8114475",
-        "name": "query",
-        "func": "const TURN_ON_TIME = new Date('2023-10-03T10:00:00.000Z');\n\ngetIntegral({ measurement: 'solar', range: 'today' });\ngetIntegral({ measurement: 'solar', range: 'week' });\ngetIntegral({ measurement: 'solar', range: 'month' });\n\ngetIntegral({ measurement: 'out-active', range: 'today' });\ngetIntegral({ measurement: 'out-active', range: 'week' });\ngetIntegral({ measurement: 'out-active', range: 'month' });\n\ngetIntegral({ measurement: 'grid', range: 'today' });\ngetIntegral({ measurement: 'grid', range: 'week' });\ngetIntegral({ measurement: 'grid', range: 'month' });\n\nfunction getIntegral(\n  /** @type {{\n   * measurement: 'solar'|'out-active'|'grid', \n   * range: 'today'|'week'|'month'\n   * }} */\n  { measurement, range }\n) {\n  const now = new Date();\n  now.setHours(0, 0, 0, 0);\n\n  let start;\n\n  if (range === 'today') {\n    start = now.toISOString()\n  } else if (range === 'week') {\n    const day = now.getDay();\n    const diff = now.getDate() - day + (day == 0 ? -6 : 1); // adjust when day is sunday\n    now.setDate(diff);\n    if (now < TURN_ON_TIME) {\n      start = TURN_ON_TIME.toISOString();\n    } else {\n      start = now.toISOString()\n    }\n  } else if (range === 'month') {\n    now.setDate(1);\n    if (now < TURN_ON_TIME) {\n      start = TURN_ON_TIME.toISOString();\n    } else {\n      start = now.toISOString()\n    }\n  }\n\n  let q;\n  switch (measurement) {\n    case 'solar': q = \"solar-input-power\"; break;\n    case 'out-active': q = \"ac-output-active-power\"; break;\n    case 'grid': q = \"ac-input-active-power\"; break;\n  }\n\n\n  node.send({\n    query: `from(bucket: \"power\")\n  |> range(start: ${start}, stop: 1d )\n  |> filter(fn: (r) => r[\"_measurement\"] == \"${q}\")\n  |> filter(fn: (r) => r[\"_field\"] == \"total\")\n  |> integral(unit: 1h, column: \"_value\")`,\n    topic: `${measurement}-${range}`,\n  });\n}\n",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 290,
-        "y": 500,
-        "wires": [
-            [
-                "2aab131e2ee3025e"
-            ]
-        ]
-    },
-    {
-        "id": "ab88d18768b3de58",
-        "type": "function",
-        "z": "d02cf25fa8114475",
-        "name": "set unit",
-        "func": "/** @type {number} */\nlet value = msg.payload[0]._value / 1000;\nvalue = Math.round(value * 10) / 10;\n\nconst unit = msg.topic.indexOf('apparent') >= 0\n    ? 'kVAh'\n    : 'kWh';\n\nreturn {\n    ...msg,\n    payload: `${value} ${unit}`,\n}\n\n",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 580,
-        "y": 500,
-        "wires": [
-            [
-                "91cf5bce3adf6228"
-            ]
-        ]
-    },
-    {
-        "id": "b7bbdd6e60dd3be8",
-        "type": "ui_text",
-        "z": "d02cf25fa8114475",
-        "group": "16a95fc0b1c58900",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "name": "",
-        "label": "Used (active)",
-        "format": "{{msg.payload}}",
-        "layout": "row-spread",
-        "className": "",
-        "style": false,
-        "font": "",
-        "fontSize": 16,
-        "color": "#000000",
-        "x": 730,
-        "y": 540,
-        "wires": []
     },
     {
         "id": "c33b744470cd791e",
@@ -3618,8 +3569,8 @@
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 500,
-        "y": 940,
+        "x": 510,
+        "y": 540,
         "wires": []
     },
     {
@@ -3627,14 +3578,15 @@
         "type": "function",
         "z": "d02cf25fa8114475",
         "name": "general status map",
-        "func": "return [{\n    payload: msg.payload.battery.voltage,\n}, {\n    payload: msg.payload.battery.current,\n}, {\n    payload: Math.round(msg.payload.battery.voltage *\n        msg.payload.battery.current),\n}];",
-        "outputs": 3,
+        "func": "return [{\n    payload: msg.payload.battery.voltage,\n}, {\n    payload: msg.payload.battery.current,\n}, {\n    payload: Math.round(msg.payload.battery.voltage *\n        msg.payload.battery.current),\n}, {\n    payload: {\n        ...msg.payload.acInput.voltage,\n        power: flow.get('acInputActivePowerTotal'),\n    }\n}];",
+        "outputs": 4,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 210,
-        "y": 980,
+        "x": 190,
+        "y": 600,
         "wires": [
             [
                 "2f2071693f65b26f"
@@ -3644,6 +3596,9 @@
             ],
             [
                 "a2e7d47846b5bf73"
+            ],
+            [
+                "4d3dcc377b7c001d"
             ]
         ]
     },
@@ -3664,8 +3619,8 @@
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 680,
-        "y": 100,
+        "x": 660,
+        "y": 60,
         "wires": []
     },
     {
@@ -3685,8 +3640,8 @@
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 500,
-        "y": 980,
+        "x": 510,
+        "y": 580,
         "wires": []
     },
     {
@@ -3694,18 +3649,16 @@
         "type": "function",
         "z": "d02cf25fa8114475",
         "name": "power status map",
-        "func": "return [{\n    payload: msg.payload.acInput.activePower,\n}, {\n    payload: msg.payload.acOutput.activePower,\n}, {\n    payload: msg.payload.acOutput.apparentPower,\n}, {\n    payload: {\n        ...msg.payload.solarInput,\n        total: \n            msg.payload.solarInput.power1 +\n            msg.payload.solarInput.power2,\n    }\n}, {\n    payload: msg.payload.status.batteryPowerDirectionStatus,\n}, {\n    payload: msg.payload.status.dcAcPowerDirectionStatus,\n}];",
-        "outputs": 6,
+        "func": "flow.set('acInputActivePowerTotal', msg.payload.acInput.activePower.total);\n\nreturn [{\n    payload: msg.payload.acOutput.activePower,\n}, {\n    payload: msg.payload.acOutput.apparentPower,\n}, {\n    payload: {\n        ...msg.payload.solarInput,\n        total:\n            msg.payload.solarInput.power1 +\n            msg.payload.solarInput.power2,\n    }\n}, {\n    payload: msg.payload.status.batteryPowerDirectionStatus,\n}, {\n    payload: msg.payload.status.dcAcPowerDirectionStatus,\n}];",
+        "outputs": 5,
+        "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 730,
-        "y": 980,
+        "x": 190,
+        "y": 780,
         "wires": [
-            [
-                "4d84fd93056f28a8"
-            ],
             [
                 "9c8be8156083c62a"
             ],
@@ -3724,27 +3677,6 @@
         ]
     },
     {
-        "id": "2f19800f056e25c2",
-        "type": "ui_text",
-        "z": "d02cf25fa8114475",
-        "group": "9d1871108d73a07a",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "name": "",
-        "label": "Grid input",
-        "format": "{{msg.payload.total}}W",
-        "layout": "row-spread",
-        "className": "",
-        "style": false,
-        "font": "",
-        "fontSize": 16,
-        "color": "#000000",
-        "x": 1160,
-        "y": 940,
-        "wires": []
-    },
-    {
         "id": "51ed10398534bbd0",
         "type": "ui_text",
         "z": "d02cf25fa8114475",
@@ -3761,8 +3693,8 @@
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 1150,
-        "y": 1100,
+        "x": 500,
+        "y": 820,
         "wires": []
     },
     {
@@ -3782,8 +3714,8 @@
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 1170,
-        "y": 1140,
+        "x": 520,
+        "y": 860,
         "wires": []
     },
     {
@@ -3797,7 +3729,7 @@
             "0120f22e197cc1f6"
         ],
         "x": 295,
-        "y": 160,
+        "y": 180,
         "wires": []
     },
     {
@@ -3808,8 +3740,8 @@
         "links": [
             "9ae24bafaa9eeaae"
         ],
-        "x": 75,
-        "y": 980,
+        "x": 55,
+        "y": 600,
         "wires": [
             [
                 "24afa043bf723afc"
@@ -3838,8 +3770,8 @@
         "links": [
             "bce547419e98f9f9"
         ],
-        "x": 605,
-        "y": 980,
+        "x": 65,
+        "y": 780,
         "wires": [
             [
                 "f24c77b337c9beec"
@@ -3863,365 +3795,9 @@
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 500,
-        "y": 1020,
-        "wires": []
-    },
-    {
-        "id": "398ff5d9b7fe7022",
-        "type": "switch",
-        "z": "d02cf25fa8114475",
-        "name": "",
-        "property": "topic",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "out-active-today",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "out-active-week",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "out-active-month",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 3,
-        "x": 550,
-        "y": 560,
-        "wires": [
-            [
-                "b7bbdd6e60dd3be8"
-            ],
-            [
-                "6fef54cb08381adb"
-            ],
-            [
-                "b197daeff52c5d42"
-            ]
-        ]
-    },
-    {
-        "id": "6fef54cb08381adb",
-        "type": "ui_text",
-        "z": "d02cf25fa8114475",
-        "group": "236088c4a8c426ef",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "name": "",
-        "label": "Used (active)",
-        "format": "{{msg.payload}}",
-        "layout": "row-spread",
-        "className": "",
-        "style": false,
-        "font": "",
-        "fontSize": 16,
-        "color": "#000000",
-        "x": 730,
-        "y": 580,
-        "wires": []
-    },
-    {
-        "id": "b197daeff52c5d42",
-        "type": "ui_text",
-        "z": "d02cf25fa8114475",
-        "group": "7b126afe2d280420",
-        "order": 1,
-        "width": 0,
-        "height": 0,
-        "name": "",
-        "label": "Used (active)",
-        "format": "{{msg.payload}}",
-        "layout": "row-spread",
-        "className": "",
-        "style": false,
-        "font": "",
-        "fontSize": 16,
-        "color": "#000000",
-        "x": 730,
+        "x": 510,
         "y": 620,
         "wires": []
-    },
-    {
-        "id": "1ce378763c07c64d",
-        "type": "ui_text",
-        "z": "d02cf25fa8114475",
-        "group": "16a95fc0b1c58900",
-        "order": 2,
-        "width": 0,
-        "height": 0,
-        "name": "",
-        "label": "Generated",
-        "format": "{{msg.payload}}",
-        "layout": "row-spread",
-        "className": "",
-        "style": false,
-        "font": "",
-        "fontSize": 16,
-        "color": "#000000",
-        "x": 350,
-        "y": 540,
-        "wires": []
-    },
-    {
-        "id": "090f29d71b1f66cc",
-        "type": "switch",
-        "z": "d02cf25fa8114475",
-        "name": "",
-        "property": "topic",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "solar-today",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "solar-week",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "solar-month",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 3,
-        "x": 170,
-        "y": 560,
-        "wires": [
-            [
-                "1ce378763c07c64d"
-            ],
-            [
-                "303f556d0813e5ad"
-            ],
-            [
-                "b3290405ee0e873e"
-            ]
-        ]
-    },
-    {
-        "id": "303f556d0813e5ad",
-        "type": "ui_text",
-        "z": "d02cf25fa8114475",
-        "group": "236088c4a8c426ef",
-        "order": 2,
-        "width": 0,
-        "height": 0,
-        "name": "",
-        "label": "Generated",
-        "format": "{{msg.payload}}",
-        "layout": "row-spread",
-        "className": "",
-        "style": false,
-        "font": "",
-        "fontSize": 16,
-        "color": "#000000",
-        "x": 350,
-        "y": 580,
-        "wires": []
-    },
-    {
-        "id": "b3290405ee0e873e",
-        "type": "ui_text",
-        "z": "d02cf25fa8114475",
-        "group": "7b126afe2d280420",
-        "order": 2,
-        "width": 0,
-        "height": 0,
-        "name": "",
-        "label": "Generated",
-        "format": "{{msg.payload}}",
-        "layout": "row-spread",
-        "className": "",
-        "style": false,
-        "font": "",
-        "fontSize": 16,
-        "color": "#000000",
-        "x": 350,
-        "y": 620,
-        "wires": []
-    },
-    {
-        "id": "bb5f3bb7652167e0",
-        "type": "link in",
-        "z": "d02cf25fa8114475",
-        "name": "link in 29",
-        "links": [
-            "700836b37484edc9"
-        ],
-        "x": 75,
-        "y": 560,
-        "wires": [
-            [
-                "090f29d71b1f66cc"
-            ]
-        ]
-    },
-    {
-        "id": "700836b37484edc9",
-        "type": "link out",
-        "z": "d02cf25fa8114475",
-        "name": "link out 31",
-        "mode": "link",
-        "links": [
-            "bb5f3bb7652167e0",
-            "575595e27bbc2e20",
-            "a0053459103ec723",
-            "845cb21af7957ec4",
-            "444cf493ef1ebeac"
-        ],
-        "x": 835,
-        "y": 500,
-        "wires": []
-    },
-    {
-        "id": "575595e27bbc2e20",
-        "type": "link in",
-        "z": "d02cf25fa8114475",
-        "name": "link in 30",
-        "links": [
-            "700836b37484edc9"
-        ],
-        "x": 465,
-        "y": 560,
-        "wires": [
-            [
-                "398ff5d9b7fe7022"
-            ]
-        ]
-    },
-    {
-        "id": "7c3298a99f8b939c",
-        "type": "ui_text",
-        "z": "d02cf25fa8114475",
-        "group": "16a95fc0b1c58900",
-        "order": 3,
-        "width": 0,
-        "height": 0,
-        "name": "",
-        "label": "Grid",
-        "format": "{{msg.payload}}",
-        "layout": "row-spread",
-        "className": "",
-        "style": false,
-        "font": "",
-        "fontSize": 16,
-        "color": "#000000",
-        "x": 310,
-        "y": 680,
-        "wires": []
-    },
-    {
-        "id": "3b26f8fb9dcb5772",
-        "type": "switch",
-        "z": "d02cf25fa8114475",
-        "name": "",
-        "property": "topic",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "grid-today",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "grid-week",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "grid-month",
-                "vt": "str"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 3,
-        "x": 170,
-        "y": 700,
-        "wires": [
-            [
-                "7c3298a99f8b939c"
-            ],
-            [
-                "8542cd0a74214d36"
-            ],
-            [
-                "ca2670f0963536e6"
-            ]
-        ]
-    },
-    {
-        "id": "8542cd0a74214d36",
-        "type": "ui_text",
-        "z": "d02cf25fa8114475",
-        "group": "236088c4a8c426ef",
-        "order": 3,
-        "width": 0,
-        "height": 0,
-        "name": "",
-        "label": "Grid",
-        "format": "{{msg.payload}}",
-        "layout": "row-spread",
-        "className": "",
-        "style": false,
-        "font": "",
-        "fontSize": 16,
-        "color": "#000000",
-        "x": 310,
-        "y": 720,
-        "wires": []
-    },
-    {
-        "id": "ca2670f0963536e6",
-        "type": "ui_text",
-        "z": "d02cf25fa8114475",
-        "group": "7b126afe2d280420",
-        "order": 3,
-        "width": 0,
-        "height": 0,
-        "name": "",
-        "label": "Grid",
-        "format": "{{msg.payload}}",
-        "layout": "row-spread",
-        "className": "",
-        "style": false,
-        "font": "",
-        "fontSize": 16,
-        "color": "#000000",
-        "x": 310,
-        "y": 760,
-        "wires": []
-    },
-    {
-        "id": "a0053459103ec723",
-        "type": "link in",
-        "z": "d02cf25fa8114475",
-        "name": "link in 31",
-        "links": [
-            "700836b37484edc9"
-        ],
-        "x": 65,
-        "y": 700,
-        "wires": [
-            [
-                "3b26f8fb9dcb5772"
-            ]
-        ]
     },
     {
         "id": "a2faba3606b844a1",
@@ -4246,7 +3822,7 @@
         "type": "function",
         "z": "d02cf25fa8114475",
         "name": "connect grid?",
-        "func": "const isGridConnected = context.get('gridConnected') ?? false;\n\nlet batteryCurrent = context.get('batteryCurrent');\nlet batteryVoltage = context.get('batteryVoltage');\nlet solarPower = context.get('solarPower');\nconst batteryCapacity = global.get('batteryCapacity');\n\nif (typeof msg.payload?.battery?.current === 'number') {\n    const currentBatteryCurrent = msg.payload.battery.current;\n    if (currentBatteryCurrent !== batteryCurrent) {\n        context.set('batteryCurrent', batteryCurrent = currentBatteryCurrent);\n    }\n}\n\nif (typeof msg.payload?.battery?.voltage === 'number') {\n    const currentBatteryVoltage = msg.payload.battery.voltage;\n    if (currentBatteryVoltage !== batteryVoltage) {\n        context.set('batteryVoltage', batteryVoltage = currentBatteryVoltage);\n    }\n}\n\nif (typeof msg.payload?.solarInput?.power1 === 'number') {\n    const currentSolarPower = msg.payload.solarInput.power1 + msg.payload.solarInput.power2;\n    if (currentSolarPower !== solarPower) {\n        context.set('solarPower', solarPower = currentSolarPower);\n    }\n}\n\nif (typeof batteryCurrent !== 'number' ||\n    typeof batteryCapacity !== 'number' ||\n    typeof solarPower !== 'number' ||\n    typeof batteryVoltage !== 'number') {\n    return;\n}\n\nlet shouldConnectGrid;\n\nif (!isGridConnected) {\n    shouldConnectGrid = batteryVoltage < 48;\n} else {\n    const shouldDisconnectGrid =\n        (solarPower > 5000 || batteryCurrent > 50) && batteryCapacity > 40 ||\n        batteryCapacity >= 70;\n\n    shouldConnectGrid = !shouldDisconnectGrid;\n}\n\nnode.status({\n    fill: shouldConnectGrid ? 'blue' : 'yellow',\n    text: shouldConnectGrid ? 'yes' : 'nope',\n});\n\nif (shouldConnectGrid !== isGridConnected) {\n    const at = new Date().toLocaleString();\n    context.set('gridConnected', shouldConnectGrid);\n    return [\n        {\n            payload: shouldConnectGrid ? 'on' : 'off'\n        },\n        {\n            payload: {\n                tag: \"grid-connection\",\n                title: \"Grid connection\",\n                body: `Grid ${shouldConnectGrid ? 'connected' : 'disconnected'}, at ${at}`,\n            }\n        }\n    ];\n}\n",
+        "func": "const isGridConnected = context.get('gridConnected') ?? false;\n\nlet batteryCurrent = context.get('batteryCurrent');\nlet batteryVoltage = context.get('batteryVoltage');\nlet solarPower = context.get('solarPower');\n/** @type {'auto'|'connect'|'disconnect'} */\nlet gridConnect = flow.get('gridConnect') ?? 'auto';\nconst batteryCapacity = global.get('batteryCapacity');\n\nif (typeof msg.payload?.battery?.current === 'number') {\n    const currentBatteryCurrent = msg.payload.battery.current;\n    if (currentBatteryCurrent !== batteryCurrent) {\n        context.set('batteryCurrent', batteryCurrent = currentBatteryCurrent);\n    }\n}\n\nif (typeof msg.payload?.battery?.voltage === 'number') {\n    const currentBatteryVoltage = msg.payload.battery.voltage;\n    if (currentBatteryVoltage !== batteryVoltage) {\n        context.set('batteryVoltage', batteryVoltage = currentBatteryVoltage);\n    }\n}\n\nif (typeof msg.payload?.solarInput?.power1 === 'number') {\n    const currentSolarPower = msg.payload.solarInput.power1 + msg.payload.solarInput.power2;\n    if (currentSolarPower !== solarPower) {\n        context.set('solarPower', solarPower = currentSolarPower);\n    }\n}\n\nif (typeof batteryCurrent !== 'number' ||\n    typeof batteryCapacity !== 'number' ||\n    typeof solarPower !== 'number' ||\n    typeof batteryVoltage !== 'number') {\n    return;\n}\n\nlet shouldConnectGrid;\n\nif (gridConnect === 'auto') {\n    if (!isGridConnected) {\n        shouldConnectGrid = batteryVoltage < 48;\n    } else {\n        const shouldDisconnectGrid =\n            (solarPower > 5000 || batteryCurrent > 50) && batteryCapacity > 40 ||\n            batteryCapacity >= 70;\n\n        shouldConnectGrid = !shouldDisconnectGrid;\n    }\n} else {\n    shouldConnectGrid = gridConnect === 'connect';\n}\n\nnode.status({\n    fill: shouldConnectGrid ? 'blue' : 'yellow',\n    text: `${shouldConnectGrid ? 'yes' : 'nope'} - ${gridConnect === 'auto' ? 'auto' : 'manual'}`,\n});\n\nif (shouldConnectGrid !== isGridConnected) {\n    const at = new Date().toLocaleString();\n    context.set('gridConnected', shouldConnectGrid);\n    return [\n        {\n            payload: shouldConnectGrid ? 'on' : 'off'\n        },\n        {\n            payload: {\n                tag: \"grid-connection\",\n                title: \"Grid connection\",\n                body: `Grid ${shouldConnectGrid ? 'connected' : 'disconnected'} ${gridConnect === 'auto' ? '' : '(manual)'}, at ${at}`,\n            }\n        }\n    ];\n}\n",
         "outputs": 2,
         "timeout": "",
         "noerr": 0,
@@ -4272,7 +3848,8 @@
         "links": [
             "679b0cb9b118d7dd",
             "bce547419e98f9f9",
-            "9ae24bafaa9eeaae"
+            "9ae24bafaa9eeaae",
+            "b56557da9e0d3fdb"
         ],
         "x": 55,
         "y": 380,
@@ -4302,26 +3879,6 @@
         ]
     },
     {
-        "id": "91cf5bce3adf6228",
-        "type": "rbe",
-        "z": "d02cf25fa8114475",
-        "name": "",
-        "func": "rbe",
-        "gap": "",
-        "start": "",
-        "inout": "out",
-        "septopics": true,
-        "property": "payload",
-        "topi": "topic",
-        "x": 730,
-        "y": 500,
-        "wires": [
-            [
-                "700836b37484edc9"
-            ]
-        ]
-    },
-    {
         "id": "2f2071693f65b26f",
         "type": "rbe",
         "z": "d02cf25fa8114475",
@@ -4333,8 +3890,8 @@
         "septopics": true,
         "property": "payload",
         "topi": "topic",
-        "x": 370,
-        "y": 940,
+        "x": 380,
+        "y": 540,
         "wires": [
             [
                 "c33b744470cd791e"
@@ -4353,8 +3910,8 @@
         "septopics": true,
         "property": "payload",
         "topi": "topic",
-        "x": 370,
-        "y": 980,
+        "x": 380,
+        "y": 580,
         "wires": [
             [
                 "5859a7534d8c2bc7"
@@ -4373,31 +3930,11 @@
         "septopics": true,
         "property": "payload",
         "topi": "topic",
-        "x": 370,
-        "y": 1020,
+        "x": 380,
+        "y": 620,
         "wires": [
             [
                 "ab4dc7b5b81d9d5b"
-            ]
-        ]
-    },
-    {
-        "id": "4d84fd93056f28a8",
-        "type": "rbe",
-        "z": "d02cf25fa8114475",
-        "name": "",
-        "func": "rbe",
-        "gap": "",
-        "start": "",
-        "inout": "out",
-        "septopics": true,
-        "property": "payload",
-        "topi": "topic",
-        "x": 970,
-        "y": 940,
-        "wires": [
-            [
-                "2f19800f056e25c2"
             ]
         ]
     },
@@ -4413,8 +3950,8 @@
         "septopics": true,
         "property": "payload",
         "topi": "topic",
-        "x": 970,
-        "y": 980,
+        "x": 380,
+        "y": 700,
         "wires": [
             [
                 "7ae3194535ef82de"
@@ -4433,8 +3970,8 @@
         "septopics": true,
         "property": "payload",
         "topi": "topic",
-        "x": 970,
-        "y": 1060,
+        "x": 380,
+        "y": 780,
         "wires": [
             [
                 "30b984a02c902ba5"
@@ -4453,8 +3990,8 @@
         "septopics": true,
         "property": "payload",
         "topi": "topic",
-        "x": 970,
-        "y": 1100,
+        "x": 380,
+        "y": 820,
         "wires": [
             [
                 "51ed10398534bbd0"
@@ -4473,8 +4010,8 @@
         "septopics": true,
         "property": "payload",
         "topi": "topic",
-        "x": 970,
-        "y": 1140,
+        "x": 380,
+        "y": 860,
         "wires": [
             [
                 "a3dbf718734f629d"
@@ -4514,8 +4051,8 @@
         "septopics": true,
         "property": "payload",
         "topi": "topic",
-        "x": 970,
-        "y": 1020,
+        "x": 380,
+        "y": 740,
         "wires": [
             [
                 "7acf5f85598ea960"
@@ -4537,8 +4074,8 @@
         "resendOnRefresh": true,
         "templateScope": "local",
         "className": "",
-        "x": 1180,
-        "y": 980,
+        "x": 530,
+        "y": 700,
         "wires": [
             []
         ]
@@ -4558,8 +4095,8 @@
         "resendOnRefresh": true,
         "templateScope": "local",
         "className": "",
-        "x": 1190,
-        "y": 1020,
+        "x": 540,
+        "y": 740,
         "wires": [
             []
         ]
@@ -4579,8 +4116,8 @@
         "resendOnRefresh": true,
         "templateScope": "local",
         "className": "",
-        "x": 1200,
-        "y": 1060,
+        "x": 550,
+        "y": 780,
         "wires": [
             []
         ]
@@ -4605,10 +4142,12 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 730,
-        "y": 60,
+        "x": 710,
+        "y": 100,
         "wires": [
-            []
+            [
+                "8bb4278aca29cc84"
+            ]
         ]
     },
     {
@@ -4637,18 +4176,1031 @@
         "type": "function",
         "z": "d02cf25fa8114475",
         "name": "map",
-        "func": "const isOnline = msg.payload;\nconst status = isOnline ? 'online' : 'offline';\nconst at = new Date().toLocaleString();\n\nreturn {\n    payload: {\n        tag: \"grid-online\",\n        title: \"Grid\",\n        body: `Grid changed to ${status}, at ${at}`,\n        silent: true,\n    }\n};",
+        "func": "const isOnline = msg.payload;\nconst status = isOnline ? 'online' : 'offline';\nconst at = new Date().toLocaleString();\n\nnode.status({\n    fill: isOnline ? 'blue' : 'red',\n    text: isOnline ? 'online' : 'offline',\n});\n\nreturn {\n    payload: {\n        tag: \"grid-online\",\n        title: \"Grid\",\n        body: `Grid changed to ${status}, at ${at}`,\n        silent: true,\n    }\n};",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 750,
+        "x": 715,
         "y": 380,
         "wires": [
             [
                 "002fbcc4b5600960"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "bb0a4494c7d35255",
+        "type": "ui_dropdown",
+        "z": "d02cf25fa8114475",
+        "name": "",
+        "label": "Grid",
+        "tooltip": "",
+        "place": "Select option",
+        "group": "827cf95cdf202cb4",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "multiple": false,
+        "options": [
+            {
+                "label": "auto",
+                "value": "auto",
+                "type": "str"
+            },
+            {
+                "label": "connect",
+                "value": "connect",
+                "type": "str"
+            },
+            {
+                "label": "disconnect",
+                "value": "disconnect",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "topic",
+        "topicType": "msg",
+        "className": "",
+        "x": 90,
+        "y": 500,
+        "wires": [
+            [
+                "f6253cb39a917b09"
+            ]
+        ]
+    },
+    {
+        "id": "f6253cb39a917b09",
+        "type": "change",
+        "z": "d02cf25fa8114475",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "gridConnect",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg",
+                "dc": true
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 280,
+        "y": 500,
+        "wires": [
+            [
+                "b56557da9e0d3fdb"
+            ]
+        ]
+    },
+    {
+        "id": "b56557da9e0d3fdb",
+        "type": "link out",
+        "z": "d02cf25fa8114475",
+        "name": "link out 34",
+        "mode": "link",
+        "links": [
+            "0120f22e197cc1f6"
+        ],
+        "x": 425,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "252757374fa348f4",
+        "type": "ui_template",
+        "z": "d02cf25fa8114475",
+        "group": "9d1871108d73a07a",
+        "name": "Grid",
+        "order": 1,
+        "width": "6",
+        "height": "1",
+        "format": "<div class=\"nr-dashboard-text\" style=\"display: flex; flex-direction: column; padding: 0 10px 0 6px; margin: -10px 0;\">\n    <div style=\"display: flex; justify-content: space-between;\">\n        <p class=\"label\">Grid</p>\n        <p class=\"value\">{{msg.payload.power}}W</p>\n    </div>\n    <div style=\"display: flex; justify-content: space-between; font-size: .9em; font-weight: 500\">\n        <p>(R) {{msg.payload.R}}V</p>\n        <p>(S) {{msg.payload.S}}V</p>\n        <p>(T) {{msg.payload.T}}V</p>\n    </div>\n</div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 500,
+        "y": 660,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "860d818f14cd1779",
+        "type": "noraf-charger",
+        "z": "d02cf25fa8114475",
+        "devicename": "Home Battery",
+        "roomhint": "Service Room",
+        "name": "",
+        "passthru": false,
+        "nora": "f1e538c1.0315f8",
+        "isRechargeable": true,
+        "queryOnlyEnergyStorage": true,
+        "energyStorageDistanceUnitForUX": "KILOMETERS",
+        "topic": "",
+        "twofactor": "off",
+        "twofactorpin": "",
+        "filter": false,
+        "asyncCmd": false,
+        "outputs": 1,
+        "x": 740,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8bb4278aca29cc84",
+        "type": "function",
+        "z": "d02cf25fa8114475",
+        "name": "map",
+        "func": "const batteryCapacity = global.get('batteryCapacity');\n\nconst isCharging = flow.get('batteryStatus') === 'charge';\n\nconst capacityRemaining = [{\n    rawValue: batteryCapacity,\n    unit: 'PERCENTAGE',\n}];\n\nconst capacityUntilFull = [{\n    rawValue: 100 - batteryCapacity,\n    unit: 'PERCENTAGE',\n}];\n\nconst descriptiveCapacityRemaining = [\n    { threshold: 98, message: 'FULL' },\n    { threshold: 80, message: 'HIGH' },\n    { threshold: 40, message: 'MEDIUM' },\n    { threshold: 20, message: 'LOW' },\n    { threshold: 0, message: 'CRITICALLY_LOW' },\n]\n    .find(v => batteryCapacity >= v.threshold)\n    .message;\n\nreturn {\n    payload: {\n        capacityRemaining,\n        capacityUntilFull,\n        descriptiveCapacityRemaining,\n        isCharging,\n        isPluggedIn: true,\n    },\n};",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 615,
+        "y": 140,
+        "wires": [
+            [
+                "860d818f14cd1779"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "4d3dcc377b7c001d",
+        "type": "rbe",
+        "z": "d02cf25fa8114475",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 380,
+        "y": 660,
+        "wires": [
+            [
+                "252757374fa348f4"
+            ]
+        ]
+    },
+    {
+        "id": "93f27c194f1671e2",
+        "type": "ui_chart",
+        "z": "d02cf25fa8114475",
+        "name": "last-year",
+        "group": "ba44977d7b6ec35b",
+        "order": 1,
+        "width": "6",
+        "height": "9",
+        "label": "",
+        "chartType": "horizontalBar",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#ff7b42",
+            "#99c5ff",
+            "#858dff",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 640,
+        "y": 1000,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "dfaf723684262b45",
+        "type": "influxdb in",
+        "z": "d02cf25fa8114475",
+        "influxdb": "63bdbe3c09b491f2",
+        "name": "db",
+        "query": "import \"date\"\nimport \"timezone\"\n\noption location = timezone.location(name: \"Europe/Bucharest\")\n\nstart = date.truncate(t: -12mo, unit: 1mo)\nend = date.truncate(t: 1mo, unit: 1mo)\n\nfrom(bucket: \"power_aggregated\")\n    |> range(start: start, stop: end)\n    |> filter(\n        fn: (r) =>\n            r[\"_measurement\"] == \"ac-output-active-power\" or r[\"_measurement\"]\n                ==\n                \"ac-input-active-power\" or r[\"_measurement\"] == \"solar-input-power\",\n    )\n    |> aggregateWindow(\n        every: 1mo,\n        fn: (tables=<-, column) =>\n            tables\n                |> sum(column: \"_value\")\n    )\n    |> map(\n        fn: (r) =>\n            ({_measurement: r._measurement, _field: \"value\", _value: r._value, _time: date.sub(from: r._time, d: 1s)}),\n    )\n",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "home",
+        "x": 310,
+        "y": 1000,
+        "wires": [
+            [
+                "7a7166818ad596c4"
+            ]
+        ]
+    },
+    {
+        "id": "7a7166818ad596c4",
+        "type": "function",
+        "z": "d02cf25fa8114475",
+        "name": "map",
+        "func": "/** @type {{_time:string,_value:number,_measurement:'ac-input-active-power'|'ac-output-active-power'|'solar-input-power'}[]} */\nconst data = msg.payload;\n\nconst months = [\n    \"Jan\", \"Feb\", \"Mar\",\n    \"Apr\", \"May\", \"Jun\",\n    \"Jul\", \"Aug\", \"Sep\",\n    \"Oct\", \"Nov\", \"Dec\"\n];\n\nconst mapped = data.map(v => {\n    const at = new Date(v._time);\n    const label = `${at.getFullYear()} - ${months[at.getMonth()]}`;\n    return {\n        label,\n        topic: v._measurement,\n        value: Math.round(v._value),\n        ticks: at.getTime(),\n    };\n});\n\n/** @type {Partial<Record<typeof mapped[0]['topic'], typeof mapped[0][]>>} */\nconst groups = {};\nmapped.forEach(v => {\n    let group = groups[v.topic];\n    if (!group) {\n        groups[v.topic] = group = [];\n    }\n    group.push(v);\n});\n\nObject.values(groups).forEach(v => {\n    v.sort((a, b) => a.ticks - b.ticks);\n});\n\nreturn {\n    payload: [{\n        \"series\": [\"Grid\", \"Used\"],\n        \"data\": [\n            groups['ac-input-active-power'].map(v => v.value),\n            groups['ac-output-active-power'].map(v => v.value),\n        ],\n        \"labels\": groups['ac-input-active-power'].map(v => v.label),\n    }]\n};\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 395,
+        "y": 1000,
+        "wires": [
+            [
+                "c0462038835605dd"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "99587ea33696a96e",
+        "type": "influxdb in",
+        "z": "d02cf25fa8114475",
+        "influxdb": "63bdbe3c09b491f2",
+        "name": "db",
+        "query": "import \"date\"\nimport \"timezone\"\n\noption location = timezone.location(name: \"Europe/Bucharest\")\n\nstart = date.truncate(t: -7d, unit: 1d)\nend = date.truncate(t: 1d, unit: 1d)\n\nfrom(bucket: \"power_aggregated\")\n    |> range(start: start, stop: end)\n    |> filter(\n        fn: (r) =>\n            r[\"_measurement\"] == \"solar-input-power\" or r[\"_measurement\"] == \"ac-output-active-power\" or r[\"_measurement\"] == \"ac-input-active-power\",\n    )\n    |> map(\n        fn: (r) =>\n            ({_measurement: r._measurement, _field: \"value\", _value: r._value, _time:  r._time}),\n    )\n",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "home",
+        "x": 310,
+        "y": 960,
+        "wires": [
+            [
+                "d6720e316ab6c1c1"
+            ]
+        ]
+    },
+    {
+        "id": "a1a82b228246dd6f",
+        "type": "inject",
+        "z": "d02cf25fa8114475",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "300",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "5",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 920,
+        "wires": [
+            [
+                "99587ea33696a96e",
+                "dfaf723684262b45",
+                "ec8ea9e4de28967c",
+                "ad0eaeed7112a695",
+                "208b4b347860a827",
+                "4332a86f0a017a4e"
+            ]
+        ]
+    },
+    {
+        "id": "d6720e316ab6c1c1",
+        "type": "function",
+        "z": "d02cf25fa8114475",
+        "name": "map",
+        "func": "/** @type {{\n * _time:string,\n * _value:number,\n * _measurement:\n *  'solar-input-power'|\n *  'ac-input-active-power'|\n *  'ac-output-active-power'\n * }[]} */\nconst data = msg.payload;\n\nconst days = [\n    \"Sun\", \"Mon\", \"Tue\",\n    \"Wed\", \"Thu\", \"Fri\", \"Sat\",\n];\n\nconst mapped = data.map(v => {\n    const at = new Date(v._time);\n    const label = days[at.getDay()];\n    return {\n        label,\n        topic: v._measurement,\n        value: Math.round(v._value * 10) / 10,\n        ticks: at.getTime(),\n    };\n});\n\n/** @type {Partial<Record<typeof mapped[0]['topic'], typeof mapped[0][]>>} */\nconst groups = {};\nmapped.forEach(v => {\n    let group = groups[v.topic];\n    if (!group) {\n        groups[v.topic] = group = [];\n    }\n    group.push(v);\n});\n\nObject.values(groups).forEach(v => {\n    v.sort((a, b) => a.ticks - b.ticks);\n});\n\nreturn {\n    payload: [{\n        \"series\": [\"Grid\", \"Solar\", \"Used\"],\n        \"data\": [\n            groups['ac-input-active-power'].map(v => v.value),\n            groups['solar-input-power'].map(v => v.value),\n            groups['ac-output-active-power'].map(v => v.value),\n        ],\n        \"labels\": groups['ac-input-active-power'].map(v => v.label),\n    }]\n};\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 395,
+        "y": 960,
+        "wires": [
+            [
+                "51966ac4cb525180"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "8e1f5d5ba29e2236",
+        "type": "ui_chart",
+        "z": "d02cf25fa8114475",
+        "name": "last-week",
+        "group": "3b7b403039fa5965",
+        "order": 1,
+        "width": "6",
+        "height": "7",
+        "label": "",
+        "chartType": "horizontalBar",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#ff7b42",
+            "#73c990",
+            "#99c5ff",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 640,
+        "y": 960,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c3798cd147f21703",
+        "type": "ui_template",
+        "z": "d02cf25fa8114475",
+        "group": "827cf95cdf202cb4",
+        "name": "",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "format": "<style>\n    .nr-dashboard-chart-title {\n        display: none;\n    }\n</style>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "global",
+        "className": "",
+        "x": 860,
+        "y": 920,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ec8ea9e4de28967c",
+        "type": "influxdb in",
+        "z": "d02cf25fa8114475",
+        "influxdb": "63bdbe3c09b491f2",
+        "name": "db",
+        "query": "import \"date\"\nimport \"timezone\"\n\noption location = timezone.location(name: \"Europe/Bucharest\")\n\nstart = date.truncate(t: now(), unit: 1d)\nend = now() //date.truncate(t: now(), unit: 1h)\n\nfrom(bucket: \"power\")\n    |> range(start: start, stop: end)\n    |> filter(\n        fn: (r) =>\n            r[\"_measurement\"] == \"ac-output-active-power\" or r[\"_measurement\"]\n                ==\n                \"ac-input-active-power\" or r[\"_measurement\"] == \"solar-input-power\",\n    )\n    |> filter(fn: (r) => r[\"_field\"] == \"total\")\n    |> aggregateWindow(\n        every: 1h,\n        fn: (tables=<-, column) =>\n            tables\n                |> integral(unit: 1h, column: \"_value\")\n                |> map(fn: (r) => ({r with _value: r._value / 1000.0})),\n    )\n    |> map(\n        fn: (r) =>\n            ({\n                _measurement: r._measurement,\n                _field: \"value\",\n                _value: r._value,\n                _time: r._time,\n            }),\n    )\n",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "home",
+        "x": 310,
+        "y": 920,
+        "wires": [
+            [
+                "d1fd58eb9690fc72"
+            ]
+        ]
+    },
+    {
+        "id": "d1fd58eb9690fc72",
+        "type": "function",
+        "z": "d02cf25fa8114475",
+        "name": "map",
+        "func": "/** @type {{\n * _time:string,\n * _value:number,\n * _measurement:\n *  'solar-input-power'|\n *  'ac-input-active-power'|\n *  'ac-output-active-power'\n * }[]} */\nconst data = msg.payload;\n\nconst mapped = data.map(v => {\n    return {\n        topic: v._measurement,\n        value: Math.round(v._value * 10) / 10,\n        ticks: new Date(v._time).getTime(),\n    };\n});\n\n/** @type {Partial<Record<typeof mapped[0]['topic'], typeof mapped[0][]>>} */\nconst groups = {};\nmapped.forEach(v => {\n    let group = groups[v.topic];\n    if (!group) {\n        groups[v.topic] = group = [];\n    }\n    group.push(v);\n});\n\nObject.values(groups).forEach(v => {\n    v.sort((a, b) => a.ticks - b.ticks);\n});\n\nreturn {\n    payload: [{\n        \"series\": [\"Grid\", \"Solar\", \"Used\"],\n        \"data\": [\n            getData(groups['ac-input-active-power']),\n            getData(groups['solar-input-power']),\n            getData(groups['ac-output-active-power']),\n        ],\n    }]\n};\n\n/** @param data {{ticks: number, value: number}[]} */\nfunction getData(data) {\n    const mapped = [];\n    let lastDate;\n    for (const v of data) {\n        lastDate = v.ticks;\n        mapped.push({\n            x: v.ticks,\n            y: v.value,\n        });\n    }\n\n    if (lastDate) {\n        const l = new Date(lastDate)\n        l.setHours(23, 59, 59, 0);\n        mapped.push({\n            x: l.getTime(),\n            y: null,\n        });\n    }\n\n    return mapped;\n}\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 395,
+        "y": 920,
+        "wires": [
+            [
+                "a4f0f047b83a7ffa"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "f86d42f7967c6136",
+        "type": "ui_chart",
+        "z": "d02cf25fa8114475",
+        "name": "today",
+        "group": "b53a900ec325bc65",
+        "order": 1,
+        "width": "6",
+        "height": "4",
+        "label": "",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#ff7b42",
+            "#73c990",
+            "#99c5ff",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 630,
+        "y": 920,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a4f0f047b83a7ffa",
+        "type": "rbe",
+        "z": "d02cf25fa8114475",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": false,
+        "property": "payload",
+        "topi": "topic",
+        "x": 490,
+        "y": 920,
+        "wires": [
+            [
+                "f86d42f7967c6136"
+            ]
+        ]
+    },
+    {
+        "id": "51966ac4cb525180",
+        "type": "rbe",
+        "z": "d02cf25fa8114475",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": false,
+        "property": "payload",
+        "topi": "topic",
+        "x": 490,
+        "y": 960,
+        "wires": [
+            [
+                "8e1f5d5ba29e2236"
+            ]
+        ]
+    },
+    {
+        "id": "c0462038835605dd",
+        "type": "rbe",
+        "z": "d02cf25fa8114475",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": false,
+        "property": "payload",
+        "topi": "topic",
+        "x": 490,
+        "y": 1000,
+        "wires": [
+            [
+                "93f27c194f1671e2"
+            ]
+        ]
+    },
+    {
+        "id": "aaab93ca80d93467",
+        "type": "influxdb in",
+        "z": "d02cf25fa8114475",
+        "influxdb": "63bdbe3c09b491f2",
+        "name": "db",
+        "query": "",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "home",
+        "x": 310,
+        "y": 1200,
+        "wires": [
+            [
+                "253ee55b662add5a"
+            ]
+        ]
+    },
+    {
+        "id": "253ee55b662add5a",
+        "type": "function",
+        "z": "d02cf25fa8114475",
+        "name": "map",
+        "func": "/** @type {{\n * result: 'offset'|'today',\n * _time:string,\n * _value:number,\n * _measurement:'solar-input-power',\n * hour: number,\n * }[]} */\nconst data = msg.payload;\n\nconst offset = flow.get('dayOffset') ?? -1;\n\nconst mapped = data.map(v => {\n    const d = new Date(v._time);\n    return {\n        result: v.result,\n        x: d.getTime(),\n        y: Math.round(v._value * 10) / 10,\n    };\n});\n\nconst offsetData = mapped\n    .filter(v => v.result === 'offset')\n    .map(({ x, y }) => {\n        const d = new Date(x);\n        d.setDate(d.getDate() - offset);\n        return {\n            x: d.getTime(),\n            y,\n        };\n    });\nconst todayData = mapped\n    .filter(v => v.result === 'today')\n    .map(({ x, y }) => ({ x, y }));\n\nreturn {\n    payload: [{\n        \"series\": [\"Today\", `${offset} day`],\n        \"data\": [\n            todayData,\n            offsetData,\n        ],\n    }]\n};\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 395,
+        "y": 1200,
+        "wires": [
+            [
+                "c22d9b44d1d0ba74"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "9605e281fd324990",
+        "type": "ui_chart",
+        "z": "d02cf25fa8114475",
+        "name": "today vs yesterday",
+        "group": "73c9d7077dcee7d3",
+        "order": 2,
+        "width": "6",
+        "height": "4",
+        "label": "",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#73c990",
+            "#ff7b42",
+            "#858dff",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 670,
+        "y": 1200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c22d9b44d1d0ba74",
+        "type": "rbe",
+        "z": "d02cf25fa8114475",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": false,
+        "property": "payload",
+        "topi": "topic",
+        "x": 490,
+        "y": 1200,
+        "wires": [
+            [
+                "9605e281fd324990"
+            ]
+        ]
+    },
+    {
+        "id": "312d45a724aa1438",
+        "type": "ui_numeric",
+        "z": "d02cf25fa8114475",
+        "name": "",
+        "label": "Offset (days)",
+        "tooltip": "",
+        "group": "73c9d7077dcee7d3",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "wrap": false,
+        "passthru": false,
+        "topic": "topic",
+        "topicType": "msg",
+        "format": "{{value}} day",
+        "min": "-100",
+        "max": "-1",
+        "step": 1,
+        "className": "",
+        "x": 270,
+        "y": 1240,
+        "wires": [
+            [
+                "9990b84a250ea4f7"
+            ]
+        ]
+    },
+    {
+        "id": "e40ebc487598d34c",
+        "type": "change",
+        "z": "d02cf25fa8114475",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "dayOffset",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 730,
+        "y": 1240,
+        "wires": [
+            [
+                "ad0eaeed7112a695"
+            ]
+        ]
+    },
+    {
+        "id": "ad0eaeed7112a695",
+        "type": "function",
+        "z": "d02cf25fa8114475",
+        "name": "map",
+        "func": "const offset = flow.get('dayOffset') ?? -1;\nreturn {\n    query: `\nimport \"date\"\nimport \"timezone\"\n\noption location = timezone.location(name: \"Europe/Bucharest\")\n\ngetSolarEnergyPerHour = (tables=<-) =>\n    tables\n        |> filter(fn: (r) => r[\"_measurement\"] == \"solar-input-power\")\n        |> filter(fn: (r) => r[\"_field\"] == \"total\")\n        |> aggregateWindow(\n            every: 1h,\n            fn: (tables=<-, column) =>\n                tables\n                    |> integral(unit: 1h, column: \"_value\")\n                    |> map(fn: (r) => ({r with _value: r._value / 1000.0})),\n        )\n        |> map(\n            fn: (r) =>\n                ({\n                    _measurement: r._measurement,\n                    _field: \"value\",\n                    _value: r._value,\n                    _time: r._time,\n                }),\n        )\n\nfrom(bucket: \"power\")\n    |> range(start: date.truncate(t: ${offset}d, unit: 1d), stop: date.truncate(t: ${offset + 1}d, unit: 1d))\n    |> getSolarEnergyPerHour()\n    |> yield(name: \"offset\")\n\nfrom(bucket: \"power\")\n    |> range(start: date.truncate(t: now(), unit: 1d), stop: now())\n    |> getSolarEnergyPerHour()\n    |> yield(name: \"today\")\n`\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 225,
+        "y": 1200,
+        "wires": [
+            [
+                "aaab93ca80d93467"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "9990b84a250ea4f7",
+        "type": "trigger",
+        "z": "d02cf25fa8114475",
+        "name": "",
+        "op1": "",
+        "op2": "",
+        "op1type": "nul",
+        "op2type": "payl",
+        "duration": "1",
+        "extend": true,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 440,
+        "y": 1240,
+        "wires": [
+            [
+                "5eca1f0432cd01df"
+            ]
+        ]
+    },
+    {
+        "id": "5eca1f0432cd01df",
+        "type": "rbe",
+        "z": "d02cf25fa8114475",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": false,
+        "property": "payload",
+        "topi": "topic",
+        "x": 570,
+        "y": 1240,
+        "wires": [
+            [
+                "e40ebc487598d34c"
+            ]
+        ]
+    },
+    {
+        "id": "208b4b347860a827",
+        "type": "influxdb in",
+        "z": "d02cf25fa8114475",
+        "influxdb": "63bdbe3c09b491f2",
+        "name": "db",
+        "query": "from(bucket: \"power_aggregated\")\n    |> range(start: 2023-10-04T00:00:00Z, stop: 1d)\n    |> filter(\n        fn: (r) =>\n            r[\"_measurement\"] == \"ac-input-active-power\" or \n            r[\"_measurement\"] == \"ac-output-active-power\" or \n            r[\"_measurement\"] == \"solar-input-power\",\n    )\n    |> sum()\n    |> yield()\n",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "home",
+        "x": 310,
+        "y": 1080,
+        "wires": [
+            [
+                "d8752a58d3ffc0a3"
+            ]
+        ]
+    },
+    {
+        "id": "d8752a58d3ffc0a3",
+        "type": "function",
+        "z": "d02cf25fa8114475",
+        "name": "function 1",
+        "func": "/** @type {{_value:number, _measurement:'ac-input-active-power'|'ac-output-active-power'|'solar-input-power'}[]} */\nconst measurements = msg.payload;\n\nconst totalIn = measurements\n    .find(v => v._measurement === 'ac-input-active-power')\n    ._value;\n\nconst totalOut = measurements\n    .find(v => v._measurement === 'ac-output-active-power')\n    ._value;\n\nconst solarInput = measurements\n    .find(v => v._measurement === 'solar-input-power')\n    ._value;\n\nreturn [{\n    payload: Math.round((totalOut - totalIn) / solarInput * 1000) / 10,\n}, {\n    payload: Math.round(totalOut * 10) / 10,\n}, {\n    payload: Math.round((totalOut - totalIn) * 10) / 10,\n}]",
+        "outputs": 3,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 395,
+        "y": 1080,
+        "wires": [
+            [
+                "887f3ed6281437e5"
+            ],
+            [
+                "2d3bf4a3e04379a7"
+            ],
+            [
+                "2fea9c289254d63a"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "4332a86f0a017a4e",
+        "type": "influxdb in",
+        "z": "d02cf25fa8114475",
+        "influxdb": "63bdbe3c09b491f2",
+        "name": "db",
+        "query": "from(bucket: \"power_aggregated\")\n    |> range(start: -31d, stop: 1d)\n    |> filter(\n        fn: (r) =>\n            r[\"_measurement\"] == \"ac-input-active-power\" or \n            r[\"_measurement\"] == \"ac-output-active-power\" or \n            r[\"_measurement\"] == \"solar-input-power\",\n    )\n    |> sum()\n    |> yield()\n",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "home",
+        "x": 310,
+        "y": 1160,
+        "wires": [
+            [
+                "22bc033e8f814343"
+            ]
+        ]
+    },
+    {
+        "id": "22bc033e8f814343",
+        "type": "function",
+        "z": "d02cf25fa8114475",
+        "name": "function 2",
+        "func": "/** @type {{_value:number, _measurement:'ac-input-active-power'|'ac-output-active-power'|'solar-input-power'}[]} */\nconst measurements = msg.payload;\n\nconst totalIn = measurements\n    .find(v => v._measurement === 'ac-input-active-power')\n    ._value;\n\nconst totalOut = measurements\n    .find(v => v._measurement === 'ac-output-active-power')\n    ._value;\n\nconst solarInput = measurements\n    .find(v => v._measurement === 'solar-input-power')\n    ._value;\n\nreturn {\n    payload: Math.round((totalOut - totalIn) / solarInput * 1000) / 10,\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 395,
+        "y": 1160,
+        "wires": [
+            [
+                "1989ea913e42d2ba"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "d6533ffbd477f895",
+        "type": "ui_text",
+        "z": "d02cf25fa8114475",
+        "group": "827cf95cdf202cb4",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "All time efficiency",
+        "format": "{{msg.payload}}%",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 670,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "b8f73de9b8242c6a",
+        "type": "ui_text",
+        "z": "d02cf25fa8114475",
+        "group": "827cf95cdf202cb4",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Last 31 days efficiency",
+        "format": "{{msg.payload}}%",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 680,
+        "y": 1160,
+        "wires": []
+    },
+    {
+        "id": "887f3ed6281437e5",
+        "type": "rbe",
+        "z": "d02cf25fa8114475",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": false,
+        "property": "payload",
+        "topi": "topic",
+        "x": 490,
+        "y": 1040,
+        "wires": [
+            [
+                "d6533ffbd477f895"
+            ]
+        ]
+    },
+    {
+        "id": "1989ea913e42d2ba",
+        "type": "rbe",
+        "z": "d02cf25fa8114475",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": false,
+        "property": "payload",
+        "topi": "topic",
+        "x": 490,
+        "y": 1160,
+        "wires": [
+            [
+                "b8f73de9b8242c6a"
+            ]
+        ]
+    },
+    {
+        "id": "9a4aad9ff010f130",
+        "type": "ui_text",
+        "z": "d02cf25fa8114475",
+        "group": "827cf95cdf202cb4",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Total used",
+        "format": "{{msg.payload}} kWh",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 650,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "2d3bf4a3e04379a7",
+        "type": "rbe",
+        "z": "d02cf25fa8114475",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": false,
+        "property": "payload",
+        "topi": "topic",
+        "x": 490,
+        "y": 1080,
+        "wires": [
+            [
+                "9a4aad9ff010f130"
+            ]
+        ]
+    },
+    {
+        "id": "d78f0c756ab516b6",
+        "type": "ui_text",
+        "z": "d02cf25fa8114475",
+        "group": "827cf95cdf202cb4",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "From solar",
+        "format": "{{msg.payload}} kWh",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 650,
+        "y": 1120,
+        "wires": []
+    },
+    {
+        "id": "2fea9c289254d63a",
+        "type": "rbe",
+        "z": "d02cf25fa8114475",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": false,
+        "property": "payload",
+        "topi": "topic",
+        "x": 490,
+        "y": 1120,
+        "wires": [
+            [
+                "d78f0c756ab516b6"
             ]
         ]
     },
@@ -4657,7 +5209,7 @@
         "type": "function",
         "z": "13aa577370e4c4d7",
         "name": "Last Message",
-        "func": "const now = new Date();\nconst last = context.get(msg.topic) || {};\nconst span = last ? (now.getTime() - last.lastTick) / 1000 : null;\nconst maxSpan = last && span ? Math.max(last.maxSpan, span) : null;\n\ncontext.set(msg.topic, {\n    lastTick: now.getTime(),\n    last: now.toLocaleString(),\n    maxSpan,\n});\n\nreturn msg;",
+        "func": "const now = new Date();\nconst last = context.get(msg.topic) || {};\nconst span = last ? (now.getTime() - last.lastTick) / 1000 : null;\nconst seconds = last && span ? Math.max(last.seconds ?? 0, span) : null;\n\ncontext.set(msg.topic, {\n    lastTick: now.getTime(),\n    last: now.toLocaleString(),\n    seconds,\n    payload: msg.payload,\n});\n\nreturn msg;",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -5031,21 +5583,22 @@
         "type": "function",
         "z": "536b0e9eda614fd2",
         "name": "Map",
-        "func": "let name = msg.topic.substring(msg.topic.indexOf('/') + 1);\n\nconst PREFIX = '/RESULT';\nif (name.endsWith(PREFIX)) {\n    name = name.substring(0, name.length - PREFIX.length);\n}\n\nconst previousPayload = global.get(name) ?? {};\nconst payload = {\n    ...previousPayload,\n    ...v('temperature'),\n    ...v('humidity'),\n    ...v('state', 'on', p => p === 'ON'),\n    ...v('occupancy'),\n    ...v('brightness', 'brightness', v => Math.round(v / 254 * 100)),\n    online: msg.payload?.online ?? true,\n};\nglobal.set(name, payload);\n\nreturn {\n    payload,\n    topic: msg.topic,\n};\n\n/**\n* @param {string} input\n* @param {string} output\n* @param {(a:any)=>any} transform\n* @returns {Record<string, *>}\n*/\nfunction v(input, output = input, transform = x => x) {\n    if (input in msg.payload) {\n        return {\n            [output]: transform(msg.payload[input])\n        };\n    }\n    return {};\n}\n",
+        "func": "let name = msg.topic.substring(msg.topic.indexOf('/') + 1);\n\nconst PREFIX = '/RESULT';\nif (name.endsWith(PREFIX)) {\n    name = name.substring(0, name.length - PREFIX.length);\n}\n\ncontext.set(name, msg.payload);\n\nconst previousPayload = global.get(name) ?? {};\nconst payload = {\n    ...previousPayload,\n    ...v('temperature'),\n    ...v('humidity'),\n    ...v('state', 'on', p => p === 'ON'),\n    ...v('occupancy'),\n    ...v('brightness', 'brightness', v => Math.round(v / 254 * 100)),\n    online: msg.payload?.online ?? true,\n};\nglobal.set(name, payload);\n\nreturn {\n    payload,\n    topic: msg.topic,\n};\n\n/**\n* @param {string} input\n* @param {string} output\n* @param {(a:any)=>any} transform\n* @returns {Record<string, *>}\n*/\nfunction v(input, output = input, transform = x => x) {\n    if (input in msg.payload) {\n        return {\n            [output]: transform(msg.payload[input])\n        };\n    }\n    return {};\n}\n",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 190,
+        "x": 155,
         "y": 340,
         "wires": [
             [
                 "38687e0ac546600f",
                 "939503bc765e4d79"
             ]
-        ]
+        ],
+        "l": false
     },
     {
         "id": "38687e0ac546600f",
@@ -5067,7 +5620,7 @@
         "filter": true,
         "asyncCmd": false,
         "outputs": 1,
-        "x": 370,
+        "x": 320,
         "y": 280,
         "wires": [
             [
@@ -5080,20 +5633,21 @@
         "type": "function",
         "z": "536b0e9eda614fd2",
         "name": "Map",
-        "func": "const payload = {};\n\nconst state = typeof msg.payload === 'boolean'\n    ? msg.payload\n    : msg.payload?.on;\n\nif (typeof state === 'boolean') {\n    payload.state = state ? 'ON' : 'OFF';\n}\n\nif ('brightness' in msg.payload) {\n    payload.brightness = Math.round(msg.payload.brightness / 100 * 254);\n}\n\nreturn {\n    payload,\n    topic: msg.topic + '/set',\n};",
+        "func": "const payload = {};\n\nconst state = typeof msg.payload === 'boolean'\n    ? msg.payload\n    : msg.payload?.on;\n\nif (typeof state === 'boolean') {\n    payload.state = state ? 'ON' : 'OFF';\n}\n\nif (typeof msg.payload === 'object' &&\n    'brightness' in msg.payload) {\n    payload.brightness = Math.round(msg.payload.brightness / 100 * 254);\n}\n\nreturn {\n    payload,\n    topic: msg.topic + '/set',\n};",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 550,
+        "x": 495,
         "y": 340,
         "wires": [
             [
                 "b02b6ceb7687e947"
             ]
-        ]
+        ],
+        "l": false
     },
     {
         "id": "b02b6ceb7687e947",
@@ -5109,7 +5663,7 @@
         "correl": "",
         "expiry": "",
         "broker": "f569d34c.8c7ed",
-        "x": 690,
+        "x": 610,
         "y": 340,
         "wires": []
     },
@@ -5403,7 +5957,7 @@
         "twofactor": "off",
         "twofactorpin": "",
         "filter": true,
-        "x": 360,
+        "x": 310,
         "y": 340,
         "wires": [
             [
@@ -5495,7 +6049,7 @@
         "type": "function",
         "z": "67e1c6f6bd2fab57",
         "name": "open/close blinds",
-        "func": "/** @type boolean */\nconst away = global.get('awayMode');\n\n/** @type Array<{id: number, open?:number, close?: number, openLater?: number}> */\nconst BLINDS = [\n    { id: 1, open: 15, openLater: 100, close: 0 }, // guest\n    { id: 2, open: 100, close: 0 }, // kitchen-window\n    { id: 8, open: 15, close: 0 }, // kitchen-fixed\n    { id: 3, open: away && 15, openLater: away && 80, close: 0 }, // big bedroom\n    { id: 4, open: 100 }, // living-door\n    { id: 6, open: 40, openLater: away ? 80 : 100, close: 0 }, // living-window\n    { id: 5, open: 100, close: 0 }, // office\n];\n\nconst KEY = 'blindsLastCommand';\n\n/** @type {'open'|'close'|'openLater'} */\n\nif (!msg.payload) {\n    blinds('close');\n} else {\n    const now = new Date();\n    const minTimeToOpenBlinds = new Date();\n    minTimeToOpenBlinds.setHours(7, 30, 0);\n\n    const openLaterTime = new Date();\n    openLaterTime.setHours(8, 30, 0);\n\n    if (now >= minTimeToOpenBlinds && now < openLaterTime) {\n        blinds('open');\n    } else if (now >= openLaterTime) {\n        blinds('openLater');\n    }\n}\n\n/** @param {'open'|'close'|'openLater'} type */\nfunction blinds(type) {\n    const last = context.get(KEY);\n    if (type === last) {\n        return;\n    }\n    context.set(KEY, type);\n\n    if (type.startsWith('open') &&\n        !flow.get('autoOpenBlinds')) {\n        return;\n    }\n\n    const msgs = BLINDS\n        .map(b => {\n            const stateTopic = `ha-switch/switch-blinds-${b.id}/state`;\n            const currentState = global.get(stateTopic);\n\n            const openPercent = b[type];\n            if (typeof openPercent !== 'number') {\n                return;\n            }\n\n            if (currentState) {\n                switch (type) {\n                    case 'open':\n                    case 'openLater':\n                        if (openPercent <= currentState.openPercent) {\n                            return;\n                        }\n                        break;\n                    case 'close':\n                        if (openPercent >= currentState.openPercent) {\n                            //blinds are already more closed\n                            return;\n                        }\n                        break;\n                }\n            }\n\n            return {\n                payload: { openPercent },\n                topic: `${stateTopic}/set`,\n                retain: true,\n            };\n        })\n        .filter(m => !!m);\n    node.send([msgs]);\n}\n",
+        "func": "/** @type boolean */\nconst away = global.get('awayMode');\n\n/** @type Array<{id: number, open?:number, close?: number, openLater?: number}> */\nconst BLINDS = [\n    { id: 1, open: 15, openLater: 100, close: 0 }, // guest\n    { id: 2, open: 100, close: 0 }, // kitchen-window\n    { id: 8, open: 15, close: 0 }, // kitchen-fixed\n    { id: 3, open: away && 15, openLater: away ? 80 : 40, close: 0 }, // big bedroom\n    { id: 4, open: 100 }, // living-door\n    { id: 6, open: 40, openLater: away ? 80 : 100, close: away ? 15 : 0 }, // living-window\n    { id: 5, open: 100, close: 0 }, // office\n];\n\nconst KEY = 'blindsLastCommand';\n\n/** @type {'open'|'close'|'openLater'} */\n\nif (!msg.payload) {\n    blinds('close');\n} else {\n    const now = new Date();\n    const minTimeToOpenBlinds = new Date();\n    minTimeToOpenBlinds.setHours(7, 30, 0);\n\n    const openLaterTime = new Date();\n    openLaterTime.setHours(8, 30, 0);\n\n    if (now >= minTimeToOpenBlinds && now < openLaterTime) {\n        blinds('open');\n    } else if (now >= openLaterTime) {\n        blinds('openLater');\n    }\n}\n\n/** @param {'open'|'close'|'openLater'} type */\nfunction blinds(type) {\n    const last = context.get(KEY);\n    if (type === last) {\n        return;\n    }\n\n    // if (type.startsWith('open') && global.get('outdoorTemperature') <= 0) {\n    //     return;\n    // }\n\n    context.set(KEY, type);\n\n    if (type.startsWith('open') && !flow.get('autoOpenBlinds')) {\n        return;\n    }\n\n    const msgs = BLINDS\n        .map(b => {\n            const stateTopic = `ha-switch/switch-blinds-${b.id}/state`;\n            const currentState = global.get(stateTopic);\n\n            const openPercent = b[type];\n            if (typeof openPercent !== 'number') {\n                return;\n            }\n\n            if (currentState) {\n                switch (type) {\n                    case 'open':\n                    case 'openLater':\n                        if (openPercent <= currentState.openPercent) {\n                            return;\n                        }\n                        break;\n                    case 'close':\n                        if (openPercent >= currentState.openPercent) {\n                            //blinds are already more closed\n                            return;\n                        }\n                        break;\n                }\n            }\n\n            return {\n                payload: { openPercent },\n                topic: `${stateTopic}/set`,\n                retain: true,\n            };\n        })\n        .filter(m => !!m);\n    node.send([msgs]);\n}\n",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -5742,7 +6296,6 @@
         "id": "651eb38aa48c6e2a",
         "type": "nibe-register",
         "z": "67e1c6f6bd2fab57",
-        "d": true,
         "name": "",
         "register": "Humidity (AZ30-BM20)",
         "nibe": "89e46ce21c7f5128",
@@ -5763,7 +6316,6 @@
         "id": "27d499b6a6e0d7e5",
         "type": "nibe-register",
         "z": "67e1c6f6bd2fab57",
-        "d": true,
         "name": "",
         "register": "Bypass during heating (ERS 1)",
         "nibe": "89e46ce21c7f5128",
@@ -5784,9 +6336,8 @@
         "id": "1895125bc221a5c6",
         "type": "function",
         "z": "67e1c6f6bd2fab57",
-        "d": true,
         "name": "decide",
-        "func": "const humidity = msg.payload.value;\nif (humidity < 0 || humidity > 100) {\n    return;\n}\n\nconst stopRecovery = flow.get('bypass_recovery') === 1;\nconst target = 46;\nconst histerezis = 2;\nconst compareTo = target + (stopRecovery ? 0 : 1) * histerezis;\nconst shouldStopRecovery = humidity >= compareTo;\n\nnode.status({\n    fill: shouldStopRecovery ? 'red' : \"blue\",\n    shape: \"dot\",\n    text: `recovery ${shouldStopRecovery ? 'off' : 'on'}`,\n});\n\nreturn {\n    payload: shouldStopRecovery ? 1 : 0,\n};\n",
+        "func": "const humidity = msg.payload.value;\nif (humidity < 0 || humidity > 100) {\n    return;\n}\n\nconst outdoorTemperature = global.get('outdoorTemperature');\nconst stopRecovery = flow.get('bypass_recovery') === 1;\nconst target = 46;\nconst histerezis = 1;\nconst compareTo = target + (stopRecovery ? 0 : 1) * histerezis;\n\nconst shouldStopRecovery =\n    outdoorTemperature < 10\n        ? humidity >= compareTo\n        : false;\n\nnode.status({\n    fill: shouldStopRecovery ? 'red' : \"blue\",\n    shape: \"dot\",\n    text: `recovery ${shouldStopRecovery ? 'off' : 'on'}`,\n});\n\nreturn {\n    payload: shouldStopRecovery ? 1 : 0,\n};\n",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -5805,7 +6356,6 @@
         "id": "5d3dfd6ae641f427",
         "type": "function",
         "z": "67e1c6f6bd2fab57",
-        "d": true,
         "name": "set flow.bypass_recovery",
         "func": "const oldValue = flow.get('bypass_recovery');\nconst newValue = msg.payload.value;\nif (newValue !== oldValue) {\n    flow.set('bypass_recovery', newValue);\n}\n",
         "outputs": 1,
@@ -5847,7 +6397,7 @@
         "type": "function",
         "z": "67e1c6f6bd2fab57",
         "name": "lights on/off when motion or contact",
-        "func": "if (!flow.get('auto_light')) {\n    return;\n}\n\n/**\n * @type Array<{\n *  src:Array<string>, \n *  target:string, \n *  timeoutMin: number, \n *  turn:'on'|'off'\n * }>\n */\nconst targetByPir = [\n    {\n        src: ['pir/hallway-1', 'pir/hallway-2'],\n        target: 'switch-dimmer-3',\n        timeoutMin: 1,\n        turn: 'on',\n    }, {\n        src: ['pir/hallway-3', 'contact/entrance'],\n        target: 'switch-dimmer-10',\n        timeoutMin: 3,\n        turn: 'on',\n    }, {\n        src: ['pir/small-bathroom'],\n        target: 'switch-onoff-3',\n        timeoutMin: 15,\n        turn: 'off',\n    }\n]\n\nconst name = msg.topic.split('/').slice(1).join('/');\nconst found = targetByPir.find(t => t.src.includes(name));\nif (!found) {\n    return;\n}\n\nconst p = msg.payload;\nif (found.turn === 'on') {\n    let turnOn = false;\n\n    if ('occupancy' in p) {\n        const last = context.get(`last-${name}`);\n        if (p.occupancy || last) {\n            turnOn = true;\n        }\n        context.set(`last-${name}`, p.occupancy);\n    }\n\n    if ('contact' in p) {\n        const last = context.get(`last-${name}`);\n        if (p.contact !== last) {\n            turnOn = true;\n        }\n        context.set(`last-${name}`, p.contact);\n    }\n\n    if (turnOn) {\n        return {\n            payload: {\n                'brightness': 100,\n                'for': found.timeoutMin * 60,\n            },\n            topic: `ha-switch/${found.target}/state/set`,\n            retain: false,\n        };\n    }\n} else if (found.turn === 'off') {\n    if (p.occupancy) {\n        return [, {\n            payload: {\n                on: false\n            },\n            delay: found.timeoutMin * 60 * 1000,\n            topic: `ha-switch/${found.target}/state/set`,\n            retain: true,\n        }];\n    }\n}\n",
+        "func": "if (!flow.get('auto_light')) {\n    return;\n}\n\n/**\n * @type Array<{\n *  src:Array<string>, \n *  target:string, \n *  timeoutMin: number, \n *  turn:'on'|'off'\n * }>\n */\nconst targetByPir = [\n    {\n        src: ['pir/hallway-1', 'pir/hallway-2'],\n        target: 'switch-dimmer-3',\n        timeoutMin: 1,\n        turn: 'on',\n    }, {\n        src: ['pir/hallway-3', 'contact/entrance'],\n        target: 'switch-dimmer-10',\n        timeoutMin: 3,\n        turn: 'on',\n    }, {\n        src: ['pir/small-bathroom'],\n        target: 'switch-onoff-3',\n        timeoutMin: 15,\n        turn: 'off',\n    }\n]\n\nconst name = msg.topic.split('/').slice(1).join('/');\nconst found = targetByPir.find(t => t.src.includes(name));\nif (!found) {\n    return;\n}\n\nconst p = msg.payload;\nif (found.turn === 'on') {\n    let turnOn = false;\n\n    if ('occupancy' in p) {\n        const last = context.get(`last-${name}`);\n        if (p.occupancy || last) {\n            turnOn = true;\n        }\n        context.set(`last-${name}`, p.occupancy);\n    }\n\n    if ('contact' in p) {\n        const last = context.get(`last-${name}`);\n        if (p.contact !== last) {\n            turnOn = true;\n        }\n        context.set(`last-${name}`, p.contact);\n    }\n\n    if (turnOn) {\n        return {\n            payload: {\n                'brightness': 100,\n                'for': found.timeoutMin * 60,\n            },\n            topic: `ha-switch/${found.target}/state/set`,\n            retain: false,\n        };\n    }\n} else if (found.turn === 'off') {\n    if (p.occupancy) {\n        return [, {\n            reset: true,\n            topic: `ha-switch/${found.target}/state/set`,\n        }];\n    } else {\n        return [, {\n            payload: {\n                on: false\n            },\n            delay: found.timeoutMin * 60 * 1000,\n            topic: `ha-switch/${found.target}/state/set`,\n            retain: true,\n        }];\n    }\n}\n",
         "outputs": 2,
         "timeout": "",
         "noerr": 0,
@@ -5932,7 +6482,7 @@
         "type": "function",
         "z": "67e1c6f6bd2fab57",
         "name": "map",
-        "func": "const valueName = msg.topic.split('/').slice(-1)[0];\nif (typeof msg.payload.occupancy !== 'boolean') {\n    return;\n}\n\nreturn {\n    payload: { [valueName]: msg.payload.occupancy ? 1 : 0 },\n    measurement: 'occupancy',\n};",
+        "func": "const valueName = msg.topic.split('/').slice(-1)[0];\nconst msgs = [];\n\nif (typeof msg.payload.occupancy === 'boolean') {\n    msgs.push({\n        payload: { [valueName]: msg.payload.occupancy ? 1 : 0 },\n        measurement: 'occupancy',\n    });\n}\n\nif (typeof msg.payload.illuminance === 'number') {\n    msgs.push({\n        payload: { [valueName]: msg.payload.illuminance },\n        measurement: 'illuminance',\n    });\n}\n\nreturn [msgs];",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -6436,6 +6986,27 @@
         ]
     },
     {
+        "id": "f776e992d6a065f5",
+        "type": "mqtt in",
+        "z": "67e1c6f6bd2fab57",
+        "name": "",
+        "topic": "ha-vent/state",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "f569d34c.8c7ed",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 900,
+        "wires": [
+            [
+                "b6abe71a4ff1687d"
+            ]
+        ]
+    },
+    {
         "id": "c0db6845e0edacfa",
         "type": "mqtt in",
         "z": "86c7bfe22f048e9c",
@@ -6605,7 +7176,7 @@
         "commandonlycolor": false,
         "turnonwhenbrightnesschanges": false,
         "passthru": false,
-        "errorifstateunchaged": false,
+        "errorifstateunchaged": true,
         "statepayload": true,
         "brightnessoverride": "",
         "roomhint": "Living Room",
@@ -6673,7 +7244,6 @@
         "id": "c9f86e52c399a757",
         "type": "noraf-light",
         "z": "86c7bfe22f048e9c",
-        "d": true,
         "devicename": "Power 3",
         "lightcolor": false,
         "brightnesscontrol": false,
@@ -6704,5 +7274,215 @@
                 "724ffcb347b98a4b"
             ]
         ]
+    },
+    {
+        "id": "100e31a6d22519ca",
+        "type": "inject",
+        "z": "86c7bfe22f048e9c",
+        "d": true,
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "00 16 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "cmnd/power_t3/Power",
+        "payload": "ON",
+        "payloadType": "str",
+        "x": 200,
+        "y": 400,
+        "wires": [
+            [
+                "b0855dd761eb9773"
+            ]
+        ]
+    },
+    {
+        "id": "b0855dd761eb9773",
+        "type": "delay",
+        "z": "86c7bfe22f048e9c",
+        "d": true,
+        "name": "",
+        "pauseType": "random",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "10",
+        "randomLast": "60",
+        "randomUnits": "minutes",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 440,
+        "y": 420,
+        "wires": [
+            [
+                "45de3d575fa6a2fe"
+            ]
+        ]
+    },
+    {
+        "id": "c4740cef8210c17e",
+        "type": "inject",
+        "z": "86c7bfe22f048e9c",
+        "d": true,
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "00 07 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "cmnd/power_t3/Power",
+        "payload": "OFF",
+        "payloadType": "str",
+        "x": 200,
+        "y": 440,
+        "wires": [
+            [
+                "b0855dd761eb9773"
+            ]
+        ]
+    },
+    {
+        "id": "45de3d575fa6a2fe",
+        "type": "mqtt out",
+        "z": "86c7bfe22f048e9c",
+        "d": true,
+        "name": "",
+        "topic": "",
+        "qos": "",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "f569d34c.8c7ed",
+        "x": 590,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "372b662bbbeed24b",
+        "type": "inject",
+        "z": "86c7bfe22f048e9c",
+        "d": true,
+        "name": "hol:on",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "00 18 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "ha-switch/switch-dimmer-3/state/set",
+        "payload": "{\"on\":true}",
+        "payloadType": "json",
+        "x": 160,
+        "y": 520,
+        "wires": [
+            [
+                "07a01e5055ca9c81"
+            ]
+        ]
+    },
+    {
+        "id": "67f8da9e71b9f7b5",
+        "type": "inject",
+        "z": "86c7bfe22f048e9c",
+        "d": true,
+        "name": "hol:off",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "00 21 * * *",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "ha-switch/switch-dimmer-3/state/set",
+        "payload": "{\"on\":false}",
+        "payloadType": "json",
+        "x": 160,
+        "y": 560,
+        "wires": [
+            [
+                "07a01e5055ca9c81"
+            ]
+        ]
+    },
+    {
+        "id": "07a01e5055ca9c81",
+        "type": "delay",
+        "z": "86c7bfe22f048e9c",
+        "d": true,
+        "name": "",
+        "pauseType": "random",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "10",
+        "randomLast": "60",
+        "randomUnits": "minutes",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 340,
+        "y": 540,
+        "wires": [
+            [
+                "42e405e57785c4bf"
+            ]
+        ]
+    },
+    {
+        "id": "42e405e57785c4bf",
+        "type": "mqtt out",
+        "z": "86c7bfe22f048e9c",
+        "d": true,
+        "name": "",
+        "topic": "",
+        "qos": "",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "f569d34c.8c7ed",
+        "x": 490,
+        "y": 540,
+        "wires": []
     }
 ]
