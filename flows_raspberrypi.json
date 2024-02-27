@@ -136,7 +136,7 @@
     {
         "id": "e18cedd70c93f843",
         "type": "ui_tab",
-        "name": "PV",
+        "name": "pv",
         "icon": "wb_sunny",
         "disabled": false,
         "hidden": false
@@ -318,6 +318,94 @@
         "className": ""
     },
     {
+        "id": "1e8ff3e2e8219b0c",
+        "type": "ui_group",
+        "name": "stats (all time)",
+        "tab": "e18cedd70c93f843",
+        "order": 8,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "dcaffe26d1b1ca2d",
+        "type": "ui_tab",
+        "name": "hvac",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "a8684bfbe26d43a5",
+        "type": "ui_group",
+        "name": "control",
+        "tab": "dcaffe26d1b1ca2d",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "4782433439596f2f",
+        "type": "ui_group",
+        "name": "current",
+        "tab": "dcaffe26d1b1ca2d",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "af294a26a01766cc",
+        "type": "ui_group",
+        "name": "stats (-31 days)",
+        "tab": "e18cedd70c93f843",
+        "order": 9,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "ea0310ce54c9a43e",
+        "type": "google-notify-config",
+        "ipaddress": "192.168.68.233",
+        "name": "Google Home Mini.Garage speaker",
+        "language": "en",
+        "playVolumeLevel": "30",
+        "speakSlow": false,
+        "mediaServerUrl": "",
+        "mediaServerPort": "8098",
+        "cacheFolder": "/tmp"
+    },
+    {
+        "id": "dc32c722d4c93816",
+        "type": "google-notify-config",
+        "ipaddress": "192.168.68.191",
+        "name": "Google Nest Hub.Kitchen display",
+        "language": "en",
+        "playVolumeLevel": "20",
+        "speakSlow": true,
+        "mediaServerUrl": "",
+        "mediaServerPort": "8098",
+        "cacheFolder": "/tmp"
+    },
+    {
+        "id": "75f9992b7ac7471e",
+        "type": "google-notify-config",
+        "ipaddress": "192.168.68.72",
+        "name": "Google Home Mini.Bedroom speaker",
+        "language": "en",
+        "playVolumeLevel": "20",
+        "speakSlow": true,
+        "mediaServerUrl": "",
+        "mediaServerPort": "8098",
+        "cacheFolder": "/tmp"
+    },
+    {
         "id": "719187bb860811ae",
         "type": "nibe-register",
         "z": "2de9a494ac1d6c71",
@@ -330,7 +418,7 @@
         "topic": "ventilation/speed-gq3",
         "filter": false,
         "x": 930,
-        "y": 920,
+        "y": 1340,
         "wires": [
             [
                 "b3dde27634dd2e4c"
@@ -350,10 +438,11 @@
         "topic": "ventilation/speed-gq2",
         "filter": false,
         "x": 930,
-        "y": 860,
+        "y": 1280,
         "wires": [
             [
-                "b3dde27634dd2e4c"
+                "b3dde27634dd2e4c",
+                "1896aecdf780a7aa"
             ]
         ]
     },
@@ -369,8 +458,8 @@
         "force": false,
         "topic": "living/setpoint",
         "filter": true,
-        "x": 240,
-        "y": 340,
+        "x": 840,
+        "y": 760,
         "wires": [
             [
                 "34e4236db446efad"
@@ -389,8 +478,8 @@
         "force": false,
         "topic": "bedroom/setpoint",
         "filter": true,
-        "x": 250,
-        "y": 400,
+        "x": 850,
+        "y": 820,
         "wires": [
             [
                 "34e4236db446efad"
@@ -409,11 +498,12 @@
         "force": false,
         "topic": "living/temperature",
         "filter": false,
-        "x": 590,
-        "y": 400,
+        "x": 130,
+        "y": 840,
         "wires": [
             [
-                "69a2359c3bf3f716"
+                "69a2359c3bf3f716",
+                "53311fb42f728855"
             ]
         ]
     },
@@ -424,13 +514,13 @@
         "name": "More hot water",
         "register": "30697",
         "nibe": "89e46ce21c7f5128",
-        "interval": "5",
+        "interval": "300",
         "timeout": "5",
         "force": true,
         "topic": "more-hot-water",
         "filter": true,
         "x": 220,
-        "y": 220,
+        "y": 280,
         "wires": [
             [
                 "1cd1125ce32c5aca"
@@ -457,8 +547,8 @@
         "filter": true,
         "asyncCmd": false,
         "outputs": 1,
-        "x": 610,
-        "y": 160,
+        "x": 570,
+        "y": 200,
         "wires": [
             [
                 "660188df0186d9af"
@@ -470,19 +560,21 @@
         "type": "function",
         "z": "2de9a494ac1d6c71",
         "name": "map",
-        "func": "return {\n    payload: msg.payload.value,\n    topic: msg.topic,\n};",
-        "outputs": 1,
+        "func": "return [{\n    payload: msg.payload.value >= 1 ? 1 : 0,\n    topic: msg.topic,\n}, {\n    payload: msg.payload.value,\n    topic: msg.topic,\n}];",
+        "outputs": 2,
         "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 425,
-        "y": 220,
+        "x": 435,
+        "y": 280,
         "wires": [
             [
-                "f07580f20f9c8e5f",
-                "cc668fc7fdbd504b"
+                "f07580f20f9c8e5f"
+            ],
+            [
+                "8f15ab904a1f47fa"
             ]
         ],
         "l": false
@@ -507,8 +599,8 @@
         "filter": true,
         "asyncCmd": false,
         "outputs": 1,
-        "x": 600,
-        "y": 220,
+        "x": 560,
+        "y": 260,
         "wires": [
             [
                 "660188df0186d9af"
@@ -522,7 +614,8 @@
         "name": "link in 8",
         "links": [
             "660188df0186d9af",
-            "795f23756f1e446b"
+            "795f23756f1e446b",
+            "7d7734e07932bc3c"
         ],
         "x": 75,
         "y": 160,
@@ -530,7 +623,7 @@
             [
                 "99b78cb07dd4c043",
                 "8c036ed2e6442271",
-                "4412eeb85ec5796a"
+                "eb6e60ce1508eee2"
             ]
         ]
     },
@@ -543,8 +636,8 @@
         "links": [
             "9f8ecdb12e5082f5"
         ],
-        "x": 785,
-        "y": 160,
+        "x": 775,
+        "y": 200,
         "wires": []
     },
     {
@@ -564,7 +657,7 @@
         "bytopic": "all",
         "topic": "topic",
         "outputs": 1,
-        "x": 450,
+        "x": 490,
         "y": 40,
         "wires": [
             [
@@ -584,8 +677,8 @@
         "force": false,
         "topic": "living/setpoint",
         "filter": true,
-        "x": 240,
-        "y": 460,
+        "x": 840,
+        "y": 880,
         "wires": [
             [
                 "34e4236db446efad"
@@ -604,8 +697,8 @@
         "force": false,
         "topic": "bedroom/setpoint",
         "filter": true,
-        "x": 250,
-        "y": 520,
+        "x": 850,
+        "y": 940,
         "wires": [
             [
                 "34e4236db446efad"
@@ -621,8 +714,8 @@
         "name": "living",
         "modes": "off,heat,cool",
         "unit": "C",
-        "rangeMin": "19",
-        "rangeMax": "24",
+        "rangeMin": "18",
+        "rangeMax": "25",
         "topic": "living",
         "passthru": false,
         "commandOnly": false,
@@ -633,7 +726,7 @@
         "twofactorpin": "",
         "filter": true,
         "x": 270,
-        "y": 600,
+        "y": 1020,
         "wires": [
             [
                 "a5df44a963725282"
@@ -652,11 +745,12 @@
         "force": false,
         "topic": "humidity",
         "filter": false,
-        "x": 620,
-        "y": 340,
+        "x": 160,
+        "y": 780,
         "wires": [
             [
-                "69a2359c3bf3f716"
+                "69a2359c3bf3f716",
+                "7c06dbcc62e62ed4"
             ]
         ]
     },
@@ -673,7 +767,7 @@
         "finalize": "",
         "libs": [],
         "x": 155,
-        "y": 600,
+        "y": 1020,
         "wires": [
             [
                 "e56377cc659b2c95",
@@ -691,8 +785,8 @@
         "name": "bedroom",
         "modes": "off,heat,cool",
         "unit": "C",
-        "rangeMin": "19",
-        "rangeMax": "24",
+        "rangeMin": "18",
+        "rangeMax": "25",
         "topic": "bedroom",
         "passthru": false,
         "commandOnly": false,
@@ -703,7 +797,7 @@
         "twofactorpin": "",
         "filter": true,
         "x": 280,
-        "y": 660,
+        "y": 1080,
         "wires": [
             [
                 "a5df44a963725282"
@@ -723,7 +817,7 @@
         "finalize": "",
         "libs": [],
         "x": 415,
-        "y": 600,
+        "y": 1020,
         "wires": [
             [
                 "847b62e1d562ef8b"
@@ -741,7 +835,7 @@
             "50badacef6b71f47"
         ],
         "x": 605,
-        "y": 600,
+        "y": 1020,
         "wires": []
     },
     {
@@ -750,10 +844,11 @@
         "z": "2de9a494ac1d6c71",
         "name": "link in 10",
         "links": [
-            "61d8d50274c6ed71"
+            "61d8d50274c6ed71",
+            "7d7734e07932bc3c"
         ],
-        "x": 75,
-        "y": 420,
+        "x": 675,
+        "y": 840,
         "wires": [
             [
                 "8a2d91b19d4ef994",
@@ -775,11 +870,12 @@
         "force": false,
         "topic": "bedroom/temperature",
         "filter": false,
-        "x": 600,
-        "y": 460,
+        "x": 140,
+        "y": 900,
         "wires": [
             [
-                "69a2359c3bf3f716"
+                "69a2359c3bf3f716",
+                "f56a62ef10d0d84b"
             ]
         ]
     },
@@ -795,7 +891,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 610,
+        "x": 630,
         "y": 40,
         "wires": [
             [
@@ -819,7 +915,7 @@
         "property": "payload",
         "topi": "topic",
         "x": 510,
-        "y": 600,
+        "y": 1020,
         "wires": [
             [
                 "61d8d50274c6ed71"
@@ -841,7 +937,7 @@
         "org": "home",
         "bucket": "home",
         "x": 300,
-        "y": 1040,
+        "y": 1460,
         "wires": []
     },
     {
@@ -857,7 +953,7 @@
         "finalize": "",
         "libs": [],
         "x": 170,
-        "y": 1040,
+        "y": 1460,
         "wires": [
             [
                 "9d978d4c29e3fede"
@@ -877,7 +973,7 @@
         "topic": "outdoor/temperature-bt1",
         "filter": true,
         "x": 220,
-        "y": 740,
+        "y": 1160,
         "wires": [
             [
                 "7ca97a871eef0253",
@@ -898,7 +994,7 @@
         "finalize": "",
         "libs": [],
         "x": 170,
-        "y": 1080,
+        "y": 1500,
         "wires": [
             [
                 "192c99f16f9eaaee"
@@ -920,7 +1016,7 @@
         "org": "home",
         "bucket": "nibe",
         "x": 300,
-        "y": 1080,
+        "y": 1500,
         "wires": []
     },
     {
@@ -936,7 +1032,7 @@
         "topic": "line/supply-bt2",
         "filter": true,
         "x": 170,
-        "y": 800,
+        "y": 1220,
         "wires": [
             [
                 "7ca97a871eef0253"
@@ -956,7 +1052,7 @@
         "topic": "line/return-bt3",
         "filter": true,
         "x": 170,
-        "y": 860,
+        "y": 1280,
         "wires": [
             [
                 "7ca97a871eef0253"
@@ -976,7 +1072,7 @@
         "topic": "ventilation/supp-air-temperature-bt22",
         "filter": true,
         "x": 560,
-        "y": 800,
+        "y": 1220,
         "wires": [
             [
                 "772ab499b9243a81"
@@ -996,7 +1092,7 @@
         "topic": "ventilation/outdoor-temperature-bt23",
         "filter": true,
         "x": 590,
-        "y": 740,
+        "y": 1160,
         "wires": [
             [
                 "772ab499b9243a81"
@@ -1016,7 +1112,7 @@
         "topic": "ventilation/extract-air-temp-bt21",
         "filter": true,
         "x": 560,
-        "y": 860,
+        "y": 1280,
         "wires": [
             [
                 "772ab499b9243a81"
@@ -1036,7 +1132,7 @@
         "topic": "ventilation/exhaust-air-temp-bt20",
         "filter": true,
         "x": 560,
-        "y": 920,
+        "y": 1340,
         "wires": [
             [
                 "772ab499b9243a81"
@@ -1056,10 +1152,12 @@
         "topic": "operation/priority",
         "filter": false,
         "x": 880,
-        "y": 980,
+        "y": 1460,
         "wires": [
             [
-                "6c724be7f6fd897c"
+                "6c724be7f6fd897c",
+                "cce88af52e63bf82",
+                "b3dde27634dd2e4c"
             ]
         ]
     },
@@ -1068,21 +1166,21 @@
         "type": "function",
         "z": "2de9a494ac1d6c71",
         "name": "Priority",
-        "func": "const map = {\n    '10': 'off',\n    '20': 'hotwater',\n    '30': 'heat',\n    '40': 'pool',\n    '60': 'cooling',\n};\n\nnode.status({ fill: \"blue\", shape: \"dot\", text: map[msg.payload.value] });\nreturn msg;",
+        "func": "const map = {\n    '10': 'off',\n    '20': 'hot water',\n    '30': 'heat',\n    '40': 'pool',\n    '60': 'cooling',\n};\n\nconst mode = map[msg.payload.value];\n\nnode.status(mode);\n\nreturn {\n    payload: mode,\n};",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1040,
-        "y": 980,
+        "x": 1025,
+        "y": 1500,
         "wires": [
             [
-                "cce88af52e63bf82",
-                "b3dde27634dd2e4c"
+                "de81314094c70c91"
             ]
-        ]
+        ],
+        "l": false
     },
     {
         "id": "52532f840d2ce09f",
@@ -1097,7 +1195,7 @@
         "topic": "brine/in-bt10",
         "filter": false,
         "x": 900,
-        "y": 740,
+        "y": 1160,
         "wires": [
             [
                 "b3dde27634dd2e4c"
@@ -1117,7 +1215,7 @@
         "topic": "brine/out-bt11",
         "filter": false,
         "x": 900,
-        "y": 800,
+        "y": 1220,
         "wires": [
             [
                 "b3dde27634dd2e4c"
@@ -1137,7 +1235,7 @@
         "topic": "ventilation/mode",
         "filter": false,
         "x": 550,
-        "y": 980,
+        "y": 1400,
         "wires": [
             [
                 "772ab499b9243a81"
@@ -1161,7 +1259,8 @@
         "wires": [
             [
                 "7e80dd6fcb41cdda",
-                "df27d4e5b15bc14e"
+                "df27d4e5b15bc14e",
+                "c5cf93edc9abdd07"
             ]
         ]
     },
@@ -1177,8 +1276,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 430,
-        "y": 120,
+        "x": 410,
+        "y": 180,
         "wires": [
             [
                 "f0a4665aecc7e7e1"
@@ -1208,8 +1307,8 @@
         "filter": true,
         "asyncCmd": false,
         "outputs": 1,
-        "x": 590,
-        "y": 100,
+        "x": 550,
+        "y": 140,
         "wires": [
             [
                 "660188df0186d9af"
@@ -1229,10 +1328,11 @@
         "topic": "hot-water/charging-bt6",
         "filter": false,
         "x": 190,
-        "y": 920,
+        "y": 1340,
         "wires": [
             [
-                "7ca97a871eef0253"
+                "7ca97a871eef0253",
+                "34d8b09cbd23088f"
             ]
         ]
     },
@@ -1246,7 +1346,7 @@
             "34e4236db446efad"
         ],
         "x": 85,
-        "y": 1040,
+        "y": 1460,
         "wires": [
             [
                 "dc49bf19798833ec"
@@ -1257,14 +1357,14 @@
         "id": "69a2359c3bf3f716",
         "type": "link out",
         "z": "2de9a494ac1d6c71",
-        "name": "link out 17",
+        "name": "temp+humidity",
         "mode": "link",
         "links": [
             "3b13ed9084ac3922",
             "ceabaec499757bb4"
         ],
-        "x": 775,
-        "y": 400,
+        "x": 335,
+        "y": 920,
         "wires": []
     },
     {
@@ -1273,13 +1373,13 @@
         "z": "2de9a494ac1d6c71",
         "name": "link in 20",
         "links": [
-            "69a2359c3bf3f716",
-            "e41d6b0ea38ad5e3",
             "34e4236db446efad",
-            "4495116d6ff821e7"
+            "4495116d6ff821e7",
+            "69a2359c3bf3f716",
+            "e41d6b0ea38ad5e3"
         ],
         "x": 85,
-        "y": 600,
+        "y": 1020,
         "wires": [
             [
                 "25ecd6270bd33719"
@@ -1290,7 +1390,7 @@
         "id": "e41d6b0ea38ad5e3",
         "type": "link out",
         "z": "2de9a494ac1d6c71",
-        "name": "link out 18",
+        "name": "nibe online",
         "mode": "link",
         "links": [
             "ceabaec499757bb4"
@@ -1303,14 +1403,14 @@
         "id": "34e4236db446efad",
         "type": "link out",
         "z": "2de9a494ac1d6c71",
-        "name": "link out 19",
+        "name": "temp. setpoints",
         "mode": "link",
         "links": [
             "3b13ed9084ac3922",
             "ceabaec499757bb4"
         ],
-        "x": 425,
-        "y": 420,
+        "x": 1025,
+        "y": 840,
         "wires": []
     },
     {
@@ -1324,7 +1424,7 @@
             "47ae0eea20515ee1"
         ],
         "x": 415,
-        "y": 740,
+        "y": 1160,
         "wires": []
     },
     {
@@ -1333,12 +1433,12 @@
         "z": "2de9a494ac1d6c71",
         "name": "link in 21",
         "links": [
-            "7ca97a871eef0253",
             "772ab499b9243a81",
+            "7ca97a871eef0253",
             "b3dde27634dd2e4c"
         ],
         "x": 85,
-        "y": 1080,
+        "y": 1500,
         "wires": [
             [
                 "3a75e22cbaeb5f90"
@@ -1356,7 +1456,7 @@
             "47ae0eea20515ee1"
         ],
         "x": 775,
-        "y": 740,
+        "y": 1160,
         "wires": []
     },
     {
@@ -1369,8 +1469,8 @@
             "9443fc43a7aab52a",
             "47ae0eea20515ee1"
         ],
-        "x": 1145,
-        "y": 740,
+        "x": 1095,
+        "y": 1160,
         "wires": []
     },
     {
@@ -1386,7 +1486,7 @@
         "topic": "operation/priority",
         "filter": false,
         "x": 900,
-        "y": 1040,
+        "y": 1400,
         "wires": [
             [
                 "777c440cff6e50f7"
@@ -1406,7 +1506,7 @@
         "finalize": "",
         "libs": [],
         "x": 1060,
-        "y": 1040,
+        "y": 1400,
         "wires": [
             []
         ]
@@ -1423,8 +1523,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1155,
-        "y": 980,
+        "x": 1025,
+        "y": 1460,
         "wires": [
             [
                 "4495116d6ff821e7"
@@ -1436,62 +1536,14 @@
         "id": "4495116d6ff821e7",
         "type": "link out",
         "z": "2de9a494ac1d6c71",
-        "name": "link out 33",
+        "name": "thermostat active mode",
         "mode": "link",
         "links": [
             "ceabaec499757bb4"
         ],
-        "x": 1215,
-        "y": 980,
+        "x": 1075,
+        "y": 1460,
         "wires": []
-    },
-    {
-        "id": "4412eeb85ec5796a",
-        "type": "nibe-register",
-        "z": "2de9a494ac1d6c71",
-        "name": "Bypass recovery",
-        "register": "Bypass during heating (ERS 1)",
-        "nibe": "89e46ce21c7f5128",
-        "interval": "300",
-        "timeout": "5",
-        "force": false,
-        "topic": "bypass-heating-recovery",
-        "filter": true,
-        "x": 220,
-        "y": 280,
-        "wires": [
-            [
-                "1cd1125ce32c5aca"
-            ]
-        ]
-    },
-    {
-        "id": "cc668fc7fdbd504b",
-        "type": "noraf-switch",
-        "z": "2de9a494ac1d6c71",
-        "devicename": "Bypass recovery",
-        "roomhint": "Service Room",
-        "name": "",
-        "passthru": false,
-        "errorifstateunchaged": false,
-        "nora": "f1e538c1.0315f8",
-        "topic": "bypass-heating-recovery",
-        "onvalue": "1",
-        "onvalueType": "num",
-        "offvalue": "0",
-        "offvalueType": "num",
-        "twofactor": "ack",
-        "twofactorpin": "",
-        "filter": true,
-        "asyncCmd": false,
-        "outputs": 1,
-        "x": 600,
-        "y": 280,
-        "wires": [
-            [
-                "660188df0186d9af"
-            ]
-        ]
     },
     {
         "id": "79840687cbc01295",
@@ -1506,7 +1558,7 @@
         "topic": "",
         "actions": [],
         "closeNotification": false,
-        "x": 770,
+        "x": 790,
         "y": 80,
         "wires": [
             []
@@ -1532,10 +1584,1045 @@
         "to": "",
         "reg": false,
         "x": 590,
-        "y": 1060,
+        "y": 1480,
         "wires": [
             []
         ]
+    },
+    {
+        "id": "46fcb561cc16d521",
+        "type": "ui_dropdown",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "label": "vent. mode",
+        "tooltip": "",
+        "place": "Select option",
+        "group": "a8684bfbe26d43a5",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "multiple": false,
+        "options": [
+            {
+                "label": "off",
+                "value": 1,
+                "type": "num"
+            },
+            {
+                "label": "normal",
+                "value": 0,
+                "type": "num"
+            },
+            {
+                "label": "low",
+                "value": 2,
+                "type": "num"
+            },
+            {
+                "label": "high",
+                "value": 3,
+                "type": "num"
+            },
+            {
+                "label": "boost",
+                "value": 4,
+                "type": "num"
+            }
+        ],
+        "payload": "",
+        "topic": "ventilation-mode",
+        "topicType": "str",
+        "className": "equal-space",
+        "x": 630,
+        "y": 80,
+        "wires": [
+            [
+                "660188df0186d9af"
+            ]
+        ]
+    },
+    {
+        "id": "c5cf93edc9abdd07",
+        "type": "function",
+        "z": "2de9a494ac1d6c71",
+        "name": "function 4",
+        "func": "return {\n    payload: msg.payload.value,\n};",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 475,
+        "y": 80,
+        "wires": [
+            [
+                "4308a38a3f98b67d"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "7e188979b4c7dc7c",
+        "type": "ui_text",
+        "z": "2de9a494ac1d6c71",
+        "group": "4782433439596f2f",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "humidity",
+        "format": "{{msg.payload.value}}%",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 460,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "4308a38a3f98b67d",
+        "type": "rbe",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 525,
+        "y": 80,
+        "wires": [
+            [
+                "46fcb561cc16d521"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "7c06dbcc62e62ed4",
+        "type": "rbe",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 335,
+        "y": 800,
+        "wires": [
+            [
+                "7e188979b4c7dc7c",
+                "5b628d2ea4d3b191"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "7adfef4f1054da24",
+        "type": "ui_text",
+        "z": "2de9a494ac1d6c71",
+        "group": "4782433439596f2f",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "living",
+        "format": "{{msg.payload.value}}°C",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 450,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "53311fb42f728855",
+        "type": "rbe",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 335,
+        "y": 840,
+        "wires": [
+            [
+                "7adfef4f1054da24"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "9c92fd2b8c07cccc",
+        "type": "ui_text",
+        "z": "2de9a494ac1d6c71",
+        "group": "4782433439596f2f",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "bedroom",
+        "format": "{{msg.payload.value}}°C",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 460,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "f56a62ef10d0d84b",
+        "type": "rbe",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 335,
+        "y": 880,
+        "wires": [
+            [
+                "9c92fd2b8c07cccc"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "19f31d77ba8ef94d",
+        "type": "ui_text",
+        "z": "2de9a494ac1d6c71",
+        "group": "4782433439596f2f",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "operation mode",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1200,
+        "y": 1500,
+        "wires": []
+    },
+    {
+        "id": "de81314094c70c91",
+        "type": "rbe",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 1075,
+        "y": 1500,
+        "wires": [
+            [
+                "19f31d77ba8ef94d"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "bcec952a1fce8e05",
+        "type": "ui_text",
+        "z": "2de9a494ac1d6c71",
+        "group": "4782433439596f2f",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "hot water",
+        "format": "{{msg.payload.value}}°C",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 340,
+        "y": 1400,
+        "wires": []
+    },
+    {
+        "id": "34d8b09cbd23088f",
+        "type": "rbe",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 235,
+        "y": 1400,
+        "wires": [
+            [
+                "bcec952a1fce8e05"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "6851ce2590b301f2",
+        "type": "ui_text",
+        "z": "2de9a494ac1d6c71",
+        "group": "4782433439596f2f",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "fan speed",
+        "format": "{{msg.payload.value}}%",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1210,
+        "y": 1280,
+        "wires": []
+    },
+    {
+        "id": "1896aecdf780a7aa",
+        "type": "rbe",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 1105,
+        "y": 1280,
+        "wires": [
+            [
+                "6851ce2590b301f2"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "c1759f343a87fbd5",
+        "type": "ui_dropdown",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "label": "bypass recovery (heating)",
+        "tooltip": "",
+        "place": "Select option",
+        "group": "a8684bfbe26d43a5",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "multiple": false,
+        "options": [
+            {
+                "label": "auto",
+                "value": "auto",
+                "type": "str"
+            },
+            {
+                "label": "on",
+                "value": "on",
+                "type": "str"
+            },
+            {
+                "label": "off",
+                "value": "off",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "topic",
+        "topicType": "msg",
+        "className": "equal-space",
+        "x": 470,
+        "y": 600,
+        "wires": [
+            [
+                "82830d4f50d0d8b1"
+            ]
+        ]
+    },
+    {
+        "id": "27d499b6a6e0d7e5",
+        "type": "nibe-register",
+        "z": "2de9a494ac1d6c71",
+        "name": "Bypass during heating",
+        "register": "Bypass during heating (ERS 1)",
+        "nibe": "89e46ce21c7f5128",
+        "interval": "300",
+        "timeout": "5",
+        "force": false,
+        "topic": "",
+        "filter": false,
+        "x": 340,
+        "y": 660,
+        "wires": [
+            [
+                "0cac7e4e32ee3a94"
+            ]
+        ]
+    },
+    {
+        "id": "1895125bc221a5c6",
+        "type": "function",
+        "z": "2de9a494ac1d6c71",
+        "name": "decide",
+        "func": "/** @type {'auto'|'on'|'off'} */\nconst bypassRecoveryMode = flow.get('bypassRecoveryMode') ?? 'auto';\n/** @type number */\nconst humidity = flow.get('humidity') ?? 0;\nif (humidity < 0 || humidity > 100) {\n    return;\n}\n\nconst outdoorTemperature = global.get('outdoorTemperature');\nconst stopRecovery = flow.get('currentBypassRecovery') === 1;\nconst target = flow.get('targetHumidity') ?? 45;\nconst histerezis = 1;\nconst compareTo = target + (stopRecovery ? 0 : 1) * histerezis;\n\n/** @type boolean */\nlet shouldStopRecovery;\n\nif (bypassRecoveryMode === 'auto') {\n    shouldStopRecovery = outdoorTemperature < 10\n        ? humidity >= compareTo\n        : false;\n} else {\n    shouldStopRecovery = bypassRecoveryMode === 'on';\n}\n\nnode.status({\n    fill: shouldStopRecovery ? 'red' : \"blue\",\n    shape: \"dot\",\n    text: `recovery ${shouldStopRecovery ? 'off' : 'on'}`,\n});\n\nreturn {\n    payload: shouldStopRecovery ? 1 : 0,\n};\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 170,
+        "y": 660,
+        "wires": [
+            [
+                "27d499b6a6e0d7e5"
+            ]
+        ]
+    },
+    {
+        "id": "a89a7d1a69791e64",
+        "type": "inject",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "5",
+        "topic": "",
+        "payload": "bypassRecoveryMode",
+        "payloadType": "flow",
+        "x": 200,
+        "y": 600,
+        "wires": [
+            [
+                "c1759f343a87fbd5"
+            ]
+        ]
+    },
+    {
+        "id": "82830d4f50d0d8b1",
+        "type": "change",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "bypassRecoveryMode",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 750,
+        "y": 600,
+        "wires": [
+            [
+                "b6935da713247650"
+            ]
+        ]
+    },
+    {
+        "id": "5b628d2ea4d3b191",
+        "type": "change",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "humidity",
+                "pt": "flow",
+                "to": "payload.value",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 480,
+        "y": 760,
+        "wires": [
+            [
+                "b7753e62e5172138"
+            ]
+        ]
+    },
+    {
+        "id": "a2fc284adb73a57c",
+        "type": "rbe",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": true,
+        "property": "payload",
+        "topi": "topic",
+        "x": 525,
+        "y": 660,
+        "wires": [
+            [
+                "f1e2ba3b1ad0334a",
+                "e4f37dabebfec6aa"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "f1e2ba3b1ad0334a",
+        "type": "change",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "currentBypassRecovery",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 710,
+        "y": 660,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0cac7e4e32ee3a94",
+        "type": "function",
+        "z": "2de9a494ac1d6c71",
+        "name": "function 6",
+        "func": "return {\n    payload: msg.payload.value,\n};",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 475,
+        "y": 660,
+        "wires": [
+            [
+                "a2fc284adb73a57c"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "fd568b4575571252",
+        "type": "ui_slider",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "label": "target humidity",
+        "tooltip": "",
+        "group": "a8684bfbe26d43a5",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "outs": "end",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": "30",
+        "max": "60",
+        "step": 1,
+        "className": "",
+        "x": 440,
+        "y": 540,
+        "wires": [
+            [
+                "0bec653360a02da9"
+            ]
+        ]
+    },
+    {
+        "id": "0bec653360a02da9",
+        "type": "change",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "targetHumidity",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 720,
+        "y": 540,
+        "wires": [
+            [
+                "b6935da713247650"
+            ]
+        ]
+    },
+    {
+        "id": "bb63d55c54c78a93",
+        "type": "inject",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "5",
+        "topic": "",
+        "payload": "targetHumidity",
+        "payloadType": "flow",
+        "x": 170,
+        "y": 540,
+        "wires": [
+            [
+                "fd568b4575571252"
+            ]
+        ]
+    },
+    {
+        "id": "e4f37dabebfec6aa",
+        "type": "ui_text",
+        "z": "2de9a494ac1d6c71",
+        "group": "4782433439596f2f",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "bypass recovery",
+        "format": "{{msg.payload ? 'on' : 'off'}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 660,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "b6935da713247650",
+        "type": "link out",
+        "z": "2de9a494ac1d6c71",
+        "name": "link out 35",
+        "mode": "link",
+        "links": [
+            "10d36d8a03faef1a"
+        ],
+        "x": 955,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "10d36d8a03faef1a",
+        "type": "link in",
+        "z": "2de9a494ac1d6c71",
+        "name": "link in 35",
+        "links": [
+            "b6935da713247650",
+            "b7753e62e5172138"
+        ],
+        "x": 75,
+        "y": 660,
+        "wires": [
+            [
+                "1895125bc221a5c6"
+            ]
+        ]
+    },
+    {
+        "id": "b7753e62e5172138",
+        "type": "link out",
+        "z": "2de9a494ac1d6c71",
+        "name": "link out 36",
+        "mode": "link",
+        "links": [
+            "10d36d8a03faef1a"
+        ],
+        "x": 595,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "eb6e60ce1508eee2",
+        "type": "nibe-register",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "register": "Hot water demand mode",
+        "nibe": "89e46ce21c7f5128",
+        "interval": "300",
+        "timeout": "5",
+        "force": false,
+        "topic": "hot-water-demand",
+        "filter": true,
+        "x": 250,
+        "y": 380,
+        "wires": [
+            [
+                "afe81ebbf0f87807"
+            ]
+        ]
+    },
+    {
+        "id": "02ce6201851d30ac",
+        "type": "ui_dropdown",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "label": "hot water demand",
+        "tooltip": "",
+        "place": "Select option",
+        "group": "a8684bfbe26d43a5",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "multiple": false,
+        "options": [
+            {
+                "label": "small",
+                "value": 0,
+                "type": "num"
+            },
+            {
+                "label": "medium",
+                "value": 1,
+                "type": "num"
+            },
+            {
+                "label": "large",
+                "value": 2,
+                "type": "num"
+            },
+            {
+                "label": "smart",
+                "value": "4",
+                "type": "str"
+            }
+        ],
+        "payload": "",
+        "topic": "hot-water-demand",
+        "topicType": "str",
+        "className": "equal-space",
+        "x": 570,
+        "y": 380,
+        "wires": [
+            [
+                "660188df0186d9af"
+            ]
+        ]
+    },
+    {
+        "id": "afe81ebbf0f87807",
+        "type": "function",
+        "z": "2de9a494ac1d6c71",
+        "name": "map",
+        "func": "return {\n    payload: msg.payload.value,\n    topic: msg.topic,\n};",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 435,
+        "y": 380,
+        "wires": [
+            [
+                "02ce6201851d30ac"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "8f15ab904a1f47fa",
+        "type": "ui_dropdown",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "label": "more hot water",
+        "tooltip": "",
+        "place": "Select option",
+        "group": "a8684bfbe26d43a5",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "multiple": false,
+        "options": [
+            {
+                "label": "off",
+                "value": 0,
+                "type": "num"
+            },
+            {
+                "label": "1h",
+                "value": 1,
+                "type": "num"
+            },
+            {
+                "label": "one time",
+                "value": 2,
+                "type": "num"
+            },
+            {
+                "label": "3h",
+                "value": 3,
+                "type": "num"
+            },
+            {
+                "label": "6h",
+                "value": 6,
+                "type": "num"
+            },
+            {
+                "label": "12h",
+                "value": 12,
+                "type": "num"
+            },
+            {
+                "label": "24h",
+                "value": 24,
+                "type": "num"
+            },
+            {
+                "label": "48h",
+                "value": 48,
+                "type": "num"
+            }
+        ],
+        "payload": "",
+        "topic": "more-hot-water",
+        "topicType": "str",
+        "className": "equal-space",
+        "x": 560,
+        "y": 320,
+        "wires": [
+            [
+                "660188df0186d9af"
+            ]
+        ]
+    },
+    {
+        "id": "5822e7dc66286433",
+        "type": "nibe-register",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "register": "Heating offset climate system 1",
+        "nibe": "89e46ce21c7f5128",
+        "interval": "300",
+        "timeout": "5",
+        "force": false,
+        "topic": "climate-1",
+        "filter": true,
+        "x": 1190,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ea99da76979117dc",
+        "type": "nibe-register",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "register": "Heating offset climate system 2",
+        "nibe": "89e46ce21c7f5128",
+        "interval": "300",
+        "timeout": "5",
+        "force": false,
+        "topic": "climate-2",
+        "filter": true,
+        "x": 1190,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7a718bf4f4e4dca5",
+        "type": "nibe-register",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "register": "Heating offset climate system 3",
+        "nibe": "89e46ce21c7f5128",
+        "interval": "300",
+        "timeout": "5",
+        "force": false,
+        "topic": "climate-3",
+        "filter": true,
+        "x": 1190,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d9397a1c58ee36eb",
+        "type": "function",
+        "z": "2de9a494ac1d6c71",
+        "name": "map",
+        "func": "const regular = [1, 1, 0];\nconst offset = [3, 0, 3];\nconst shouldIncrease = !!msg.payload;\n\nreturn [[\n    ...regular.map((v, index) => ({\n        payload: shouldIncrease ? v + offset[index] : v,\n        topic: `climate-${index + 1}`\n    })),\n    {\n        topic: 'bedroom/setpoint',\n        payload: shouldIncrease ? 25 : 21.5\n    },\n    {\n        topic: 'more-hot-water',\n        payload: shouldIncrease ? 6 : 0,\n    }\n]];",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 930,
+        "y": 460,
+        "wires": [
+            [
+                "5822e7dc66286433",
+                "ea99da76979117dc",
+                "7a718bf4f4e4dca5",
+                "7d7734e07932bc3c"
+            ]
+        ]
+    },
+    {
+        "id": "8da99f75ea38eea5",
+        "type": "inject",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "true",
+        "payloadType": "bool",
+        "x": 770,
+        "y": 440,
+        "wires": [
+            [
+                "d9397a1c58ee36eb"
+            ]
+        ]
+    },
+    {
+        "id": "5d8a5abee4d5a5b8",
+        "type": "inject",
+        "z": "2de9a494ac1d6c71",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "false",
+        "payloadType": "bool",
+        "x": 770,
+        "y": 480,
+        "wires": [
+            [
+                "d9397a1c58ee36eb"
+            ]
+        ]
+    },
+    {
+        "id": "7d7734e07932bc3c",
+        "type": "link out",
+        "z": "2de9a494ac1d6c71",
+        "name": "link out 37",
+        "mode": "link",
+        "links": [
+            "50badacef6b71f47",
+            "9f8ecdb12e5082f5"
+        ],
+        "x": 1075,
+        "y": 580,
+        "wires": []
     },
     {
         "id": "5bb98af947157223",
@@ -2858,6 +3945,7 @@
         "id": "4c24a422c018775f",
         "type": "noraf-openclose",
         "z": "7d41aab9fd0b6a3e",
+        "d": true,
         "devicename": "Human Gate",
         "roomhint": "Outside",
         "name": "",
@@ -3355,12 +4443,12 @@
         "id": "8755301a8c241477",
         "type": "mpp-input",
         "z": "d02cf25fa8114475",
-        "name": "mpp general status",
+        "name": "general",
         "mpp": "50383ae4cbb82921",
         "interval": "2",
         "timeout": "2",
         "query": "GeneralStatus",
-        "x": 130,
+        "x": 90,
         "y": 140,
         "wires": [
             [
@@ -3374,12 +4462,12 @@
         "id": "0cb2bd44a8edc2d3",
         "type": "mpp-input",
         "z": "d02cf25fa8114475",
-        "name": "mpp power status",
+        "name": "power",
         "mpp": "50383ae4cbb82921",
         "interval": "2",
         "timeout": "2",
         "query": "PowerStatus",
-        "x": 130,
+        "x": 90,
         "y": 200,
         "wires": [
             [
@@ -3404,7 +4492,7 @@
         "retentionPolicyV18Flux": "",
         "org": "home",
         "bucket": "power",
-        "x": 470,
+        "x": 390,
         "y": 120,
         "wires": []
     },
@@ -3420,7 +4508,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 330,
+        "x": 250,
         "y": 120,
         "wires": [
             [
@@ -3440,7 +4528,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 330,
+        "x": 250,
         "y": 220,
         "wires": [
             [
@@ -3461,7 +4549,7 @@
         "topic": "",
         "actions": [],
         "closeNotification": false,
-        "x": 810,
+        "x": 830,
         "y": 320,
         "wires": [
             []
@@ -3484,7 +4572,7 @@
         "bytopic": "all",
         "topic": "topic",
         "outputs": 1,
-        "x": 340,
+        "x": 260,
         "y": 320,
         "wires": [
             [
@@ -3504,7 +4592,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 520,
+        "x": 440,
         "y": 320,
         "wires": [
             [
@@ -3524,7 +4612,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 360,
+        "x": 280,
         "y": 60,
         "wires": [
             [
@@ -3544,11 +4632,11 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 380,
+        "x": 300,
         "y": 280,
         "wires": [
             [
-                "8bb4278aca29cc84"
+                "6a88550f5db42499"
             ]
         ]
     },
@@ -3561,7 +4649,7 @@
         "width": 0,
         "height": 0,
         "name": "",
-        "label": "Voltage",
+        "label": "voltage",
         "format": "{{msg.payload}}V",
         "layout": "row-spread",
         "className": "",
@@ -3569,7 +4657,7 @@
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 510,
+        "x": 520,
         "y": 540,
         "wires": []
     },
@@ -3611,7 +4699,7 @@
         "width": 0,
         "height": 0,
         "name": "",
-        "label": "Capacity",
+        "label": "capacity",
         "format": "{{msg.payload}}%",
         "layout": "row-spread",
         "className": "",
@@ -3619,7 +4707,7 @@
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 660,
+        "x": 1080,
         "y": 60,
         "wires": []
     },
@@ -3632,7 +4720,7 @@
         "width": 0,
         "height": 0,
         "name": "",
-        "label": "Current",
+        "label": "current",
         "format": "{{msg.payload}}A",
         "layout": "row-spread",
         "className": "",
@@ -3640,7 +4728,7 @@
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 510,
+        "x": 520,
         "y": 580,
         "wires": []
     },
@@ -3685,7 +4773,7 @@
         "width": 0,
         "height": 0,
         "name": "",
-        "label": "Status",
+        "label": "status",
         "format": "{{msg.payload}}",
         "layout": "row-spread",
         "className": "",
@@ -3693,7 +4781,7 @@
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 500,
+        "x": 510,
         "y": 820,
         "wires": []
     },
@@ -3706,7 +4794,7 @@
         "width": 0,
         "height": 0,
         "name": "",
-        "label": "Conversion",
+        "label": "conversion",
         "format": "{{msg.payload}}",
         "layout": "row-spread",
         "className": "",
@@ -3714,7 +4802,7 @@
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 520,
+        "x": 530,
         "y": 860,
         "wires": []
     },
@@ -3722,13 +4810,13 @@
         "id": "9ae24bafaa9eeaae",
         "type": "link out",
         "z": "d02cf25fa8114475",
-        "name": "link out 29",
+        "name": "inverter general status",
         "mode": "link",
         "links": [
-            "4893dd7930bbba57",
-            "0120f22e197cc1f6"
+            "0120f22e197cc1f6",
+            "4893dd7930bbba57"
         ],
-        "x": 295,
+        "x": 215,
         "y": 180,
         "wires": []
     },
@@ -3752,13 +4840,13 @@
         "id": "bce547419e98f9f9",
         "type": "link out",
         "z": "d02cf25fa8114475",
-        "name": "link out 30",
+        "name": "inverter power status",
         "mode": "link",
         "links": [
-            "600938fcf232ad14",
-            "0120f22e197cc1f6"
+            "0120f22e197cc1f6",
+            "600938fcf232ad14"
         ],
-        "x": 365,
+        "x": 285,
         "y": 180,
         "wires": []
     },
@@ -3783,11 +4871,11 @@
         "type": "ui_text",
         "z": "d02cf25fa8114475",
         "group": "9d1871108d73a07a",
-        "order": 2,
+        "order": 3,
         "width": 0,
         "height": 0,
         "name": "",
-        "label": "Battery",
+        "label": "battery",
         "format": "{{msg.payload}}W",
         "layout": "row-spread",
         "className": "",
@@ -3822,7 +4910,7 @@
         "type": "function",
         "z": "d02cf25fa8114475",
         "name": "connect grid?",
-        "func": "const isGridConnected = context.get('gridConnected') ?? false;\n\nlet batteryCurrent = context.get('batteryCurrent');\nlet batteryVoltage = context.get('batteryVoltage');\nlet solarPower = context.get('solarPower');\n/** @type {'auto'|'connect'|'disconnect'} */\nlet gridConnect = flow.get('gridConnect') ?? 'auto';\nconst batteryCapacity = global.get('batteryCapacity');\n\nif (typeof msg.payload?.battery?.current === 'number') {\n    const currentBatteryCurrent = msg.payload.battery.current;\n    if (currentBatteryCurrent !== batteryCurrent) {\n        context.set('batteryCurrent', batteryCurrent = currentBatteryCurrent);\n    }\n}\n\nif (typeof msg.payload?.battery?.voltage === 'number') {\n    const currentBatteryVoltage = msg.payload.battery.voltage;\n    if (currentBatteryVoltage !== batteryVoltage) {\n        context.set('batteryVoltage', batteryVoltage = currentBatteryVoltage);\n    }\n}\n\nif (typeof msg.payload?.solarInput?.power1 === 'number') {\n    const currentSolarPower = msg.payload.solarInput.power1 + msg.payload.solarInput.power2;\n    if (currentSolarPower !== solarPower) {\n        context.set('solarPower', solarPower = currentSolarPower);\n    }\n}\n\nif (typeof batteryCurrent !== 'number' ||\n    typeof batteryCapacity !== 'number' ||\n    typeof solarPower !== 'number' ||\n    typeof batteryVoltage !== 'number') {\n    return;\n}\n\nlet shouldConnectGrid;\n\nif (gridConnect === 'auto') {\n    if (!isGridConnected) {\n        shouldConnectGrid = batteryVoltage < 48;\n    } else {\n        const shouldDisconnectGrid =\n            (solarPower > 5000 || batteryCurrent > 50) && batteryCapacity > 40 ||\n            batteryCapacity >= 70;\n\n        shouldConnectGrid = !shouldDisconnectGrid;\n    }\n} else {\n    shouldConnectGrid = gridConnect === 'connect';\n}\n\nnode.status({\n    fill: shouldConnectGrid ? 'blue' : 'yellow',\n    text: `${shouldConnectGrid ? 'yes' : 'nope'} - ${gridConnect === 'auto' ? 'auto' : 'manual'}`,\n});\n\nif (shouldConnectGrid !== isGridConnected) {\n    const at = new Date().toLocaleString();\n    context.set('gridConnected', shouldConnectGrid);\n    return [\n        {\n            payload: shouldConnectGrid ? 'on' : 'off'\n        },\n        {\n            payload: {\n                tag: \"grid-connection\",\n                title: \"Grid connection\",\n                body: `Grid ${shouldConnectGrid ? 'connected' : 'disconnected'} ${gridConnect === 'auto' ? '' : '(manual)'}, at ${at}`,\n            }\n        }\n    ];\n}\n",
+        "func": "const isGridConnected = flow.get('gridConnected') ?? false;\n\nlet batteryCurrent = context.get('batteryCurrent');\nlet batteryVoltage = context.get('batteryVoltage');\nlet solarPower = context.get('solarPower');\n/** @type {'auto'|'connect'|'disconnect'} */\nlet gridConnect = flow.get('gridConnect') ?? 'auto';\nconst batteryCapacity = global.get('batteryCapacity');\n\nif (typeof msg.payload?.battery?.current === 'number') {\n    const currentBatteryCurrent = msg.payload.battery.current;\n    if (currentBatteryCurrent !== batteryCurrent) {\n        context.set('batteryCurrent', batteryCurrent = currentBatteryCurrent);\n    }\n}\n\nif (typeof msg.payload?.battery?.voltage === 'number') {\n    const currentBatteryVoltage = msg.payload.battery.voltage;\n    if (currentBatteryVoltage !== batteryVoltage) {\n        context.set('batteryVoltage', batteryVoltage = currentBatteryVoltage);\n    }\n}\n\nif (typeof msg.payload?.solarInput?.power1 === 'number') {\n    const currentSolarPower = msg.payload.solarInput.power1 + msg.payload.solarInput.power2;\n    if (currentSolarPower !== solarPower) {\n        context.set('solarPower', solarPower = currentSolarPower);\n    }\n}\n\nif (typeof batteryCurrent !== 'number' ||\n    typeof batteryCapacity !== 'number' ||\n    typeof solarPower !== 'number' ||\n    typeof batteryVoltage !== 'number') {\n    return;\n}\n\nlet shouldConnectGrid;\n\nif (gridConnect === 'auto') {\n    if (!isGridConnected) {\n        shouldConnectGrid = batteryVoltage < 48;\n    } else {\n        const shouldDisconnectGrid =\n            (solarPower > 5000 || batteryCurrent > 50) && batteryCapacity > 40 ||\n            batteryCapacity >= 70;\n\n        shouldConnectGrid = !shouldDisconnectGrid;\n    }\n} else {\n    shouldConnectGrid = gridConnect === 'connect';\n}\n\nnode.status({\n    fill: shouldConnectGrid ? 'blue' : 'yellow',\n    text: `${shouldConnectGrid ? 'yes' : 'nope'} - ${gridConnect === 'auto' ? 'auto' : 'manual'}`,\n});\n\nif (shouldConnectGrid !== isGridConnected) {\n    const at = new Date().toLocaleString();\n    flow.set('gridConnected', shouldConnectGrid);\n    return [\n        {\n            payload: shouldConnectGrid ? 'on' : 'off'\n        },\n        {\n            payload: {\n                tag: \"grid-connection\",\n                title: \"Grid connection\",\n                body: `Grid ${shouldConnectGrid ? 'connected' : 'disconnected'} ${gridConnect === 'auto' ? '' : '(manual)'}, at ${at}`,\n            }\n        }\n    ];\n}\n",
         "outputs": 2,
         "timeout": "",
         "noerr": 0,
@@ -3833,7 +4921,8 @@
         "y": 380,
         "wires": [
             [
-                "a2faba3606b844a1"
+                "a2faba3606b844a1",
+                "d46c8723cce1eada"
             ],
             [
                 "b02f923aa1eacf92"
@@ -3890,7 +4979,7 @@
         "septopics": true,
         "property": "payload",
         "topi": "topic",
-        "x": 380,
+        "x": 390,
         "y": 540,
         "wires": [
             [
@@ -3910,7 +4999,7 @@
         "septopics": true,
         "property": "payload",
         "topi": "topic",
-        "x": 380,
+        "x": 390,
         "y": 580,
         "wires": [
             [
@@ -3930,7 +5019,7 @@
         "septopics": true,
         "property": "payload",
         "topi": "topic",
-        "x": 380,
+        "x": 390,
         "y": 620,
         "wires": [
             [
@@ -3950,7 +5039,7 @@
         "septopics": true,
         "property": "payload",
         "topi": "topic",
-        "x": 380,
+        "x": 390,
         "y": 700,
         "wires": [
             [
@@ -3970,7 +5059,7 @@
         "septopics": true,
         "property": "payload",
         "topi": "topic",
-        "x": 380,
+        "x": 390,
         "y": 780,
         "wires": [
             [
@@ -3990,7 +5079,7 @@
         "septopics": true,
         "property": "payload",
         "topi": "topic",
-        "x": 380,
+        "x": 390,
         "y": 820,
         "wires": [
             [
@@ -4010,7 +5099,7 @@
         "septopics": true,
         "property": "payload",
         "topi": "topic",
-        "x": 380,
+        "x": 390,
         "y": 860,
         "wires": [
             [
@@ -4030,11 +5119,10 @@
         "septopics": true,
         "property": "payload",
         "topi": "topic",
-        "x": 510,
+        "x": 430,
         "y": 60,
         "wires": [
             [
-                "8210f017aea4b421",
                 "ea85b483fb877384"
             ]
         ]
@@ -4051,7 +5139,7 @@
         "septopics": true,
         "property": "payload",
         "topi": "topic",
-        "x": 380,
+        "x": 390,
         "y": 740,
         "wires": [
             [
@@ -4064,17 +5152,17 @@
         "type": "ui_template",
         "z": "d02cf25fa8114475",
         "group": "9d1871108d73a07a",
-        "name": "Output (active)",
-        "order": 3,
+        "name": "output (active)",
+        "order": 4,
         "width": "6",
         "height": "1",
-        "format": "<div class=\"nr-dashboard-text\" style=\"display: flex; flex-direction: column; padding: 0 10px 0 6px; margin: -10px 0;\">\n    <div style=\"display: flex; justify-content: space-between;\">\n        <p class=\"label\">Output (active)</p>\n        <p class=\"value\">{{msg.payload.total}}W</p>\n    </div>\n    <div style=\"display: flex; justify-content: space-between; font-size: .9em; font-weight: 500\">\n        <p>(R) {{msg.payload.R}}W</p>\n        <p>(S) {{msg.payload.S}}W</p>\n        <p>(T) {{msg.payload.T}}W</p>\n    </div>\n</div>",
+        "format": "<div class=\"nr-dashboard-text\" style=\"display: flex; flex-direction: column; padding: 0 10px 0 6px; margin: -10px 0;\">\n    <div style=\"display: flex; justify-content: space-between;\">\n        <p class=\"label\">output (active)</p>\n        <p class=\"value\">{{msg.payload.total}}W</p>\n    </div>\n    <div style=\"display: flex; justify-content: space-between; font-size: .9em; font-weight: 500\">\n        <p>(R) {{msg.payload.R}}W</p>\n        <p>(S) {{msg.payload.S}}W</p>\n        <p>(T) {{msg.payload.T}}W</p>\n    </div>\n</div>",
         "storeOutMessages": true,
         "fwdInMessages": true,
         "resendOnRefresh": true,
         "templateScope": "local",
         "className": "",
-        "x": 530,
+        "x": 540,
         "y": 700,
         "wires": [
             []
@@ -4085,17 +5173,17 @@
         "type": "ui_template",
         "z": "d02cf25fa8114475",
         "group": "9d1871108d73a07a",
-        "name": "Output (apparent)",
-        "order": 4,
+        "name": "output (apparent)",
+        "order": 5,
         "width": "6",
         "height": "1",
-        "format": "<div class=\"nr-dashboard-text\" style=\"display: flex; flex-direction: column; padding: 0 10px 0 6px; margin: -10px 0;\">\n    <div style=\"display: flex; justify-content: space-between;\">\n        <p class=\"label\">Output (apparent)</p>\n        <p class=\"value\">{{msg.payload.total}}VA</p>\n    </div>\n    <div style=\"display: flex; justify-content: space-between; font-size: .9em; font-weight: 500\">\n        <p>(R) {{msg.payload.R}}VA</p>\n        <p>(S) {{msg.payload.S}}VA</p>\n        <p>(T) {{msg.payload.T}}VA</p>\n    </div>\n</div>",
+        "format": "<div class=\"nr-dashboard-text\" style=\"display: flex; flex-direction: column; padding: 0 10px 0 6px; margin: -10px 0;\">\n    <div style=\"display: flex; justify-content: space-between;\">\n        <p class=\"label\">output (apparent)</p>\n        <p class=\"value\">{{msg.payload.total}}VA</p>\n    </div>\n    <div style=\"display: flex; justify-content: space-between; font-size: .9em; font-weight: 500\">\n        <p>(R) {{msg.payload.R}}VA</p>\n        <p>(S) {{msg.payload.S}}VA</p>\n        <p>(T) {{msg.payload.T}}VA</p>\n    </div>\n</div>",
         "storeOutMessages": true,
         "fwdInMessages": true,
         "resendOnRefresh": true,
         "templateScope": "local",
         "className": "",
-        "x": 540,
+        "x": 550,
         "y": 740,
         "wires": [
             []
@@ -4106,17 +5194,17 @@
         "type": "ui_template",
         "z": "d02cf25fa8114475",
         "group": "9d1871108d73a07a",
-        "name": "Solar input per string",
-        "order": 5,
+        "name": "solar input",
+        "order": 6,
         "width": "6",
         "height": "1",
-        "format": "<div class=\"nr-dashboard-text\" style=\"display: flex; flex-direction: column; padding: 0 10px 0 6px; margin: -10px 0;\">\n    <div style=\"display: flex; justify-content: space-between;\">\n        <p class=\"label\">Solar input</p>\n        <p class=\"value\">{{msg.payload.total}}W</p>\n    </div>\n    <div style=\"display: flex; justify-content: space-between; font-size: .9em; font-weight: 500\">\n        <p>(1) {{msg.payload.power1}}W</p>\n        <p>(2) {{msg.payload.power2}}W</p>\n    </div>\n</div>",
+        "format": "<div class=\"nr-dashboard-text\" style=\"display: flex; flex-direction: column; padding: 0 10px 0 6px; margin: -10px 0;\">\n    <div style=\"display: flex; justify-content: space-between;\">\n        <p class=\"label\">solar input</p>\n        <p class=\"value\">{{msg.payload.total}}W</p>\n    </div>\n    <div style=\"display: flex; justify-content: space-between; font-size: .9em; font-weight: 500\">\n        <p>(1) {{msg.payload.power1}}W</p>\n        <p>(2) {{msg.payload.power2}}W</p>\n    </div>\n</div>",
         "storeOutMessages": true,
         "fwdInMessages": true,
         "resendOnRefresh": true,
         "templateScope": "local",
         "className": "",
-        "x": 550,
+        "x": 530,
         "y": 780,
         "wires": [
             []
@@ -4142,11 +5230,11 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 710,
-        "y": 100,
+        "x": 610,
+        "y": 60,
         "wires": [
             [
-                "8bb4278aca29cc84"
+                "ea97108d7c286c24"
             ]
         ]
     },
@@ -4176,7 +5264,7 @@
         "type": "function",
         "z": "d02cf25fa8114475",
         "name": "map",
-        "func": "const isOnline = msg.payload;\nconst status = isOnline ? 'online' : 'offline';\nconst at = new Date().toLocaleString();\n\nnode.status({\n    fill: isOnline ? 'blue' : 'red',\n    text: isOnline ? 'online' : 'offline',\n});\n\nreturn {\n    payload: {\n        tag: \"grid-online\",\n        title: \"Grid\",\n        body: `Grid changed to ${status}, at ${at}`,\n        silent: true,\n    }\n};",
+        "func": "const isOnline = msg.payload;\nconst status = isOnline ? 'online' : 'offline';\nconst at = new Date().toLocaleString();\n\nnode.status({\n    fill: isOnline ? 'blue' : 'red',\n    text: isOnline ? 'online' : 'offline',\n});\n\nflow.set('gridOnline', isOnline);\n\nreturn {\n    payload: {\n        tag: \"grid-online\",\n        title: \"Grid\",\n        body: `Grid changed to ${status}, at ${at}`,\n        silent: true,\n    }\n};",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -4187,7 +5275,8 @@
         "y": 380,
         "wires": [
             [
-                "002fbcc4b5600960"
+                "002fbcc4b5600960",
+                "d46c8723cce1eada"
             ]
         ],
         "l": false
@@ -4197,7 +5286,7 @@
         "type": "ui_dropdown",
         "z": "d02cf25fa8114475",
         "name": "",
-        "label": "Grid",
+        "label": "grid",
         "tooltip": "",
         "place": "Select option",
         "group": "827cf95cdf202cb4",
@@ -4227,7 +5316,7 @@
         "topic": "topic",
         "topicType": "msg",
         "className": "",
-        "x": 90,
+        "x": 310,
         "y": 500,
         "wires": [
             [
@@ -4255,7 +5344,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 280,
+        "x": 480,
         "y": 500,
         "wires": [
             [
@@ -4267,12 +5356,12 @@
         "id": "b56557da9e0d3fdb",
         "type": "link out",
         "z": "d02cf25fa8114475",
-        "name": "link out 34",
+        "name": "_ grid connect mode",
         "mode": "link",
         "links": [
             "0120f22e197cc1f6"
         ],
-        "x": 425,
+        "x": 625,
         "y": 500,
         "wires": []
     },
@@ -4281,17 +5370,17 @@
         "type": "ui_template",
         "z": "d02cf25fa8114475",
         "group": "9d1871108d73a07a",
-        "name": "Grid",
-        "order": 1,
+        "name": "grid",
+        "order": 2,
         "width": "6",
         "height": "1",
-        "format": "<div class=\"nr-dashboard-text\" style=\"display: flex; flex-direction: column; padding: 0 10px 0 6px; margin: -10px 0;\">\n    <div style=\"display: flex; justify-content: space-between;\">\n        <p class=\"label\">Grid</p>\n        <p class=\"value\">{{msg.payload.power}}W</p>\n    </div>\n    <div style=\"display: flex; justify-content: space-between; font-size: .9em; font-weight: 500\">\n        <p>(R) {{msg.payload.R}}V</p>\n        <p>(S) {{msg.payload.S}}V</p>\n        <p>(T) {{msg.payload.T}}V</p>\n    </div>\n</div>",
+        "format": "<div class=\"nr-dashboard-text\" style=\"display: flex; flex-direction: column; padding: 0 10px 0 6px; margin: -10px 0;\">\n    <div style=\"display: flex; justify-content: space-between;\">\n        <p class=\"label\">grid</p>\n        <p class=\"value\">{{msg.payload.power}}W</p>\n    </div>\n    <div style=\"display: flex; justify-content: space-between; font-size: .9em; font-weight: 500\">\n        <p>(R) {{msg.payload.R}}V</p>\n        <p>(S) {{msg.payload.S}}V</p>\n        <p>(T) {{msg.payload.T}}V</p>\n    </div>\n</div>",
         "storeOutMessages": true,
         "fwdInMessages": true,
         "resendOnRefresh": true,
         "templateScope": "local",
         "className": "",
-        "x": 500,
+        "x": 510,
         "y": 660,
         "wires": [
             []
@@ -4315,8 +5404,8 @@
         "filter": false,
         "asyncCmd": false,
         "outputs": 1,
-        "x": 740,
-        "y": 140,
+        "x": 720,
+        "y": 200,
         "wires": [
             []
         ]
@@ -4333,8 +5422,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 615,
-        "y": 140,
+        "x": 605,
+        "y": 200,
         "wires": [
             [
                 "860d818f14cd1779"
@@ -4354,7 +5443,7 @@
         "septopics": true,
         "property": "payload",
         "topi": "topic",
-        "x": 380,
+        "x": 390,
         "y": 660,
         "wires": [
             [
@@ -4400,7 +5489,7 @@
         "outputs": 1,
         "useDifferentColor": false,
         "className": "",
-        "x": 640,
+        "x": 620,
         "y": 1000,
         "wires": [
             []
@@ -4412,7 +5501,7 @@
         "z": "d02cf25fa8114475",
         "influxdb": "63bdbe3c09b491f2",
         "name": "db",
-        "query": "import \"date\"\nimport \"timezone\"\n\noption location = timezone.location(name: \"Europe/Bucharest\")\n\nstart = date.truncate(t: -12mo, unit: 1mo)\nend = date.truncate(t: 1mo, unit: 1mo)\n\nfrom(bucket: \"power_aggregated\")\n    |> range(start: start, stop: end)\n    |> filter(\n        fn: (r) =>\n            r[\"_measurement\"] == \"ac-output-active-power\" or r[\"_measurement\"]\n                ==\n                \"ac-input-active-power\" or r[\"_measurement\"] == \"solar-input-power\",\n    )\n    |> aggregateWindow(\n        every: 1mo,\n        fn: (tables=<-, column) =>\n            tables\n                |> sum(column: \"_value\")\n    )\n    |> map(\n        fn: (r) =>\n            ({_measurement: r._measurement, _field: \"value\", _value: r._value, _time: date.sub(from: r._time, d: 1s)}),\n    )\n",
+        "query": "import \"date\"\nimport \"timezone\"\n\noption location = timezone.location(name: \"Europe/Bucharest\")\n\nstart = date.truncate(t: -11mo, unit: 1mo)\nend = date.truncate(t: 1mo, unit: 1mo)\n\nfrom(bucket: \"power_aggregated\")\n    |> range(start: start, stop: end)\n    |> filter(\n        fn: (r) =>\n            r[\"_measurement\"] == \"ac-output-active-power\" or r[\"_measurement\"]\n                ==\n                \"ac-input-active-power\" or r[\"_measurement\"] == \"solar-input-power\",\n    )\n    |> aggregateWindow(\n        every: 1mo,\n        fn: (tables=<-, column) =>\n            tables\n                |> sum(column: \"_value\")\n    )\n    |> map(\n        fn: (r) =>\n            ({_measurement: r._measurement, _field: \"value\", _value: r._value, _time: date.sub(from: r._time, d: 1s)}),\n    )\n",
         "rawOutput": false,
         "precision": "",
         "retentionPolicy": "",
@@ -4452,7 +5541,7 @@
         "z": "d02cf25fa8114475",
         "influxdb": "63bdbe3c09b491f2",
         "name": "db",
-        "query": "import \"date\"\nimport \"timezone\"\n\noption location = timezone.location(name: \"Europe/Bucharest\")\n\nstart = date.truncate(t: -7d, unit: 1d)\nend = date.truncate(t: 1d, unit: 1d)\n\nfrom(bucket: \"power_aggregated\")\n    |> range(start: start, stop: end)\n    |> filter(\n        fn: (r) =>\n            r[\"_measurement\"] == \"solar-input-power\" or r[\"_measurement\"] == \"ac-output-active-power\" or r[\"_measurement\"] == \"ac-input-active-power\",\n    )\n    |> map(\n        fn: (r) =>\n            ({_measurement: r._measurement, _field: \"value\", _value: r._value, _time:  r._time}),\n    )\n",
+        "query": "import \"date\"\nimport \"timezone\"\n\noption location = timezone.location(name: \"Europe/Bucharest\")\n\nstart = date.truncate(t: -7d, unit: 1d)\nend = date.truncate(t: 1d, unit: 1d)\n\nfrom(bucket: \"power\")\n    |> range(start: start, stop: end)\n    |> filter(fn: (r) => r[\"_measurement\"] == \"solar-forecast\")\n    |> map(fn: (r) => ({r with _value: r._value / 1000.0}))\n    |> aggregateWindow(every: 1d, fn: sum)\n    |> map(\n        fn: (r) =>\n            ({\n                _measurement: r._measurement,\n                _field: \"value\",\n                _value: r._value,\n                _time: date.sub(from: r._time, d: 1s),\n            }),\n    )\n    |> yield(name: \"solar-forecast\")\n\nfrom(bucket: \"power_aggregated\")\n    |> range(start: start, stop: end)\n    |> filter(\n        fn: (r) =>\n            r[\"_measurement\"] == \"solar-input-power\" or r[\"_measurement\"]\n                ==\n                \"ac-output-active-power\" or r[\"_measurement\"] == \"ac-input-active-power\",\n    )\n    |> map(\n        fn: (r) =>\n            ({_measurement: r._measurement, _field: \"value\", _value: r._value, _time: r._time}),\n    )\n",
         "rawOutput": false,
         "precision": "",
         "retentionPolicy": "",
@@ -4504,7 +5593,7 @@
         "type": "function",
         "z": "d02cf25fa8114475",
         "name": "map",
-        "func": "/** @type {{\n * _time:string,\n * _value:number,\n * _measurement:\n *  'solar-input-power'|\n *  'ac-input-active-power'|\n *  'ac-output-active-power'\n * }[]} */\nconst data = msg.payload;\n\nconst days = [\n    \"Sun\", \"Mon\", \"Tue\",\n    \"Wed\", \"Thu\", \"Fri\", \"Sat\",\n];\n\nconst mapped = data.map(v => {\n    const at = new Date(v._time);\n    const label = days[at.getDay()];\n    return {\n        label,\n        topic: v._measurement,\n        value: Math.round(v._value * 10) / 10,\n        ticks: at.getTime(),\n    };\n});\n\n/** @type {Partial<Record<typeof mapped[0]['topic'], typeof mapped[0][]>>} */\nconst groups = {};\nmapped.forEach(v => {\n    let group = groups[v.topic];\n    if (!group) {\n        groups[v.topic] = group = [];\n    }\n    group.push(v);\n});\n\nObject.values(groups).forEach(v => {\n    v.sort((a, b) => a.ticks - b.ticks);\n});\n\nreturn {\n    payload: [{\n        \"series\": [\"Grid\", \"Solar\", \"Used\"],\n        \"data\": [\n            groups['ac-input-active-power'].map(v => v.value),\n            groups['solar-input-power'].map(v => v.value),\n            groups['ac-output-active-power'].map(v => v.value),\n        ],\n        \"labels\": groups['ac-input-active-power'].map(v => v.label),\n    }]\n};\n\n",
+        "func": "/** @type {{\n * _time:string,\n * _value:number,\n * _measurement:\n *  'solar-input-power'|\n *  'ac-input-active-power'|\n *  'ac-output-active-power'|\n *  'solar-forecast'\n * }[]} */\nconst data = msg.payload;\n\nconst days = [\n    \"Sun\", \"Mon\", \"Tue\",\n    \"Wed\", \"Thu\", \"Fri\", \"Sat\",\n];\n\nconst mapped = data.map(v => {\n    const at = new Date(v._time);\n    const label = days[at.getDay()];\n    return {\n        label,\n        topic: v._measurement,\n        value: Math.round(v._value * 10) / 10,\n        ticks: at.getTime(),\n    };\n});\n\n/** @type {Partial<Record<typeof mapped[0]['topic'], typeof mapped[0][]>>} */\nconst groups = {};\nmapped.forEach(v => {\n    let group = groups[v.topic];\n    if (!group) {\n        groups[v.topic] = group = [];\n    }\n    group.push(v);\n});\n\nObject.values(groups).forEach(v => {\n    v.sort((a, b) => a.ticks - b.ticks);\n});\n\nreturn {\n    payload: [{\n        \"series\": [\"Grid\", \"Used\", \"Solar\", \"Forecast\"],\n        \"data\": [\n            groups['ac-input-active-power'].map(v => v.value),\n            groups['ac-output-active-power'].map(v => v.value),\n            groups['solar-input-power'].map(v => v.value),\n            groups['solar-forecast'].map(v => v.value),\n        ],\n        \"labels\": groups['solar-forecast'].map(v => v.label),\n    }]\n};\n\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -4546,9 +5635,9 @@
         "useUTC": false,
         "colors": [
             "#ff7b42",
-            "#73c990",
             "#99c5ff",
-            "#2ca02c",
+            "#73c990",
+            "#e4e59a",
             "#98df8a",
             "#d62728",
             "#ff9896",
@@ -4558,7 +5647,7 @@
         "outputs": 1,
         "useDifferentColor": false,
         "className": "",
-        "x": 640,
+        "x": 620,
         "y": 960,
         "wires": [
             []
@@ -4573,7 +5662,7 @@
         "order": 1,
         "width": 0,
         "height": 0,
-        "format": "<style>\n    .nr-dashboard-chart-title {\n        display: none;\n    }\n</style>",
+        "format": "<style>\n    .nr-dashboard-chart-title {\n        display: none;\n    }\n\n    .nr-dashboard-dropdown>md-input-container {\n        padding-left: 12px;\n        padding-right: 12px;\n        margin: 0;\n        margin-right: 0;\n    }\n\n    .equal-space.nr-dashboard-dropdown p.label {\n        flex: 7;\n    }\n    .equal-space.nr-dashboard-dropdown md-select {\n        flex: 3 !important;\n    }\n</style>",
         "storeOutMessages": true,
         "fwdInMessages": true,
         "resendOnRefresh": true,
@@ -4591,7 +5680,7 @@
         "z": "d02cf25fa8114475",
         "influxdb": "63bdbe3c09b491f2",
         "name": "db",
-        "query": "import \"date\"\nimport \"timezone\"\n\noption location = timezone.location(name: \"Europe/Bucharest\")\n\nstart = date.truncate(t: now(), unit: 1d)\nend = now() //date.truncate(t: now(), unit: 1h)\n\nfrom(bucket: \"power\")\n    |> range(start: start, stop: end)\n    |> filter(\n        fn: (r) =>\n            r[\"_measurement\"] == \"ac-output-active-power\" or r[\"_measurement\"]\n                ==\n                \"ac-input-active-power\" or r[\"_measurement\"] == \"solar-input-power\",\n    )\n    |> filter(fn: (r) => r[\"_field\"] == \"total\")\n    |> aggregateWindow(\n        every: 1h,\n        fn: (tables=<-, column) =>\n            tables\n                |> integral(unit: 1h, column: \"_value\")\n                |> map(fn: (r) => ({r with _value: r._value / 1000.0})),\n    )\n    |> map(\n        fn: (r) =>\n            ({\n                _measurement: r._measurement,\n                _field: \"value\",\n                _value: r._value,\n                _time: r._time,\n            }),\n    )\n",
+        "query": "import \"date\"\nimport \"timezone\"\n\noption location = timezone.location(name: \"Europe/Bucharest\")\n\nstart = date.truncate(t: now(), unit: 1d)\nend = now()\nendForecast = date.truncate(t: 1d, unit: 1d)\n\nfrom(bucket: \"power\")\n    |> range(start: start, stop: endForecast)\n    |> filter(fn: (r) => r[\"_measurement\"] == \"solar-forecast\")\n    |> map(fn: (r) => ({r with _value: r._value / 1000.0}))\n    |> yield(name: \"solar-forecast\")\n\nfrom(bucket: \"power\")\n    |> range(start: start, stop: end)\n    |> filter(\n        fn: (r) =>\n            r[\"_measurement\"] == \"ac-output-active-power\" or \n            r[\"_measurement\"] == \"ac-input-active-power\" or \n            r[\"_measurement\"] == \"solar-input-power\"\n    )\n    |> filter(fn: (r) => r[\"_field\"] == \"total\" or r[\"_field\"] == \"value\")\n    |> aggregateWindow(\n        every: 1h,\n        fn: (tables=<-, column) =>\n            tables\n                |> integral(unit: 1h, column: \"_value\")\n                |> map(fn: (r) => ({r with _value: r._value / 1000.0})),\n    )\n    |> map(\n        fn: (r) =>\n            ({\n                _measurement: r._measurement,\n                _field: \"value\",\n                _value: r._value,\n                _time: r._time,\n            }),\n    )\n    |> yield(name: \"today\")\n\n",
         "rawOutput": false,
         "precision": "",
         "retentionPolicy": "",
@@ -4609,7 +5698,7 @@
         "type": "function",
         "z": "d02cf25fa8114475",
         "name": "map",
-        "func": "/** @type {{\n * _time:string,\n * _value:number,\n * _measurement:\n *  'solar-input-power'|\n *  'ac-input-active-power'|\n *  'ac-output-active-power'\n * }[]} */\nconst data = msg.payload;\n\nconst mapped = data.map(v => {\n    return {\n        topic: v._measurement,\n        value: Math.round(v._value * 10) / 10,\n        ticks: new Date(v._time).getTime(),\n    };\n});\n\n/** @type {Partial<Record<typeof mapped[0]['topic'], typeof mapped[0][]>>} */\nconst groups = {};\nmapped.forEach(v => {\n    let group = groups[v.topic];\n    if (!group) {\n        groups[v.topic] = group = [];\n    }\n    group.push(v);\n});\n\nObject.values(groups).forEach(v => {\n    v.sort((a, b) => a.ticks - b.ticks);\n});\n\nreturn {\n    payload: [{\n        \"series\": [\"Grid\", \"Solar\", \"Used\"],\n        \"data\": [\n            getData(groups['ac-input-active-power']),\n            getData(groups['solar-input-power']),\n            getData(groups['ac-output-active-power']),\n        ],\n    }]\n};\n\n/** @param data {{ticks: number, value: number}[]} */\nfunction getData(data) {\n    const mapped = [];\n    let lastDate;\n    for (const v of data) {\n        lastDate = v.ticks;\n        mapped.push({\n            x: v.ticks,\n            y: v.value,\n        });\n    }\n\n    if (lastDate) {\n        const l = new Date(lastDate)\n        l.setHours(23, 59, 59, 0);\n        mapped.push({\n            x: l.getTime(),\n            y: null,\n        });\n    }\n\n    return mapped;\n}\n\n",
+        "func": "/** @type {{\n * _time:string,\n * _value:number,\n * _measurement:\n *  'solar-input-power'|\n *  'ac-input-active-power'|\n *  'ac-output-active-power'|\n *  'solar-forecast'\n * }[]} */\nconst data = msg.payload;\n\nconst mapped = data.map(v => {\n    return {\n        topic: v._measurement,\n        value: Math.round(v._value * 10) / 10,\n        ticks: new Date(v._time).getTime(),\n    };\n});\n\n/** @type {Partial<Record<typeof mapped[0]['topic'], typeof mapped[0][]>>} */\nconst groups = {};\nmapped.forEach(v => {\n    let group = groups[v.topic];\n    if (!group) {\n        groups[v.topic] = group = [];\n    }\n    group.push(v);\n});\n\nObject.values(groups).forEach(v => {\n    v.sort((a, b) => a.ticks - b.ticks);\n});\n\nreturn {\n    payload: [{\n        \"series\": [\"Grid\", \"Solar\", \"Used\", \"Forecast\"],\n        \"data\": [\n            getData(groups['ac-input-active-power']),\n            getData(groups['solar-input-power']),\n            getData(groups['ac-output-active-power']),\n            getData(groups['solar-forecast'] ?? []),\n        ],\n    }]\n};\n\n/** @param data {{ticks: number, value: number}[]} */\nfunction getData(data) {\n    const mapped = [];\n    let lastDate;\n    for (const v of data) {\n        lastDate = v.ticks;\n        mapped.push({\n            x: v.ticks,\n            y: v.value,\n        });\n    }\n\n    if (lastDate) {\n        const l = new Date(lastDate)\n        l.setHours(23, 59, 59, 0);\n        mapped.push({\n            x: l.getTime(),\n            y: null,\n        });\n    }\n\n    return mapped;\n}\n\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -4653,7 +5742,7 @@
             "#ff7b42",
             "#73c990",
             "#99c5ff",
-            "#2ca02c",
+            "#e4e59a",
             "#98df8a",
             "#d62728",
             "#ff9896",
@@ -4663,7 +5752,7 @@
         "outputs": 1,
         "useDifferentColor": false,
         "className": "",
-        "x": 630,
+        "x": 610,
         "y": 920,
         "wires": [
             []
@@ -4741,7 +5830,7 @@
         "retentionPolicy": "",
         "org": "home",
         "x": 310,
-        "y": 1200,
+        "y": 1360,
         "wires": [
             [
                 "253ee55b662add5a"
@@ -4761,7 +5850,7 @@
         "finalize": "",
         "libs": [],
         "x": 395,
-        "y": 1200,
+        "y": 1360,
         "wires": [
             [
                 "c22d9b44d1d0ba74"
@@ -4807,8 +5896,8 @@
         "outputs": 1,
         "useDifferentColor": false,
         "className": "",
-        "x": 670,
-        "y": 1200,
+        "x": 650,
+        "y": 1360,
         "wires": [
             []
         ]
@@ -4826,7 +5915,7 @@
         "property": "payload",
         "topi": "topic",
         "x": 490,
-        "y": 1200,
+        "y": 1360,
         "wires": [
             [
                 "9605e281fd324990"
@@ -4838,7 +5927,7 @@
         "type": "ui_numeric",
         "z": "d02cf25fa8114475",
         "name": "",
-        "label": "Offset (days)",
+        "label": "offset (days)",
         "tooltip": "",
         "group": "73c9d7077dcee7d3",
         "order": 1,
@@ -4853,8 +5942,8 @@
         "max": "-1",
         "step": 1,
         "className": "",
-        "x": 270,
-        "y": 1240,
+        "x": 290,
+        "y": 1400,
         "wires": [
             [
                 "9990b84a250ea4f7"
@@ -4881,7 +5970,7 @@
         "to": "",
         "reg": false,
         "x": 730,
-        "y": 1240,
+        "y": 1400,
         "wires": [
             [
                 "ad0eaeed7112a695"
@@ -4901,7 +5990,7 @@
         "finalize": "",
         "libs": [],
         "x": 225,
-        "y": 1200,
+        "y": 1360,
         "wires": [
             [
                 "aaab93ca80d93467"
@@ -4927,7 +6016,7 @@
         "topic": "topic",
         "outputs": 1,
         "x": 440,
-        "y": 1240,
+        "y": 1400,
         "wires": [
             [
                 "5eca1f0432cd01df"
@@ -4947,7 +6036,7 @@
         "property": "payload",
         "topi": "topic",
         "x": 570,
-        "y": 1240,
+        "y": 1400,
         "wires": [
             [
                 "e40ebc487598d34c"
@@ -4966,7 +6055,7 @@
         "retentionPolicy": "",
         "org": "home",
         "x": 310,
-        "y": 1080,
+        "y": 1100,
         "wires": [
             [
                 "d8752a58d3ffc0a3"
@@ -4978,15 +6067,15 @@
         "type": "function",
         "z": "d02cf25fa8114475",
         "name": "function 1",
-        "func": "/** @type {{_value:number, _measurement:'ac-input-active-power'|'ac-output-active-power'|'solar-input-power'}[]} */\nconst measurements = msg.payload;\n\nconst totalIn = measurements\n    .find(v => v._measurement === 'ac-input-active-power')\n    ._value;\n\nconst totalOut = measurements\n    .find(v => v._measurement === 'ac-output-active-power')\n    ._value;\n\nconst solarInput = measurements\n    .find(v => v._measurement === 'solar-input-power')\n    ._value;\n\nreturn [{\n    payload: Math.round((totalOut - totalIn) / solarInput * 1000) / 10,\n}, {\n    payload: Math.round(totalOut * 10) / 10,\n}, {\n    payload: Math.round((totalOut - totalIn) * 10) / 10,\n}]",
-        "outputs": 3,
+        "func": "/** @type {{_value:number, _measurement:'ac-input-active-power'|'ac-output-active-power'|'solar-input-power'}[]} */\nconst measurements = msg.payload;\n\nconst totalIn = measurements\n    .find(v => v._measurement === 'ac-input-active-power')\n    ._value;\n\nconst totalOut = measurements\n    .find(v => v._measurement === 'ac-output-active-power')\n    ._value;\n\nconst solarInput = measurements\n    .find(v => v._measurement === 'solar-input-power')\n    ._value;\n\nreturn [{\n    payload: Math.round((totalOut - totalIn) / solarInput * 1000) / 10,\n}, {\n    payload: Math.round(totalOut * 10) / 10,\n}, {\n    payload: Math.round((totalOut - totalIn) * 10) / 10,\n}, {\n    payload: Math.round((totalOut - totalIn) / totalOut * 1000) / 10,\n}]",
+        "outputs": 4,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
         "x": 395,
-        "y": 1080,
+        "y": 1100,
         "wires": [
             [
                 "887f3ed6281437e5"
@@ -4996,6 +6085,9 @@
             ],
             [
                 "2fea9c289254d63a"
+            ],
+            [
+                "7ad3ec6fab9d4fb7"
             ]
         ],
         "l": false
@@ -5006,50 +6098,29 @@
         "z": "d02cf25fa8114475",
         "influxdb": "63bdbe3c09b491f2",
         "name": "db",
-        "query": "from(bucket: \"power_aggregated\")\n    |> range(start: -31d, stop: 1d)\n    |> filter(\n        fn: (r) =>\n            r[\"_measurement\"] == \"ac-input-active-power\" or \n            r[\"_measurement\"] == \"ac-output-active-power\" or \n            r[\"_measurement\"] == \"solar-input-power\",\n    )\n    |> sum()\n    |> yield()\n",
+        "query": "import \"date\"\nimport \"timezone\"\n\noption location = timezone.location(name: \"Europe/Bucharest\")\n\nfrom(bucket: \"power_aggregated\")\n    |> range(start: -31d, stop: 1d)\n    |> filter(\n        fn: (r) =>\n            r[\"_measurement\"] == \"ac-input-active-power\" or \n            r[\"_measurement\"] == \"ac-output-active-power\" or \n            r[\"_measurement\"] == \"solar-input-power\",\n    )\n    |> sum()\n    |> yield()\n",
         "rawOutput": false,
         "precision": "",
         "retentionPolicy": "",
         "org": "home",
         "x": 310,
-        "y": 1160,
+        "y": 1260,
         "wires": [
             [
-                "22bc033e8f814343"
+                "62df97620fc39f4a"
             ]
         ]
-    },
-    {
-        "id": "22bc033e8f814343",
-        "type": "function",
-        "z": "d02cf25fa8114475",
-        "name": "function 2",
-        "func": "/** @type {{_value:number, _measurement:'ac-input-active-power'|'ac-output-active-power'|'solar-input-power'}[]} */\nconst measurements = msg.payload;\n\nconst totalIn = measurements\n    .find(v => v._measurement === 'ac-input-active-power')\n    ._value;\n\nconst totalOut = measurements\n    .find(v => v._measurement === 'ac-output-active-power')\n    ._value;\n\nconst solarInput = measurements\n    .find(v => v._measurement === 'solar-input-power')\n    ._value;\n\nreturn {\n    payload: Math.round((totalOut - totalIn) / solarInput * 1000) / 10,\n}",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 395,
-        "y": 1160,
-        "wires": [
-            [
-                "1989ea913e42d2ba"
-            ]
-        ],
-        "l": false
     },
     {
         "id": "d6533ffbd477f895",
         "type": "ui_text",
         "z": "d02cf25fa8114475",
-        "group": "827cf95cdf202cb4",
-        "order": 2,
+        "group": "1e8ff3e2e8219b0c",
+        "order": 1,
         "width": 0,
         "height": 0,
-        "name": "",
-        "label": "All time efficiency",
+        "name": "efficiency (all time)",
+        "label": "efficiency",
         "format": "{{msg.payload}}%",
         "layout": "row-spread",
         "className": "",
@@ -5057,7 +6128,7 @@
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 670,
+        "x": 650,
         "y": 1040,
         "wires": []
     },
@@ -5065,12 +6136,12 @@
         "id": "b8f73de9b8242c6a",
         "type": "ui_text",
         "z": "d02cf25fa8114475",
-        "group": "827cf95cdf202cb4",
+        "group": "af294a26a01766cc",
         "order": 2,
         "width": 0,
         "height": 0,
-        "name": "",
-        "label": "Last 31 days efficiency",
+        "name": "efficiency (-31 days)",
+        "label": "efficiency",
         "format": "{{msg.payload}}%",
         "layout": "row-spread",
         "className": "",
@@ -5078,8 +6149,8 @@
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 680,
-        "y": 1160,
+        "x": 660,
+        "y": 1200,
         "wires": []
     },
     {
@@ -5115,7 +6186,7 @@
         "property": "payload",
         "topi": "topic",
         "x": 490,
-        "y": 1160,
+        "y": 1200,
         "wires": [
             [
                 "b8f73de9b8242c6a"
@@ -5126,12 +6197,12 @@
         "id": "9a4aad9ff010f130",
         "type": "ui_text",
         "z": "d02cf25fa8114475",
-        "group": "827cf95cdf202cb4",
+        "group": "1e8ff3e2e8219b0c",
         "order": 2,
         "width": 0,
         "height": 0,
-        "name": "",
-        "label": "Total used",
+        "name": "used (all time)",
+        "label": "used",
         "format": "{{msg.payload}} kWh",
         "layout": "row-spread",
         "className": "",
@@ -5139,7 +6210,7 @@
         "font": "",
         "fontSize": 16,
         "color": "#000000",
-        "x": 650,
+        "x": 640,
         "y": 1080,
         "wires": []
     },
@@ -5167,12 +6238,12 @@
         "id": "d78f0c756ab516b6",
         "type": "ui_text",
         "z": "d02cf25fa8114475",
-        "group": "827cf95cdf202cb4",
-        "order": 2,
+        "group": "1e8ff3e2e8219b0c",
+        "order": 3,
         "width": 0,
         "height": 0,
-        "name": "",
-        "label": "From solar",
+        "name": "from solar (all time)",
+        "label": "from solar",
         "format": "{{msg.payload}} kWh",
         "layout": "row-spread",
         "className": "",
@@ -5201,6 +6272,451 @@
         "wires": [
             [
                 "d78f0c756ab516b6"
+            ]
+        ]
+    },
+    {
+        "id": "434691015e70ce37",
+        "type": "ui_text",
+        "z": "d02cf25fa8114475",
+        "group": "1e8ff3e2e8219b0c",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "name": "from solar% (all time)",
+        "label": "from solar",
+        "format": "{{msg.payload}}%",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 660,
+        "y": 1160,
+        "wires": []
+    },
+    {
+        "id": "7ad3ec6fab9d4fb7",
+        "type": "rbe",
+        "z": "d02cf25fa8114475",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": false,
+        "property": "payload",
+        "topi": "topic",
+        "x": 490,
+        "y": 1160,
+        "wires": [
+            [
+                "434691015e70ce37"
+            ]
+        ]
+    },
+    {
+        "id": "0f506b0b897273b0",
+        "type": "ui_text",
+        "z": "d02cf25fa8114475",
+        "group": "9d1871108d73a07a",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "grid status",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 910,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "d46c8723cce1eada",
+        "type": "function",
+        "z": "d02cf25fa8114475",
+        "name": "function 3",
+        "func": "const gridConnected = flow.get('gridConnected') ?? false;\nconst gridOnline = flow.get('gridOnline') ?? false;\n\nreturn {\n    payload: `${gridConnected ? 'connected' : 'disconnected'}/${gridOnline ? 'online' : 'offline'}`,\n};",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 795,
+        "y": 440,
+        "wires": [
+            [
+                "0f506b0b897273b0"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "63de766456058850",
+        "type": "inject",
+        "z": "d02cf25fa8114475",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "10",
+        "topic": "",
+        "payload": "gridConnect",
+        "payloadType": "flow",
+        "x": 150,
+        "y": 500,
+        "wires": [
+            [
+                "bb0a4494c7d35255"
+            ]
+        ]
+    },
+    {
+        "id": "1052568395e4a337",
+        "type": "inject",
+        "z": "d02cf25fa8114475",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "10",
+        "topic": "",
+        "payload": "dayOffset",
+        "payloadType": "flow",
+        "x": 120,
+        "y": 1400,
+        "wires": [
+            [
+                "312d45a724aa1438"
+            ]
+        ]
+    },
+    {
+        "id": "036a405f42237d92",
+        "type": "http request",
+        "z": "d02cf25fa8114475",
+        "name": "",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "https://api.forecast.solar/estimate/45.9735/21.3192/18/0/15",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "other",
+                "keyValue": "accept",
+                "valueType": "other",
+                "valueValue": "application/json"
+            }
+        ],
+        "x": 290,
+        "y": 1460,
+        "wires": [
+            [
+                "f941bd3e48b2e20f"
+            ]
+        ]
+    },
+    {
+        "id": "1426b9765d3874a2",
+        "type": "inject",
+        "z": "d02cf25fa8114475",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "*/30 5-21 * * *",
+        "once": false,
+        "onceDelay": "10",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 130,
+        "y": 1460,
+        "wires": [
+            [
+                "036a405f42237d92"
+            ]
+        ]
+    },
+    {
+        "id": "5c82cb86c2784c5c",
+        "type": "influxdb out",
+        "z": "d02cf25fa8114475",
+        "influxdb": "63bdbe3c09b491f2",
+        "name": "db",
+        "measurement": "",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "home",
+        "bucket": "power",
+        "x": 590,
+        "y": 1480,
+        "wires": []
+    },
+    {
+        "id": "f941bd3e48b2e20f",
+        "type": "function",
+        "z": "d02cf25fa8114475",
+        "name": "map",
+        "func": "if (msg.payload?.message?.type !== 'success') {\n    global.set('estimatedSolarProduction', 0);\n    node.status({ fill: \"red\", shape: \"ring\", text: \"error\" });\n    node.warn(msg);\n    return;\n}\n\nconst [todayDate] = new Date().toISOString().split('T');\n\n/** @type {Record<string, number>} */\nconst forecast = msg.payload.result.watt_hours_period;\n\nconst influxDbData = {\n    payload: [],\n    measurement: 'solar-forecast',\n};\n\nconst now = new Date().getTime();\n\nfor (const [key, value] of Object.entries(forecast)) {\n    const ticks = new Date(key).getTime();\n    if (ticks <= now) {\n        continue;\n    }\n\n    influxDbData.payload.push([\n        {\n            value,\n            time: ticks,\n        },\n        {} //tags\n    ]);\n}\n\nconst estimatedProduction = msg.payload.result.watt_hours_day[todayDate];\n\nglobal.set('estimatedSolarProduction', estimatedProduction);\nnode.status({\n    fill: \"blue\", shape: \"ring\",\n    text: `${estimatedProduction} kWh`\n});\n\nreturn [{\n    payload: estimatedProduction,\n}, influxDbData];",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 1460,
+        "wires": [
+            [],
+            [
+                "5c82cb86c2784c5c"
+            ]
+        ]
+    },
+    {
+        "id": "ea97108d7c286c24",
+        "type": "link out",
+        "z": "d02cf25fa8114475",
+        "name": "battery capacity",
+        "mode": "link",
+        "links": [
+            "6f8b99e1a75e4eae",
+            "81c5a79fcb978074"
+        ],
+        "x": 755,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "6a88550f5db42499",
+        "type": "link out",
+        "z": "d02cf25fa8114475",
+        "name": "battery status",
+        "mode": "link",
+        "links": [
+            "81c5a79fcb978074"
+        ],
+        "x": 435,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "81c5a79fcb978074",
+        "type": "link in",
+        "z": "d02cf25fa8114475",
+        "name": "link in 36",
+        "links": [
+            "ea97108d7c286c24",
+            "6a88550f5db42499"
+        ],
+        "x": 545,
+        "y": 200,
+        "wires": [
+            [
+                "8bb4278aca29cc84"
+            ]
+        ]
+    },
+    {
+        "id": "6f8b99e1a75e4eae",
+        "type": "link in",
+        "z": "d02cf25fa8114475",
+        "name": "link in 37",
+        "links": [
+            "ea97108d7c286c24"
+        ],
+        "x": 985,
+        "y": 60,
+        "wires": [
+            [
+                "8210f017aea4b421"
+            ]
+        ]
+    },
+    {
+        "id": "62df97620fc39f4a",
+        "type": "function",
+        "z": "d02cf25fa8114475",
+        "name": "function 7",
+        "func": "/** @type {{_value:number, _measurement:'ac-input-active-power'|'ac-output-active-power'|'solar-input-power'}[]} */\nconst measurements = msg.payload;\n\nconst totalIn = measurements\n    .find(v => v._measurement === 'ac-input-active-power')\n    ._value;\n\nconst totalOut = measurements\n    .find(v => v._measurement === 'ac-output-active-power')\n    ._value;\n\nconst solarInput = measurements\n    .find(v => v._measurement === 'solar-input-power')\n    ._value;\n\nreturn [{\n    payload: Math.round((totalOut - totalIn) / solarInput * 1000) / 10,\n}, {\n    payload: Math.round(totalOut * 10) / 10,\n}, {\n    payload: Math.round((totalOut - totalIn) * 10) / 10,\n}, {\n    payload: Math.round((totalOut - totalIn) / totalOut * 1000) / 10,\n}]",
+        "outputs": 4,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 395,
+        "y": 1260,
+        "wires": [
+            [
+                "1989ea913e42d2ba"
+            ],
+            [
+                "619978a8e4ef83cf"
+            ],
+            [
+                "6bf2d8943d15ef7e"
+            ],
+            [
+                "7aab8e59ab7d072b"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "9e2f6b1f33640ffb",
+        "type": "ui_text",
+        "z": "d02cf25fa8114475",
+        "group": "af294a26a01766cc",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "used (-31 days)",
+        "label": "used",
+        "format": "{{msg.payload}} kWh",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 640,
+        "y": 1240,
+        "wires": []
+    },
+    {
+        "id": "619978a8e4ef83cf",
+        "type": "rbe",
+        "z": "d02cf25fa8114475",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": false,
+        "property": "payload",
+        "topi": "topic",
+        "x": 490,
+        "y": 1240,
+        "wires": [
+            [
+                "9e2f6b1f33640ffb"
+            ]
+        ]
+    },
+    {
+        "id": "96466a774ca2cfa1",
+        "type": "ui_text",
+        "z": "d02cf25fa8114475",
+        "group": "af294a26a01766cc",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "from solar (-31 days)",
+        "label": "from solar",
+        "format": "{{msg.payload}} kWh",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 660,
+        "y": 1280,
+        "wires": []
+    },
+    {
+        "id": "6bf2d8943d15ef7e",
+        "type": "rbe",
+        "z": "d02cf25fa8114475",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": false,
+        "property": "payload",
+        "topi": "topic",
+        "x": 490,
+        "y": 1280,
+        "wires": [
+            [
+                "96466a774ca2cfa1"
+            ]
+        ]
+    },
+    {
+        "id": "e1e4029b2b74655d",
+        "type": "ui_text",
+        "z": "d02cf25fa8114475",
+        "group": "af294a26a01766cc",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "from solar% (-31 days)",
+        "label": "from solar",
+        "format": "{{msg.payload}}%",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 660,
+        "y": 1320,
+        "wires": []
+    },
+    {
+        "id": "7aab8e59ab7d072b",
+        "type": "rbe",
+        "z": "d02cf25fa8114475",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": false,
+        "property": "payload",
+        "topi": "topic",
+        "x": 490,
+        "y": 1320,
+        "wires": [
+            [
+                "e1e4029b2b74655d"
             ]
         ]
     },
@@ -5302,27 +6818,6 @@
         "inputs": 0,
         "x": 140,
         "y": 260,
-        "wires": [
-            [
-                "e6892c53b951d955"
-            ]
-        ]
-    },
-    {
-        "id": "eb8c54867345d225",
-        "type": "mqtt in",
-        "z": "13aa577370e4c4d7",
-        "name": "",
-        "topic": "stat/+/+/RESULT",
-        "qos": "2",
-        "datatype": "json",
-        "broker": "f569d34c.8c7ed",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 120,
-        "y": 100,
         "wires": [
             [
                 "e6892c53b951d955"
@@ -5473,7 +6968,7 @@
         "rh": 0,
         "inputs": 0,
         "x": 130,
-        "y": 60,
+        "y": 100,
         "wires": [
             [
                 "e6892c53b951d955"
@@ -5494,7 +6989,7 @@
         "rh": 0,
         "inputs": 0,
         "x": 140,
-        "y": 20,
+        "y": 60,
         "wires": [
             [
                 "e6892c53b951d955"
@@ -5577,6 +7072,27 @@
         "x": 530,
         "y": 500,
         "wires": []
+    },
+    {
+        "id": "fc5820fcf7b1a116",
+        "type": "mqtt in",
+        "z": "13aa577370e4c4d7",
+        "name": "",
+        "topic": "zigbee2mqtt/dimmer/+",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "f569d34c.8c7ed",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 340,
+        "wires": [
+            [
+                "e6892c53b951d955"
+            ]
+        ]
     },
     {
         "id": "f08cfee748e21645",
@@ -5987,6 +7503,277 @@
         ]
     },
     {
+        "id": "dfca40dd7aa881e6",
+        "type": "mqtt in",
+        "z": "536b0e9eda614fd2",
+        "name": "",
+        "topic": "zigbee2mqtt/pir/+",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "f569d34c.8c7ed",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 540,
+        "wires": [
+            [
+                "8ab75f8eee4ef8d5",
+                "a2ce7a8e3f483f80"
+            ]
+        ]
+    },
+    {
+        "id": "54e506afd7d7a753",
+        "type": "mqtt in",
+        "z": "536b0e9eda614fd2",
+        "name": "",
+        "topic": "zigbee2mqtt/contact/+",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "f569d34c.8c7ed",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 480,
+        "wires": [
+            [
+                "d445960ecb358d5a",
+                "a2ce7a8e3f483f80"
+            ]
+        ]
+    },
+    {
+        "id": "6615d0e84e2ff43a",
+        "type": "influxdb out",
+        "z": "536b0e9eda614fd2",
+        "influxdb": "63bdbe3c09b491f2",
+        "name": "db",
+        "measurement": "",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "home",
+        "bucket": "home",
+        "x": 530,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "8ab75f8eee4ef8d5",
+        "type": "function",
+        "z": "536b0e9eda614fd2",
+        "name": "map",
+        "func": "const valueName = msg.topic.split('/').slice(-1)[0];\nconst msgs = [];\n\nif (typeof msg.payload.occupancy === 'boolean') {\n    msgs.push({\n        payload: { [valueName]: msg.payload.occupancy ? 1 : 0 },\n        measurement: 'occupancy',\n    });\n}\n\nif (typeof msg.payload.illuminance === 'number') {\n    msgs.push({\n        payload: { [valueName]: msg.payload.illuminance },\n        measurement: 'illuminance',\n    });\n}\n\nreturn [msgs];",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 540,
+        "wires": [
+            [
+                "6615d0e84e2ff43a"
+            ]
+        ]
+    },
+    {
+        "id": "d445960ecb358d5a",
+        "type": "function",
+        "z": "536b0e9eda614fd2",
+        "name": "map",
+        "func": "const valueName = msg.topic.split('/').slice(-1)[0];\nif (typeof msg.payload.contact !== 'boolean') {\n    return;\n}\n\nreturn {\n    payload: { [valueName]: msg.payload.contact ? 1 : 0 },\n    measurement: 'contact',\n};",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 500,
+        "wires": [
+            [
+                "6615d0e84e2ff43a"
+            ]
+        ]
+    },
+    {
+        "id": "a2ce7a8e3f483f80",
+        "type": "link out",
+        "z": "536b0e9eda614fd2",
+        "name": "contact/pir change",
+        "mode": "link",
+        "links": [
+            "2015749dd862c92d"
+        ],
+        "x": 355,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "82ff84e98779afab",
+        "type": "google-notify",
+        "z": "536b0e9eda614fd2",
+        "server": "ea0310ce54c9a43e",
+        "label": "Garage",
+        "playVolumeLevel": "50",
+        "playMessage": "Missing message",
+        "language": "config",
+        "speakSlow": "config",
+        "mediaUrl": "",
+        "mediaType": "mp3",
+        "x": 740,
+        "y": 600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "191f8ea48fb23429",
+        "type": "mqtt in",
+        "z": "536b0e9eda614fd2",
+        "name": "",
+        "topic": "zigbee2mqtt/contact/terasa",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "f569d34c.8c7ed",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 170,
+        "y": 600,
+        "wires": [
+            [
+                "26a5f218381dfa8a"
+            ]
+        ]
+    },
+    {
+        "id": "26a5f218381dfa8a",
+        "type": "function",
+        "z": "536b0e9eda614fd2",
+        "name": "map",
+        "func": "if (typeof msg.payload.contact !== 'boolean') {\n    return;\n}\n\nreturn msg.payload.contact\n    ? [, {\n        reset: true,\n    }]\n    : {\n        playMessage: 'ușa la terasă este deschisă',\n        language: 'ro',\n        playVolumeLevel: 100,\n    };",
+        "outputs": 2,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 325,
+        "y": 600,
+        "wires": [
+            [
+                "5d98dcd8d55d35db"
+            ],
+            [
+                "58004da352786771",
+                "5d98dcd8d55d35db"
+            ]
+        ],
+        "outputLabels": [
+            "msg",
+            "reset"
+        ],
+        "l": false
+    },
+    {
+        "id": "5d98dcd8d55d35db",
+        "type": "trigger",
+        "z": "536b0e9eda614fd2",
+        "name": "",
+        "op1": "",
+        "op2": "",
+        "op1type": "nul",
+        "op2type": "payl",
+        "duration": "30",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 490,
+        "y": 600,
+        "wires": [
+            [
+                "58004da352786771"
+            ]
+        ]
+    },
+    {
+        "id": "dd3eeb57a2ddeb28",
+        "type": "google-notify",
+        "z": "536b0e9eda614fd2",
+        "server": "dc32c722d4c93816",
+        "label": "Kitchen",
+        "playVolumeLevel": "50",
+        "playMessage": "Missing message",
+        "language": "config",
+        "speakSlow": "config",
+        "mediaUrl": "",
+        "mediaType": "mp3",
+        "x": 740,
+        "y": 660,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "28ec26da620b00de",
+        "type": "google-notify",
+        "z": "536b0e9eda614fd2",
+        "server": "75f9992b7ac7471e",
+        "label": "Bedroom",
+        "playVolumeLevel": "50",
+        "playMessage": "Missing message",
+        "language": "config",
+        "speakSlow": "config",
+        "mediaUrl": "",
+        "mediaType": "mp3",
+        "x": 740,
+        "y": 720,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "58004da352786771",
+        "type": "trigger",
+        "z": "536b0e9eda614fd2",
+        "name": "",
+        "op1": "",
+        "op2": "0",
+        "op1type": "pay",
+        "op2type": "str",
+        "duration": "-10",
+        "extend": false,
+        "overrideDelay": false,
+        "units": "s",
+        "reset": "",
+        "bytopic": "all",
+        "topic": "topic",
+        "outputs": 1,
+        "x": 510,
+        "y": 660,
+        "wires": [
+            [
+                "82ff84e98779afab",
+                "dd3eeb57a2ddeb28",
+                "28ec26da620b00de"
+            ]
+        ]
+    },
+    {
         "id": "244c26807bc68f0e",
         "type": "sunrise",
         "z": "67e1c6f6bd2fab57",
@@ -6293,111 +8080,11 @@
         ]
     },
     {
-        "id": "651eb38aa48c6e2a",
-        "type": "nibe-register",
-        "z": "67e1c6f6bd2fab57",
-        "name": "",
-        "register": "Humidity (AZ30-BM20)",
-        "nibe": "89e46ce21c7f5128",
-        "interval": "300",
-        "timeout": "5",
-        "force": false,
-        "topic": "",
-        "filter": false,
-        "x": 160,
-        "y": 580,
-        "wires": [
-            [
-                "1895125bc221a5c6"
-            ]
-        ]
-    },
-    {
-        "id": "27d499b6a6e0d7e5",
-        "type": "nibe-register",
-        "z": "67e1c6f6bd2fab57",
-        "name": "",
-        "register": "Bypass during heating (ERS 1)",
-        "nibe": "89e46ce21c7f5128",
-        "interval": "300",
-        "timeout": "5",
-        "force": false,
-        "topic": "",
-        "filter": false,
-        "x": 530,
-        "y": 580,
-        "wires": [
-            [
-                "5d3dfd6ae641f427"
-            ]
-        ]
-    },
-    {
-        "id": "1895125bc221a5c6",
-        "type": "function",
-        "z": "67e1c6f6bd2fab57",
-        "name": "decide",
-        "func": "const humidity = msg.payload.value;\nif (humidity < 0 || humidity > 100) {\n    return;\n}\n\nconst outdoorTemperature = global.get('outdoorTemperature');\nconst stopRecovery = flow.get('bypass_recovery') === 1;\nconst target = 46;\nconst histerezis = 1;\nconst compareTo = target + (stopRecovery ? 0 : 1) * histerezis;\n\nconst shouldStopRecovery =\n    outdoorTemperature < 10\n        ? humidity >= compareTo\n        : false;\n\nnode.status({\n    fill: shouldStopRecovery ? 'red' : \"blue\",\n    shape: \"dot\",\n    text: `recovery ${shouldStopRecovery ? 'off' : 'on'}`,\n});\n\nreturn {\n    payload: shouldStopRecovery ? 1 : 0,\n};\n",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 330,
-        "y": 580,
-        "wires": [
-            [
-                "27d499b6a6e0d7e5"
-            ]
-        ]
-    },
-    {
-        "id": "5d3dfd6ae641f427",
-        "type": "function",
-        "z": "67e1c6f6bd2fab57",
-        "name": "set flow.bypass_recovery",
-        "func": "const oldValue = flow.get('bypass_recovery');\nconst newValue = msg.payload.value;\nif (newValue !== oldValue) {\n    flow.set('bypass_recovery', newValue);\n}\n",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 790,
-        "y": 580,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "dfca40dd7aa881e6",
-        "type": "mqtt in",
-        "z": "67e1c6f6bd2fab57",
-        "name": "",
-        "topic": "zigbee2mqtt/pir/+",
-        "qos": "2",
-        "datatype": "json",
-        "broker": "f569d34c.8c7ed",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 740,
-        "y": 140,
-        "wires": [
-            [
-                "8ab75f8eee4ef8d5",
-                "a2ce7a8e3f483f80"
-            ]
-        ]
-    },
-    {
         "id": "a0bf8cda615f1687",
         "type": "function",
         "z": "67e1c6f6bd2fab57",
         "name": "lights on/off when motion or contact",
-        "func": "if (!flow.get('auto_light')) {\n    return;\n}\n\n/**\n * @type Array<{\n *  src:Array<string>, \n *  target:string, \n *  timeoutMin: number, \n *  turn:'on'|'off'\n * }>\n */\nconst targetByPir = [\n    {\n        src: ['pir/hallway-1', 'pir/hallway-2'],\n        target: 'switch-dimmer-3',\n        timeoutMin: 1,\n        turn: 'on',\n    }, {\n        src: ['pir/hallway-3', 'contact/entrance'],\n        target: 'switch-dimmer-10',\n        timeoutMin: 3,\n        turn: 'on',\n    }, {\n        src: ['pir/small-bathroom'],\n        target: 'switch-onoff-3',\n        timeoutMin: 15,\n        turn: 'off',\n    }\n]\n\nconst name = msg.topic.split('/').slice(1).join('/');\nconst found = targetByPir.find(t => t.src.includes(name));\nif (!found) {\n    return;\n}\n\nconst p = msg.payload;\nif (found.turn === 'on') {\n    let turnOn = false;\n\n    if ('occupancy' in p) {\n        const last = context.get(`last-${name}`);\n        if (p.occupancy || last) {\n            turnOn = true;\n        }\n        context.set(`last-${name}`, p.occupancy);\n    }\n\n    if ('contact' in p) {\n        const last = context.get(`last-${name}`);\n        if (p.contact !== last) {\n            turnOn = true;\n        }\n        context.set(`last-${name}`, p.contact);\n    }\n\n    if (turnOn) {\n        return {\n            payload: {\n                'brightness': 100,\n                'for': found.timeoutMin * 60,\n            },\n            topic: `ha-switch/${found.target}/state/set`,\n            retain: false,\n        };\n    }\n} else if (found.turn === 'off') {\n    if (p.occupancy) {\n        return [, {\n            reset: true,\n            topic: `ha-switch/${found.target}/state/set`,\n        }];\n    } else {\n        return [, {\n            payload: {\n                on: false\n            },\n            delay: found.timeoutMin * 60 * 1000,\n            topic: `ha-switch/${found.target}/state/set`,\n            retain: true,\n        }];\n    }\n}\n",
+        "func": "if (!flow.get('auto_light')) {\n    return;\n}\n\n/**\n * @type Array<{\n *  src:Array<string>, \n *  target:string, \n *  timeoutMin: number, \n *  turn:'on'|'off'\n * }>\n */\nconst targetByPir = [\n    {\n        src: ['pir/hallway-1', 'pir/hallway-2'],\n        target: 'switch-dimmer-3',\n        timeoutMin: 1,\n        turn: 'on',\n    }, {\n        src: ['pir/hallway-3', 'contact/entrance'],\n        target: 'switch-dimmer-10',\n        timeoutMin: 3,\n        turn: 'on',\n    }, {\n        src: ['pir/small-bathroom'],\n        target: 'switch-onoff-3',\n        timeoutMin: 15,\n        turn: 'off',\n    }, {\n        src: ['pir/washer-room'],\n        target: 'switch-onoff-9',\n        timeoutMin: 15,\n        turn: 'off',\n    }\n]\n\nconst name = msg.topic.split('/').slice(1).join('/');\nconst found = targetByPir.find(t => t.src.includes(name));\nif (!found) {\n    return;\n}\n\nconst p = msg.payload;\nif (found.turn === 'on') {\n    let turnOn = false;\n\n    if ('occupancy' in p) {\n        const last = context.get(`last-${name}`);\n        if (p.occupancy || last) {\n            turnOn = true;\n        }\n        context.set(`last-${name}`, p.occupancy);\n    }\n\n    if ('contact' in p) {\n        const last = context.get(`last-${name}`);\n        if (p.contact !== last) {\n            turnOn = true;\n        }\n        context.set(`last-${name}`, p.contact);\n    }\n\n    if (turnOn) {\n        return {\n            payload: {\n                'brightness': 100,\n                'for': found.timeoutMin * 60,\n            },\n            topic: `ha-switch/${found.target}/state/set`,\n            retain: false,\n        };\n    }\n} else if (found.turn === 'off') {\n    if (p.occupancy) {\n        return [, {\n            reset: true,\n            topic: `ha-switch/${found.target}/state/set`,\n        }];\n    } else {\n        return [, {\n            payload: {\n                on: false\n            },\n            delay: found.timeoutMin * 60 * 1000,\n            topic: `ha-switch/${found.target}/state/set`,\n            retain: true,\n        }];\n    }\n}\n",
         "outputs": 2,
         "timeout": "",
         "noerr": 0,
@@ -6436,86 +8123,6 @@
         "x": 710,
         "y": 440,
         "wires": []
-    },
-    {
-        "id": "54e506afd7d7a753",
-        "type": "mqtt in",
-        "z": "67e1c6f6bd2fab57",
-        "name": "",
-        "topic": "zigbee2mqtt/contact/+",
-        "qos": "2",
-        "datatype": "json",
-        "broker": "f569d34c.8c7ed",
-        "nl": false,
-        "rap": true,
-        "rh": 0,
-        "inputs": 0,
-        "x": 760,
-        "y": 80,
-        "wires": [
-            [
-                "d445960ecb358d5a",
-                "a2ce7a8e3f483f80"
-            ]
-        ]
-    },
-    {
-        "id": "6615d0e84e2ff43a",
-        "type": "influxdb out",
-        "z": "67e1c6f6bd2fab57",
-        "influxdb": "63bdbe3c09b491f2",
-        "name": "db",
-        "measurement": "",
-        "precision": "",
-        "retentionPolicy": "",
-        "database": "database",
-        "precisionV18FluxV20": "ms",
-        "retentionPolicyV18Flux": "",
-        "org": "home",
-        "bucket": "home",
-        "x": 1130,
-        "y": 140,
-        "wires": []
-    },
-    {
-        "id": "8ab75f8eee4ef8d5",
-        "type": "function",
-        "z": "67e1c6f6bd2fab57",
-        "name": "map",
-        "func": "const valueName = msg.topic.split('/').slice(-1)[0];\nconst msgs = [];\n\nif (typeof msg.payload.occupancy === 'boolean') {\n    msgs.push({\n        payload: { [valueName]: msg.payload.occupancy ? 1 : 0 },\n        measurement: 'occupancy',\n    });\n}\n\nif (typeof msg.payload.illuminance === 'number') {\n    msgs.push({\n        payload: { [valueName]: msg.payload.illuminance },\n        measurement: 'illuminance',\n    });\n}\n\nreturn [msgs];",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 990,
-        "y": 140,
-        "wires": [
-            [
-                "6615d0e84e2ff43a"
-            ]
-        ]
-    },
-    {
-        "id": "d445960ecb358d5a",
-        "type": "function",
-        "z": "67e1c6f6bd2fab57",
-        "name": "map",
-        "func": "const valueName = msg.topic.split('/').slice(-1)[0];\nif (typeof msg.payload.contact !== 'boolean') {\n    return;\n}\n\nreturn {\n    payload: { [valueName]: msg.payload.contact ? 1 : 0 },\n    measurement: 'contact',\n};",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 990,
-        "y": 100,
-        "wires": [
-            [
-                "6615d0e84e2ff43a"
-            ]
-        ]
     },
     {
         "id": "4d1c7f5bb7516b99",
@@ -6733,7 +8340,7 @@
         "type": "function",
         "z": "67e1c6f6bd2fab57",
         "name": "not away mode",
-        "func": "if (!global.get('awayMode') && \n    !msg.payload && \n    global.get('batteryCapacity') > 96) {\n    return {\n        payload: 1,\n        topic: 'more-hot-water',\n    };\n}\n",
+        "func": "if (!global.get('awayMode') &&\n    !msg.payload &&\n    global.get('batteryCapacity') > 96 &&\n    !global.get('estimatedSolarProduction')) {\n    return {\n        payload: 1,\n        topic: 'more-hot-water',\n    };\n}\n",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -6796,19 +8403,6 @@
                 "a0bf8cda615f1687"
             ]
         ]
-    },
-    {
-        "id": "a2ce7a8e3f483f80",
-        "type": "link out",
-        "z": "67e1c6f6bd2fab57",
-        "name": "link out 32",
-        "mode": "link",
-        "links": [
-            "2015749dd862c92d"
-        ],
-        "x": 955,
-        "y": 60,
-        "wires": []
     },
     {
         "id": "44f03731dd6e3522",
@@ -7244,6 +8838,7 @@
         "id": "c9f86e52c399a757",
         "type": "noraf-light",
         "z": "86c7bfe22f048e9c",
+        "d": true,
         "devicename": "Power 3",
         "lightcolor": false,
         "brightnesscontrol": false,
@@ -7484,5 +9079,124 @@
         "x": 490,
         "y": 540,
         "wires": []
+    },
+    {
+        "id": "bbbdecb1cda7db5e",
+        "type": "noraf-doorbell",
+        "z": "86c7bfe22f048e9c",
+        "d": true,
+        "devicename": "Doorbell",
+        "roomhint": "",
+        "name": "",
+        "nora": "3302889fa9b7cb44",
+        "topic": "",
+        "filter": false,
+        "x": 580,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "7dc0804a1cdeba54",
+        "type": "inject",
+        "z": "86c7bfe22f048e9c",
+        "d": true,
+        "name": "\"Alice\" is at the doorbell",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"named\":[\"Alice\"]}",
+        "payloadType": "json",
+        "x": 220,
+        "y": 660,
+        "wires": [
+            [
+                "bbbdecb1cda7db5e"
+            ]
+        ]
+    },
+    {
+        "id": "1b08bca9fd2551e9",
+        "type": "inject",
+        "z": "86c7bfe22f048e9c",
+        "d": true,
+        "name": "someone's at the doorbell (unclassified)",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"unclassified\":1}",
+        "payloadType": "json",
+        "x": 270,
+        "y": 740,
+        "wires": [
+            [
+                "bbbdecb1cda7db5e"
+            ]
+        ]
+    },
+    {
+        "id": "71629549d9fd9dc9",
+        "type": "inject",
+        "z": "86c7bfe22f048e9c",
+        "d": true,
+        "name": "someone you know is at the doorbell",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"familiar\":1}",
+        "payloadType": "json",
+        "x": 260,
+        "y": 700,
+        "wires": [
+            [
+                "bbbdecb1cda7db5e"
+            ]
+        ]
+    },
+    {
+        "id": "aeeedb84a9e88d39",
+        "type": "inject",
+        "z": "86c7bfe22f048e9c",
+        "d": true,
+        "name": "someone's at the doorbell (unfamiliar)",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"unfamiliar\":1}",
+        "payloadType": "json",
+        "x": 270,
+        "y": 780,
+        "wires": [
+            [
+                "bbbdecb1cda7db5e"
+            ]
+        ]
     }
 ]
